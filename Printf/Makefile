@@ -3,39 +3,43 @@ CC = GCC
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_printf.c \
-		ft_ltoa_base.c \
-		ft_putendl_fd.c \
-		ft_putchar_fd.c \
-		ft_putstr_fd.c \
-		ft_strdup.c \
-		ft_strndup.c \
-		ft_strlen.c \
-		ft_strjoin.c \
-		ft_putnbr_fd.c
+	ft_make_list.c \
+	ft_ltoa_base.c \
+	ft_strndup.c \
+	ft_plst.c \
+	ft_modif.c
 
-LIB = libft.a
+LIB = $(LIBFT)libft.a
 
+LIBFT = ./libft/
 
 OBJ = $(SRCS:.c=.o)
 
 NAME = libftprintf.a
 
-.PHONY: all clean fclean re
+.PHONY: all libft.a clean fclean re
 
-all: $(NAME)
+all: $(NAME) 
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ) $(LIB)
+$(NAME): $(OBJ) libft.a
+	ar rcs $(NAME) $(OBJ)
 
 $(OBJ): $(SRCS)
 	$(CC) $(CFLAGS) -I . -c $(SRCS)
 
+libft.a: 
+	make -C $(LIBFT)
+	cp $(LIB) .
+	mv $(LIB) $(NAME)
 
 clean:
 	rm -f *.o
-
+	make -C $(LIBFT) clean
 fclean: clean
-	rm -f $(NAME)
+	rm -f *.a
+	make -C $(LIBFT) fclean
+	
 
 re: fclean all
+
 
