@@ -17,15 +17,16 @@ OBJ = $(SRCS:.c=.o)
 
 NAME = libftprintf.a
 
-.PHONY: all libft.a clean fclean re
+.PHONY: all clean fclean re
 
 all: $(NAME) 
 
 $(NAME): $(OBJ) libft.a
 	ar rcs $(NAME) $(OBJ)
 
-$(OBJ): $(SRCS)
-	$(CC) $(CFLAGS) -I . -c $(SRCS)
+%.o : %.c
+	$(CC) $(CFLAGS) $< -c -o $@ 
+
 
 libft.a: 
 	make -C $(LIBFT)
