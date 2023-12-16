@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:23:32 by gfinet            #+#    #+#             */
-/*   Updated: 2023/10/22 21:13:52 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/16 18:06:58 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*p;
-	int				i;
-
-	i = 0;
+	
 	p = malloc(count * size);
 	if (!p)
 		return (p);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/16 17:39:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/16 17:51:33 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		ft_nlstclear(t_nlst **lst, void (*del)(void *));
 void	ft_nlstdelone(t_nlst *lst, void (*del)(void *));
 t_nlst	*ft_nlstnew(int cont);
 int		ft_nlstsize(t_nlst *lst);
+
+
 
 
 #endif
