@@ -1,17 +1,17 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
-SRCS = ft_printf.c \
-	ft_make_list.c \
-	ft_ltoa_base.c \
-	ft_strndup.c \
-	ft_plst.c \
-	ft_modif.c
+SRCS = push_swap.c \
+		p_s_r.c \
+		nlst.c \
+		nlst2.c
 
-LIB = $(LIBFT)libft.a
+HEAD = push_swap.h		
 
-LIBFT = ./libft/
+LIB = $(LIBFT)libftprintf.a
+
+LIBFT = ./Printf/
 
 OBJ = $(SRCS:.c=.o)
 
@@ -21,14 +21,13 @@ NAME = push_swap
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) libft.a
-	$(CC) $(CFLAGS) $< -o $@
+$(NAME): $(OBJ) libftprintf.a
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c
-	$(CC) $(CFLAGS) $< -c -o $@ 
+	$(CC) $(CFLAGS) $^ -c -o $@ 
 
-
-libft.a: 
+libftprintf.a: 
 	make -C $(LIBFT)
 	cp $(LIB) .
 	mv $(LIB) $(NAME)

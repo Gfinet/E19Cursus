@@ -6,15 +6,15 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/12 19:28:15 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:05:23 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_list **a, t_list **b)
+void	push(t_nlst **a, t_nlst **b)
 {
-	t_list	*tmp;
+	t_nlst	*tmp;
 
 	if (!*a)
 		return ;
@@ -24,10 +24,10 @@ void	push(t_list **a, t_list **b)
 	(*b)->next = tmp;
 }
 
-void	swap(t_list **l)
+void	swap(t_nlst **l)
 {
-	t_list	*tmp;
-	t_list	*tmp2;
+	t_nlst	*tmp;
+	t_nlst	*tmp2;
 
 	if (!*l || !(*l)->next)
 		return ;
@@ -38,10 +38,10 @@ void	swap(t_list **l)
 	*l = tmp;
 }
 
-void	rotate(t_list **l)
+void	rotate(t_nlst **l)
 {
-	t_list	*tmp;
-	t_list	*tmp2;
+	t_nlst	*tmp;
+	t_nlst	*tmp2;
 
 	if (!*l || !(*l)->next)
 		return ;
@@ -54,10 +54,10 @@ void	rotate(t_list **l)
 	tmp->next = NULL;
 }
 
-void	reverse_rotate(t_list **l)
+void	reverse_rotate(t_nlst **l)
 {
-	t_list	*tmp;
-	t_list	*tmp2;
+	t_nlst	*tmp;
+	t_nlst	*tmp2;
 
 	if (!*l || !(*l)->next)
 		return ;

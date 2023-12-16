@@ -62,7 +62,7 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o :	%.c
-	$(CC) $(CFLAGS) $@ -c -o $< 
+	$(CC) $(CFLAGS) $< -c -o $@ 
 	
 
 bonus: $(BONUSOBJ) $(OBJ)

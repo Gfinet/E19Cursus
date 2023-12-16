@@ -11,7 +11,7 @@ SRCS = ft_printf.c \
 
 LIB = $(LIBFT)libft.a
 
-LIBFT = ../libft/
+LIBFT = ./libft/
 
 OBJ = $(SRCS:.c=.o)
 
