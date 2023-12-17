@@ -39,6 +39,7 @@ clean:
 fclean: clean
 	rm -f *.a
 	make -C $(LIBFT) fclean
+	rm -f $(NAME)
 	
 
 re: fclean all
