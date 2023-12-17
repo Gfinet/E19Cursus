@@ -3,40 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   nlst2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 22:17:48 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/13 22:26:06 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/16 18:49:15 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_place(t_nlst **a, int cont)
+int	nlst_get_place(t_nlst **a, int cont)
 {
 	int	place;
+	t_nlst *p;
 
 	place = 0;
-	while ((*a))
+	p = *a;
+	while (p)
 	{
-		if ((*a)->content == cont)
+		if (p->content == cont)
 			return (place);
 		place++;
-		(*a) = (*a)->next;
+		p = p->next;
 	}
 	return (0);
 }
 
-int	get_low(t_nlst **a)
+int	nlst_get_low(t_nlst **a)
 {
 	int	low;
+	t_nlst *p;
 
 	low = 2147483647;
-	while ((*a))
+	p = *a;
+	while (p)
 	{
-		if ((*a)->content < low)
-			low = (*a)->content;
-		(*a) = (*a)->next;
+		if (p->content < low)
+			low = p->content;
+		p = p->next;
 	}
 	return (low);
 }

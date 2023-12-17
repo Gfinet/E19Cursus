@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 SRCS = push_swap.c \
 		p_s_r.c \
 		nlst.c \
-		nlst2.c
+		nlst2.c \
+		ps_sort.c
 
 HEAD = push_swap.h		
 

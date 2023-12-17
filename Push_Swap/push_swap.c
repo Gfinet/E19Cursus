@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/16 17:46:33 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/16 18:39:05 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,29 @@ static int	fill_a(t_nlst **a, char **arg, int nb_arg)
 int push_swap(char **arg, int nb_arg)
 {
 	t_nlst  *a;
-	//t_nlst  *b;
+	t_nlst  *b;
+	t_nlst	*p;
 
 	a = NULL;
-	//b = NULL;
+	b = NULL;
 	if (!fill_a(&a, arg, nb_arg))
 		return (0);
-	while (a)
+	p = a;
+	while (p)
 	{
-		printf("%i\n", a->content);
-		a = a->next;
+		printf("a %i\n", p->content);
+		p = p->next;
 	}
+	ps_sort(&a, &b);
+	ft_printf("\n");
+	p = a;
+	while (p)
+	{
+		printf("b %i\n", p->content);
+		p = p->next;
+	}
+	ft_nlstclear(&a, free);
+	ft_nlstclear(&b, free);
 	//ps_sort(&a, &b);
 	return (1);
 }
