@@ -6,13 +6,13 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:58:42 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/18 23:25:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/19 16:36:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_heap(t_nlst **a)
+int	check_heap(t_nlst **a, int a_b)
 {
 	t_nlst	*p;
 
@@ -21,14 +21,16 @@ int	check_heap(t_nlst **a)
 		return (0);
 	while (p->next)
 	{
-		if (p->content > p->next->content)
+		if (!a_b && p->content > p->next->content)
+			return (0);
+		else if (a_b && p->content < p->next->content)
 			return (0);
 		p = p->next;
 	}
 	return (1);
 }
 
-int	check_first(t_nlst **a, int low_big)
+int	check_first(t_nlst **a, int a_b)
 {
 	int 	low;
 	t_nlst	*tmp;
@@ -39,9 +41,9 @@ int	check_first(t_nlst **a, int low_big)
 	low = (*a)->content;
 	while (tmp != NULL)
 	{
-		if (!low_big && tmp->content < low)
+		if (!a_b && tmp->content < low)
 			return (0);
-		else if (low_big && tmp->content > low)
+		else if (a_b && tmp->content > low)
 			return (0);
 		tmp = tmp->next;
 	}
@@ -70,22 +72,31 @@ int	check_only_need_rot(t_nlst **a)
 		return (0);
 	return (p->next == NULL);
 }
-int	check_only_swap(t_nlst **a, int size)
+int	check_only_swap(t_nlst **a, int size, int a_b)
 {
 	t_nlst *p;
 	int c;
 	int b;
+	int d;
 
 	p = (*a);
 	if (size < 3)
 		return (0);
-	c = (p->content < p->next->next->content);
-	b = (p->next->content < p->next->next->content);
+	if (!a_b)
+	{
+		c = (p->content < p->next->next->content);
+		b = (p->next->content < p->next->next->content);
+		d = (*a)->content > (*a)->next->content;
+	}
+	else
+	{
+		c = (p->content > p->next->next->content);
+		b = (p->next->content > p->next->next->content);
+		d = (*a)->content < (*a)->next->content;
+	}
 	if (c && b)
 		p = (*a)->next->next;
 	else
 		return (0);
-	if (check_heap(&p) && (*a)->content > (*a)->next->content)
-		return (1);
-	return (0);
+	return (check_heap(&p, a_b) && d);
 }

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/18 19:56:23 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/19 16:43:33 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int push_swap(char **arg, int nb_arg)
 	b = NULL;
 	if (!fill_a(&a, arg, nb_arg))
 		return (0);
-	p = a;
-	while (p)
-	{
-		ft_printf("%i\n", p->content);
-		p = p->next;
-	}
+	// p = a;
+	// while (p)
+	// {
+	// 	ft_printf("%i\n", p->content);
+	// 	p = p->next;
+	// }
 	ps_sort(&a, &b);
 	ft_printf("\n");
 	p = a;

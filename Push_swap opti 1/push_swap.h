@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/18 23:21:12 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/19 16:37:17 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ps_sort(t_nlst **a, t_nlst **b);
 
 
 int		nlst_get_place(t_nlst **a, int cont);
-int		nlst_get_low_big(t_nlst **a, int low_big);
+int		nlst_get_low_big(t_nlst **a, int a_b);
 void	ft_nlstadd_back(t_nlst **lst, t_nlst *new);
 int		ft_nlstclear(t_nlst **lst, void (*del)(void *));
 void	ft_nlstdelone(t_nlst *lst, void (*del)(void *));
@@ -41,10 +41,10 @@ t_nlst	*ft_nlstnew(int cont);
 int		ft_nlstsize(t_nlst *lst);
 void rot_to_first(t_nlst **a, int n);
 
-int	check_heap(t_nlst **a);
-int	check_first(t_nlst **a, int low_big);
+int	check_heap(t_nlst **a, int a_b);
+int	check_first(t_nlst **a, int a_b);
 int	check_only_need_rot(t_nlst **a);
-int	check_only_swap(t_nlst **a, int size);
+int	check_only_swap(t_nlst **a, int size, int a_b);
 
 
 #endif
