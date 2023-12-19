@@ -6,7 +6,8 @@ SRCS = push_swap.c \
 		p_s_r.c \
 		nlst.c \
 		nlst2.c \
-		ps_sort.c
+		ps_sort.c \
+		all_verif.c
 
 HEAD = push_swap.h		
 

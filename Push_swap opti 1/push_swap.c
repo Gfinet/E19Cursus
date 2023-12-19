@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/16 18:39:05 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/18 19:56:23 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int push_swap(char **arg, int nb_arg)
 	p = a;
 	while (p)
 	{
-		printf("a %i\n", p->content);
+		ft_printf("%i\n", p->content);
 		p = p->next;
 	}
 	ps_sort(&a, &b);
@@ -91,7 +91,7 @@ int push_swap(char **arg, int nb_arg)
 	p = a;
 	while (p)
 	{
-		printf("b %i\n", p->content);
+		ft_printf("%i\n", p->content);
 		p = p->next;
 	}
 	ft_nlstclear(&a, free);

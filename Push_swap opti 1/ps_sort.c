@@ -6,81 +6,47 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/18 17:37:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/18 23:23:59 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_heap(t_nlst **a)
+void rot_to_first(t_nlst **a, int n)
 {
-	t_nlst	*p;
+	int flag;
 
-	p = *a;
-	if (!*a)
-		return (0);
-	while (p->next)
+	flag = (nlst_get_place(a, nlst_get_low_big(a, 0)) <= n / 2);
+	while (!check_first(a, 0))
 	{
-		if (p->content > p->next->content)
-			return (0);
-		p = p->next;
+		if (flag)
+			rotate(a, 0);
+		else 
+			reverse_rotate(a, 0);
 	}
-	return (1);
-}
-
-static int	check_first(t_nlst **a, int low_big)
-{
-	int 	low;
-	t_nlst	*tmp;
-
-	if (!*a)
-		return (0);
-	tmp = (*a)->next;
-	low = (*a)->content;
-	while (tmp != NULL)
-	{
-		if (!low_big && tmp->content < low)
-			return (0);
-		else if (low_big && tmp->content > low)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
 }
 
 static t_nlst	**sort_n(t_nlst **a,t_nlst **b , int n)
 {
 	if (n == 2)
+		swap(a, 0);
+	else if (n == 3)
 	{
-		if (!check_heap(a))
-		{
-			rotate(a);
-			ft_printf("ra ");
-		}
+		if (!check_only_need_rot(a))
+			swap(a, 0);
+		rot_to_first(a, n);
 	}
 	else
 	{
-		if (nlst_get_place(a, nlst_get_low(a)) <= n / 2)
-		{
-			while (!check_first(a, 0))
-			{
-				ft_printf("ra ");
-				rotate(a);
-			}
-		}
+		if (check_only_need_rot(a))
+			rot_to_first(a, n);
 		else
 		{
-			while (!check_first(a, 0))
-			{
-				ft_printf("rra ");
-				reverse_rotate(a);
-			}
+			rot_to_first(a, n);
+			push(a, b, 0);
+			sort_n(a, b, n - 1);
+			push(b, a, 1);
 		}
-		push(a, b);
-		ft_printf("pa ");
-		sort_n(a, b, n - 1);
-		push(b, a);
-		ft_printf("pb ");
 	}
 	return (a);
 }
@@ -88,16 +54,9 @@ static t_nlst	**sort_n(t_nlst **a,t_nlst **b , int n)
 void ps_sort(t_nlst **a, t_nlst **b)
 {
 	int	size;
-	
 	size = ft_nlstsize(*a);
-	if (size == 2)
-	{
-		if (sort_n(a, b, size) != a)
-			ft_printf("ra");
-	}
-	else
-	{
-		printf("\n3 %i %i\n", check_first(a, 0), ft_nlstsize(*a));
+	if (check_only_swap(a, size))
+		swap(a, 0);
+	if (!check_heap(a))
 		sort_n(a, b, size);
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nlst2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 22:17:48 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/16 18:49:15 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/18 20:05:49 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,21 @@ int	nlst_get_place(t_nlst **a, int cont)
 	return (0);
 }
 
-int	nlst_get_low(t_nlst **a)
+int	nlst_get_low_big(t_nlst **a, int low_big)
 {
-	int	low;
+	int	num;
 	t_nlst *p;
 
-	low = 2147483647;
+	if (low_big)
+		num = -2147483648;
+	else
+		num = 2147483647;
 	p = *a;
 	while (p)
 	{
-		if (p->content < low)
-			low = p->content;
+		if ((!low_big && p->content < num) || (low_big && p->content > num))
+			num = p->content;
 		p = p->next;
 	}
-	return (low);
+	return (num);
 }
