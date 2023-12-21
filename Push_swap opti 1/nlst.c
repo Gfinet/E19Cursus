@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:46:56 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/16 20:02:16 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/21 21:04:57 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_nlst	*ft_nlstnew(int cont)
 		return (0);
 	new->content = cont;
 	new->next = 0;
+	new->move = 0;
 	return (new);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_verif.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:58:42 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/19 16:36:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/21 14:47:21 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,27 @@ int	check_first(t_nlst **a, int a_b)
 	return (1);
 }
 
-int	check_only_need_rot(t_nlst **a)
+int	check_only_need_rot(t_nlst **a, int a_b)
 {
 	t_nlst *p;
 
 	p = *a;
 	if (!*a)
 		return (0);
-	while (p->next && p->content < p->next->content)
-		p = p->next;
-	if (!p->next || p->content != nlst_get_low_big(a, 1))
+	if (!a_b)
+		while (p->next && p->content < p->next->content)
+			p = p->next;
+	else
+		while (p->next && p->content > p->next->content)
+			p = p->next;
+	if (!p->next || p->content != nlst_get_low_big(a, !a_b))
 		return (0);
 	p = p->next;
 	while (p->next && p->content < p->next->content)
 	{
-		if (p->content > (*a)->content)
+		if (!a_b && p->content > (*a)->content)
+			return (0);
+		else if (a_b && p->content < (*a)->content)
 			return (0);
 		p = p->next;
 	}
@@ -99,4 +105,17 @@ int	check_only_swap(t_nlst **a, int size, int a_b)
 	else
 		return (0);
 	return (check_heap(&p, a_b) && d);
+}
+
+int check_swap(t_nlst **a, int a_b)
+{
+	t_nlst *p;
+
+	p = *a;
+	if (!a_b && p->content > p->next->content)
+		return (1);
+	else if (a_b && p->content < p->next->content)
+		return (1);
+	else
+		return (0);
 }

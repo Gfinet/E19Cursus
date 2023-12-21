@@ -3,54 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/19 16:43:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/21 21:17:45 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_number(char *s)
-{
-	int	len;
-	int	i;
+// static int	is_number(char *s)
+// {
+// 	int	len;
+// 	int	i;
 
-	len = ft_strlen(s);
-	i = (s[0] == '-');
-	if (i && len == 1)
-		return (0);
-	while (i < len)
-	{
-		if (!ft_isdigit(s[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
+// 	len = ft_strlen(s);
+// 	i = (s[0] == '-');
+// 	if (i && len == 1)
+// 		return (0);
+// 	while (i < len)
+// 	{
+// 		if (!ft_isdigit(s[i]))
+// 			return (0);
+// 		i++;
+// 	}
+// 	return (1);
+// }
 
-static int check_input(char **s, int n_arg)
-{
-	int i;
-	int j;
+// static int check_input(char **s, int n_arg)
+// {
+// 	int i;
+// 	int j;
 
-	i = 0;
-	while (s[i])
-	{
-		j = i + 1;
-		while (j < n_arg && s[j])
-		{
-			if (ft_atoi(s[i]) == ft_atoi(s[j]))
-				return (0);
-			j++;
-		}
-		if (!is_number(s[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
+// 	i = 0;
+// 	while (s[i])
+// 	{
+// 		j = i + 1;
+// 		while (j < n_arg && s[j])
+// 		{
+// 			if (ft_atoi(s[i]) == ft_atoi(s[j]))
+// 				return (0);
+// 			j++;
+// 		}
+// 		if (!is_number(s[i]))
+// 			return (0);
+// 		i++;
+// 	}
+// 	return (1);
+// }
 
 static int	fill_a(t_nlst **a, char **arg, int nb_arg)
 {
@@ -75,9 +75,11 @@ int push_swap(char **arg, int nb_arg)
 	t_nlst  *a;
 	t_nlst  *b;
 	t_nlst	*p;
+	int res;
 
 	a = NULL;
 	b = NULL;
+
 	if (!fill_a(&a, arg, nb_arg))
 		return (0);
 	// p = a;
@@ -86,18 +88,27 @@ int push_swap(char **arg, int nb_arg)
 	// 	ft_printf("%i\n", p->content);
 	// 	p = p->next;
 	// }
+	p = a;
+	while (p)
+	{
+		ft_printf("%i ", p->content);
+		p = p->next;
+	}
+	ft_printf("\nmedian = %d\n", nlst_get_median(&a, ft_nlstsize(a)));
 	ps_sort(&a, &b);
 	ft_printf("\n");
 	p = a;
 	while (p)
 	{
-		ft_printf("%i\n", p->content);
+		ft_printf("%i ", p->content);
 		p = p->next;
 	}
+	ft_printf("\nmove = %i\n", nlst_compute_moves(&a));
+	res = check_heap(&a, 0);
 	ft_nlstclear(&a, free);
 	ft_nlstclear(&b, free);
 	//ps_sort(&a, &b);
-	return (1);
+	return (res);
 }
 
 
@@ -112,12 +123,12 @@ int push_swap(char **arg, int nb_arg)
 //	 return (0);
 // }
 
-int main(int argc, char **argv)
-{
-	if (argc < 2)
-		return (0);
-	printf("check input = %i\n", check_input(&argv[1], argc--));
-	printf("push_swap = %i\n", push_swap(&argv[1], argc--));
+// int main(int argc, char **argv)
+// {
+// 	if (argc < 2)
+// 		return (0);
+// 	printf("check input = %i\n", check_input(&argv[1], argc--));
+// 	printf("push_swap = %i\n", push_swap(&argv[1], argc--));
 	
-	return (0);
-}
+// 	return (0);
+// }

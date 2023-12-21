@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_s_r.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/18 23:06:45 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/21 21:08:56 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ void	push(t_nlst **a, t_nlst **b, int a_b)
 
 	if (!*a)
 		return ;
+	(*a)->move++;
 	tmp = *b;
 	*b = *a;
 	*a = (*a)->next;
 	(*b)->next = tmp;
-	if (!a_b)
-		ft_printf("pa ");
+	if (a_b)
+		ft_printf("pa\n");
 	else
-		ft_printf("pb ");
+		ft_printf("pb\n");
 }
 
 void	swap(t_nlst **l, int a_b)
@@ -35,15 +36,16 @@ void	swap(t_nlst **l, int a_b)
 
 	if (!*l || !(*l)->next)
 		return ;
+	(*l)->move++;
 	tmp = (*l)->next;
 	tmp2 = tmp->next;
 	(*l)->next = tmp2;
 	tmp->next = *l;
 	*l = tmp;
 	if (!a_b)
-		ft_printf("sa ");
+		ft_printf("sa\n");
 	else
-		ft_printf("sb ");
+		ft_printf("sb\n");
 }
 
 void	rotate(t_nlst **l, int a_b)
@@ -53,6 +55,7 @@ void	rotate(t_nlst **l, int a_b)
 
 	if (!*l || !(*l)->next)
 		return ;
+	(*l)->move++;
 	tmp = *l;
 	*l = tmp->next;
 	tmp2 = *l;
@@ -61,29 +64,30 @@ void	rotate(t_nlst **l, int a_b)
 	tmp2->next = tmp;
 	tmp->next = NULL;
 	if (!a_b)
-		ft_printf("ra ");
+		ft_printf("ra\n");
 	else
-		ft_printf("rb ");
+		ft_printf("rb\n");
 }
 
-void	reverse_rotate(t_nlst **l, int a_b)
+void	reverse_rotate(t_nlst **a, int a_b)
 {
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
-	if (!*l || !(*l)->next)
+	if (!*a || !(*a)->next)
 		return ;
-	tmp = *l;
+	(*a)->move++;
+	tmp = *a;
 	while (tmp->next)
 	{
 		tmp2 = tmp;
 		tmp = tmp->next;
 	}
-	tmp->next = *l;
+	tmp->next = *a;
 	tmp2->next = NULL;
-	*l = tmp;
+	*a = tmp;
 	if (!a_b)
-		ft_printf("rra ");
+		ft_printf("rra\n");
 	else
-		ft_printf("rrb ");
+		ft_printf("rrb\n");
 }
