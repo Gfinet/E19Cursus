@@ -6,40 +6,43 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:46:56 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/21 21:04:57 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/29 06:35:24 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_nlstadd_back(t_nlst **lst, t_nlst *new)
+void	ft_nlstadd_back(t_nlst_head *lst, t_nlst *new)
 {
 	t_nlst	*p;
 
-	if (!*lst)
-		*lst = new;
+	if (!lst)
+		return ;
+	if (!lst->first)
+		lst->first = new;
 	else
 	{
-		p = *lst;
+		p = lst->first;
 		while (p->next)
 			p = p->next;
 		p->next = new;
 	}
 }
 
-int	ft_nlstclear(t_nlst **lst, void (*del)(void *))
+int	ft_nlstclear(t_nlst_head *lst, void (*del)(void *))
 {
 	t_nlst	*prev;
 	t_nlst	*next_node;
 
-	prev = *lst;
+	prev = lst->first;
 	while (prev)
 	{
 		next_node = prev->next;
 		ft_nlstdelone(prev, del);
 		prev = next_node;
 	}
-	*lst = 0;
+	free(lst);
+	lst = 0;
 	return (0);
 }
 
@@ -62,15 +65,15 @@ t_nlst	*ft_nlstnew(int cont)
 	return (new);
 }
 
-int	ft_nlstsize(t_nlst *lst)
+int	ft_nlstsize(t_nlst_head *lst)
 {
 	int		i;
 	t_nlst	*t;
 
-	if (!lst)
+	if (!lst || !lst->first)
 		return (0); 
 	i = 1;
-	t = lst;
+	t = lst->first;
 	while (t->next)
 	{
 		t = t->next;

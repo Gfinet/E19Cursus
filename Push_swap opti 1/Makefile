@@ -6,6 +6,7 @@ SRCS = push_swap.c \
 		p_s_r.c \
 		nlst.c \
 		nlst2.c \
+		nlst3.c \
 		ps_sort.c \
 		all_verif.c
 

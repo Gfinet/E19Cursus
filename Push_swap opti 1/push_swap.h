@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/21 21:10:22 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/28 19:06:57 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,16 @@
 # include "./Printf/ft_printf.h"
 # include <unistd.h>
 #include <stdio.h> ////////////////////////////////////////////////////
+#define SEP ' '
 
-int		push_swap(char **argv, int argc);
+typedef struct s_res
+{
+	int 		moves;
+	int 		sorted;
+}	t_res;
+
+t_res	*push_swap(char **argv, int argc);
+int res_init(t_res **res);
 
 typedef struct s_nlst
 {
@@ -26,29 +34,40 @@ typedef struct s_nlst
 	struct s_nlst	*next;
 }	t_nlst;
 
-void	push(t_nlst **a, t_nlst **b, int a_b);
-void	swap(t_nlst **l, int a_b);
-void	rotate(t_nlst **l, int a_b);
-void	reverse_rotate(t_nlst **l, int a_b);
-void	ps_sort(t_nlst **a, t_nlst **b);
+typedef struct s_nlst_head
+{
+	int		lower;
+	int		bigger;
+	int		median;
+	t_nlst	*first;
+}	t_nlst_head;
 
 
-int		nlst_get_place(t_nlst **a, int cont);
-int		nlst_get_low_big(t_nlst **a, int a_b);
-void	ft_nlstadd_back(t_nlst **lst, t_nlst *new);
-int		ft_nlstclear(t_nlst **lst, void (*del)(void *));
+void	push(t_nlst_head *a, t_nlst_head *b, int a_b);
+void	swap(t_nlst_head *l, int a_b);
+void	rotate(t_nlst_head *l, int a_b);
+void	reverse_rotate(t_nlst_head *l, int a_b);
+void	ps_sort(t_nlst_head *a, t_nlst_head *b);
+
+
+int		nlst_get_place(t_nlst_head *a, int cont);
+int		nlst_get_low_big(t_nlst_head *a, int a_b);
+void	ft_nlstadd_back(t_nlst_head *lst, t_nlst *new);
+int		ft_nlstclear(t_nlst_head *lst, void (*del)(void *));
 void	ft_nlstdelone(t_nlst *lst, void (*del)(void *));
 t_nlst	*ft_nlstnew(int cont);
-int		ft_nlstsize(t_nlst *lst);
-int		nlst_get_median(t_nlst **a, int nb_elem);
-int 	nlst_compute_moves(t_nlst **a);
-void 	rot_to_first(t_nlst **a, int n, int a_b);
+int		ft_nlstsize(t_nlst_head *lst);
+int		nlst_get_median(t_nlst_head *a, int nb_elem);
+int 	nlst_compute_moves(t_nlst_head *a);
+void 	rot_to_first(t_nlst_head *a, int num, int n, int a_b);
+int		nlst_is_need_val(t_nlst_head *a, int x);
+int		nlst_head_init(t_nlst_head **a);
 
 int		check_heap(t_nlst **a, int a_b);
-int		check_first(t_nlst **a, int a_b);
-int		check_only_need_rot(t_nlst **a, int a_b);
-int		check_only_swap(t_nlst **a, int size, int a_b);
-int		check_swap(t_nlst **a, int a_b);
+int		check_first(t_nlst_head *a, int a_b);
+int		check_only_need_rot(t_nlst_head *a, int a_b);
+int		check_only_swap(t_nlst_head *a, int size, int a_b);
+int		check_swap(t_nlst_head *a, int a_b);
 
 
 #endif

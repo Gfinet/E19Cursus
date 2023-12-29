@@ -6,88 +6,94 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/21 21:08:56 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/28 18:28:33 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_nlst **a, t_nlst **b, int a_b)
+void	push(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	t_nlst	*tmp;
 
-	if (!*a)
+	if (!a)
 		return ;
-	(*a)->move++;
-	tmp = *b;
-	*b = *a;
-	*a = (*a)->next;
-	(*b)->next = tmp;
+	a->first->move++;
+	tmp = b->first;
+	b->first = a->first;
+	a->first = a->first->next;
+	b->first->next = tmp;
 	if (a_b)
-		ft_printf("pa\n");
+		ft_printf("pa%c", SEP);
 	else
-		ft_printf("pb\n");
+		ft_printf("pb%c", SEP);
 }
 
-void	swap(t_nlst **l, int a_b)
+void	swap(t_nlst_head *l, int a_b)
 {
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
-	if (!*l || !(*l)->next)
+	if (!l)
 		return ;
-	(*l)->move++;
-	tmp = (*l)->next;
+	if (!l->first)
+		return ;
+	l->first->move++;
+	tmp = l->first->next;
 	tmp2 = tmp->next;
-	(*l)->next = tmp2;
-	tmp->next = *l;
-	*l = tmp;
+	l->first->next = tmp2;
+	tmp->next = l->first;
+	l->first = tmp;
 	if (!a_b)
-		ft_printf("sa\n");
+		ft_printf("sa%c", SEP);
 	else
-		ft_printf("sb\n");
+		ft_printf("sb%c", SEP);
 }
 
-void	rotate(t_nlst **l, int a_b)
+void	rotate(t_nlst_head *l, int a_b)
 {
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
-	if (!*l || !(*l)->next)
+	if (!l)
 		return ;
-	(*l)->move++;
-	tmp = *l;
-	*l = tmp->next;
-	tmp2 = *l;
+	if (!l->first)
+		return ;
+	l->first->move++;
+	tmp = l->first;
+	l->first = tmp->next;
+	tmp2 = l->first;
 	while (tmp2->next)
 		tmp2 = tmp2->next;
 	tmp2->next = tmp;
 	tmp->next = NULL;
 	if (!a_b)
-		ft_printf("ra\n");
+		ft_printf("ra%c", SEP);
 	else
-		ft_printf("rb\n");
+		ft_printf("rb%c", SEP);
 }
 
-void	reverse_rotate(t_nlst **a, int a_b)
+void	reverse_rotate(t_nlst_head *a, int a_b)
 {
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
-	if (!*a || !(*a)->next)
+	if (!a)
 		return ;
-	(*a)->move++;
-	tmp = *a;
+	if (!a->first)
+		return ;
+	a->first->move++;
+	tmp = a->first;
 	while (tmp->next)
 	{
 		tmp2 = tmp;
 		tmp = tmp->next;
 	}
-	tmp->next = *a;
+	tmp->next = a->first;
 	tmp2->next = NULL;
-	*a = tmp;
+	a->first = tmp;
 	if (!a_b)
-		ft_printf("rra\n");
+		ft_printf("rra%c", SEP);
 	else
-		ft_printf("rrb\n");
+		ft_printf("rrb%c", SEP);
 }
