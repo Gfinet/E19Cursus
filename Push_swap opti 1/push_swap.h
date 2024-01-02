@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/28 19:06:57 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/29 18:01:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct s_nlst_head
 
 
 void	push(t_nlst_head *a, t_nlst_head *b, int a_b);
-void	swap(t_nlst_head *l, int a_b);
-void	rotate(t_nlst_head *l, int a_b);
-void	reverse_rotate(t_nlst_head *l, int a_b);
+void	swap(t_nlst_head *l, t_nlst_head *m, int a_b);
+void	rotate(t_nlst_head *l, t_nlst_head *m, int a_b);
+void	reverse_rotate(t_nlst_head *l, t_nlst_head *m, int a_b);
 void	ps_sort(t_nlst_head *a, t_nlst_head *b);
 
 
@@ -62,6 +62,7 @@ int 	nlst_compute_moves(t_nlst_head *a);
 void 	rot_to_first(t_nlst_head *a, int num, int n, int a_b);
 int		nlst_is_need_val(t_nlst_head *a, int x);
 int		nlst_head_init(t_nlst_head **a);
+int 	get_closer(t_nlst_head *a, t_nlst_head *b);
 
 int		check_heap(t_nlst **a, int a_b);
 int		check_first(t_nlst_head *a, int a_b);
