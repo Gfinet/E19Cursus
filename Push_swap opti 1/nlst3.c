@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:53:31 by Gfinet            #+#    #+#             */
-/*   Updated: 2023/12/29 22:02:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/03 22:51:39 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ int res_init(t_res **res)
 	return (1);
 }
 
-int get_closer(t_nlst_head *a, t_nlst_head *b)
+int get_closer(t_nlst_head *a, int b)
 {
 	int l;
 	int bi;
 	int m;
 
-	l = b->first->content - a->lower;
-	m = b->first->content - a->median;
-	bi = a->bigger - b->first->content;
+	l = b - a->lower;
+	m = b - a->median;
+	bi = a->bigger - b;
 	if (m < 0)
 		m *= -1;
 	if (l <= m && m < bi)
@@ -54,6 +54,11 @@ int get_closer(t_nlst_head *a, t_nlst_head *b)
 	if (l == m)
 		return (a->lower);
 	if (m == bi)
-		return (a->median);
+		return (a->bigger);
 	return (0);
+}
+
+int get_fval(t_nlst_head *a)
+{
+	return (a->first->content);
 }

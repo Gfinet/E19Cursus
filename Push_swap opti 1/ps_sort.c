@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/29 22:07:20 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/04 00:51:07 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,32 @@ static void	sort_3(t_nlst_head *a, int a_b)
 
 static int	sort_9(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
-	int i;
+	//int i;
 	int j;
 	int tic_tac;
 
 	tic_tac = 0;
 	j = 0;
+	ft_printf("\n");
 	while (ft_nlstsize(a) < 9)
 	{
-		i = 0;
-		while (i < 3)
-		{
-			ft_printf("%i-%i %i %i", i, j, b->first->content, get_closer(a, b));
-			if ((j == 0 && get_closer(a, b) == a->lower) || 
-				(j == 1 && get_closer(a, b) == a->median) || j == 2)
-			{
-				push(b, a, !a_b);
-				i++;
-			}
-			else if (tic_tac)
-			{	
-				rotate(a, 0, 0);
-				tic_tac--;
-			}
-			else if (!tic_tac)
-			{
-				rotate(b, 0, 1);
-				tic_tac++;
-			}
-			sleep(1);
-		}
+		move_faster_node(a, b, find_less_move(a, b), !a_b);
+		// i = 0;
+		// while (i < 2)
+		// {
+		// 	// ft_printf("i-j a b closer\n%i-%i %i %i %i\n\n", i, j,a->first->content, b->first->content, get_closer(a, get_fval(b)));
+		// 	if (get_closer(a, get_fval(b)) == get_fval(a) || 
+		// 	get_closer(a, get_fval(b)) == get_closer(a, get_fval(a)))
+		// 	{
+		// 		push(b, a, !a_b);
+		// 		i++;
+		// 	}
+		// 	else
+		// 		reverse_rotate(a, 0, 0);
+		// 	// if ((j == 0 && i == 2) || (j == 1 && i == 2))
+		// 	// 	reverse_rotate(a, 0, a_b);
+		sleep(1);
+		// }
 		j++;
 	}
 	return (1);
@@ -115,7 +111,6 @@ void ps_sort(t_nlst_head *a, t_nlst_head *b)
 		sort_3(a, 0);
 		if (size <= 9 && size > 3)
 		{
-			rotate(a, 0, 0);
 			sort_9(a, b, 0);
 		}
 	}

@@ -8,7 +8,8 @@ SRCS = push_swap.c \
 		nlst2.c \
 		nlst3.c \
 		ps_sort.c \
-		all_verif.c
+		all_verif.c \
+		less_move.c
 
 HEAD = push_swap.h		
 
