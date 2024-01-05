@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:53:31 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/03 22:51:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/05 21:51:01 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ int get_closer(t_nlst_head *a, int b)
 	return (0);
 }
 
-int get_fval(t_nlst_head *a)
+int get_last(t_nlst_head *a)
 {
-	return (a->first->content);
+	t_nlst *p;
+
+	p = a->first;
+	while (p->next)
+		p = p->next;
+	return (p->content);
 }

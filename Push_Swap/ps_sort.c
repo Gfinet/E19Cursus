@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/21 13:52:10 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/03 22:50:29 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static t_nlst	**sort_n(t_nlst **a,t_nlst **b , int n)
 			}
 		}
 		push(a, b);
-		ft_printf("pa ");
+		ft_printf("pb ");
 		sort_n(a, b, n - 1);
 		push(b, a);
-		ft_printf("pb ");
+		ft_printf("pa ");
 	}
 	return (a);
 }

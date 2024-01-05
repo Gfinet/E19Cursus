@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nlst.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:46:56 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/29 06:35:24 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/05 18:16:54 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ int	ft_nlstsize(t_nlst_head *lst)
 	int		i;
 	t_nlst	*t;
 
-	if (!lst || !lst->first)
+	if (!lst)
+		return (0);
+	else if (!lst->first)
 		return (0); 
 	i = 1;
 	t = lst->first;
