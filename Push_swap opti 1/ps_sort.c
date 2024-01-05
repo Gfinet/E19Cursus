@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/04 00:51:07 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:51:07 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	sort_9(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	//int i;
 	int j;
-	int tic_tac;
+	// int tic_tac;
 
-	tic_tac = 0;
+	// tic_tac = 0;
 	j = 0;
 	ft_printf("\n");
 	while (ft_nlstsize(a) < 9)
@@ -64,6 +64,7 @@ static int	sort_9(t_nlst_head *a, t_nlst_head *b, int a_b)
 		// 	// 	reverse_rotate(a, 0, a_b);
 		sleep(1);
 		// }
+		ft_printf("j = %i", j);
 		j++;
 	}
 	return (1);
