@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:53:31 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/05 21:51:01 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 22:51:14 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,14 @@ int get_last(t_nlst_head *a)
 	while (p->next)
 		p = p->next;
 	return (p->content);
+}
+
+t_nlst *get_node(t_nlst_head *a, int ind)
+{
+	t_nlst *p;
+
+	p = a->first;
+	while (ind-- > 1)
+		p = p->next;
+	return (p);
 }

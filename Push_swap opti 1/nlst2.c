@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nlst2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 22:17:48 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/29 06:39:22 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 21:23:56 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	nlst_get_place(t_nlst_head *a, int cont)
 	int	place;
 	t_nlst *p;
 
-	place = 0;
+	place = 1;
 	p = a->first;
 	while (p)
 	{

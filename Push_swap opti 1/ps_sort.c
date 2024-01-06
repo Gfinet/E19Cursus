@@ -6,12 +6,25 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/05 21:57:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 22:53:32 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <time.h>
+
+void print_list(t_nlst_head *a)
+{
+	t_nlst *p;
+
+	p = a->first;
+	while (p)
+	{
+		ft_printf("%i ", p->content);
+		p = p->next;
+	}
+	ft_printf("\n");
+}
 
 void rot_to_first(t_nlst_head *a, int num, int n, int a_b)
 {
@@ -24,48 +37,46 @@ void rot_to_first(t_nlst_head *a, int num, int n, int a_b)
 			rotate(a, 0, a_b);
 		else 
 			reverse_rotate(a, 0, a_b);
-		if (check_swap(a, a_b))
-			swap (a, 0, a_b);
 	}
 }
 
-void ps_sort(t_nlst_head *a, t_nlst_head *b)
-{
-	int size;
-
-	if (check_only_need_rot(a, 0))
-		rot_to_first(a, nlst_get_low_big(a, 0), ft_nlstsize(a), 0);
-	if (!check_heap(&a->first, 0))
-	{
-		size = ft_nlstsize(a);
-		opti_push(a, b, 0);
-	}
-}
 
 void	sort_3(t_nlst_head *a, int a_b)
 {
 	if (!check_only_need_rot(a, a_b))
 		swap(a, 0, a_b);
-	rot_to_first(a, nlst_get_low_big(a, a_b), 3, a_b);
+	//rot_to_first(a, nlst_get_low_big(a, a_b), 3, a_b);
 }
 
-int get_next(int val, t_nlst_head *b)
+void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
-	int best;
-	t_nlst *tmp;
+	int	best_node;
 
-	tmp = b->first;
-	best = tmp->content;
-	while (tmp->next)
+	ft_printf("opti_push\n");
+	while (ft_nlstsize(b) < 3)
+			push(a,b, a_b);
+	sort_3(b, 1);
+	best_node = find_less_move(a, b);
+	ft_printf("%i\na : ", ft_nlstsize(b));
+	print_list(a);
+	ft_printf("b : ");
+	print_list(b);
+	while (best_node != 0)
 	{
-		if (best < tmp->content && val > best)
-			best = tmp->content;
-		else if (tmp->content > val && tmp->content < best)
-			best = tmp->content;
-		tmp = tmp->next;
+		move_faster_node(a, b, best_node, a_b);
+		best_node = find_less_move(a,b);
+		ft_printf("%i\na : ", ft_nlstsize(b));
+		print_list(a);
+		ft_printf("b : ");
+		print_list(b);
 	}
-	return (best);
+	while(ft_nlstsize(b) != 0)
+		push(b, a, !a_b);
+	rot_to_first(a, a->lower, ft_nlstsize(a), 0);
+
 }
+
+
 
 // void ps_sort(t_nlst_head *a, t_nlst_head *b)
 // {
@@ -178,4 +189,18 @@ static int	sort_9(t_nlst_head *a, t_nlst_head *b, int a_b)
 // 		}
 // 	}
 // 	return (&a->first);
+// }
+
+
+// void ps_sort(t_nlst_head *a, t_nlst_head *b)
+// {
+// 	int size;
+
+// 	if (check_only_need_rot(a, 0))
+// 		rot_to_first(a, a->lower, ft_nlstsize(a), 0);
+// 	if (!check_heap(&a->first, 0))
+// 	{
+// 		size = ft_nlstsize(a);
+// 		opti_push(a, b, 0);
+// 	}
 // }

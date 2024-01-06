@@ -6,31 +6,65 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/05 22:03:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 22:52:18 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static int	check_all_bigger_lower(t_nlst_head *b, int cur)
+{
+	int flag;
+	t_nlst *tmp;
+
+	flag = 1;
+	tmp = b->first;
+	while (tmp && flag)
+	{
+		if (tmp->content > cur)
+			flag = 0;
+	tmp = tmp->next;
+	}
+	if (flag)
+		return (nlst_get_place(b, nlst_get_low_big(b, 1)));
+	tmp = b->first;
+	while (tmp && !flag)
+	{
+		if (tmp->content < cur)
+			flag = 1;
+	tmp = tmp->next;
+	}
+	if (!flag)
+		return (nlst_get_place(b, nlst_get_low_big(b, 0)));
+		
+	return (-1);
+}
 int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
 {
 	int	count;
 	t_nlst *tmp;
+	t_nlst *prev;
 	
-	count = 0;
-	tmp = b->first;
-	while (tmp->next)
+	count = check_all_bigger_lower(b, cur->content);
+	ft_printf("count = %i\n", count);
+	if (count == -1)
 	{
-		while (tmp->next && cur->content > tmp->content)
+		count ++;
+		tmp = b->first;
+		while (tmp->next)
+		{
+			prev = tmp;
 			tmp = tmp->next;
-		if (cur->content < tmp->content)
-			count++;
-		tmp = tmp->next;
+			if (!tmp)
+				tmp = b->first;
+			if (prev->content > cur->content && tmp->content < cur->content)
+				break;
+			count ++;
+		}
 	}
 	count = (ft_nlstsize(b) != count) * count;
-	if (!count)
-		count++;
-	else if (count > ft_nlstsize(b) / 2)
+	count += !count;
+	if (count > ft_nlstsize(b) / 2)
 		count = ft_nlstsize(b) - count;
 	if (nlst_get_place(a, cur->content) < ft_nlstsize(a) / 2)
 		count += nlst_get_place(a, cur->content);
@@ -47,7 +81,7 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b)
 	int		best_node;
 	int		comp_moves;
 
-	if (ft_nlstsize(a) == 0)
+	if (!a->first)
 		return (0);
 	best = ft_nlstsize(a) * ft_nlstsize(a);
 	best_node = 0;
@@ -61,14 +95,16 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b)
 			best_node = cur->content;
 		}
 		cur = cur->next;
+		if (best == 0 || best == 1)
+			break;
 	}
-	ft_printf("best_node = %i best_moves = %i\n", best_node, best);
+	ft_printf("\nbest_node = %i best_moves = %i\n", best_node, best);
 	return (best_node);
 }
 
 static void choose_rotate(t_nlst_head *a, t_nlst_head *b, int flag, int flag2)
 {
-	ft_printf("choose_rot\n");
+	//ft_printf("choose_rot\n");
 	if (a && b && flag == flag2)
 	{
 		if (flag && flag2)
@@ -89,6 +125,37 @@ static void choose_rotate(t_nlst_head *a, t_nlst_head *b, int flag, int flag2)
 	}
 }
 
+int get_next(t_nlst_head *b, int val)
+{
+	int best;
+	t_nlst *tmp;
+	t_nlst *prev;
+
+	tmp = b->first;
+	prev = tmp;
+	best = tmp->content;
+	if (check_all_bigger_lower(b, val) != -1)
+	{
+		ft_printf("%d ok\n", val);
+		return (get_node(b, check_all_bigger_lower(b, val))->content);
+	}
+	while (prev->next)
+		prev = prev->next;
+	ft_printf("tmp = %d\nprev = %d\n", tmp->content, prev->content);
+	while (tmp)
+	{
+		if (prev->content > val && tmp->content < val)
+		{
+			best = tmp->content;
+			break;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	ft_printf("best %d\n", best);
+	return (best);
+}
+
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 {
 	int		flag;
@@ -96,13 +163,13 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 	int		futur_next;
 
 	ft_printf("move_fast\n");
-	futur_next = get_next(val, b);
+	futur_next = get_next(b, val);
+	ft_printf("f next : %d\n", futur_next);
 	flag = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
 	flag2 = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
 	while (a->first && b->first && 
 	(a->first->content != val || b->first->content != futur_next))
 	{
-		ft_printf("bite\n");
 		if (a->first->content != val && b->first->content != futur_next)
 			choose_rotate(a, b, flag, flag2);
 		else
@@ -117,23 +184,7 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 	push(a, b, a_b);
 }
 
-void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
-{
-	int	best_node;
 
-	ft_printf("opti_push\n");
-	if (!b->first)
-			push(a,b, a_b);
-	best_node = find_less_move(a, b);
-	while (best_node != 0)
-	{
-		move_faster_node(a, b, best_node, a_b);
-		best_node = find_less_move(a,b);
-	}
-	while(ft_nlstsize(b) != 0)
-		push(b, a, !a_b);
-
-}
 
 // void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 // {

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/05 21:51:08 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 22:52:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	swap(t_nlst_head *l, t_nlst_head *m, int a_b);
 void	rotate(t_nlst_head *l, t_nlst_head *m, int a_b);
 void	reverse_rotate(t_nlst_head *l, t_nlst_head *m, int a_b);
 void	ps_sort(t_nlst_head *a, t_nlst_head *b);
+void	print_list(t_nlst_head *a);
 
 int		nlst_get_place(t_nlst_head *a, int cont);
 int		nlst_get_low_big(t_nlst_head *a, int a_b);
@@ -63,7 +64,8 @@ int		nlst_head_init(t_nlst_head **a);
 int		get_closer(t_nlst_head *a, int b);
 int		get_last(t_nlst_head *a);
 void	sort_3(t_nlst_head *a, int a_b);
-int		get_next(int val, t_nlst_head *b);
+int		get_next(t_nlst_head *b, int val);
+t_nlst 	*get_node(t_nlst_head *a, int ind);
 void 	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b);
 
 int		check_heap(t_nlst **a, int a_b);

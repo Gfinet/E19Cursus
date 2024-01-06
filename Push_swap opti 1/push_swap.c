@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2023/12/29 06:35:11 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 22:27:29 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_res *push_swap(char **arg, int nb_arg)
 {
 	t_nlst_head  	*a;
 	t_nlst_head  	*b;
-	t_nlst			*p;
 	t_res 			*res;
 
 	nlst_head_init(&a);
@@ -92,21 +91,11 @@ t_res *push_swap(char **arg, int nb_arg)
 	// 	ft_printf("%i\n", p->content);
 	// 	p = p->next;
 	// }
-	p = a->first;
-	while (p)
-	{
-		ft_printf("%i ", p->content);
-		p = p->next;
-	}
-	ft_printf("\nmedian = %d\n", nlst_get_median(a, ft_nlstsize(a)));
-	ps_sort(a, b);
+	print_list(a);
+	ft_printf("median = %d\nmin = %d\nmax = %d\n", nlst_get_median(a, ft_nlstsize(a)), a->lower, a->bigger);
+	opti_push(a, b, 0);
 	ft_printf("\n");
-	p = a->first;
-	while (p)
-	{
-		ft_printf("%i ", p->content);
-		p = p->next;
-	}
+	print_list(a);
 	res->moves = nlst_compute_moves(a);
 	res->sorted = check_heap(&a->first, 0);
 	ft_nlstclear(a, free);
