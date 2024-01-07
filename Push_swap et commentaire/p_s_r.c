@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_s_r.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 01:15:55 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/29 21:54:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	push(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	t_nlst	*tmp;
 
+	if (!a)
+		return ;
 	a->first->move++;
 	tmp = b->first;
 	b->first = a->first;
@@ -32,6 +34,8 @@ void	swap(t_nlst_head *l, t_nlst_head *m, int a_b)
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
+	if (!l)
+		return ;
 	if (!l->first)
 		return ;
 	if (m && a_b == 2)
@@ -56,10 +60,12 @@ void	rotate(t_nlst_head *l, t_nlst_head *m, int a_b)
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
+	if (!l)
+		return ;
 	if (!l->first)
 		return ;
-	if (m && a_b == 2)
-	 	ft_printf("rr%c", SEP);
+	// if (m && a_b == 2)
+	// 	ft_printf("rr%c", SEP);
 	if (l && !m)
 		l->first->move++;
 	tmp = l->first;
@@ -82,6 +88,8 @@ void	reverse_rotate(t_nlst_head *a, t_nlst_head *m, int a_b)
 	t_nlst	*tmp;
 	t_nlst	*tmp2;
 
+	if (!a)
+		return ;
 	if (!a->first)
 		return ;
 	if (m && a_b == 2)

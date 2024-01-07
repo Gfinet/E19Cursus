@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   less_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 00:45:49 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/06 22:52:18 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_all_bigger_lower(t_nlst_head *b, int cur)
 	tmp = tmp->next;
 	}
 	if (flag)
-		return (nlst_get_low_big(b, 1));
+		return (nlst_get_place(b, nlst_get_low_big(b, 1)));
 	tmp = b->first;
 	while (tmp && !flag)
 	{
@@ -35,7 +35,8 @@ static int	check_all_bigger_lower(t_nlst_head *b, int cur)
 	tmp = tmp->next;
 	}
 	if (!flag)
-		return (nlst_get_low_big(b, 1));
+		return (nlst_get_place(b, nlst_get_low_big(b, 0)));
+		
 	return (-1);
 }
 int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
@@ -45,6 +46,7 @@ int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
 	t_nlst *prev;
 	
 	count = check_all_bigger_lower(b, cur->content);
+	ft_printf("count = %i\n", count);
 	if (count == -1)
 	{
 		count ++;
@@ -73,6 +75,7 @@ int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
 
 int	find_less_move(t_nlst_head *a, t_nlst_head *b)
 {
+	ft_printf("less_move\n");
 	t_nlst *cur;
 	int		best;
 	int		best_node;
@@ -95,11 +98,13 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b)
 		if (best == 0 || best == 1)
 			break;
 	}
+	ft_printf("\nbest_node = %i best_moves = %i\n", best_node, best);
 	return (best_node);
 }
 
 static void choose_rotate(t_nlst_head *a, t_nlst_head *b, int flag, int flag2)
 {
+	//ft_printf("choose_rot\n");
 	if (a && b && flag == flag2)
 	{
 		if (flag && flag2)
@@ -130,9 +135,13 @@ int get_next(t_nlst_head *b, int val)
 	prev = tmp;
 	best = tmp->content;
 	if (check_all_bigger_lower(b, val) != -1)
-		return (check_all_bigger_lower(b, val));
+	{
+		ft_printf("%d ok\n", val);
+		return (get_node(b, check_all_bigger_lower(b, val))->content);
+	}
 	while (prev->next)
 		prev = prev->next;
+	ft_printf("tmp = %d\nprev = %d\n", tmp->content, prev->content);
 	while (tmp)
 	{
 		if (prev->content > val && tmp->content < val)
@@ -143,6 +152,7 @@ int get_next(t_nlst_head *b, int val)
 		prev = tmp;
 		tmp = tmp->next;
 	}
+	ft_printf("best %d\n", best);
 	return (best);
 }
 
@@ -152,7 +162,9 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 	int		flag2;
 	int		futur_next;
 
+	ft_printf("move_fast\n");
 	futur_next = get_next(b, val);
+	ft_printf("f next : %d\n", futur_next);
 	flag = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
 	flag2 = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
 	while (a->first && b->first && 
@@ -167,6 +179,35 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 			if (b->first->content != futur_next)
 				choose_rotate(0, b, flag, flag2);
 		}
+		sleep(1);
 	}
 	push(a, b, a_b);
 }
+
+
+
+// void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
+// {
+// 	int		flag;
+// 	int		flag2;
+// 	int		closer;
+
+// 	ft_printf(" v = %i ", val);
+// 	closer = get_closer(a, b->first->content);
+// 	flag = (nlst_get_place(b, val) < ft_nlstsize(b) / 2);
+// 	flag2 = (nlst_get_place(a, closer) < ft_nlstsize(a) / 2);
+// 	while ((b->first && b->first->content != val) || a->first->content != closer)
+// 	{
+// 		if (flag && flag2)
+// 			rotate(a, b, 2);
+// 		else if (!flag && !flag2)
+// 			reverse_rotate(a, b, 2);
+// 		else if (flag && !flag2)
+// 			rotate(b, 0, a_b);
+// 		else if (!flag && flag2)
+// 			reverse_rotate(b, 0, a_b);
+// 		sleep(1);
+// 		ft_printf("yo %i ", b->first->content);
+// 	}
+// 	push(b, a, a_b);
+// }

@@ -6,20 +6,19 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:58:42 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 00:37:46 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/29 06:41:49 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_heap(t_nlst *a, int a_b)
+int	check_heap(t_nlst **a, int a_b)
 {
 	t_nlst	*p;
 
-	
-	if (!a)
+	if (*a)
 		return (0);
-	p = a;
+	p = *a;
 	while (p->next)
 	{
 		if (!a_b && p->content > p->next->content)
@@ -107,7 +106,7 @@ int	check_only_swap(t_nlst_head *a, int size, int a_b)
 		p = a->first->next->next;
 	else
 		return (0);
-	return (check_heap(p, a_b) && d);
+	return (check_heap(&p, a_b) && d);
 }
 
 int check_swap(t_nlst_head *a, int a_b)

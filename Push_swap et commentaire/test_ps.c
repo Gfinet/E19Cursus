@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 01:53:45 by Gfinet           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:22:10 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int make_rand_arg(int range, char **arg, int set)
 	srand(set * time(0));
 	while (i < range)
 	{
-		num = rand() % 1000 +1;
+		num = rand() % 500 +1;
 		while (in_list(num, arg, i))
 			num = rand() % 50 +1;
 		arg[i] = malloc(ft_strlen(ft_itoa(num)));
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 		}
 		free(arg);
 		printf("--- for %i numbers, %i tests ---\nmoyenne moves : %i\n\n", range, nb_test, total / nb_test);
-		//diff = time(NULL) - diff;
+		diff = time(NULL) - diff;
 		printf("time spend : %ld sec\n", diff);
 		printf("biggest iteration: %i\n", biggest);
 		printf("moves : %d\n\n", biggest_moves);

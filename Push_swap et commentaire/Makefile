@@ -2,8 +2,7 @@ CC = GCC
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
-SRCS = 	main.c \
-		push_swap.c \
+SRCS = push_swap.c \
 		p_s_r.c \
 		nlst.c \
 		nlst2.c \
