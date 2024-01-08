@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 01:44:52 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:09:50 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_res *push_swap(char **arg, int nb_arg)
 	if (!fill_a(a, arg, nb_arg))
 		return (res);
 	a->lower = nlst_get_low_big(a, 0);
-	print_list(a);
+	print_list(a, 0);
 	ft_printf("min = %d\n", a->lower);
 	opti_push(a, b, 0);
 	
 	ft_printf("\n");
-	print_list(a);
+	print_list(a, 0);
 	int i = 0;
 	t_nlst *p =a->first;
 	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   less_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 04:15:56 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/08 17:59:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,15 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 
 	if (!a->first)
 		return (0);
-	best = ft_nlstsize(a) * ft_nlstsize(a);
+	best = ft_nlstsize(a) * ft_nlstsize(a) + 1;
+	if (ft_nlstsize(a) < ft_nlstsize(b))
+		best = ft_nlstsize(b) * ft_nlstsize(b);
 	best_node = 0;
 	cur = a->first;
 	while (cur)
 	{
 		comp_moves = compute_moves(a, b, cur, a_b);
-		if (comp_moves < best || best_node == 0)
+		if (comp_moves < best)
 		{
 			best = comp_moves;
 			best_node = cur->content;
@@ -143,6 +145,7 @@ int get_next(t_nlst_head *b, int val, int a_b)
 	prev = tmp;
 	best = tmp->content;
 	ind = check_all_bigger_lower(b, val, a_b);
+	ft_printf("ind = %i\n", ind);
 	if ( ind != -1)
 		return (get_node(b, ind)->content);
 	while (prev->next)
@@ -182,8 +185,6 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 			if (b->first->content != futur_next)
 				choose_rotate(0, b, flag, flag2);
 		}
-		sleep(1);
 	}
 	push(a, b, a_b);
-	//sleep(1);
 }

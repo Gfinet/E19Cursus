@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 04:14:49 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:23:38 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rot_to_first(t_nlst_head *a, int num, int n, int a_b);
 
 void 	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b);
 void	sort_3(t_nlst_head *a, int a_b);
-void	print_list(t_nlst_head *a); ///
+void	print_list(t_nlst_head *a, int a_b); ///
 
 int		nlst_get_place(t_nlst_head *a, int cont);
 int		nlst_get_low_big(t_nlst_head *a, int a_b);
@@ -67,6 +67,7 @@ int		get_next(t_nlst_head *b, int val, int a_b);
 
 int		check_heap(t_nlst *a, int a_b);
 int		check_first(t_nlst_head *a, int a_b);
+int	check_only_need_rot(t_nlst_head *a, int a_b);
 
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b);
 int		find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b);
