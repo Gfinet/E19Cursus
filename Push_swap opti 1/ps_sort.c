@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 01:59:56 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/07 04:07:11 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,43 @@ void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	int	best_node;
 
 	while (ft_nlstsize(b) < 3)
-			push(a,b, a_b);
+			push(a, b, a_b);
 	sort_3(b, 1);
-	best_node = find_less_move(a, b);
+	best_node = find_less_move(a, b, a_b);
 	while (best_node != 0)
 	{
 		move_faster_node(a, b, best_node, a_b);
-		best_node = find_less_move(a,b);
+		best_node = find_less_move(a,b, a_b);
 	}
 	while(ft_nlstsize(b) != 0)
 		push(b, a, !a_b);
 	rot_to_first(a, a->lower, ft_nlstsize(a), 0);
 }
+
+// void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
+// {
+// 	int	best_node;
+
+// 	while (ft_nlstsize(b) < 3)
+// 			push(a, b, a_b);
+// 	sort_3(b, 1);
+// 	best_node = find_less_move(a, b, a_b);
+// 	while (best_node != 0 && ft_nlstsize(a) > 3)
+// 	{
+// 		move_faster_node(a, b, best_node, a_b);
+// 		best_node = find_less_move(a, b, a_b);
+// 	}
+// 	sort_3(a, 0);
+	
+// 	ft_printf("\na : ");
+// 	print_list(a);
+// 	ft_printf("b : ");
+// 	print_list(b);
+// 	best_node = find_less_move(b, a, !a_b);
+// 	while(ft_nlstsize(b) != 0)
+// 	{
+// 		move_faster_node(b, a, best_node, !a_b);
+// 		best_node = find_less_move(b, a, !a_b);
+// 	}
+// 	rot_to_first(a, a->lower, ft_nlstsize(a), 0);
+// }

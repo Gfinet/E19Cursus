@@ -6,13 +6,13 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 00:45:49 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/07 04:15:56 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_all_bigger_lower(t_nlst_head *b, int cur)
+static int	check_all_bigger_lower(t_nlst_head *b, int cur, int a_b)
 {
 	int flag;
 	t_nlst *tmp;
@@ -26,7 +26,7 @@ static int	check_all_bigger_lower(t_nlst_head *b, int cur)
 	tmp = tmp->next;
 	}
 	if (flag)
-		return (nlst_get_low_big(b, 1));
+		return (nlst_get_place(b, nlst_get_low_big(b, !a_b)));
 	tmp = b->first;
 	while (tmp && !flag)
 	{
@@ -35,16 +35,16 @@ static int	check_all_bigger_lower(t_nlst_head *b, int cur)
 	tmp = tmp->next;
 	}
 	if (!flag)
-		return (nlst_get_low_big(b, 1));
+		return (nlst_get_place(b,  nlst_get_low_big(b, !a_b)));
 	return (-1);
 }
-int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
+int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
 {
 	int	count;
 	t_nlst *tmp;
 	t_nlst *prev;
 	
-	count = check_all_bigger_lower(b, cur->content);
+	count = check_all_bigger_lower(b, cur->content, a_b);
 	if (count == -1)
 	{
 		count ++;
@@ -55,8 +55,18 @@ int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
 			tmp = tmp->next;
 			if (!tmp)
 				tmp = b->first;
-			if (prev->content > cur->content && tmp->content < cur->content)
-				break;
+			if (!a_b)
+			{
+				if (prev->content > cur->content && 
+					tmp->content < cur->content)
+					break;
+			}
+			else
+			{
+				if (prev->content < cur->content && 
+					tmp->content > cur->content)
+					break;
+			}
 			count ++;
 		}
 	}
@@ -65,13 +75,15 @@ int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur)
 	if (count > ft_nlstsize(b) / 2)
 		count = ft_nlstsize(b) - count;
 	if (nlst_get_place(a, cur->content) < ft_nlstsize(a) / 2)
-		count += nlst_get_place(a, cur->content);
+		count += nlst_get_place(a, cur->content) - 1;
 	else
 		count += ft_nlstsize(a) - nlst_get_place(a, cur->content) + 1;
+	ft_printf("val = %i ", cur->content);
+	ft_printf("- count = %i\n", count);
 	return (count);
 }
 
-int	find_less_move(t_nlst_head *a, t_nlst_head *b)
+int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	t_nlst *cur;
 	int		best;
@@ -85,7 +97,7 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b)
 	cur = a->first;
 	while (cur)
 	{
-		comp_moves = compute_moves(a, b, cur);
+		comp_moves = compute_moves(a, b, cur, a_b);
 		if (comp_moves < best || best_node == 0)
 		{
 			best = comp_moves;
@@ -120,17 +132,19 @@ static void choose_rotate(t_nlst_head *a, t_nlst_head *b, int flag, int flag2)
 	}
 }
 
-int get_next(t_nlst_head *b, int val)
+int get_next(t_nlst_head *b, int val, int a_b)
 {
 	int best;
+	int ind;
 	t_nlst *tmp;
 	t_nlst *prev;
 
 	tmp = b->first;
 	prev = tmp;
 	best = tmp->content;
-	if (check_all_bigger_lower(b, val) != -1)
-		return (check_all_bigger_lower(b, val));
+	ind = check_all_bigger_lower(b, val, a_b);
+	if ( ind != -1)
+		return (get_node(b, ind)->content);
 	while (prev->next)
 		prev = prev->next;
 	while (tmp)
@@ -152,9 +166,10 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 	int		flag2;
 	int		futur_next;
 
-	futur_next = get_next(b, val);
+	futur_next = get_next(b, val, a_b);
 	flag = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
 	flag2 = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
+	ft_printf("f_next : %i\n", futur_next);
 	while (a->first && b->first && 
 	(a->first->content != val || b->first->content != futur_next))
 	{
@@ -167,6 +182,8 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 			if (b->first->content != futur_next)
 				choose_rotate(0, b, flag, flag2);
 		}
+		sleep(1);
 	}
 	push(a, b, a_b);
+	//sleep(1);
 }

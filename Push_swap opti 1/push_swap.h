@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 01:40:36 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/07 04:14:49 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,18 @@ int		ft_nlstclear(t_nlst_head *lst, void (*del)(void *));
 void	ft_nlstdelone(t_nlst *lst, void (*del)(void *));
 t_nlst	*ft_nlstnew(int cont);
 int		ft_nlstsize(t_nlst_head *lst);
+t_nlst 	*get_node(t_nlst_head *a, int ind);
+t_nlst	*get_prev(t_nlst_head *a, int val);
 
 int		nlst_head_init(t_nlst_head **a);
-int		get_next(t_nlst_head *b, int val);
+int		get_next(t_nlst_head *b, int val, int a_b);
 
 
 int		check_heap(t_nlst *a, int a_b);
 int		check_first(t_nlst_head *a, int a_b);
 
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b);
-int		find_less_move(t_nlst_head *a, t_nlst_head *b);
-int		compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur);
+int		find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b);
+int		compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b);
 
 #endif
