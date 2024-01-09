@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 01:53:45 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/09 19:25:38 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int make_rand_arg(int range, char **arg, int set)
 	srand(set * time(0));
 	while (i < range)
 	{
-		num = rand() % 1000 +1;
+		num = rand() % 900 +1;
 		while (in_list(num, arg, i))
 			num = rand() % 50 +1;
 		arg[i] = malloc(ft_strlen(ft_itoa(num)));
@@ -93,6 +93,8 @@ int main(int argc, char **argv)
 	int total = 0;
 	int biggest = 0;
 	int biggest_moves = 0;
+	int out_lim = 0;
+	int limite;
 
 	char **arg;
 	char **big_arg;
@@ -100,12 +102,14 @@ int main(int argc, char **argv)
 
 	time_t diff;
 
-	if (argc < 3)
+	if (argc < 4)
 		return (0);
-	if (argc == 3)
+	if (argc == 3 || argc == 4)
 	{
 		diff = time(NULL);
 		range = ft_atoi(argv[2]);
+		if (argc == 4)
+			limite = ft_atoi(argv[3]);
 		if (range < 2)
 			return (0);
 		nb_test = ft_atoi(argv[1]);
@@ -135,6 +139,8 @@ int main(int argc, char **argv)
 				}
 				i = biggest - 1;
 			}
+			if (res->moves > limite)
+				out_lim++;
 			moves[i] = res->moves;
 			total += moves[i];
 			free_all(arg, range);
@@ -147,6 +153,8 @@ int main(int argc, char **argv)
 		printf("time spend : %ld sec\n", diff);
 		printf("biggest iteration: %i\n", biggest);
 		printf("moves : %d\n\n", biggest_moves);
+		if (argc == 4)
+			printf("%d/%d test outlimit = %d%%", out_lim, nb_test, (100*out_lim/nb_test));
 		res = push_swap(big_arg, range);
 		free_all(big_arg,range);
 	}

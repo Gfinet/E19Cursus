@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/08 18:11:23 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/09 18:27:03 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	best_node = find_less_move(a, b, a_b);
 	while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))
 	{
-		ft_printf("\n");
-		print_list(a, 0);
-		print_list(b, 1);
+		// ft_printf("\n");
+		// print_list(a, 0);
+		// print_list(b, 1);
 		move_faster_node(a, b, best_node, a_b);
 		best_node = find_less_move(a, b, a_b);
 		
@@ -123,14 +123,14 @@ void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	}
 	if (ft_nlstsize(a) == 3)
 		sort_3(a, 0);
-	ft_printf("LEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n\n");
+	// ft_printf("LEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n\n");
 	best_node = find_less_move(b, a, !a_b);
 	while(ft_nlstsize(b) != 0)
 	{
-		ft_printf("\n");
-		print_list(a, 0);
-		print_list(b, 1);
-		ft_printf("bst node : %d\n", best_node);
+		// ft_printf("\n");
+		// print_list(a, 0);
+		// print_list(b, 1);
+		// ft_printf("bst node : %d\n", best_node);
 		move_faster_node(b, a, best_node, !a_b);
 		best_node = find_less_move(b, a, !a_b);
 		

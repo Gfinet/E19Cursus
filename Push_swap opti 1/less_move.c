@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   less_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/08 17:59:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/09 18:25:29 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
 		count += nlst_get_place(a, cur->content) - 1;
 	else
 		count += ft_nlstsize(a) - nlst_get_place(a, cur->content) + 1;
-	ft_printf("val = %i ", cur->content);
-	ft_printf("- count = %i\n", count);
+	// ft_printf("val = %i ", cur->content);
+	// ft_printf("- count = %i\n", count);
 	return (count);
 }
 
@@ -145,17 +145,18 @@ int get_next(t_nlst_head *b, int val, int a_b)
 	prev = tmp;
 	best = tmp->content;
 	ind = check_all_bigger_lower(b, val, a_b);
-	ft_printf("ind = %i\n", ind);
+	// ft_printf("ind = %i\n", ind);
 	if ( ind != -1)
 		return (get_node(b, ind)->content);
 	while (prev->next)
 		prev = prev->next;
-	while (tmp)
+	while (tmp && ind)
 	{
-		if (prev->content > val && tmp->content < val)
+		if ((!a_b && prev->content > val && tmp->content < val )||
+		(a_b && prev->content < val && tmp->content > val))
 		{
 			best = tmp->content;
-			break;
+			ind = 0;
 		}
 		prev = tmp;
 		tmp = tmp->next;
@@ -172,7 +173,7 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 	futur_next = get_next(b, val, a_b);
 	flag = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
 	flag2 = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
-	ft_printf("f_next : %i\n", futur_next);
+	// ft_printf("f_next : %i\n", futur_next);
 	while (a->first && b->first && 
 	(a->first->content != val || b->first->content != futur_next))
 	{
