@@ -1,6 +1,6 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 SRCS = 	main.c \
 		push_swap.c \
@@ -15,7 +15,7 @@ SRCS = 	main.c \
 
 HEAD = push_swap.h		
 
-LIB = $(LIBFT)libftprintf.a
+LIB = libftprintf.a
 
 LIBFT = ./Printf/
 
@@ -27,23 +27,15 @@ NAME = push_swap
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) libftprintf.a
-	$(CC) $(CFLAGS) $^ -o $@
+$(NAME): $(OBJ) $(LIB)
+	$(CC) $(CFLAGS) $(LIB) $^ -o $@
 
 %.o : %.c
 	$(CC) $(CFLAGS) $^ -c -o $@ 
 
-libftprintf.a: 
-	make -C $(LIBFT)
-	cp $(LIB) .
-	mv $(LIB) $(NAME)
-
 clean:
 	rm -f *.o
-	make -C $(LIBFT) clean
 fclean: clean
-	rm -f *.a
-	make -C $(LIBFT) fclean
 	rm -f $(NAME)
 	
 

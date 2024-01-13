@@ -6,16 +6,15 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 21:42:19 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/13 22:20:08 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "./Printf/libft/libft.h"
-# include "./Printf/ft_printf.h"
+# include "ft_printf.h"
 # include <unistd.h>
-# define SEP 32 // 32( ) 10(\n)
+# define SEP 10 // 32( ) 10(\n)
 
 typedef struct s_res
 {
