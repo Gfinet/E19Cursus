@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_ps.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 13:49:24 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/13 20:31:10 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ int main(int argc, char **argv)
 			ft_printf("---------------- test %i ----------------\n", i+1);
 			res = push_swap(arg, range);
 			printf("\nsorted : %s\n", res->sorted ? "yes" : "no");
+			if (!res->sorted)
+				sleep(20);
 			printf("moves : %d\n\n", res->moves);
 			if (res->moves >= biggest_moves)
 			{

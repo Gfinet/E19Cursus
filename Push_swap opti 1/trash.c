@@ -241,3 +241,56 @@ void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	// 	push(b, a, !a_b);
 	rot_to_first(a, a->lower, ft_nlstsize(a), 0);
 }
+
+// void	sort_3(t_nlst_head *a, int a_b)
+// {
+// 	t_nlst *p1;
+// 	t_nlst *p2;
+// 	t_nlst *p3;
+
+// 	p1 = a->first;
+// 	p2 = p1->next;
+// 	p3 = p2->next;
+// 	if (a_b)
+// 	{
+// 		if (p1->content < p2->content && p2->content < p3->content)
+// 			swap(a, 0, a_b);
+// 		else if (p1->content > p2->content && p2->content < p3->content)
+// 			swap(a, 0, a_b);
+// 		else if (p1->content < p2->content && p2->content > p3->content)
+// 			swap(a, 0, a_b);
+// 	}
+// 	else
+// 	{
+// 		if (p1->content > p2->content && p2->content > p3->content)
+// 			swap(a, 0, a_b);
+// 		else if (p1->content < p2->content && p2->content > p3->content)
+// 			swap(a, 0, a_b);
+// 		else if (p1->content > p2->content && p2->content < p3->content)
+// 			swap(a, 0, a_b);
+// 	}
+// }
+
+// void opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
+// {
+// 	int	best_node;
+
+// 	while (ft_nlstsize(b) < 3)
+// 			push(a, b, a_b);
+// 	sort_3(b, 1);
+// 	best_node = find_less_move(a, b, a_b);
+// 	while (!check_only_need_rot(a, 0))
+// 	{
+		
+// 		move_faster_node(a, b, best_node, a_b);
+// 		ft_printf("\n");
+// 		ft_printf("bst node : %d\n", best_node);
+// 		print_list(a, 0);
+// 		print_list(b, 1);
+// 		best_node = find_less_move(a,b, a_b);
+// 		ft_printf("bst node : %d\n", best_node);
+// 	}
+// 	while(ft_nlstsize(b) != 0)
+// 		push(b, a, !a_b);
+// 	rot_to_first(a, a->lower, ft_nlstsize(a), 0);
+// }

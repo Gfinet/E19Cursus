@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_verif.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:58:42 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/07 00:37:46 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/13 20:37:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	check_heap(t_nlst *a, int a_b)
 {
 	t_nlst	*p;
 
-	
 	if (!a)
 		return (0);
 	p = a;
