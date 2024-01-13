@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/09 19:25:38 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/09 19:47:55 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #include <stdlib.h>
 #include <time.h>
 
+static void print_time(time_t sec)
+{
+	int min;
+
+	if (sec <= 60)
+		printf("time spend : %ld sec\n", sec);
+	else
+	{
+		min = sec / 60;
+		sec %= 60;
+		printf("time spend : %d min and %ld sec\n", min, sec);
+	}
+
+}
 static int free_all(char **arg, int len)
 {
 	int i = 0;
@@ -71,9 +85,9 @@ static int make_rand_arg(int range, char **arg, int set)
 	srand(set * time(0));
 	while (i < range)
 	{
-		num = rand() % 900 +1;
+		num = rand() % (range * 2) +1;
 		while (in_list(num, arg, i))
-			num = rand() % 50 +1;
+			num = rand() % (range * 2) +1;
 		arg[i] = malloc(ft_strlen(ft_itoa(num)));
 		if (!arg[i])
 			return (free_all(arg, i));
@@ -150,7 +164,7 @@ int main(int argc, char **argv)
 		free(arg);
 		printf("--- for %i numbers, %i tests ---\nmoyenne moves : %i\n\n", range, nb_test, total / nb_test);
 		//diff = time(NULL) - diff;
-		printf("time spend : %ld sec\n", diff);
+		print_time(diff);
 		printf("biggest iteration: %i\n", biggest);
 		printf("moves : %d\n\n", biggest_moves);
 		if (argc == 4)
