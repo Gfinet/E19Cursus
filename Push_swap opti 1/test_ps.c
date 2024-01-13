@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/09 19:47:55 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/13 13:49:24 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int main(int argc, char **argv)
 		}
 		free(arg);
 		printf("--- for %i numbers, %i tests ---\nmoyenne moves : %i\n\n", range, nb_test, total / nb_test);
-		//diff = time(NULL) - diff;
+		diff = time(NULL) - diff;
 		print_time(diff);
 		printf("biggest iteration: %i\n", biggest);
 		printf("moves : %d\n\n", biggest_moves);
