@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 21:38:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:01:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	int	best_node;
 
 	while (ft_nlstsize(b) < 3)
-		push(a, b, a_b);
+		push(a, b, !a_b);
 	sort_3(b, 1);
 	best_node = find_less_move(a, b, a_b);
 	while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))

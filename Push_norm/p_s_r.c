@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 21:35:57 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/14 19:29:00 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	b->first = a->first;
 	a->first = a->first->next;
 	b->first->next = tmp;
-	if (a_b)
+	if (!a_b)
 		ft_printf("pa%c", SEP);
 	else
 		ft_printf("pb%c", SEP);

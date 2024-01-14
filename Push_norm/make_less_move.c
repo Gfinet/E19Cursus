@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 20:53:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/14 19:57:26 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 	return (best_node);
 }
 
-static void	choose_rotate(t_nlst_head *a, t_nlst_head *b, int flag, int flag2)
+static void	choose_rotate(t_nlst_head *a, t_nlst_head *b, t_2_flag f, int a_b)
 {
-	if (a && b && flag == flag2)
+	if (a && b && f.one == f.two)
 	{
-		if (flag && flag2)
+		if (f.one && f.two)
 			rotate(a, b, 2);
-		else if (!flag && !flag2)
+		else if (!f.one && !f.two)
 			reverse_rotate(a, b, 2);
 	}
 	else
 	{
-		if (a && flag)
-			rotate(a, 0, 0);
-		else if (a && !flag)
-			reverse_rotate(a, 0, 0);
-		if (b && flag2)
-			rotate(b, 0, 1);
-		else if (b && !flag2)
-			reverse_rotate(b, 0, 1);
+		if (a && f.one)
+			rotate(a, 0, a_b);
+		else if (a && !f.one)
+			reverse_rotate(a, 0, a_b);
+		if (b && f.two)
+			rotate(b, 0, !a_b);
+		else if (b && !f.two)
+			reverse_rotate(b, 0, !a_b);
 	}
 }
 
@@ -94,25 +94,24 @@ int	get_next(t_nlst_head *b, int val, int a_b)
 
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 {
-	int		flag;
-	int		flag2;
-	int		futur_next;
+	t_2_flag	f;
+	int			futur_next;
 
 	futur_next = get_next(b, val, a_b);
-	flag = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
-	flag2 = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
+	f.one = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
+	f.two = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
 	while (a->first && b->first && 
 		(a->first->content != val || b->first->content != futur_next))
 	{
 		if (a->first->content != val && b->first->content != futur_next)
-			choose_rotate(a, b, flag, flag2);
+			choose_rotate(a, b, f, a_b);
 		else
 		{
 			if (a->first->content != val)
-				choose_rotate(a, 0, flag, flag2);
+				choose_rotate(a, 0, f, a_b);
 			if (b->first->content != futur_next)
-				choose_rotate(0, b, flag, flag2);
+				choose_rotate(0, b, f, a_b);
 		}
 	}
-	push(a, b, a_b);
+	push(a, b, !a_b);
 }

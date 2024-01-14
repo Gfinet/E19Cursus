@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 22:20:08 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:01:52 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include "ft_printf.h"
 # include <unistd.h>
 # define SEP 10 // 32( ) 10(\n)
+
+typedef struct s_2_flag
+{
+	int	one;
+	int	two;
+}	t_2_flag;
 
 typedef struct s_res
 {
