@@ -1,6 +1,6 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 SRCS = 	main.c \
 		push_swap.c \
@@ -11,7 +11,8 @@ SRCS = 	main.c \
 		ps_sort.c \
 		all_verif.c \
 		make_less_move.c \
-		compute_best_node.c
+		compute_best_node.c \
+		guess_second.c
 
 HEAD = push_swap.h		
 

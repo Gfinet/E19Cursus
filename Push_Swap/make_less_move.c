@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/14 23:05:47 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/15 20:33:10 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 	cur = a->first;
 	while (cur)
 	{
-		comp_moves = compute_moves(a, b, cur, a_b);
+		ft_printf("FDM %d\n", cur->content);
+		comp_moves = compute_moves(a, b, cur, a_b) + guess_sec(a, b, cur, a_b);
+		ft_printf("comp done\n");
 		if (comp_moves < best)
 		{
 			best = comp_moves;

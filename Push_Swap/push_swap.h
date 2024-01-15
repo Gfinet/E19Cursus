@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/14 20:01:52 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/15 20:22:36 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int		check_all_bigger_lower(t_nlst_head *b, int cur, int a_b);
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b);
 int		find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b);
 int		compute_moves(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b);
+int		guess_sec(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b);
 
 #endif

@@ -6,20 +6,47 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 22:09:33 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/14 23:14:47 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/15 20:38:08 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*init_imaginary_list(t_nlst_head *l, t_nlst *cur, t_nlst *p, int a_b)
+static t_nlst	*init_p(t_nlst_head *l, t_nlst *cur, int a_b)
+{
+	int		next;
+	t_nlst	*p;
+
+	if (a_b)
+	{
+		next = get_next(l, cur->content, a_b);
+		p = l->first;
+		while (p && p->content != next)
+			p = p->next;
+	}
+	else
+	{
+		p = l->first;
+		ft_printf("%d %p\n", cur->content, cur->next);
+		if (cur->next)
+		{
+			while (p->next && p != cur)
+				p = p->next;
+			p = p->next;
+		}
+	}
+	ft_printf("%p\n", p);
+	return (p);
+}
+
+static int	*init_imagi_list(t_nlst_head *l, t_nlst *cur, t_nlst *p, int a_b)
 {
 	int		i;
 	int		size;
 	int		*m;
 
 	size = ft_nlstsize(l) + (1 * a_b - 1 * !a_b);
-	m = malloc(sizeof(int) + size);
+	m = malloc(sizeof(int) * size);
 	if (!m)
 		return (0);
 	if (a_b)
@@ -36,34 +63,65 @@ int	*init_imaginary_list(t_nlst_head *l, t_nlst *cur, t_nlst *p, int a_b)
 	return (m);
 }
 
-int	guess_second(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
+static int	my_free(int *a1, t_nlst_head *a, t_nlst_head *b)
+{
+	if (a1)
+		free(a1);
+	return (ft_nlstsize(a) * ft_nlstsize(b));
+}
+
+static int	compute_second(int val, int *b2, int size_b, int a_b)
+{
+	int	i;
+
+	i = 0;
+	while (i < size_b)
+	{
+		if (i == 0)
+		{
+			if ((!a_b && b2[0] < val && val < b2[size_b - 1])
+				|| (a_b && b2[0] > val && val > b2[size_b - 1]))
+				break ;
+		}
+		else
+		{
+			if ((!a_b && b2[i] < val && val < b2[i - 1])
+				|| (a_b && b2[i] > val && val > b2[i - 1]))
+				break ;
+		}
+
+		i++;
+	}
+	return (i);
+}
+
+int	guess_sec(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
 {
 	int		*a2;
 	int		*b2;
-	int		next;
-	t_nlst	*p;
+	int		i;
+	int		best;
+	int		move_a;
 
-	next = get_next(b, cur->content, a_b);
-	p = b->first;
-	while (p && p->content != next)
-		p = p->next;	
-	b2 = init_imaginary_list(b, cur, p, !a_b);
+	b2 = init_imagi_list(b, cur, init_p(b, cur, !a_b), !a_b);
 	if (!b2)
-		return (ft_nlstsize(a) * ft_nlstsize(b));
-	p = a->first;
-	if (cur->next)
-	{
-		while (p && p != cur)
-			p = p->next;
-		p = p->next;
-	}
-	a2 = init_imaginary_list(a, cur, p, a_b);
+		return (my_free(0, a, b));
+	a2 = init_imagi_list(a, cur, init_p(a, cur, a_b), a_b);
 	if (!a2)
-		return (ft_nlstsize(a) * ft_nlstsize(b));
+		return (my_free(b2, a, b));
+	i = 0;
+	while (i < ft_nlstsize(a) - 1)
+	{
+		move_a = i * (i < ((ft_nlstsize(a) - 1)  / 2))
+			+ (ft_nlstsize(a) - 1 - i) * (i >= ((ft_nlstsize(a) - 1)  / 2));
+		if (compute_second(a2[i], b2, ft_nlstsize(b) + 1, a_b) + move_a < best)
+			best = compute_second(a2[i], b2, ft_nlstsize(b) + 1, a_b) + move_a;
+		i++;
+	}
 	free(a2);
 	free(b2);
+	return (best);
 }
-
 
 /*
 	next = get_next(b, cur->content, a_b);
