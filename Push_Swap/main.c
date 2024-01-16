@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/14 19:14:07 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 00:28:17 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	check_input(char **s, int n_arg)
 	i = 0;
 	while (s[i])
 	{
+		if (ft_strlen(s[i]) != ft_strlen(ft_itoa(ft_atoi(s[i]))))
+			return (0);
 		j = i + 1;
 		while (j < n_arg && s[j])
 		{
@@ -90,6 +92,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		res = push_swap(nums, nb_elem);
+		ft_printf("moves : %d", res->moves);
 		if (!res)
 			write(2, "Error\n", 6);
 		else

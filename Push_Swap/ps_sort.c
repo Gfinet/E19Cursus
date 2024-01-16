@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/14 20:01:31 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/16 23:40:33 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <time.h>
+
+//optionnal printing function of a or b because of a_b
+//0 : a / 1 : b
 
 void	print_list(t_nlst_head *a, int a_b)
 {
@@ -29,6 +31,9 @@ void	print_list(t_nlst_head *a, int a_b)
 	ft_printf("\n");
 }
 
+//function will put the lower or bigger in the first place of the pile
+//a_b(0) : lower / a_b(1) : bigger
+
 void	rot_to_first(t_nlst_head *a, int num, int n, int a_b)
 {
 	int	flag;
@@ -38,16 +43,25 @@ void	rot_to_first(t_nlst_head *a, int num, int n, int a_b)
 	{
 		if (flag)
 			rotate(a, 0, a_b);
-		else 
+		else
 			reverse_rotate(a, 0, a_b);
 	}
 }
+
+//Function which sort a pile of 3 number depending of a_b
+//0 : lower to bigger / 1 : bigger to lower
 
 void	sort_3(t_nlst_head *a, int a_b)
 {
 	if (!check_only_need_rot(a, a_b))
 		swap(a, 0, a_b);
 }
+
+//Algorythm wich sort the 2 piles.
+//Starting with pushing the 3 first value form a to b and sorting b.
+//then will move the faster node from a to b until 3 nodes left in a.
+//Sort the 3 last nodes in a before moving the fatser nodes from b to a.
+//Finishing by putting the lower node in the first position.
 
 void	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 {

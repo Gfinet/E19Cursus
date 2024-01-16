@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   p_s_r.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/14 19:29:00 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/16 23:55:22 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//Push the first node from a to b and print pa or pb with a_b
+//0 : pa / 1 : pb 
 
 void	push(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
@@ -26,6 +29,9 @@ void	push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	else
 		ft_printf("pb%c", SEP);
 }
+
+//Swap the first and the second node in l and print sa, sb or ss with a_b
+//0 : sa / 1 : sb / 2 : ss
 
 void	swap(t_nlst_head *l, t_nlst_head *m, int a_b)
 {
@@ -50,6 +56,9 @@ void	swap(t_nlst_head *l, t_nlst_head *m, int a_b)
 	else if (a_b == 1)
 		ft_printf("sb%c", SEP);
 }
+
+//Rotate the pile l or both piles and print ra, rb or rr with a_b
+//0 : ra / 1 : rb / 2 : rr
 
 void	rotate(t_nlst_head *l, t_nlst_head *m, int a_b)
 {
@@ -76,6 +85,9 @@ void	rotate(t_nlst_head *l, t_nlst_head *m, int a_b)
 	else if (a_b == 1)
 		ft_printf("rb%c", SEP);
 }
+
+//Reverse_rotate the pile l or both piles and print rra, rrb or rrr with a_b
+//0 : rra / 1 : rrb / 2 : rrr
 
 void	reverse_rotate(t_nlst_head *a, t_nlst_head *m, int a_b)
 {

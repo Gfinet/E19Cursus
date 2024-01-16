@@ -16,7 +16,7 @@ SRCS = 	main.c \
 
 HEAD = push_swap.h		
 
-LIB = libftprintf.a
+LIB = $(LIBFT)libftprintf.a
 
 LIBFT = ./Printf/
 
@@ -28,16 +28,23 @@ NAME = push_swap
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) $(LIB) $^ -o $@
+$(NAME): $(OBJ) libftprintf.a
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c
 	$(CC) $(CFLAGS) $^ -c -o $@ 
 
+libftprintf.a: 
+	make -C $(LIBFT)
+	cp $(LIB) .
+	mv $(LIB) $(NAME)
+
 clean:
 	rm -f *.o
+	make -C $(LIBFT) clean
 fclean: clean
-	rm -f $(NAME)
+	rm -f *.a
+	make -C $(LIBFT) fclean
 	
 
 re: fclean all

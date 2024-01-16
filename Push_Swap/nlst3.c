@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   nlst3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:53:31 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 21:35:24 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/16 23:50:25 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//initialyze the t_nlst_head struct
 
 int	nlst_head_init(t_nlst_head **a)
 {
@@ -22,6 +24,8 @@ int	nlst_head_init(t_nlst_head **a)
 	return (1);
 }
 
+//initialyze the t_res struct
+
 int	res_init(t_res **res)
 {
 	*res = malloc(sizeof(t_res));
@@ -32,6 +36,8 @@ int	res_init(t_res **res)
 	return (1);
 }
 
+//get the node wich have the ind position into a
+
 t_nlst	*get_node(t_nlst_head *a, int ind)
 {
 	t_nlst	*p;
@@ -41,6 +47,8 @@ t_nlst	*get_node(t_nlst_head *a, int ind)
 		p = p->next;
 	return (p);
 }
+
+//return the previous node of the value node.
 
 t_nlst	*get_prev(t_nlst_head *a, int val)
 {

@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   make_less_move.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/15 20:33:10 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/16 23:18:50 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//This function look for the node in a wich will make the less move
+//from a to b. Each node will get his numbers of move computed and 
+//the content of the lesser one will be return
+//a_b will be used into conpute move for later content
 
 int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
@@ -24,13 +29,11 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 	best = ft_nlstsize(a) * ft_nlstsize(a) + 1;
 	if (ft_nlstsize(a) < ft_nlstsize(b))
 		best = ft_nlstsize(b) * ft_nlstsize(b);
-	best_node = 0;
+	best_node = a->first->content;
 	cur = a->first;
 	while (cur)
 	{
-		ft_printf("FDM %d\n", cur->content);
-		comp_moves = compute_moves(a, b, cur, a_b) + guess_sec(a, b, cur, a_b);
-		ft_printf("comp done\n");
+		comp_moves = compute_moves(a, b, cur, a_b);
 		if (comp_moves < best)
 		{
 			best = comp_moves;
@@ -42,6 +45,9 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 	}
 	return (best_node);
 }
+
+//This function choose between ra, rb, rr, rra, rrb and rrb 
+//because of the 2 flag inside t_2_flag and the presence of a or b
 
 static void	choose_rotate(t_nlst_head *a, t_nlst_head *b, t_2_flag f, int a_b)
 {
@@ -64,6 +70,10 @@ static void	choose_rotate(t_nlst_head *a, t_nlst_head *b, t_2_flag f, int a_b)
 			reverse_rotate(b, 0, !a_b);
 	}
 }
+//This function return the value of the futur next node
+//of the given value from the other pile 'b'
+//a_b is used to know in wich sense it has to check
+//0 : prev < val < next /1 prev > val > next 
 
 int	get_next(t_nlst_head *b, int val, int a_b)
 {
@@ -93,6 +103,10 @@ int	get_next(t_nlst_head *b, int val, int a_b)
 	}
 	return (best);
 }
+
+//This function move the faster node "val" from a to b 
+//a_b is used to know the pile wich we move the node from
+//0 : from a to b / 1 : from b to a
 
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 {

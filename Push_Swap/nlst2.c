@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   nlst2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 22:17:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 21:34:16 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/16 23:48:22 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//Function wich return the place of the node wich content is cont.
 
 int	nlst_get_place(t_nlst_head *a, int cont)
 {
@@ -28,6 +30,8 @@ int	nlst_get_place(t_nlst_head *a, int cont)
 	}
 	return (0);
 }
+
+//Function wich return the value of the lower or the bigger node.
 
 int	nlst_get_low_big(t_nlst_head *a, int low_big)
 {
@@ -47,6 +51,9 @@ int	nlst_get_low_big(t_nlst_head *a, int low_big)
 	}
 	return (num);
 }
+
+//Function that compute the numbers of moves for a pile.
+//Use only at the end of the push_swap algorythm to get the total.
 
 int	nlst_compute_moves(t_nlst_head *a)
 {

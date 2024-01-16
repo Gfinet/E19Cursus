@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   guess_second.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 22:09:33 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/15 20:38:08 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/16 22:56:11 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static t_nlst	*init_p(t_nlst_head *l, t_nlst *cur, int a_b)
 	else
 	{
 		p = l->first;
-		ft_printf("%d %p\n", cur->content, cur->next);
 		if (cur->next)
 		{
 			while (p->next && p != cur)
@@ -35,7 +34,6 @@ static t_nlst	*init_p(t_nlst_head *l, t_nlst *cur, int a_b)
 			p = p->next;
 		}
 	}
-	ft_printf("%p\n", p);
 	return (p);
 }
 
@@ -45,7 +43,7 @@ static int	*init_imagi_list(t_nlst_head *l, t_nlst *cur, t_nlst *p, int a_b)
 	int		size;
 	int		*m;
 
-	size = ft_nlstsize(l) + (1 * a_b - 1 * !a_b);
+	size = ft_nlstsize(l) + ((1 * a_b) - (1 * !a_b));
 	m = malloc(sizeof(int) * size);
 	if (!m)
 		return (0);
@@ -122,42 +120,3 @@ int	guess_sec(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
 	free(b2);
 	return (best);
 }
-
-/*
-	next = get_next(b, cur->content, a_b);
-	p = b->first;
-	while (p && p->content != next)
-		p = p->next;
-	
-	b2 = malloc(sizeof(int) * (ft_nlstsize(b) + 1));
-	b2[0] = cur->content;
-	i = 1; //a_b
-	while (i < ft_nlstsize(b) + 1) //size / L et a_b
-	{
-		b2[i] = p->content; // L
-		p = p->next;
-		if (!p)
-			p = b->first;
-		i++;
-	}
-
-	i = 0;
-	p = a->first;
-	if (cur->next)
-	{
-		while (p && p != cur)
-			p = p->next;
-		p = p->next;
-	}
-
-	a2 = malloc(sizeof(int) * (ft_nlstsize(a) - 1));
-	i = 0;
-	while (i < ft_nlstsize(a) - 1)
-	{
-		a2[i] = p->content;
-		p = p->next;
-		if (!p)
-			p = a->first;
-		i++;
-	}
-*/

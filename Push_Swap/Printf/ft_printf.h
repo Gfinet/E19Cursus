@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:30:39 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/13 21:59:00 by gfinet           ###   ########.fr       */
+/*   Updated: 2023/11/08 17:39:14 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 int		ft_printf(const char *arg0, ...);
 char	*ft_strndup(const char *src, size_t n);
