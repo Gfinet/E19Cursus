@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/17 18:46:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 22:54:03 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	t_nlst	*cur;
-	int		best; // less move
-	int		best_node; // node_one && node_two
+	int		best;
+	int		best_node;
 	int		comp_moves;
 
 	if (!a->first)
