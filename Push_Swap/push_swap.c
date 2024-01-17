@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:56:47 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:44:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static void	sort_little(t_nlst_head *a, t_nlst_head *b, int n)
 	}
 }
 
-t_res	*push_swap(char **arg, int nb_arg)
+t_2_int	*push_swap(char **arg, int nb_arg)
 {
 	t_nlst_head		*a;
 	t_nlst_head		*b;
-	t_res			*res;
+	t_2_int			*res;
 
 	nlst_head_init(&a);
 	nlst_head_init(&b);
@@ -70,8 +70,8 @@ t_res	*push_swap(char **arg, int nb_arg)
 		opti_push(a, b, 0);
 	else
 		sort_little(a, b, ft_nlstsize(a));
-	res->moves = nlst_compute_moves(a);
-	res->sorted = check_heap(a->first, 0);
+	res->one = nlst_compute_moves(a);
+	res->two = check_heap(a->first, 0);
 	ft_nlstclear(a, free);
 	ft_nlstclear(b, free);
 	return (res);

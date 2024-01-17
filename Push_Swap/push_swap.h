@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:06:59 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:47:39 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,14 @@
 # include <unistd.h>
 # define SEP 10 // 32( ) 10(\n)
 
-typedef struct s_2_flag
+typedef struct s_2_int
 {
 	int	one;
 	int	two;
-}	t_2_flag;
+}	t_2_int;
 
-typedef struct s_res
-{
-	int		moves;
-	int		sorted;
-}	t_res;
-
-t_res	*push_swap(char **argv, int argc);
-int		res_init(t_res **res);
+t_2_int	*push_swap(char **argv, int argc);
+int		res_init(t_2_int **res);
 
 typedef struct s_nlst
 {

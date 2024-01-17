@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nlst3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:53:31 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:50:25 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:46:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ int	nlst_head_init(t_nlst_head **a)
 	return (1);
 }
 
-//initialyze the t_res struct
+//initialyze the result struct
+//one is the move count
+//two is a flag to know if the pile is sorted
 
-int	res_init(t_res **res)
+int	res_init(t_2_int **res)
 {
-	*res = malloc(sizeof(t_res));
+	*res = malloc(sizeof(t_2_int));
 	if (!res)
 		return (0);
-	(*res)->moves = 0;
-	(*res)->sorted = -1;
+	(*res)->one = 0;
+	(*res)->two = -1;
 	return (1);
 }
 

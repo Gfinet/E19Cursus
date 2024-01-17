@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/17 00:28:17 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:47:11 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	parse_arg(int argc, char **argv, char ***nums, int *nb_elem)
 
 int	main(int argc, char **argv)
 {
-	t_res	*res;
+	t_2_int	*res;
 	int		nb_elem;
 	char	**nums;
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		res = push_swap(nums, nb_elem);
-		ft_printf("moves : %d", res->moves);
+		ft_printf("moves : %d", res->one);
 		if (!res)
 			write(2, "Error\n", 6);
 		else

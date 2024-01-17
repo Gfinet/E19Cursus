@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_less_move.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:18:50 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/17 18:46:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	t_nlst	*cur;
-	int		best;
-	int		best_node;
+	int		best; // less move
+	int		best_node; // node_one && node_two
 	int		comp_moves;
 
 	if (!a->first)
@@ -47,9 +47,9 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 }
 
 //This function choose between ra, rb, rr, rra, rrb and rrb 
-//because of the 2 flag inside t_2_flag and the presence of a or b
+//because of the 2 flag inside t_2_int and the presence of a or b
 
-static void	choose_rotate(t_nlst_head *a, t_nlst_head *b, t_2_flag f, int a_b)
+static void	choose_rotate(t_nlst_head *a, t_nlst_head *b, t_2_int f, int a_b)
 {
 	if (a && b && f.one == f.two)
 	{
@@ -110,7 +110,7 @@ int	get_next(t_nlst_head *b, int val, int a_b)
 
 void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 {
-	t_2_flag	f;
+	t_2_int		f;
 	int			futur_next;
 
 	futur_next = get_next(b, val, a_b);
