@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:46:17 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/19 18:59:53 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/24 20:29:03 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include "ft_printf.h"
 
+int	count_percent(const char *str)
+{
+	int i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '%' && )
+		i++;
+	}
+}
 
 int ft_printf(const char *str, ...)
 {

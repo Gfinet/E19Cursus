@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/17 18:47:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:13:00 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define PUSH_SWAP_H
 # include "Printf/ft_printf.h"
 # include <unistd.h>
-# define SEP 10 // 32( ) 10(\n)
+# ifndef SEP
+#  define SEP 10 // 32( ) 10(\n)
+# endif
 
 typedef struct s_2_int
 {

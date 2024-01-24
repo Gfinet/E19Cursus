@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/17 18:47:11 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:52:45 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int	main(int argc, char **argv)
 	char	**nums;
 
 	nums = 0;
-	if (argc < 2)
+	if (argc < 2 || !argv[1][0])
 		return (0);
 	if (!parse_arg(argc, argv, &nums, &nb_elem) || !check_input(nums, nb_elem))
 		write(2, "Error\n", 6);
 	else
 	{
 		res = push_swap(nums, nb_elem);
-		ft_printf("moves : %d", res->one);
+		//ft_printf("moves : %d", res->one);
 		if (!res)
 			write(2, "Error\n", 6);
 		else

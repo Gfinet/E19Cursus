@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:40:33 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:51:07 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	rot_to_first(t_nlst_head *a, int num, int n, int a_b)
 {
 	int	flag;
 
-	flag = (nlst_get_place(a, num) <= n / 2);
+	flag = (nlst_get_place(a, num) - 1 <= n / 2);
 	while (!check_first(a, a_b))
 	{
 		if (flag)
@@ -53,7 +53,7 @@ void	rot_to_first(t_nlst_head *a, int num, int n, int a_b)
 
 void	sort_3(t_nlst_head *a, int a_b)
 {
-	if (!check_only_need_rot(a, a_b))
+	if (!check_only_need_rot(a, a_b) && !check_heap(a->first, 0))
 		swap(a, 0, a_b);
 }
 
@@ -67,6 +67,8 @@ void	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 {
 	int	best_node;
 
+	if (check_heap(a->first, 0))
+		return ;
 	while (ft_nlstsize(b) < 3)
 		push(a, b, !a_b);
 	sort_3(b, 1);

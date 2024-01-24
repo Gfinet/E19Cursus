@@ -1,6 +1,7 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+
 
 SRCS = 	main.c \
 		push_swap.c \
@@ -38,6 +39,7 @@ libftprintf.a:
 	make -C $(LIBFT)
 	cp $(LIB) .
 	mv $(LIB) $(NAME)
+
 
 clean:
 	rm -f *.o
