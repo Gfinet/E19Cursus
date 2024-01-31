@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 09:49:07 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 10:06:30 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ void	sort_3(t_nlst_head *a, int a_b)
 		swap(a, 0, a_b);
 }
 
-void pre_sort(t_nlst_head *a, t_nlst_head *b)
+//Function wich push all number into either the top or the bottom of b.
+//If the first element is lower than average (m), it's stay on top else,
+//it goes on bottom.
+
+void	pre_sort(t_nlst_head *a, t_nlst_head *b)
 {
-	int	m;
-	t_nlst *p;
+	int		m;
+	t_nlst	*p;
 
 	p = a->first;
 	m = 0;
@@ -93,12 +97,6 @@ void	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 	while (ft_nlstsize(b) < 3)
 		push(a, b, !a_b);
 	sort_3(b, 1);
-	best_node = find_less_move(a, b, a_b);
-	// while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))
-	// {
-	// 	move_faster_node(a, b, best_node, a_b);
-	// 	best_node = find_less_move(a, b, a_b);
-	// }
 	pre_sort(a, b);
 	if (ft_nlstsize(a) == 3 && !check_heap(a->first, 0))
 		sort_3(a, 0);

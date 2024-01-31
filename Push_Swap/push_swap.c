@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 09:49:58 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 10:10:25 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ static int	fill_a(t_nlst_head *a, char **arg, int nb_arg)
 	return (1);
 }
 
+//Function wich sort little amount of number (less than 6)
+
 static void	sort_little(t_nlst_head *a, t_nlst_head *b, int n)
 {
 	if (check_heap(a->first, 0))
 		return ;
 	if (n == 2 && !check_heap(a->first, 0))
-			rotate(a, 0, 0);
+		rotate(a, 0, 0);
 	else if (n == 3)
 	{
 		sort_3(a, 0);
@@ -70,18 +72,16 @@ t_2_int	*push_swap(char **arg, int nb_arg)
 	res_init(&res);
 	if (!fill_a(a, arg, nb_arg))
 		return (res);
-	//print_list(a, 0);
 	a->lower = nlst_get_low_big(a, 0);
 	if (ft_nlstsize(a) > 5)
 		opti_push(a, b, 0);
 	else if (ft_nlstsize(a) == 3)
 	{
 		sort_3(a, 0);
-		rot_to_first(a, nlst_get_low_big(a, 0), 3, 0);	
+		rot_to_first(a, nlst_get_low_big(a, 0), 3, 0);
 	}
 	else
 		sort_little(a, b, ft_nlstsize(a));
-	print_list(a, 0);
 	res->one = nlst_compute_moves(a);
 	res->two = check_heap(a->first, 0);
 	ft_nlstclear(a, free);

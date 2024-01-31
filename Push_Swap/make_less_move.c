@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_less_move.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/17 22:54:03 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 10:10:45 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	move_faster_node(t_nlst_head *a, t_nlst_head *b, int val, int a_b)
 	futur_next = get_next(b, val, a_b);
 	f.one = (nlst_get_place(a, val) < ft_nlstsize(a) / 2);
 	f.two = (nlst_get_place(b, futur_next) < ft_nlstsize(b) / 2);
-	while (a->first && b->first && 
+	while (a->first && b->first &&
 		(a->first->content != val || b->first->content != futur_next))
 	{
 		if (a->first->content != val && b->first->content != futur_next)
