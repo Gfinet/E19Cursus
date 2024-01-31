@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_ps.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/23 19:24:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 09:52:58 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 
 	if (argc < 3)
 		return (0);
-	if (argc == 3)
+	if (argc == 3 || argc == 4)
 	{
 		diff = time(NULL);
 		range = ft_atoi(argv[2]);

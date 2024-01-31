@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/23 19:51:07 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 09:49:07 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,27 @@ void	sort_3(t_nlst_head *a, int a_b)
 		swap(a, 0, a_b);
 }
 
+void pre_sort(t_nlst_head *a, t_nlst_head *b)
+{
+	int	m;
+	t_nlst *p;
+
+	p = a->first;
+	m = 0;
+	while (p)
+	{
+		m += p->content;
+		p = p->next;
+	}
+	m /= ft_nlstsize(a);
+	while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))
+	{
+		push(a, b, 0);
+		if (b->first->content >= m)
+			rotate(b, 0, 1);
+	}
+}
+
 //Algorythm wich sort the 2 piles.
 //Starting with pushing the 3 first value form a to b and sorting b.
 //then will move the faster node from a to b until 3 nodes left in a.
@@ -73,11 +94,12 @@ void	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b)
 		push(a, b, !a_b);
 	sort_3(b, 1);
 	best_node = find_less_move(a, b, a_b);
-	while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))
-	{
-		move_faster_node(a, b, best_node, a_b);
-		best_node = find_less_move(a, b, a_b);
-	}
+	// while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))
+	// {
+	// 	move_faster_node(a, b, best_node, a_b);
+	// 	best_node = find_less_move(a, b, a_b);
+	// }
+	pre_sort(a, b);
 	if (ft_nlstsize(a) == 3 && !check_heap(a->first, 0))
 		sort_3(a, 0);
 	best_node = find_less_move(b, a, !a_b);

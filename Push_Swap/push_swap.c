@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   Push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/23 19:51:57 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 09:49:58 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_2_int	*push_swap(char **arg, int nb_arg)
 	}
 	else
 		sort_little(a, b, ft_nlstsize(a));
-	//print_list(a, 0);
+	print_list(a, 0);
 	res->one = nlst_compute_moves(a);
 	res->two = check_heap(a->first, 0);
 	ft_nlstclear(a, free);
