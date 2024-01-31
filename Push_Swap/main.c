@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 09:50:42 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 14:39:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int	main(int argc, char **argv)
 	else
 	{
 		res = push_swap(nums, nb_elem);
-		ft_printf("moves : %d\n", res->one);
-		ft_printf("sorted : %d", res->two);
+		//ft_printf("moves : %d\n", res->one);
+		//ft_printf("sorted : %d", res->two);
 		if (!res)
 			write(2, "Error\n", 6);
 		else

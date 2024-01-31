@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 10:06:30 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 14:40:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	pre_sort(t_nlst_head *a, t_nlst_head *b)
 	m /= ft_nlstsize(a);
 	while (!(ft_nlstsize(a) == 3) && !check_only_need_rot(a, 0))
 	{
-		push(a, b, 0);
+		push(a, b, 1);
 		if (b->first->content >= m)
 			rotate(b, 0, 1);
 	}
