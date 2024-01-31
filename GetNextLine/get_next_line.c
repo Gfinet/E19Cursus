@@ -6,13 +6,13 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:03:09 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/24 22:24:50 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/24 21:45:10 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_strdup_char(const char *src, int c)
+char	*ft_strdup_char(const char *src, int c)
 {
 	char		*p;
 	size_t		len;
@@ -38,7 +38,7 @@ static char	*ft_strdup_char(const char *src, int c)
 	return (p);
 }
 
-static char	*read_one_line(char **rest, int *byte, int fd)
+char	*read_one_line(char **rest, int *byte, int fd)
 {
 	char		*buff;
 
@@ -60,7 +60,7 @@ static char	*read_one_line(char **rest, int *byte, int fd)
 	return (*rest);
 }
 
-static void	empty_res(char **rest, char **result, int byte)
+void	empty_res(char **rest, char **result, int byte)
 {
 	char	*p;
 
@@ -89,7 +89,7 @@ static void	empty_res(char **rest, char **result, int byte)
 	}
 }
 
-static char	*end_call(char **rest, int byte)
+char	*end_call(char **rest, int byte)
 {
 	char	*result;
 

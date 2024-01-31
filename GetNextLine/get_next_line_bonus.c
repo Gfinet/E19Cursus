@@ -6,13 +6,13 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:03:09 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/24 22:25:26 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/26 16:59:34 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_strdup_char(const char *src, int c)
+char	*ft_strdup_char(const char *src, int c)
 {
 	char		*p;
 	size_t		len;
@@ -38,7 +38,7 @@ static char	*ft_strdup_char(const char *src, int c)
 	return (p);
 }
 
-static int	read_one_line(char *rest[], int *byte, int fd)
+int	read_one_line(char *rest[], int *byte, int fd)
 {
 	char		*buff;
 
@@ -60,7 +60,7 @@ static int	read_one_line(char *rest[], int *byte, int fd)
 	return (1);
 }
 
-static void	empty_res(char *rest[], char **result, int byte, int fd)
+void	empty_res(char *rest[], char **result, int byte, int fd)
 {
 	char	*p;
 
@@ -89,7 +89,7 @@ static void	empty_res(char *rest[], char **result, int byte, int fd)
 	}
 }
 
-static char	*end_call(char *rest[], int byte, int fd)
+char	*end_call(char *rest[], int byte, int fd)
 {
 	char	*result;
 
@@ -115,8 +115,8 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE < 1 || fd < 0 || BUFFER_SIZE >= INT32_MAX || fd > 1023)
 		return (NULL);
-	if (rest && ft_strchr(rest, '\n'))
-		return (end_call(&rest, 1, fd));
+	if (rest[fd] && ft_strchr(rest[fd], '\n'))
+		return (end_call(rest, 1, fd));
 	if (read_one_line(rest, &byte, fd))
 		return (end_call(rest, byte, fd));
 	else

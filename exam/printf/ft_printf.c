@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:46:17 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/25 16:51:47 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/26 16:49:17 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	count_percent(const char *str)
 
 	i = 0;
 	count = 0;
+	if (!str)
+		return (-1);
 	while (str[i])
 	{
 		if (str[i] == '%' && check_case(str[i + 1]))
@@ -51,15 +53,28 @@ int	count_percent(const char *str)
 	return (count);
 }
 
+int	print_arg(const char *str, va_list app)
+{
+	return (1);
+}
+
 int ft_printf(const char *str, ...)
 {
 	va_list	app;
+	int	nb_pourcent;
 
-	if 
-
+	nb_pourcent = count_percent(str);
+	if (nb_pourcent == 0)
+		return(ft_putstr(str));
+	else if (nb_pourcent > 0)
+		return (print_arg(str, app));
+	return (0);
 }
 
 int main(void)
 {
-	ft_printf()
+	
+	ft_printf("bonjour\n");
+	//ft_printf("%d %d %i %i %d %i\n", 5, 52 ,2147483647, -2147483648, 0, 100);
+
 }
