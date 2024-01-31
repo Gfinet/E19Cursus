@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 09:52:58 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 10:23:16 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 		printf("biggest iteration: %i\n", biggest);
 		printf("moves : %d\n\n", biggest_moves);
 		if (argc == 4)
-			printf("%d/%d test outlimit = %d%%", out_lim, nb_test, (100*out_lim/nb_test));
+			printf("\n%d/%d test outlimit = %d%%", out_lim, nb_test, (100*out_lim/nb_test));
 		print_num(big_arg, range);
 		res = push_swap(big_arg, range);
 		free_all(big_arg,range);
