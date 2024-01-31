@@ -2,9 +2,11 @@ CC = GCC
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
+MAIN = main.c
 
-SRCS = 	main.c \
-		push_swap.c \
+MAIN_OBJ =$(MAIN:.c=.o)
+
+SRCS = 	push_swap.c \
 		p_s_r.c \
 		nlst.c \
 		nlst2.c \
@@ -15,21 +17,28 @@ SRCS = 	main.c \
 		compute_best_node.c \
 		guess_second.c
 
-HEAD = push_swap.h		
+OBJ = $(SRCS:.c=.o)
+
+BONUS_SRC = checker.c \
+			get_next_line.c \
+			get_next_line_utils.c
+
+
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
+
+HEAD = push_swap.h
 
 LIB = $(LIBFT)libftprintf.a
 
 LIBFT = ./Printf/
 
-OBJ = $(SRCS:.c=.o)
-
 NAME = push_swap
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) libftprintf.a
+$(NAME): $(OBJ) $(MAIN) libftprintf.a
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c
@@ -50,3 +59,6 @@ fclean: clean
 	
 
 re: fclean all
+
+bonus: $(BONUS_OBJ) $(OBJ) libftprintf.a
+	$(CC) $(CFLAGS) $^ -o checker

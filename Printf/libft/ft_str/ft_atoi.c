@@ -6,11 +6,11 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 18:07:49 by gfinet            #+#    #+#             */
-/*   Updated: 2023/10/22 21:13:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 19:15:04 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 static int	check_isspace(char c)
 {

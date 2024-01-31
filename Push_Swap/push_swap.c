@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 10:21:21 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 17:22:22 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //fill the a pile with all char number translate into int number.
 
-static int	fill_a(t_nlst_head *a, char **arg, int nb_arg)
+int	fill_a(t_nlst_head *a, char **arg, int nb_arg)
 {
 	t_nlst	*p;
 	int		i;

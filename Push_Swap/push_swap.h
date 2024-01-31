@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 14:39:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/01/31 17:23:00 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_2_int
 	int	two;
 }	t_2_int;
 
+int		parse_arg(int argc, char **argv, char ***nums, int *nb_elem);
+int		check_input(char **s, int n_arg);
 t_2_int	*push_swap(char **argv, int argc);
 int		res_init(t_2_int **res);
 
@@ -39,6 +41,8 @@ typedef struct s_nlst_head
 	int		lower;
 	t_nlst	*first;
 }	t_nlst_head;
+
+int		fill_a(t_nlst_head *a, char **arg, int nb_arg);
 
 void	push(t_nlst_head *a, t_nlst_head *b, int a_b);
 void	swap(t_nlst_head *l, t_nlst_head *m, int a_b);

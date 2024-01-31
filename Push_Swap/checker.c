@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 17:22:02 by gfinet           ###   ########.fr       */
+/*   Created: 2024/01/31 14:52:29 by gfinet            #+#    #+#             */
+/*   Updated: 2024/01/31 18:46:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "get_next_line.h"
 
 static int	is_number(char *s)
 {
@@ -78,11 +79,62 @@ int	parse_arg(int argc, char **argv, char ***nums, int *nb_elem)
 	return (1);
 }
 
+void make_move(t_nlst_head *a, t_nlst_head *b, char *move)
+{
+
+	if (move[0] == 'p' && move[1] == 'a')
+		push(b, a, 0);
+	else if (move[0] == 'p' && move[1] == 'a')
+		push(a, b, 1);
+	else if (move[0] == 'r' && move[1] == 'a')
+		rotate(a, 0, 0);
+	else if (move[0] == 'r' && move[1] == 'b')
+		rotate(b, 0, 1);
+	else if (move[0] == 'r' && move[1] == 'r')
+		rotate(a, b, 2);
+	else if (move[0] == 's' && move[1] == 'a')
+		swap(a, 0, 0);
+	else if (move[0] == 's' && move[1] == 'b')
+		swap(b, 0, 1);
+	else if (move[0] == 's' && move[1] == 's')
+		swap(a, b, 2);
+}
+
+static int	emule_ps_answer(char **arg, int nb_arg)
+{
+	t_nlst_head *a;
+	t_nlst_head *b;
+	char		*move;
+
+	move = get_next_line(0);
+	a = NULL;
+	b = NULL;
+	if (!fill_a(a, arg, nb_arg))
+		return (-1);
+	while (move)
+	{
+		if (ft_strlen(move) == 4)
+		{
+			if (move[0] == 'r' && move[2] == 'a')
+				reverse_rotate(a, 0, 0);
+			else if (move[0] == 'r' && move[2] == 'b')
+				reverse_rotate(b, 0, 1);
+			else if (move[0] == 'r' && move[2] == 'r')
+				reverse_rotate(a, b, 2);
+		}
+		else
+			make_move(a, b, move);
+		move = get_next_line(0);
+		ft_printf("%d", ft_strlen(move));
+	}
+	return (check_heap(a->first, 0) && ft_nlstsize(b) == 0);
+}
+
 int	main(int argc, char **argv)
 {
-	t_2_int	*res;
 	int		nb_elem;
 	char	**nums;
+	int		res;
 
 	nums = 0;
 	if (argc < 2 || !argv[1][0])
@@ -91,13 +143,13 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 	else
 	{
-		res = push_swap(nums, nb_elem);
-		//ft_printf("moves : %d\n", res->one);
-		//ft_printf("sorted : %d", res->two);
-		if (!res)
-			write(2, "Error\n", 6);
+		res = emule_ps_answer(nums, nb_elem);
+		if (res == 1)
+			write(1, "OK\n", 3);
+		else if (res == 0)
+			write(1, "KO\n", 3);
 		else
-			free(res);
+			write(2, "Error\n", 6);
 	}
 	return (0);
 }
