@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 21:44:02 by gfinet           ###   ########.fr       */
+/*   Created: 2023/10/16 15:33:18 by gfinet            #+#    #+#             */
+/*   Updated: 2024/01/31 19:15:12 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include "Printf/ft_printf.h"
-# include <unistd.h>
+#include "../libft.h"
 
+char	*ft_strdup(const char *src)
+{
+	char		*p;
+	size_t		len;
+	size_t		i;
 
-
-
-#endif
+	len = ft_strlen(src);
+	i = 0;
+	p = (char *)malloc((len + 1) * sizeof(char));
+	if (!p)
+		return (0);
+	while (i < len + 1)
+	{
+		p[i] = src[i];
+		i++;
+	}
+	return (p);
+}

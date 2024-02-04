@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 21:44:02 by gfinet           ###   ########.fr       */
+/*   Created: 2023/10/16 15:23:32 by gfinet            #+#    #+#             */
+/*   Updated: 2024/01/31 19:14:36 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include "Printf/ft_printf.h"
-# include <unistd.h>
+#include "../libft.h"
 
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*p;
+	int				i;
 
-
-
-#endif
+	i = 0;
+	p = malloc(count * size);
+	if (!p)
+		return (p);
+	ft_bzero(p, count * size);
+	return (p);
+}

@@ -2,28 +2,33 @@ CC = GCC
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main_pipex.c 
+SRCS = ft_printf.c \
+	ft_make_list.c \
+	ft_ltoa_base.c \
+	ft_strndup.c \
+	ft_plst.c \
+	ft_modif.c
 
-LIB = $(LIBFT)libftprintf.a
+LIB = $(LIBFT)libft.a
 
-LIBFT = ./Printf/
+LIBFT = ./libft/
 
 OBJ = $(SRCS:.c=.o)
 
-NAME = pipex
+NAME = libftprintf.a
 
 .PHONY: all clean fclean re
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) libftprintf.a
-	$(CC) $(CFLAGS) $(OBJ) libftprintf.a -o $(NAME) 
+$(NAME): $(OBJ) libft.a
+	ar rcs $(NAME) $(OBJ)
 
 %.o : %.c
 	$(CC) $(CFLAGS) $< -c -o $@ 
 
 
-libftprintf.a:
+libft.a: 
 	make -C $(LIBFT)
 	cp $(LIB) .
 	mv $(LIB) $(NAME)

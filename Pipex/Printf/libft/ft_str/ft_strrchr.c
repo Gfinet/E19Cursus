@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 21:44:02 by gfinet           ###   ########.fr       */
+/*   Created: 2023/10/15 23:48:45 by gfinet            #+#    #+#             */
+/*   Updated: 2024/01/31 19:15:30 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include "Printf/ft_printf.h"
-# include <unistd.h>
+#include "../libft.h"
 
+char	*ft_strrchr(const char *str, int c)
+{
+	char	*p;
 
-
-
-#endif
+	p = (char *)str;
+	while (*p)
+		p++;
+	while (p + 1 != str)
+	{
+		if (*p == (char)c)
+			return (p);
+		p--;
+	}
+	if (!c)
+		return (p);
+	return (0);
+}
