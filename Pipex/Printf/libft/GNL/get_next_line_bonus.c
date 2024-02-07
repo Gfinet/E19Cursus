@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:03:09 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 22:40:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/06 23:55:34 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	read_one_line(char *rest[], int *byte, int fd)
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buff == NULL)
-		return ((free_all_GNL(&rest[fd], 0)) != NULL);
+		return ((free_all_gnl(&rest[fd], 0)) != NULL);
 	*byte = read(fd, buff, BUFFER_SIZE);
 	while (*byte > 0)
 	{
 		buff[*byte] = '\0';
 		rest[fd] = ft_stradd(rest[fd], buff);
 		if (!rest[fd])
-			return ((free_all_GNL(&rest[fd], &buff)) != NULL);
+			return ((free_all_gnl(&rest[fd], &buff)) != NULL);
 		if (ft_strchr(buff, '\n'))
 			break ;
 		*byte = read(fd, buff, BUFFER_SIZE);
@@ -83,7 +83,7 @@ void	empty_res(char *rest[], char **result, int byte, int fd)
 			p = ft_strdup(p + 1);
 			free(rest[fd]);
 			if (p == NULL && *result != NULL)
-				free_all_GNL(&(*result), 0);
+				free_all_gnl(&(*result), 0);
 			rest[fd] = p;
 		}
 	}

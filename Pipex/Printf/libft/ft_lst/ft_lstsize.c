@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 20:53:39 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 19:14:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/06 23:46:46 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_lstsize(t_list *lst)
 	t_list	*t;
 
 	if (!lst)
-		return (0); 
+		return (0);
 	i = 1;
 	t = lst;
 	while (t->next)

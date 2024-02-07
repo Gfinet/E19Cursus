@@ -1,8 +1,10 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
-SRCS = main_pipex.c 
+SRCS = main_pipex.c \
+		cmd_pipe.c \
+		init_find_path.c
 
 LIB = $(LIBFT)libftprintf.a
 

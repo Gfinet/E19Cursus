@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:03:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 22:39:00 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/06 23:46:23 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *src);
 char	*ft_strchr(const char *str, int c);
-char	*free_all_GNL(char **tmp, char **tmp2);
+char	*free_all_gnl(char **tmp, char **tmp2);
 char	*ft_stradd(char *s1, char const *s2);
 
 #endif

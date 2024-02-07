@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:03:06 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 22:39:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/06 23:55:56 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*free_all_GNL(char **tmp, char **tmp2)
+char	*free_all_gnl(char **tmp, char **tmp2)
 {
 	if (tmp != NULL)
 	{
@@ -51,7 +51,7 @@ char	*ft_stradd(char *s1, char const *s2)
 	i = 0;
 	j = 0;
 	if (p == NULL)
-		return (free_all_GNL(&s1, 0));
+		return (free_all_gnl(&s1, 0));
 	while (s1 && i < ft_strlen(s1))
 	{
 		p[i] = s1[i];

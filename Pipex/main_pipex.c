@@ -3,54 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/03 23:12:08 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/06 23:53:53 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
-//./pipex file 1 cmd1 cmd2 file2
 
-
-
-int main(int argc, char **argv, char **envp)
+void	send_error(int flag)
 {
-	char **arg;
-	char **path;
-	char *p2;
-	int i;
+	if (flag == -1)
+		perror("open error\n");
+	else if (flag == -2)
+		perror("read error\n");
+	else if (flag == -3)
+		perror("write error\n");
+	else if (flag == -4)
+		perror("fork error\n");
+	else if (flag == -5)
+		perror("malloc error\n");
+	else if (flag == -6)
+		perror("pipe error\n");
+}
+
+int	write_file(int read_fd, int write_fd)
+{
+	int		read_byte;
+	char	buff[BUFFER_SIZE];
+
+	read_byte = BUFFER_SIZE;
+	while (read_byte > 0 && read_byte == BUFFER_SIZE)
+	{
+		read_byte = read(read_fd, buff, BUFFER_SIZE);
+		if (read_byte == -1)
+			return (-2);
+		if (read_byte > 0)
+		{
+			if (write(write_fd, buff, read_byte) == -1)
+				return (-3);
+		}
+	}
+	close(write_fd);
+	return (1);
+}
+
+void	free_t_cmd(t_cmds *c)
+{
+	int	i;
+	int	j;
 
 	i = 0;
-	if (argc < 5 || !argv) /// != 5
-		return (0);
-	while(*(envp) && ft_strncmp(*(++envp), "PATH", 4));
-	path = ft_split(*(envp), ':');
-	ft_printf("env %s\n\n", *envp);
-	// while (*path)
-	// 	ft_printf("path = %s\n", *path++);
-	arg = ft_split(argv[2], ' ');
-	p2 = ft_strjoin(path[i], "/");
-	p2 = ft_stradd(p2, arg[0]);
-	// i = 0;
-	// while(path[i])
-	// 	ft_printf("path = %s\n", path[i++]);
+	while (i < c->nb_pr)
+		if (c->cmd_arg[i])
+			free(c->cmd_arg[i++]);
+	free(c->cmd_arg);
 	i = 0;
-	while(path[i])
+	while (i < c->nb_pr)
 	{
-		ft_printf("path = %s\n", path[i++]);
-		//ft_printf("%i %d\n", path[i] != 0, access(p2, F_OK) == -1);
-		if (access(p2, F_OK) == 0)
-			break;
-		free(p2);
-		p2 = ft_strjoin(path[i], "/");
-		p2 = ft_stradd(p2, arg[0]);
-		i++;
+		if (c->arg[i])
+		{
+			j = 0;
+			while (c->arg[i][j])
+				free(c->arg[i][j++]);
+		}
+		free(c->arg[i++]);
 	}
-	execve(p2, arg, path);
-	free(p2);
+	free(c->arg);
+	i = 0;
+	while (c->path[i])
+		free(c->path[i++]);
+	free(c->path);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_cmds	c;
+	int		flag;
+	int		write_fd;
+
+	if (argc < 5 || !argv)
+		return (0);
+	write_fd = open(argv[argc - 1],
+			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	if (write_fd == -1)
+		return (0);
+	flag = init_t_cmds(&c, argc, envp);
+	if (flag < 0)
+		send_error(flag);
+	if (!find_all_path(&c, argv, argc - 3))
+		return (0);
+	if (!end(&c, write_fd, envp))
+		send_error(0);
+	ft_printf("fini\n");
 	return (0);
 }
 
@@ -58,7 +104,7 @@ int main(int argc, char **argv, char **envp)
 Pipex
 1) Trouver la commande
 2) Verifier acces a la commade
-3) Effectuer commade sur file1
+3) Effectuer commande sur file1
 4) Recuperer output de la commande
 5) Envoyer output de commande1 sur commande 2
 6) emvoyer output de commande 2 sur file 2
