@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/06 23:54:05 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:47:41 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp)
 	return (in_fd);
 }
 
-int	end(t_cmds *c, int write_fd, char **envp)
+int	commands(t_cmds *c, int write_fd, char **envp)
 {
 	pid_t	*proc;
 	int		in_fd;

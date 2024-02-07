@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_find_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/06 23:52:49 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:44:39 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	split_cmd(char ***command, char *infile, char *arg)
 	}
 	(*command) = ft_split(tmp, ' ');
 	if (!*command)
+	{
+		free(tmp);
 		return (0);
+	}
 	free(tmp);
 	return (1);
 }
@@ -89,9 +92,9 @@ int	find_all_path(t_cmds *c, char **argv, int nb_pr)
 			p = find_path(&(c->arg[0]), c->path, argv[2], argv[1]);
 		else
 			p = find_path(&(c->arg[i]), c->path, argv[i + 2], 0);
+		if (!p)
+			return (free_all_pipex(c, 0));
 		c->cmd_arg[i] = p;
-		if (!((*c).cmd_arg[i]))
-			return (0);
 		i++;
 	}
 	return (1);

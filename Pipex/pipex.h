@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/06 23:53:30 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:49:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 #  define BUFFER_SIZE 64
 # endif
 # include "Printf/ft_printf.h"
+// # define OPEN_ERROR -1
+// # define READ_ERROR -2
+// # define WRITE_ERROR -3
+// # define FORK_ERROR -4
+// # define MALLOC_ERROR -5
+// # define PIPE_ERROR -6
+// # define ARG_ERROR -7
+
 
 typedef struct s_cmds
 {
@@ -32,10 +40,11 @@ void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
 int		pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
 int		split_cmd(char ***command, char *infile, char *arg);
 int		find_all_path(t_cmds *c, char **argv, int nb_pr);
+int		commands(t_cmds *c, int write_fd, char **envp);
 int		init_t_cmds(t_cmds *c, int argc, char **envp);
-int		end(t_cmds *c, int write_fd, char **envp);
+int		free_all_pipex(t_cmds *c, pid_t *proc );
 int		write_file(int read_fd, int write_fd);
 void	free_t_cmd(t_cmds *c);
-void	send_error(int flag);
+int		send_error(int flag);
 
 #endif

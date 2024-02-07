@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/06 23:53:53 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:49:26 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	send_error(int flag)
+int free_all_pipex(t_cmds *c, pid_t *proc )
+{
+	if (c)
+		free_t_cmd(c);
+	if (proc)
+		free(proc);
+	return (0);
+}
+
+int	send_error(int flag)
 {
 	if (flag == -1)
 		perror("open error\n");
@@ -26,6 +35,9 @@ void	send_error(int flag)
 		perror("malloc error\n");
 	else if (flag == -6)
 		perror("pipe error\n");
+	else if (flag == -7)
+		ft_printf("Not enough argument\n");
+	return (0);
 }
 
 int	write_file(int read_fd, int write_fd)
@@ -83,20 +95,20 @@ int	main(int argc, char **argv, char **envp)
 	int		flag;
 	int		write_fd;
 
-	if (argc < 5 || !argv)
-		return (0);
+	if (argc != 5 || !argv)
+		return (send_error(-7));
 	write_fd = open(argv[argc - 1],
 			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (write_fd == -1)
-		return (0);
+		return (send_error(-1));
 	flag = init_t_cmds(&c, argc, envp);
 	if (flag < 0)
-		send_error(flag);
+		return (send_error(flag));
 	if (!find_all_path(&c, argv, argc - 3))
 		return (0);
-	if (!end(&c, write_fd, envp))
-		send_error(0);
-	ft_printf("fini\n");
+	if (!commands(&c, write_fd, envp))
+		return (0);
+	//ft_printf("fini\n");
 	return (0);
 }
 

@@ -1,6 +1,6 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = main_pipex.c \
 		cmd_pipe.c \
