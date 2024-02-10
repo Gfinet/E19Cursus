@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/09 23:52:23 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/10 20:43:51 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void print_cmd_i(t_cmds *c, int i)
 	int j;
 
 	j = 0;
-	printf("command %i : %s\n", i, c->cmd_arg[i]);
+	ft_printf("command : %s\n", c->cmd_arg[i]);
 	while (c->arg[i][j])
 	{
-		printf("arg %i %d : %s\n",i, j, c->arg[i][j]);
+		ft_printf("arg %d : %s\n", j + 1, c->arg[i][j]);
 		j++;
 	}
 	
@@ -78,7 +78,6 @@ int	commands(t_cmds *c, int write_fd, char **envp)
 	flag = write_file(in_fd, write_fd);
 	if (flag < 0)
 		send_error(flag);
-	free_t_cmd(c);
-	free(proc);
+	free_all_pipex(c, proc);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/07 17:49:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/10 21:14:18 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 // # define MALLOC_ERROR -5
 // # define PIPE_ERROR -6
 // # define ARG_ERROR -7
+# include <errno.h>
 
 
 typedef struct s_cmds
@@ -35,7 +36,13 @@ typedef struct s_cmds
 	int		nb_pr;
 }	t_cmds;
 
-char	*find_path(char ***command, char **path, char *arg, char *infile);
+typedef struct s_mall
+{
+	char	*p;
+	int		f;
+}	t_mall;
+
+t_mall	*find_path(char ***command, char **path, char *arg, char *infile);
 void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
 int		pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
 int		split_cmd(char ***command, char *infile, char *arg);
@@ -44,7 +51,9 @@ int		commands(t_cmds *c, int write_fd, char **envp);
 int		init_t_cmds(t_cmds *c, int argc, char **envp);
 int		free_all_pipex(t_cmds *c, pid_t *proc );
 int		write_file(int read_fd, int write_fd);
+void	print_cmd_i(t_cmds *c, int i);
 void	free_t_cmd(t_cmds *c);
+int		search_cmd(t_cmds *c);
 int		send_error(int flag);
 
 #endif

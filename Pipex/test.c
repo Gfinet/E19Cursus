@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:58:20 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/07 16:06:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/10 19:32:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv, char **envp)
 	ft_printf("----- Test cat ls -----\n\n");
 
 	execve("pipex", (char *[]){"pipex", "infile", "cat", "ls", "outfile", NULL}, envp);
-	execve("")
+	execve("");
 
 	proc[9] = fork();
 	if (proc[9] == 0)

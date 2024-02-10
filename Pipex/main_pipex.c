@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/09 23:00:43 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/10 21:37:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,6 @@ int free_all_pipex(t_cmds *c, pid_t *proc )
 		free_t_cmd(c);
 	if (proc)
 		free(proc);
-	return (0);
-}
-
-int	send_error(int flag)
-{
-	if (flag == -1)
-		perror("open error\n");
-	else if (flag == -2)
-		perror("read error\n");
-	else if (flag == -3)
-		perror("write error\n");
-	else if (flag == -4)
-		perror("fork error\n");
-	else if (flag == -5)
-		perror("malloc error\n");
-	else if (flag == -6)
-		perror("pipe error\n");
-	else if (flag == -7)
-		ft_printf("Not enough argument\n");
 	return (0);
 }
 
@@ -95,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	int		flag;
 	int		write_fd;
 
-	if (argc < 5 || !argv)
+	if (argc < 5 || !argv || !envp)
 		return (send_error(-7));
 	write_fd = open(argv[argc - 1],
 			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
@@ -104,10 +85,13 @@ int	main(int argc, char **argv, char **envp)
 	flag = init_t_cmds(&c, argc, envp);
 	if (flag < 0)
 		return (send_error(flag));
-	if (!find_all_path(&c, argv, argc - 3))
-		return (0);
+	flag = find_all_path(&c, argv, argc - 3);
+	if (flag == -8)
+		return (search_cmd(&c));
+	else if (flag < 0)
+		return (send_error(flag));
 	if (!commands(&c, write_fd, envp))
-		return (0);
+		return (errno);
 	//ft_printf("fini\n");
 	return (0);
 }
