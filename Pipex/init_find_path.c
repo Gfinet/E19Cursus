@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_find_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/07 17:44:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/09 23:56:17 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int	split_cmd(char ***command, char *infile, char *arg)
 	tmp = ft_strdup(arg);
 	if (!tmp)
 		return (0);
+	if (ft_strncmp(infile, "/dev/stdin", 9)
+		|| ft_strncmp(infile, "stdin", 5))
+		
 	if (infile)
 	{
 		tmp = ft_stradd(tmp, " ");
@@ -77,6 +80,7 @@ char	*find_path(char ***command, char **path, char *arg, char *infile)
 		free(cmd_arg);
 		i++;
 	}
+	cmd_arg = ft_strtrim(cmd_arg, "PATH=");
 	return (cmd_arg);
 }
 

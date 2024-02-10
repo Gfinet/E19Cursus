@@ -1,1 +1,15 @@
--rw-r--r--  1 gfinet  2023_s19  1 Feb  7 14:47 infile$
+Makefile
+Printf
+cmd_pipe.c
+cmd_pipe.o
+infile
+init_find_path.c
+init_find_path.o
+libftprintf.a
+main_pipex.c
+main_pipex.o
+outfile
+pipex
+pipex.h
+script_test.sh
+test.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/07 17:49:26 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/09 23:00:43 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int argc, char **argv, char **envp)
 	int		flag;
 	int		write_fd;
 
-	if (argc != 5 || !argv)
+	if (argc < 5 || !argv)
 		return (send_error(-7));
 	write_fd = open(argv[argc - 1],
 			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);

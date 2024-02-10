@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/07 17:47:41 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/09 23:52:23 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr)
 	_exit(EXIT_FAILURE);
 }
 
+void print_cmd_i(t_cmds *c, int i)
+{
+	int j;
+
+	j = 0;
+	printf("command %i : %s\n", i, c->cmd_arg[i]);
+	while (c->arg[i][j])
+	{
+		printf("arg %i %d : %s\n",i, j, c->arg[i][j]);
+		j++;
+	}
+	
+}
+
 int	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp)
 {
 	int	i;
@@ -32,6 +46,7 @@ int	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp)
 		send_error(-6);
 	while (i < c->nb_pr)
 	{
+		print_cmd_i(c, i);
 		proc[i] = fork();
 		if (proc[i] < 0)
 			send_error(-4);
