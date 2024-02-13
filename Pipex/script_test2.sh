@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #ls
 #cat
@@ -6,5 +6,5 @@
 #wc
 #script.sh
 
-cat $1
+cat
 

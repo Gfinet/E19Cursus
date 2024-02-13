@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/10 21:14:18 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/12 17:08:29 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 // # define ARG_ERROR -7
 # include <errno.h>
 
-
 typedef struct s_cmds
 {
 	char	***arg;
@@ -46,6 +45,7 @@ t_mall	*find_path(char ***command, char **path, char *arg, char *infile);
 void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
 int		pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
 int		split_cmd(char ***command, char *infile, char *arg);
+int		check_file_perm(char *open_file, char *write_file);
 int		find_all_path(t_cmds *c, char **argv, int nb_pr);
 int		commands(t_cmds *c, int write_fd, char **envp);
 int		init_t_cmds(t_cmds *c, int argc, char **envp);

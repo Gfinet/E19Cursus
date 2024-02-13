@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:58:20 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/10 19:32:43 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/12 18:01:06 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,13 @@ cd ?
 
 */
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	pid_t proc[10];
+	char	**sp;
 
-	if (access("./pipex", F_OK) != 0)
-	{
-		proc[0] = fork();
-		if (proc[0] == 0)
-			execve("make", (char *[]){"make", NULL}, envp);
-		ft_printf("make done\n");
-	}
-	
-	ft_printf("----- Test cat ls -----\n\n");
-
-	execve("pipex", (char *[]){"pipex", "infile", "cat", "ls", "outfile", NULL}, envp);
-	execve("");
-
-	proc[9] = fork();
-	if (proc[9] == 0)
-	{
-		execve("diff", (char *[]){"diff", "outfile1", "outfile2", NULL}, envp);
-	}
-
+	argc = argc + argc;
+	sp = ft_split(argv[1], ' ');
+	execve(sp[0], sp, envp);
 	return (0);
 }
 
