@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pipe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/13 23:58:48 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 18:15:07 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp)
 		send_error(-6);
 	while (i < c->nb_pr)
 	{
-		//print_cmd_i(c, i);
 		proc[i] = fork();
 		if (proc[i] < 0)
 			send_error(-4);

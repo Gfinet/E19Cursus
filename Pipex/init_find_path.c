@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_find_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/13 23:44:43 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 17:43:33 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ int	split_cmd(t_cmds *c, char *infile, char *arg, int ind)
 
 int	init_t_cmds(t_cmds *c, int argc, char **envp)
 {
-	while (*(envp) && ft_strncmp(*(envp++), "PATH", 4))
-		;
-	if (ft_strncmp(*--envp, "PATH", 4))
+	int	flag;
+
+	flag = 1;
+	while (*(envp) && flag)
+		flag = ft_strncmp(*(envp++), "PATH", 4);
+	if (flag)
 		return (-10);
-	c->path = ft_split(*(envp), ':');
+	c->path = ft_split(*(--envp), ':');
 	if (!c->path)
 		return (-5);
 	c->nb_pr = argc - 3;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/13 23:43:59 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 18:03:51 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		find_all_path(t_cmds *c, char **argv, int nb_pr);
 
 void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
 int		commands(t_cmds *c, int write_fd, char **envp);
-int		search_cmd(t_cmds *c);
+void	search_cmd(t_cmds *c);
 
 int		free_all_pipex(t_cmds *c, pid_t *proc );
 void	print_cmd_i(t_cmds *c, int i);

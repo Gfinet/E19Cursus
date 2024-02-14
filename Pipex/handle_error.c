@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 20:16:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/13 23:15:33 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 18:30:05 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	check_file_perm(char *open_file, char *write_file)
 {
 	if (access(open_file, F_OK))
 	{
+		ft_printf("%s: ", open_file);
 		if (access(write_file, F_OK))
 			open(write_file, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		return (send_error(-1));
@@ -25,7 +26,7 @@ int	check_file_perm(char *open_file, char *write_file)
 	if (access(write_file, F_OK) == 0)
 		if (access(write_file, R_OK))
 			return (ft_printf("\"%s\" ", write_file), send_error(-9));
-	return (0);
+	return (1);
 }
 
 int	send_error(int flag)
@@ -56,7 +57,7 @@ int	send_error(int flag)
 	return (errno);
 }
 
-int	search_cmd(t_cmds *c)
+void	search_cmd(t_cmds *c)
 {
 	int	i;
 
@@ -75,7 +76,4 @@ int	search_cmd(t_cmds *c)
 		}
 		i++;
 	}
-	free_t_cmd(c);
-	exit(0);
-	return (errno);
 }
