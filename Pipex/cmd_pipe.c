@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 18:15:07 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 20:26:08 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,45 +35,43 @@ void	print_cmd_i(t_cmds *c, int i)
 	}
 }
 
-int	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp)
+int	pipex(t_cmds *c, pid_t *proc, int r_w_fd[], char **envp)
 {
 	int	i;
-	int	in_fd;
+	int	pipe_fd[2];
 
 	i = 0;
 	if (pipe(pipe_fd) < 0)
 		send_error(-6);
 	while (i < c->nb_pr)
 	{
+		print_cmd_i(c, i);
 		proc[i] = fork();
 		if (proc[i] < 0)
 			send_error(-4);
-		if (i > 0)
-			dup2(in_fd, STDIN_FILENO);
+		dup2(r_w_fd[0], STDIN_FILENO);
 		if (proc[i] == 0)
 			launch_cmd(c, pipe_fd, envp, i);
 		if (i > 0)
-			close(in_fd);
+			close(r_w_fd[0]);
 		close(pipe_fd[1]);
-		in_fd = pipe_fd[0];
+		r_w_fd[0] = pipe_fd[0];
 		if (i < c->nb_pr - 1)
 			if (pipe(pipe_fd) < 0)
 				send_error(-6);
 		i++;
 	}
-	return (in_fd);
+	return (r_w_fd[0]);
 }
 
-int	commands(t_cmds *c, int write_fd, char **envp)
+int	commands(t_cmds *c, int r_w_fd[], char **envp)
 {
 	pid_t	*proc;
-	int		in_fd;
-	int		pipe_fd[2];
 	int		flag;
 
 	proc = malloc(sizeof(pid_t) * c->nb_pr);
-	in_fd = pipex(c, proc, pipe_fd, envp);
-	flag = write_file(in_fd, write_fd);
+	r_w_fd[0] = pipex(c, proc, r_w_fd, envp);
+	flag = write_file(r_w_fd);
 	if (flag < 0)
 		send_error(flag);
 	free_all_pipex(c, proc);

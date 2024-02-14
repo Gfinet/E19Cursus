@@ -6,28 +6,19 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 17:43:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 18:58:12 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	split_cmd(t_cmds *c, char *infile, char *arg, int ind)
+int	split_cmd(t_cmds *c, char *arg, int ind)
 {
 	char	*tmp;
 
 	tmp = ft_strdup(arg);
 	if (!tmp)
 		return (0);
-	else if (infile)
-	{
-		tmp = ft_stradd(tmp, " ");
-		if (!tmp)
-			return (0);
-		tmp = ft_stradd(tmp, infile);
-		if (!tmp)
-			return (0);
-	}
 	c->arg[ind] = ft_split(tmp, ' ');
 	if (!c->arg[ind])
 	{
@@ -70,14 +61,14 @@ t_mall	*set_t_mall(char *p, int f)
 	return (tmp);
 }
 
-t_mall	*find_path(t_cmds *c, char *arg, char *infile, int ind)
+t_mall	*find_path(t_cmds *c, char *arg, int ind)
 {
 	t_mall	*cmd_arg;
 	int		i;
 
 	i = 0;
 	cmd_arg = set_t_mall(0, 0);
-	if (!split_cmd(c, infile, arg, ind) || !cmd_arg)
+	if (!split_cmd(c, arg, ind) || !cmd_arg)
 		return (0);
 	cmd_arg->p = ft_strdup(arg);
 	cmd_arg->f = (access(cmd_arg->p, F_OK) == 0);
@@ -108,10 +99,7 @@ int	find_all_path(t_cmds *c, char **argv, int nb_pr)
 	flag = 1;
 	while (i < nb_pr)
 	{
-		if (i == 0)
-			tmp = find_path(c, argv[2], argv[1], i);
-		else
-			tmp = find_path(c, argv[i + 2], 0, i);
+		tmp = find_path(c, argv[i + 2], i);
 		if (!tmp)
 			return (-5);
 		if (!tmp->p && !tmp->f)

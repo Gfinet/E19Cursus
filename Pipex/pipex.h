@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 18:03:51 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 19:06:01 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int		pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
 int		check_file_perm(char *open_file, char *write_file);
 int		init_t_cmds(t_cmds *c, int argc, char **envp);
 
-t_mall	*find_path(t_cmds *c, char *arg, char *infile, int ind);
-int		split_cmd(t_cmds *c, char *infile, char *arg, int ind);
+t_mall	*find_path(t_cmds *c, char *arg, int ind);
+int		split_cmd(t_cmds *c, char *arg, int ind);
 int		find_all_path(t_cmds *c, char **argv, int nb_pr);
 
 void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
-int		commands(t_cmds *c, int write_fd, char **envp);
+int		commands(t_cmds *c, int r_w_fd[], char **envp);
 void	search_cmd(t_cmds *c);
 
 int		free_all_pipex(t_cmds *c, pid_t *proc );
@@ -58,5 +58,5 @@ void	print_cmd_i(t_cmds *c, int i);
 void	free_t_cmd(t_cmds *c);
 int		send_error(int flag);
 
-int		write_file(int read_fd, int write_fd);
+int		write_file(int r_w_fd[]);
 #endif

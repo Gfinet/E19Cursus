@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 18:13:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 19:13:13 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	free_all_pipex(t_cmds *c, pid_t *proc )
 	return (0);
 }
 
-int	write_file(int read_fd, int write_fd)
+int	write_file(int r_w_fd[])
 {
 	int		read_byte;
 	char	buff[BUFFER_SIZE];
@@ -29,16 +29,16 @@ int	write_file(int read_fd, int write_fd)
 	read_byte = BUFFER_SIZE;
 	while (read_byte > 0 && read_byte == BUFFER_SIZE)
 	{
-		read_byte = read(read_fd, buff, BUFFER_SIZE);
+		read_byte = read(r_w_fd[0], buff, BUFFER_SIZE);
 		if (read_byte == -1)
 			return (-2);
 		if (read_byte > 0)
 		{
-			if (write(write_fd, buff, read_byte) == -1)
+			if (write(r_w_fd[1], buff, read_byte) == -1)
 				return (-3);
 		}
 	}
-	close(write_fd);
+	close(r_w_fd[1]);
 	return (1);
 }
 
@@ -70,11 +70,22 @@ void	free_t_cmd(t_cmds *c)
 	free(c->path);
 }
 
+void	open_files(int argc, char **argv, int r_w_fd[])
+{
+	r_w_fd[1] = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	if (r_w_fd[1] == -1)
+		send_error(-1);
+	r_w_fd[0] = open(argv[1], O_RDONLY);
+	if (r_w_fd[0] == -1)
+		send_error(-1);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmds	c;
 	int		flag;
-	int		write_fd;
+	int		r_w_fd[2];
 
 	if (argc != 5 || !argv || !envp)
 		return (send_error(-7));
@@ -88,11 +99,8 @@ int	main(int argc, char **argv, char **envp)
 	else if (flag < 0)
 		send_error(flag);
 	flag = 1;
-	write_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	if (write_fd == -1)
-		return (send_error(-1));
-	if (flag && !commands(&c, write_fd, envp))
+	open_files(argc, argv, r_w_fd);
+	if (flag && !commands(&c, r_w_fd, envp))
 		return (errno);
 	return (0);
 }
