@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 19:13:13 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/14 20:49:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5 || !argv || !envp)
 		return (send_error(-7));
-	flag = check_file_perm(argv[1], argv[argc - 1]);
+	check_file_perm(argv[1], argv[argc - 1]);
 	flag = init_t_cmds(&c, argc, envp);
 	if (flag < 0)
 		return (send_error(flag));
@@ -98,7 +98,6 @@ int	main(int argc, char **argv, char **envp)
 		search_cmd(&c);
 	else if (flag < 0)
 		send_error(flag);
-	flag = 1;
 	open_files(argc, argv, r_w_fd);
 	if (flag && !commands(&c, r_w_fd, envp))
 		return (errno);

@@ -1,44 +1,61 @@
 #!/bin/bash
+# $# nb arg bash
+#cmds= "cat" "ls" "grep" "wc" ""
+
+#"${@: -1}" last one
 
 #cmds="cat ls grep wc echo awk"
 
-IFS=' ' read -r -a arr <<< "$1"
+# IFS=' ' read -r -a arr <<< "$1"
+flag=0
+#echo "${arr[${#arr[@]}]- 1 }"
 
-for (( i=0; i<${#arr[@]}; i++ ))
+args=("$@")
+#echo ${args[0]} ${args[1]} ${args[2]}
+
+for (( i=0; i + 1<$#; i++ ))
 do
-	for (( j=0; j<${#arr[@]}; j++ ))
+	for (( j=0; j + 1<$#; j++ ))
 	do
-		# echo "-----${arr[i]} infile | ${arr[j]} > b$((4*i+j)) -----"
-		${arr[i]} infile | ${arr[j]} > b$((4*i+j))
+		echo "-----< infile ${args[i]}| ${args[j]} > b$((${@: -1}*i+j)) -----"
+		< infile ${args[i]} | ${args[j]} > b$((${@: -1}*i+j))
 	done
 done
 
-
-for (( i=0; i<${#arr[@]}; i++ ))
+echo "Testing..."
+for (( i=0; i + 1<$#; i++ ))
 do
-	for (( j=0; j<${#arr[@]}; j++ ))
+	for (( j=0; j + 1<$#; j++ ))
 	do
-		# echo "-----diff c$((4*i + j)) b$((4*i + j))-----"
+		#echo "-----diff c$((${@: -1}*i + j)) b$((${@: -1}*i + j))-----"
 		
-		res=$(diff c$((4*i + j)) b$((4*i + j)))
+		res=$(diff c$((${@: -1}*i + j)) b$((${@: -1}*i + j)))
 		if [ $? -ne 0 ]
 		then
     		# echo "files are the same"
 		# else
-			echo "Error \"${arr[i]} infile | ${arr[j]} > c$((4*i + j)) b$((4*i + j))\""
+			echo "Error \"< infile ${args[i]} | ${args[j]} > c$((${@: -1}*i + j)) b$((${@: -1}*i + j))\""
+			flag=1
 			# diff c$((4*i + j)) b$((4*i + j))
 		fi	
 	done
 done
 
+if [ $flag -eq 0 ]
+then
+	echo "Everything is good"
+else
+	echo "Got some mistakes"
+fi
+
 echo "cleaning"
-for (( i=0; i<${#arr[@]}; i++ ))
+for (( i=0; i + 1<$#; i++ ))
 do
-	for (( j=0; j<${#arr[@]}; j++ ))
+	for (( j=0; j + 1<$#; j++ ))
 	do
-		#echo "-----rm c$((4*i+j)) b$((4*i+j))-----"
-		rm c$((4*i+j))
-		rm b$((4*i+j))
+		#echo "-----rm c$((${@: -1}*i+j)) b$((${@: -1}*i+j))-----"
+		rm c$((${@: -1}*i+j))
+		rm b$((${@: -1}*i+j))
 	done
 done
 echo "cleaning done"
