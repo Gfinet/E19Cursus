@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/13 15:59:36 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/13 23:47:57 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	main(int argc, char **argv, char **envp)
 		return (search_cmd(&c));
 	else if (flag < 0)
 		return (send_error(flag));
-	write_fd = open(argv[argc - 1],
-			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	write_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (write_fd == -1)
 		return (send_error(-1));
 	if (!commands(&c, write_fd, envp))
@@ -106,5 +106,9 @@ Pipex
 4) Recuperer output de la commande
 5) Envoyer output de commande1 sur commande 2
 6) emvoyer output de commande 2 sur file 2
+
+int j = 0;
+		while (c->arg[i][j])
+			{ft_printf("com %d ", i);ft_printf("%s\n", c->arg[i][j++]);}
 
 */

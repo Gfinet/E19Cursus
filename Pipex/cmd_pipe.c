@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/12 16:46:23 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/13 23:58:48 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr)
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	execve(c->cmd_arg[pr], c->arg[pr], envp);
-	_exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 void	print_cmd_i(t_cmds *c, int i)
@@ -29,7 +29,8 @@ void	print_cmd_i(t_cmds *c, int i)
 	ft_printf("command : %s\n", c->cmd_arg[i]);
 	while (c->arg[i][j])
 	{
-		ft_printf("arg %d : %s\n", j + 1, c->arg[i][j]);
+		ft_printf("arg %d", j);
+		ft_printf(" : %s\n", c->arg[i][j]);
 		j++;
 	}
 }
@@ -44,6 +45,7 @@ int	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp)
 		send_error(-6);
 	while (i < c->nb_pr)
 	{
+		//print_cmd_i(c, i);
 		proc[i] = fork();
 		if (proc[i] < 0)
 			send_error(-4);

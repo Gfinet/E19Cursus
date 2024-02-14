@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 20:16:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/12 18:16:52 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/13 23:15:33 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 int	check_file_perm(char *open_file, char *write_file)
 {
 	if (access(open_file, F_OK))
+	{
+		if (access(write_file, F_OK))
+			open(write_file, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		return (send_error(-1));
+	}
 	else if (access(open_file, R_OK))
 		return (ft_printf("\"%s\" ", open_file), send_error(-9));
 	if (access(write_file, F_OK) == 0)
@@ -47,6 +51,8 @@ int	send_error(int flag)
 		perror("access error");
 	else if (flag == -9)
 		perror("permission error");
+	else if (flag == -10)
+		perror("PATH not found");
 	return (errno);
 }
 

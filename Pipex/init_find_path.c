@@ -6,13 +6,13 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/13 15:58:38 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/13 23:44:43 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	split_cmd(char ***command, char *infile, char *arg)
+int	split_cmd(t_cmds *c, char *infile, char *arg, int ind)
 {
 	char	*tmp;
 
@@ -28,8 +28,8 @@ int	split_cmd(char ***command, char *infile, char *arg)
 		if (!tmp)
 			return (0);
 	}
-	(*command) = ft_split(tmp, ' ');
-	if (!*command)
+	c->arg[ind] = ft_split(tmp, ' ');
+	if (!c->arg[ind])
 	{
 		free(tmp);
 		return (0);
@@ -42,7 +42,9 @@ int	init_t_cmds(t_cmds *c, int argc, char **envp)
 {
 	while (*(envp) && ft_strncmp(*(envp++), "PATH", 4))
 		;
-	c->path = ft_split(*(--envp), ':');
+	if (ft_strncmp(*--envp, "PATH", 4))
+		return (-10);
+	c->path = ft_split(*(envp), ':');
 	if (!c->path)
 		return (-5);
 	c->nb_pr = argc - 3;
@@ -65,24 +67,24 @@ t_mall	*set_t_mall(char *p, int f)
 	return (tmp);
 }
 
-t_mall	*find_path(char ***command, char **path, char *arg, char *infile)
+t_mall	*find_path(t_cmds *c, char *arg, char *infile, int ind)
 {
 	t_mall	*cmd_arg;
 	int		i;
 
 	i = 0;
 	cmd_arg = set_t_mall(0, 0);
-	if (!split_cmd(command, infile, arg) || !cmd_arg)
+	if (!split_cmd(c, infile, arg, ind) || !cmd_arg)
 		return (0);
 	cmd_arg->p = ft_strdup(arg);
 	cmd_arg->f = (access(cmd_arg->p, F_OK) == 0);
-	while (path[i++] && access(cmd_arg->p, F_OK) != 0)
+	while (c->path[i++] && access(cmd_arg->p, F_OK) != 0)
 	{
 		free(cmd_arg->p);
-		cmd_arg->p = ft_strjoin(path[i], "/");
+		cmd_arg->p = ft_strjoin(c->path[i], "/");
 		if (!cmd_arg)
 			return (cmd_arg);
-		cmd_arg->p = ft_stradd(cmd_arg->p, (*command)[0]);
+		cmd_arg->p = ft_stradd(cmd_arg->p, c->arg[ind][0]);
 		if (!cmd_arg->p)
 			return (cmd_arg);
 		if (access(cmd_arg->p, F_OK) == 0 && access(cmd_arg->p, X_OK) == 0)
@@ -104,9 +106,9 @@ int	find_all_path(t_cmds *c, char **argv, int nb_pr)
 	while (i < nb_pr)
 	{
 		if (i == 0)
-			tmp = find_path(&(c->arg[0]), c->path, argv[2], argv[1]);
+			tmp = find_path(c, argv[2], argv[1], i);
 		else
-			tmp = find_path(&(c->arg[i]), c->path, argv[i + 2], 0);
+			tmp = find_path(c, argv[i + 2], 0, i);
 		if (!tmp)
 			return (-5);
 		if (!tmp->p && !tmp->f)

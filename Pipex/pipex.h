@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/12 17:08:29 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/02/13 23:43:59 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ typedef struct s_mall
 	int		f;
 }	t_mall;
 
-t_mall	*find_path(char ***command, char **path, char *arg, char *infile);
-void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
 int		pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
-int		split_cmd(char ***command, char *infile, char *arg);
 int		check_file_perm(char *open_file, char *write_file);
-int		find_all_path(t_cmds *c, char **argv, int nb_pr);
-int		commands(t_cmds *c, int write_fd, char **envp);
 int		init_t_cmds(t_cmds *c, int argc, char **envp);
+
+t_mall	*find_path(t_cmds *c, char *arg, char *infile, int ind);
+int		split_cmd(t_cmds *c, char *infile, char *arg, int ind);
+int		find_all_path(t_cmds *c, char **argv, int nb_pr);
+
+void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr);
+int		commands(t_cmds *c, int write_fd, char **envp);
+int		search_cmd(t_cmds *c);
+
 int		free_all_pipex(t_cmds *c, pid_t *proc );
-int		write_file(int read_fd, int write_fd);
 void	print_cmd_i(t_cmds *c, int i);
 void	free_t_cmd(t_cmds *c);
-int		search_cmd(t_cmds *c);
 int		send_error(int flag);
 
+int		write_file(int read_fd, int write_fd);
 #endif
