@@ -3,7 +3,8 @@ CC = GCC
 CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = main_fractol.c \
-	mandelbrot.c
+	mandelbrot.c\
+	esc_handle.c
 
 LIB = $(LIBFT)libftprintf.a
 
@@ -22,7 +23,7 @@ $(NAME): $(OBJ) libftprintf.a
 	$(CC) $(CFLAGS) $(OBJ) libftprintf.a -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
 
 %.o : %.c
-	$(CC) $(CFLAGS) $< -c -o $@ 
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
 
 
 libftprintf.a:

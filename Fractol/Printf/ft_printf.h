@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:30:39 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/06 23:47:22 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/04 22:24:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_print
 int		ft_make_list(const char *arg0, t_print **p_list,
 			int nb_arg, va_list ap);
 
-void	ft_plstadd_back(t_print **lst, t_print *new);
+void	ft_plstadd_back(t_print **lst, t_print *ne);
 int		ft_plstclear(t_print **lst, void (*del)(void *));
 void	ft_plstdelone(t_print *lst, void (*del)(void *));
 t_print	*ft_plstnew(char *cont);
