@@ -6,12 +6,14 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:15:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/05 02:03:56 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/05 20:25:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
+#ifndef COEF
+# define COEF 600
+#endif
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -21,7 +23,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void draw_circle(t_data img, int start_x, int start_y)
+void draw_circle(t_fract f)//t_data img, int start_x, int start_y)
 {
 	int i;
 	
@@ -29,7 +31,7 @@ void draw_circle(t_data img, int start_x, int start_y)
 	while (i < 2500)
 	{
 		//printf("%f - %f\n",50*sin(i) + start_x, 50 * cos(i) + start_y );
-		my_mlx_pixel_put(&img, 250*sin(i) + start_x, 250 * cos(i) + start_y, 0x00FFFFFF);
+		my_mlx_pixel_put(&f.img, 250*sin(i) + f.start_x, 250 * cos(i) + f.start_y, 0x00FFFFFF);
 		i++;
 	}
 }
@@ -58,52 +60,59 @@ void draw_axes(t_data img)
 
 int	main(int argc, char **argv)
 {
-	void *mlx;
-	void *win_ptr;
-	t_data img;
-	t_data *axes;
+	t_fract f;
 	int i;
-	int start_x;
-	int start_y;
-	t_vec c;
-	t_vec z;
 	
 	i = 0;
-	start_x = 1920/2; // [0,0] = [1000, 625], [-1, 0] = [-500, 625], [0, 1] = [1000, 1125]
+	f.start_x =  1920/2 ; // [0,0] = [1000, 625], [-1, 0] = [-500, 625], [0, 1] = [1000, 1125]
 	// x = start_x + mandelbrot_x * 500
 	// y = start_y + mandelbrot_y * 500
 
-	start_y = 1080/2;
-	axes = malloc(sizeof(t_data));
+	f.start_y = 1080/2;
 	if (argc)
 	{
 		ft_printf("%s\n", argv[argc - 1]);
-		mlx = mlx_init();
-		win_ptr = mlx_new_window(mlx, 1920, 1080, "fractol"); // entre [-2,-1], x [0, 500] - [-1,0], x [500, 1000] 
-		img.img = mlx_new_image(mlx, 1920, 1080);
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-		draw_axes(img);
-		draw_circle(img, start_x, start_y);
-		my_mlx_pixel_put(&img, start_x, start_y, 0x00FFFFFF);
-		c.x = -0.5;
-		c.y = 0;
-		z = c;
-		i = 0;
-		while (z.x * z.x + z.y *z.y < 4 && i < 200)
+		f.mlx = mlx_init();
+		f.win = mlx_new_window(f.mlx, 1920, 1080, "fractol"); // entre [-2,-1], x [0, 500] - [-1,0], x [500, 1000] 
+		f.img.img = mlx_new_image(f.mlx, 1920, 1080);
+		f.img.addr = mlx_get_data_addr(f.img.img, &f.img.bits_per_pixel, &f.img.line_length, &f.img.endian);
+		draw_axes(f.img);
+		draw_circle(f);//img, start_x, start_y);
+		f.c.x = -2;
+		while (f.c.x < 1.01)
 		{
-			my_mlx_pixel_put(&img, start_x + z.x * 1000, start_y + z.y * 1000, 0xFFFFFFF);
-			printf("%i (%f,%f)\n", i, z.x, z.y);
-			z = compute_next(z, c);
-			i++;
+			
+			f.c.y = -1;
+			printf("---c.r : %f---\n", f.c.x);
+			while (f.c.y < 1.01)
+			{
+				i = 1;
+				printf("c.i : %f\n", f.c.y);
+				f.z.x = 0;
+				f.z.y = 0;
+				while (f.start_x + f.z.x * COEF < 1920 && f.start_y - f.z.y * COEF < 1080 && i < 5000 &&
+				f.start_x + f.z.x * COEF > 0 && f.start_y - f.z.y * COEF > 0)
+				{
+					//printf("%i (%f,%f) = %X\n", i, f.z.x, f.z.y, 0x00FFFFFF / (i));
+					my_mlx_pixel_put(&f.img, f.start_x + f.z.x * COEF, f.start_y - f.z.y * COEF, 0x00AB0606);
+					f.z = compute_next(f.z, f.c);
+					i++;
+				}
+				f.c.y += 0.01;
+			}
+			f.c.x += 0.01;
 		}
+
 		// printf("%i ",i);
 		//printf("%f, %f\n", start_x + x * 500, start_y - y * 500);
 		// 	i++;
-		mlx_put_image_to_window(mlx, win_ptr, img.img, 0, 0);
-		mlx_hook(win_ptr, 17, 0, &esc_handle, mlx);
-		mlx_key_hook(win_ptr, &esc_handle, mlx);
+		mlx_put_image_to_window(f.mlx, f.win, f.img.img, 0, 0);
+		mlx_hook(f.win, 17, 0, &esc_handle, &f);
+		mlx_key_hook(f.win, &esc_handle, &f);
 		//mlx_destroy_image(mlx,img.img);
-		mlx_loop(mlx);
+		mlx_loop(f.mlx);
+		mlx_destroy_image(f.mlx, &f.img);
+		mlx_clear_window(f.mlx, f.win);
 	}
 
 	return (0);
@@ -161,4 +170,12 @@ int	main(int argc, char **argv)
 			i++;
 		}
 		i=0;
+
+				t_color
+		{
+			0x
+			int rouge; 12 
+			int rouge; 1200
+			int rouge; 120000
+		}
 */

@@ -1,10 +1,10 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRCS = main_fractol.c \
 	mandelbrot.c\
-	esc_handle.c
+	handle.c
 
 LIB = $(LIBFT)libftprintf.a
 

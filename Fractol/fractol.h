@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/05 01:08:06 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:05:48 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <stdio.h>
 
+
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -25,15 +26,26 @@ typedef struct	s_data {
 	int		endian;
 }	t_data;
 
-typedef struct t_vec {
+typedef struct s_vec {
 	double x;
 	double y;
 }	t_vec;
 
+typedef struct s_fract
+{
+	t_data img;
+	void *mlx;
+	void *win;
+	t_vec z;
+	t_vec c;
+	int start_x;
+	int start_y;
+}	t_fract;
+
 double	mandelbrot(int x, double c);
 double mandelbrot_x(int n, double a);
 double mandelbrot_y(int n, double b);
-int esc_handle(void *mlx, void *win);
+int esc_handle(t_fract f);
 t_vec compute_next(t_vec cur, t_vec cons);
 
 

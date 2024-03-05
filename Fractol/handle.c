@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   esc_handle.c                                       :+:      :+:    :+:   */
+/*   handle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/04 22:22:49 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:04:42 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int esc_handle(void *mlx, void *win)
+int esc_handle(t_fract f)
 {
-	mlx_clear_window(win, mlx);
+	mlx_clear_window(f.win, f.mlx);
 	return (1);
 }
