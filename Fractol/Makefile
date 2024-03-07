@@ -15,12 +15,17 @@ OBJ = $(SRCS:.c=.o)
 
 NAME = fractol
 
+ifeq ($(hostname),"MacBook-Air-de-Guylian.local")
+CFLAGS+="-D WIN_WIDTH=2560 -D WIN_HEIGHT=1664"
+echo $(hostname)
+endif
+
 .PHONY: all clean fclean re
 
 all: $(NAME) 
 
 $(NAME): $(OBJ) libftprintf.a
-	$(CC) $(CFLAGS) $(OBJ) libftprintf.a -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJ) libftprintf.a mlx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME) 
 
 %.o : %.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@ 

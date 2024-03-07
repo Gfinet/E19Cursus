@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/05 18:05:48 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/07 03:25:23 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_fract
 double	mandelbrot(int x, double c);
 double mandelbrot_x(int n, double a);
 double mandelbrot_y(int n, double b);
-int esc_handle(t_fract f);
+int esc_handle(int key, t_fract *f);
+int	key_event(int keycode, t_fract *f);
 t_vec compute_next(t_vec cur, t_vec cons);
 
 
