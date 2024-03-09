@@ -19,26 +19,28 @@ NAME = libftprintf.a
 
 .PHONY: all clean fclean re
 
-all: $(NAME) 
+all: $(NAME)
+	@echo "library libftprintf made"
 
 $(NAME): $(OBJ) libft.a
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 %.o : %.c
-	$(CC) $(CFLAGS) $< -c -o $@ 
+	@$(CC) $(CFLAGS) $< -c -o $@ 
 
 
 libft.a: 
-	make -C $(LIBFT)
-	cp $(LIB) .
-	mv $(LIB) $(NAME)
+	@make -C $(LIBFT)
+	@cp $(LIB) .
+	@mv $(LIB) $(NAME)
 
 clean:
-	rm -f *.o
-	make -C $(LIBFT) clean
+	@rm -f *.o
+	@make -C $(LIBFT) clean
+
 fclean: clean
-	rm -f *.a
-	make -C $(LIBFT) fclean
+	@rm -f *.a
+	@make -C $(LIBFT) fclean
 	
 
 re: fclean all

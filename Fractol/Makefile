@@ -2,9 +2,10 @@ CC = GCC
 
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
-SRCS = main_fractol.c \
-	mandelbrot.c\
-	handle.c
+
+SRCS = src/main_fractol.c \
+	src/mandelbrot.c\
+	src/handle.c
 
 LIB = $(LIBFT)libftprintf.a
 
@@ -16,35 +17,38 @@ OBJ = $(SRCS:.c=.o)
 NAME = fractol
 
 ifeq ($(hostname),"MacBook-Air-de-Guylian.local")
-CFLAGS+="-D WIN_WIDTH=2560 -D WIN_HEIGHT=1664"
+	CFLAGS="-Wall -Wextra -Werror -D WIN_WIDTH=2560 -D WIN_HEIGHT=1664"
 echo $(hostname)
 endif
 
 .PHONY: all clean fclean re
 
-all: $(NAME) 
+all: $(NAME)
+	@echo "fractol made"
 
 $(NAME): $(OBJ) libftprintf.a
-	$(CC) $(CFLAGS) $(OBJ) libftprintf.a mlx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME) 
+	@$(CC) $(CFLAGS) $^ -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
+	@$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
 
 
 libftprintf.a:
-	make -C $(LIBFT)
-	cp $(LIB) .
-	mv $(LIB) $(NAME)
+	@make -C $(LIBFT)
+	@cp $(LIB) .
+	@mv $(LIB) $(NAME)
 
 
 clean:
-	rm -f *.o
-	make -C $(LIBFT) clean
+	@rm -f *.o
+	@make -C $(LIBFT) clean
+	@echo "clean done"
 fclean: clean
-	rm -f *.a
-	make -C $(LIBFT) fclean
+	@rm -f *.a
+	@make -C $(LIBFT) fclean
+	@echo "fclean done"
 	
 
 re: fclean all
-
+	@echo "make re done"
 

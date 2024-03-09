@@ -61,21 +61,21 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
+	@echo "library libft made"
 
 %.o :	%.c
-	$(CC) $(CFLAGS) $< -c -o $@ 
+	@$(CC) $(CFLAGS) $< -c -o $@
 	
 
 bonus: $(BONUSOBJ) $(OBJ)
-	ar rcs $(NAME) $(BONUSOBJ) $(OBJ)
+	@ar rcs $(NAME) $(BONUSOBJ) $(OBJ)
 
 clean:
-	rm -f */*.o
-
+	@rm -f */*.o
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
