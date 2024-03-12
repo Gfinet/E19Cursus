@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:34:51 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/12 21:28:29 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:43:48 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,18 @@ int draw_julia(t_fract *f)
 	}
 	return (i);
 }
-void set_color(t_fract *f, t_vec p, int it)
+
+//f->start_x + f->z.x * COEF/2 = x      <=> z.x = 2*(x - f->start_x) /COEF 
+//f->start_y - f->z.y * COEF/2 + 1  = y <=> z.y = 
+
+void set_color(t_fract *f, int x, int y, int it)
 {
-	my_mlx_pixel_put(&f->img, p.x, p.y, 0x00FFFFFF/it);
+	my_mlx_pixel_put(&f->img, x, y, 0x00FFFFFF/it);
 }
 
 // 256/MAX_IT 105906176
 void draw_mandelbrot(t_fract *f)
 {
-	t_vec p;
 	int it;
 	int x;
 	int y;
@@ -100,11 +103,11 @@ void draw_mandelbrot(t_fract *f)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			p.x = f->start_x + x * COEF/2;
-			p.y = f->start_y - y * COEF/2;
+			f->z.x = 2*(f->start_x - x) / COEF; //f->start_x - x * COEF/2;
+			f->z.y = 2*(f->start_y - y + 1) / COEF;
 			it = draw_julia(f);
-			printf("%d %d\n%f %f\n", x, y, p.x, p.y);
-			set_color(f, p, it);
+			printf("%d %d %d\n%f %f\n", x, y, it, f->z.x, f->z.y);
+			set_color(f, x, y, it);
 			x++;
 		}
 		y++;

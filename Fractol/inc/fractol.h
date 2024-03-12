@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/12 20:39:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:32:30 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 # include <stdio.h>
 
 #ifndef WIN_HEIGHT
-# define WIN_HEIGHT 250
+# define WIN_HEIGHT 500
 #endif
 #ifndef COEF
 # define COEF WIN_HEIGHT/2
 #endif
 #ifndef WIN_WIDTH
-# define WIN_WIDTH 250
+# define WIN_WIDTH 500
 #endif
 #ifndef MAX_IT
-# define MAX_IT 1
+# define MAX_IT 5
 #endif
 
 //2560 × 1664
