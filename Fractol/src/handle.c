@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   handle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/12 13:08:42 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/12 16:32:50 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
+void print_option()
+{
+	ft_printf("No valid arg provided\n");
+	ft_printf("Please try the followings :\n");
+	ft_printf("Mandelbrot => ./fractol 1\n");
+	ft_printf("Julia => ./fractol 2 R I\n");
+
+}
+
 int esc_handle(t_fract *f)
 {
-	printf("Hello from esc_handle!\n");
-
 	if (f->img.img)
 		mlx_destroy_image(f->mlx, f->img.img);
 	if (f->win)

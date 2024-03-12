@@ -40,7 +40,7 @@ libftprintf.a:
 
 
 clean:
-	@rm -f *.o
+	@rm -f */*.o
 	@make -C $(LIBFT) clean
 	@echo "clean done"
 fclean: clean

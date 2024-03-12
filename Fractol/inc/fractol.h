@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/12 13:08:35 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/12 20:39:39 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 # include <math.h>
 # include <stdio.h>
 
+#ifndef WIN_HEIGHT
+# define WIN_HEIGHT 250
+#endif
+#ifndef COEF
+# define COEF WIN_HEIGHT/2
+#endif
+#ifndef WIN_WIDTH
+# define WIN_WIDTH 250
+#endif
+#ifndef MAX_IT
+# define MAX_IT 1
+#endif
+
+//2560 × 1664
+//1920 x 1080
 
 typedef struct	s_data {
 	void	*img;
@@ -42,6 +57,14 @@ typedef struct s_fract
 	int start_x;
 	int start_y;
 }	t_fract;
+
+t_fract *fract_init();
+void 	print_option();
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+double mod2(t_vec z);
+int draw_julia(t_fract *f);
+void draw_mandelbrot(t_fract *f);
 
 double	mandelbrot(int x, double c);
 double mandelbrot_x(int n, double a);
