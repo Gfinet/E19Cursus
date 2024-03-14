@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_fractol.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:15:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/12 19:45:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/14 02:21:30 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void draw_circle(t_fract *f)//t_data img, int start_x, int start_y)
 	int i;
 	
 	i = 0;
-	while (i < COEF * 10)
+	while (i < COEF * 100)
 	{
 		my_mlx_pixel_put(&f->img, COEF/2 * sin(i) + f->start_x, COEF/2 * cos(i) + f->start_y, 0x00FFFFFF);
 		i++;
@@ -52,20 +52,65 @@ void draw_axes(t_fract *f)
 		y++;
 	}
 }
-t_fract *fract_init()
+
+void set_dec_move(t_fract *f)
+{
+	if (f->coef < 1000)
+	{
+		if (f->max_it < 100)
+			f->mv.decal = 0.01;
+		else if (f->max_it < 500)
+			f->mv.decal = 0.05;
+		else if (f->max_it < 1000)
+			f->mv.decal = 0.1;
+		f->mv.move = 10;
+		f->mv.zoom = 10;
+	}
+	else if (f->coef > 1000)
+	{
+		if (f->max_it < 100)
+			f->mv.decal = 0.001;
+		else if (f->max_it < 500)
+			f->mv.decal = 0.005;
+		else if (f->max_it < 1000)
+			f->mv.decal = 0.01;
+		f->mv.move = 5;
+		f->mv.zoom = 100;
+	}
+}
+
+void set_null(t_fract *f, int j_m)
+{
+	f->start_x =  WIN_WIDTH / 2;
+	f->start_y = WIN_HEIGHT / 2;
+	f->coef = WIN_HEIGHT / 1.3;
+	f->z.x = 0.0;
+	f->z.y = 0.0;
+	f->c.x = -0.8406;//0.390000;
+	f->c.y = 0.1242;//0.170000;
+	f->mv.color = 7;
+	f->mv.b_color = 0;
+	f->mv.julia_mandel = j_m;
+	set_dec_move(f);
+}
+
+t_fract *fract_init(int argc, char **arg)
 {
 	t_fract *f;
 
 	f = malloc(sizeof(t_fract));
-	f->start_x =  WIN_WIDTH / 2;
-	f->start_y = WIN_HEIGHT / 2;
-
+	if (!f)
+		return (0);
+	if (argc < 3)
+		f->max_it = ft_atoi("50");
+	else
+		f->max_it = ft_atoi(arg[2]);
+	set_null(f, ft_atoi(arg[1]));
 	f->mlx = mlx_init();
 	if (!f->mlx)
-		return (NULL);
+		return (esc_handle(f), NULL);
 	
 	f->win = mlx_new_window(f->mlx, WIN_WIDTH, WIN_HEIGHT, "fractol");
-	// entre [-2,-1], x [0, 500] - [-1,0], x [500, 1000]
 	if (!f->win)
 		return (esc_handle(f), NULL);
 	f->img.img = mlx_new_image(f->mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -75,8 +120,6 @@ t_fract *fract_init()
 					&f->img.line_length, &f->img.endian);
 	if (!f->img.addr)
 		return (esc_handle(f), NULL);
-	draw_axes(f);
-	draw_circle(f);
 	return (f);
 }
 
@@ -85,24 +128,13 @@ int	main(int argc, char **argv)
 	t_fract *f;
 	if (argc > 1)
 	{
-		f = fract_init();
+		f = fract_init(argc, argv);
 		if (!f)
 			return (0);
-		if (argc == 2 && !ft_strncmp(argv[1], "1", 1))
-			draw_mandelbrot(f);
-		if (argc > 2)
-		{ //0,3 + 0,5
-			f->c.x = -0.4;
-			f->c.y = 0.3;
-			draw_julia(f);
-		}
-		// printf("%d\n", f->img.line_length);
-		// printf("%d\n", f->img.bits_per_pixel);
-		// printf("%d\n", f->img.line_length / f->img.bits_per_pixel);
-		mlx_put_image_to_window(f->mlx, f->win, f->img.img, 0, 0);
-		mlx_hook(f->win, 17, 0, &esc_handle, f);
-		mlx_key_hook(f->win, &key_event, f);
+		draw_fract(f);
 		mlx_mouse_hook(f->win, &mouse_event, f);
+		mlx_hook(f->win, 17, 0, &esc_handle, f);
+		mlx_hook(f->win, 2, 0, &key_event, f);
 		mlx_loop(f->mlx);
 	}
 	else

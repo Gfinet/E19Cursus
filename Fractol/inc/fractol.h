@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/12 21:32:30 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/14 02:13:33 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@
 # include <stdio.h>
 
 #ifndef WIN_HEIGHT
-# define WIN_HEIGHT 500
+# define WIN_HEIGHT 300
 #endif
 #ifndef COEF
-# define COEF WIN_HEIGHT/2
+# define COEF WIN_HEIGHT /1.3
 #endif
 #ifndef WIN_WIDTH
-# define WIN_WIDTH 500
-#endif
-#ifndef MAX_IT
-# define MAX_IT 5
+# define WIN_WIDTH WIN_HEIGHT * 1.5
 #endif
 
 //2560 × 1664
@@ -47,6 +44,16 @@ typedef struct s_vec {
 	double y;
 }	t_vec;
 
+typedef struct s_zoom 
+{
+	double decal;
+	int move;
+	int zoom;
+	unsigned int color;
+	unsigned int b_color;
+	int julia_mandel;
+} t_zoom;
+
 typedef struct s_fract
 {
 	t_data img;
@@ -54,25 +61,28 @@ typedef struct s_fract
 	void *win;
 	t_vec z;
 	t_vec c;
+	t_zoom mv;
+	double	coef;
+	int max_it;
 	int start_x;
 	int start_y;
+
 }	t_fract;
 
-t_fract *fract_init();
+t_fract *fract_init(int argc, char **arg);
+void 	set_dec_move(t_fract *f);
+void	set_null(t_fract *f, int j_m);
 void 	print_option();
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 double mod2(t_vec z);
-int draw_julia(t_fract *f);
-void draw_mandelbrot(t_fract *f);
+double compute_it(t_fract *f);
+void draw_fract(t_fract *f);
 
-double	mandelbrot(int x, double c);
-double mandelbrot_x(int n, double a);
-double mandelbrot_y(int n, double b);
 t_vec compute_next(t_vec cur, t_vec cons);
 
 int esc_handle(t_fract *f);
 int	key_event(int keycode, t_fract *f);
-int mouse_event(int keycode, t_fract *f);
+int mouse_event(int keycode, int x, int y, t_fract *f);
 
 #endif
