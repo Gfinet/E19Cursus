@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle.c                                           :+:      :+:    :+:   */
+/*   handle_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/14 02:22:25 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/14 14:30:52 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-void print_option()
+void	print_option(void)
 {
 	ft_printf("No valid arg provided\n");
-	ft_printf("Please try the followings :\n");
-	ft_printf("julia => ./fractol 0\n");
-	ft_printf("mandelbrot => ./fractol 1\n");
-
+	ft_printf("Please try the followings : (if no MAX_IT, set to 50)\n");
+	ft_printf("julia => ./fractol MAX_IT0\n");
+	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
 }
 
-int esc_handle(t_fract *f)
+int	esc_handle(t_fract *f)
 {
 	if (f->img.img)
 		mlx_destroy_image(f->mlx, f->img.img);
@@ -36,22 +35,8 @@ int esc_handle(t_fract *f)
 	exit(0);
 }
 
-void key_event_end(int keycode, t_fract *f)
+void	key_event_next(int keycode, t_fract *f)
 {
-	if (keycode == C)
-	{
-		f->start_x =  WIN_WIDTH / 2;
-		f->start_y = WIN_HEIGHT / 2;
-	}
-	if (keycode == M)
-		f->mv.julia_mandel = 1;
-	if (keycode == Z)
-		f->mv.julia_mandel = 0;
-}	
-
-void key_event_next(int keycode, t_fract *f)
-{
-	//printf("\nkey = %d\n", keycode);
 	if (keycode == ZERO)
 		set_null(f, f->mv.julia_mandel);
 	if (keycode == L_SH && f->mv.color > 10 && !f->mv.b_color)
@@ -62,19 +47,19 @@ void key_event_next(int keycode, t_fract *f)
 		f->mv.color -= 5;
 	if (keycode == R_SH && f->mv.color < 1005 && f->mv.b_color)
 		f->mv.color += 5;
-	if (keycode == I)
-		f->z.x += f->mv.decal;
-	if (keycode == K)
-		f->z.x -= f->mv.decal;
-	if (keycode == J)
-		f->z.y -= f->mv.decal;
-	if (keycode == L)
-		f->z.y += f->mv.decal;
 	if (keycode == B)
 		f->mv.b_color = 1;
 	if (keycode == N)
 		f->mv.b_color = 0;
-	key_event_end(keycode, f);
+	if (keycode == M)
+		f->mv.julia_mandel = 1;
+	if (keycode == Z)
+		f->mv.julia_mandel = 0;
+	if (keycode == C)
+	{
+		f->start_x = WIN_WIDTH / 2;
+		f->start_y = WIN_HEIGHT / 2;
+	}
 }
 
 int	key_event(int keycode, t_fract *f)
@@ -84,13 +69,13 @@ int	key_event(int keycode, t_fract *f)
 	else
 	{
 		set_dec_move(f);
-		if (keycode == D)
+		if (keycode == D && !f->mv.julia_mandel)
 			f->c.x += f->mv.decal;
-		if (keycode == A)
+		if (keycode == A && !f->mv.julia_mandel)
 			f->c.x -= f->mv.decal;
-		if (keycode == W)
+		if (keycode == W && !f->mv.julia_mandel)
 			f->c.y += f->mv.decal;
-		if (keycode == S)
+		if (keycode == S && !f->mv.julia_mandel)
 			f->c.y -= f->mv.decal;
 		if (keycode == RIGHT)
 			f->start_x += f->mv.move;
@@ -106,10 +91,10 @@ int	key_event(int keycode, t_fract *f)
 	return (1);
 }
 
-int mouse_event(int mcode, int x, int y, t_fract *f)
+int	mouse_event(int mcode, int x, int y, t_fract *f)
 {
-	int dif_x;
-	int dif_y;
+	int	dif_x;
+	int	dif_y;
 
 	dif_x = f->start_x - x / 2;
 	dif_y = f->start_y - y / 2;
@@ -120,17 +105,11 @@ int mouse_event(int mcode, int x, int y, t_fract *f)
 		esc_handle(f);
 	if (mcode == M_UP || mcode == M_DW)
 	{
-		//f->start_x -= dif_x/4;
-		//f->start_y -= dif_y;
-		//printf("x = %d\ny = %d\n", x, y);
-		//f->start_x -= (dif_x * (x > f->start_x)) + (-dif_x * (x < f->start_x));
-		//f->start_y -= (dif_y * (y > f->start_y)) + (-dif_y * (y < f->start_y));
 		if (mcode == M_UP)
 			f->coef += f->mv.zoom;
 		if (mcode == M_DW)
 			f->coef -= f->mv.zoom;
 	}
 	draw_fract(f);
-	//printf("Hello from mouse!\nkey = %d\n", mcode);
 	return (1);
 }

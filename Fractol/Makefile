@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = src/main_fractol.c \
 	src/mandelbrot.c\
-	src/handle.c
+	src/handle_event.c
 
 LIB = $(LIBFT)libftprintf.a
 
@@ -49,6 +49,7 @@ clean:
 fclean: clean
 	@rm -f *.a
 	@make -C $(LIBFT) fclean
+	@rm $(NAME)
 	@echo "fclean done"
 	
 
