@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/15 23:46:38 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/15 23:55:23 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	print_option(void)
 	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
 }
 
+//system("leaks fractol");
 int	esc_handle(t_fract *f)
 {
 	if (f->img.img)
@@ -31,7 +32,6 @@ int	esc_handle(t_fract *f)
 		mlx_destroy_window(f->mlx, f->win);
 	}
 	free(f);
-	system("leaks fractol");
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:15:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/15 23:45:04 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/16 00:01:52 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,21 @@ t_fract	*fract_init(int argc, char **arg)
 
 int	main(int argc, char **argv)
 {
+	int		i;
 	t_fract	*f;
 
-	if (argc > 1)
+	f = 0;
+	i = 0;
+	if (argc > 1 && argc < 4)
 	{
-		f = fract_init(argc, argv);
+		if (argc == 3)
+			while (argv[2][i])
+				if (!ft_isdigit(argv[2][i++]))
+					return (print_option(), 0);
+		if (ft_isdigit(argv[1][0]) && !(argv[1][0] > '1'))
+			f = fract_init(argc, argv);
 		if (!f)
-			return (0);
+			return (print_option(), 0);
 		draw_fract(f);
 		mlx_mouse_hook(f->win, &mouse_event, f);
 		mlx_hook(f->win, 17, 0, &esc_handle, f);
