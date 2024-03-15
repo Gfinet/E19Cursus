@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/14 14:31:14 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/15 03:29:12 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <stdio.h>
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 300
+#  define WIN_HEIGHT 800
 # endif
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 450
+#  define WIN_WIDTH 1200
 # endif
 
 //300x450
