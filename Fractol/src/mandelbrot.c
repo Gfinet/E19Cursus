@@ -72,6 +72,11 @@ void	set_color(t_fract *f, int x, int y, int it)
 	}
 }
 
+/*
+			if (x == WIN_WIDTH / 2 && y == WIN_HEIGHT / 2)
+				printf("z.x = %f\nz.y = %f\n\n", f->z.x, f->z.y);
+*/
+
 void	draw_fract(t_fract *f)
 {
 	double	it;
@@ -84,8 +89,8 @@ void	draw_fract(t_fract *f)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			f->z.x = (double)((x - f->start_x)) / (f->coef / 2);
-			f->z.y = (double)((y - f->start_y)) / (f->coef / 2);
+			f->z.x = (double)(2 * (x - f->start_x)) / (f->coef);
+			f->z.y = (double)(2 * (y - f->start_y)) / (f->coef);
 			if (f->mv.julia_mandel)
 				it = compute_mand(f);
 			else

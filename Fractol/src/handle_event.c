@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/14 14:30:52 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/15 23:46:38 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	print_option(void)
 {
 	ft_printf("No valid arg provided\n");
-	ft_printf("Please try the followings : (if no MAX_IT, set to 50)\n");
-	ft_printf("julia => ./fractol MAX_IT0\n");
+	ft_printf("Please try the followings :\n");
+	ft_printf("(if no MAX_IT given, set automatically to 50)\n");
+	ft_printf("julia => ./fractol MAX_IT\n");
 	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
 }
 
@@ -29,9 +30,8 @@ int	esc_handle(t_fract *f)
 		mlx_clear_window(f->mlx, f->win);
 		mlx_destroy_window(f->mlx, f->win);
 	}
-	if (f->mlx)
-		free(f->mlx);
 	free(f);
+	system("leaks fractol");
 	exit(0);
 }
 
@@ -78,9 +78,9 @@ int	key_event(int keycode, t_fract *f)
 		if (keycode == S && !f->mv.julia_mandel)
 			f->c.y -= f->mv.decal;
 		if (keycode == RIGHT)
-			f->start_x += f->mv.move;
-		if (keycode == LEFT)
 			f->start_x -= f->mv.move;
+		if (keycode == LEFT)
+			f->start_x += f->mv.move;
 		if (keycode == UP)
 			f->start_y += f->mv.move;
 		if (keycode == DW)
@@ -109,7 +109,7 @@ int	mouse_event(int mcode, int x, int y, t_fract *f)
 			f->coef += f->mv.zoom;
 		if (mcode == M_DW)
 			f->coef -= f->mv.zoom;
+		draw_fract(f);
 	}
-	draw_fract(f);
 	return (1);
 }
