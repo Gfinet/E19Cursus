@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:47:34 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/14 14:12:25 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:25:44 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define ZERO 29
 # define L_SH 257
 # define R_SH 258
+# define V 9
 # define B 11
 # define N 45
 # define Z 6

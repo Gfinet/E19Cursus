@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/15 23:55:23 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:29:05 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	esc_handle(t_fract *f)
 
 void	key_event_next(int keycode, t_fract *f)
 {
+	//printf("key = %d\n", keycode);
 	if (keycode == ZERO)
 		set_null(f, f->mv.julia_mandel);
 	if (keycode == L_SH && f->mv.color > 10 && !f->mv.b_color)
@@ -47,6 +48,8 @@ void	key_event_next(int keycode, t_fract *f)
 		f->mv.color -= 5;
 	if (keycode == R_SH && f->mv.color < 1005 && f->mv.b_color)
 		f->mv.color += 5;
+	if (keycode == V)
+		f->mv.b_color = 2;
 	if (keycode == B)
 		f->mv.b_color = 1;
 	if (keycode == N)
