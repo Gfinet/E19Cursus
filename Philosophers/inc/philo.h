@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/03/17 23:16:12 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:23:22 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct philo_data_s
 {
@@ -26,21 +27,21 @@ typedef struct philo_data_s
 	int nb_diner;
 }	philo_data_t;
 
-typedef struct philosopher_s
-{
-	int			num;
-	pthread_t	thread;
-} philosopher_t;
-
 
 typedef struct philo_s
 {
-	int					nb_philo;
 	int					*fourchettes;
-	philosopher_t		*philo;
+	pthread_t			*philo;
 	philo_data_t		arg;
 	pthread_mutex_t		*mutex;
 }	philo_t;
+
+typedef struct wich_p_s
+{
+	philo_t *data;
+	int		num_philo;
+
+}	wich_p_t;
 
 //utils.c
 int	ft_atoi(const char *str);

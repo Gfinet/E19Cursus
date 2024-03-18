@@ -1,0 +1,195 @@
+----------------------------  Correction -----------------------------
+debian vs Rocky
+- Debian est stable, applications fonctionnent entre elles
+- Rocky est open source et plus malléable mais peu contenir des bugs
+
+LVM
+- Permet de fractionner les disques sans les formater
+- Permet de crypter les disque pour les protéger
+
+aptitude vs apt
+- apt est plus proche du terminal
+- aptitude offre un visuel + comprehensible
+
+SELinux vs AppArmor
+AppArmor permet de lier les autorisations d'application à certains profils.
+À la différence de SELinux, qui s'appuie sur l'application d'indicateurs aux fichiers, AppArmor travaille avec les chemins.
+
+SSH
+Protocol qui permet de communiquer avec la machine via des ports précis
+
+Uncomplicated FireWall
+pare feu qui permet de façon simpliste à empêcher d'accéder aux servers par d'autres port que ceux qui sont permis par l'app
+
+lsblk					(affiche l'arbre des 						 partitions)
+
+Cron
+permet d'executer automatiquement des script 
+crontab -e / sudo crontab -u root -e
+
+
+BONUS
+lighttpd
+logiciel qui permet au serveur de devenir un server Web. 
+
+MariaDB
+permet de créer et administrer une architecture de données pour les server web.
+
+--------------------------  Creer le server --------------------------
+LVM :
+Partition manuelle
+1) separer sd en 2 (boot et root)
+2) Scrypter sda5
+3) Créer un groupe dans sda5
+4) Creer chaque volume logique dans le groupe
+5) Assigner chaque volume logique au point correspondant (ex : "/home")
+C bon mdr 
+
+
+ssh -p 4242 [user]@127.0.0.1		(Se connecte au server depuis un terminal)
+
+apt -y install sudo 			(install sudo (-y = yes))
+su [user] 				(ouvre une session [user])
+exit 					(ferme la session active)
+sudo reboot 				(reboot)
+sudo apt install [prgm]			(installe [prgm])
+
+sudo apt-get install openssh-server	(installe un server ssh)
+sudo systemctl enable ssh --now		(initialise et lance le serveur ssh)
+sudo systemctl start ssh		(lance le server ssh)
+= sudo service ssh start  
+sudo systemctl stop ssh			(stop le server ssh)
+= sudo service ssh stop
+sudo systemctl status ssh		(affiche le status du server ssh)
+sudo vim /etc/ssh/ssh_config		(change les config de ssh (port))
+
+(sudo) groupadd [group]			(ajoute le groupe [group])
+(sudo) groupdel [group]			(supprime le groupe [groupe]) 
+(sudo) adduser [user]			(ajoute l'utilisateur [user])
+(sudo) deluser [user]			(supprime l'utilisateur [user])
+(sudo) usermod -a -G [group] [user]	(ajoute user au groupe)
+
+sudo vim etc/sudoers.d
+
+sudo ufw enable				(active le firewall ufw)
+sudo ufw allow ssh			(Permet que la communication ssh)
+sudo ufw status verbose 		(permet de verifier l'etat d' UFW)
+sudo ufw allow [port]			(Accepte [port] sur la liste)
+sudo ufw deny [port]			(Refuse [port] sur la liste)
+sudo ufw delete [regle]			(supprime [regle] de la liste)
+	
+apt -y install libpam-pwquality		(installe un manager de mdp)
+vim /etc/login.defs			(Modifie certains paramètres des mdp)
+ - PASS_MAX_DAYS [nbr.] Nombre de jours minimum avant de devoir modifier le mdp
+ - PASS_MIN_DAYS [nbr.] Nombre de jours minimum avant de pouvoir modifier le mdp
+ - PASS_WARN_AGE [br] 	Message qui prévient [nbr] de jours a l'avance qu'il faudra
+changer le mdp.
+
+vim /etc/security/pwquality.conf	(Modifie certains paramètres des mdp)
+ - minlen = [len]	Longueur minimale du mdp
+ - dcredit = [nbr]	nombre min de chiffre dans le mdp
+ - ucredit = [nbr]	nombre min de minuscule dans le mdp
+ - lcredit = [nbr]	nombre min de majuscule dans le mdp
+ - ocredit = [nbr]	nombre min de char speciaux dans le mdp
+ - minclass = [nbr]	Nombre de type de caractères différents
+ - difok = [nbr]	Nombre de caractere dans le nouveau mdp qui doivent etre different
+ - maxrepeat = [nbr]	Nombre max du même caractères consécutifs
+ - usercheck = 1	verifie si le nom d'utilisateur est dans le mdp
+ - retry = [nbr]	Nombre d'essaies de changements de mdp avant erreur
+
+Scrypt automatique :
+1) creer scrypt (sudo vim /usr/local/bin/monitoring.sh)
+#!/bin/bash
+#OS
+OS=$(uname -a)
+
+#CPU / vCPU
+CPU=$(lscpu | grep "Pro" | awk '{print $2}')
+vCPU=$(nproc)
+
+#RAM
+MemAx=$(free --mega | grep "Mem" | cut -d" " -f13)
+MemUsed=$(free --mega | grep "Mem" | cut -d" " -f22)
+PMem=$MemUsed
+let "PMem *= 100" "PMem /= MemAx"
+
+#Disk usage
+DuMax=0
+Du=0
+for i in $(df | grep '/dev/m\|/dev/sd' | awk '{print $3}'); do let "Du+=i"; done
+for i in $(df | grep '/dev/m\|/dev/sd' | awk '{print $2}'); do let "DuMax+=i"; done
+let "DuMax /= 1024" "DuMax /= 1024" "PDu = (Du * 100) / DuMax"
+
+#CPU usage
+CpLo=$(top -bn1 | grep %Cpu | awk '{printf("%.1f"), $1 +$3}')
+
+#Last Boot
+LbD=$(who -b | awk '{print $3}')
+LbH=$(who -b | awk '{print $4}')
+
+#LVM use
+LVu="no"; if grep -Pq '/dev/mapper' /etc/fstab; then LVu="yes"; fi
+
+#TCP Connexion
+Tcp=$(ss -s | grep "TCP" | grep -v ":" | awk '{print $3}')
+
+#User online
+Ul=$(w | grep 'users' |  awk '{print $5}')
+
+#IPV4 and MAC adress
+Ip=$(hostname -I)
+Mac=$(ip addr | grep "ether" | awk '{print $2}')
+
+#command used by sudo
+Su=$(cat "/var/log/sudo/sudo.log" | awk '{print $1}' | grep COMMAND | wc -l)
+
+wall "Welcome to this server, i did it with my barehand like i do your mom, enjoy :D
+
+	#Architecture  	: $OS
+	#CPU physicall 	: $CPU
+	#vCPU		: $vCPU
+	#Memory Usage	: $MemUsed / $MemAx MB ($PMem %)
+	#Disk Usage	: $Du / $DuMax MB ($PDu %)
+	#CPU load	: $CpLo %
+	#Last boot	: $LbD $LbH
+	#LVM use	: $LVu
+	#Connexions TCP	: $Tcp
+	#User log	: $Ul
+	#Network	: $Ip ($Mac)
+	#Sudo		: $Su command(s) done
+
+See you next time Stepson/Stepdaughter ! :D"
+
+sudo vim /etc/sudoers
+- Defaults	logfile="/var/log/sudo.log"
+- gfinet ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh
+
+sudo crontab -u root -e
+
+Bonus:
+1) download pack
+lighttpd:
+	- sudo apt-get install lighttpd
+	- sudo lighted -tt -f lighttpd.conf
+MariaDB : 
+	- sudo apt install mariadb-server
+	- sudo mysql_secure_installation
+PHP : 	
+	- sudo apt install php
+
+2) configure
+lighttpd:
+	- sudo systemctl start lighttpd
+	- sudo systemctl enable lighttpd
+/!\ AUTORISER PORTE 80 AVEC UFW
+	-
+mariaDB
+	- sudo mariadb 			(lance maria manager)
+	- sudo systemctl status mariadb	(check status)
+in maria : 
+	- GRANT ALL ON *.* TO '[admin]'@'[IP/localhost]' IDENTIFIED BY '[password]' WITH GRANT OPTION; 				(done les options admin à [admin] avec mdp [password] sur l'adresse [IP/localhost])
+	- FLUSH PRIVILEGES;
+	- 
+
+
+	CRON SUDO ROCKY 
