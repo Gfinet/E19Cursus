@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/03/18 17:23:22 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/20 13:56:23 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct philo_data_s
 {
+	int	*fourchettes;
 	int	nb_philo;
 	int	die_time;
 	int	sleep_time;
@@ -30,18 +31,11 @@ typedef struct philo_data_s
 
 typedef struct philo_s
 {
-	int					*fourchettes;
-	pthread_t			*philo;
-	philo_data_t		arg;
-	pthread_mutex_t		*mutex;
+	int					num;
+	pthread_t			thread;
+	philo_data_t		*arg;
+	pthread_mutex_t		mutex;
 }	philo_t;
-
-typedef struct wich_p_s
-{
-	philo_t *data;
-	int		num_philo;
-
-}	wich_p_t;
 
 //utils.c
 int	ft_atoi(const char *str);
