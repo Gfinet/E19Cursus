@@ -64,7 +64,6 @@ void	set_color(t_fract *f, int x, int y, int it)
 	{
 		color = 0xFFFFFFFF / ((it + 1) * f->mv.color);
 		my_mlx_pixel_put(&f->img, x, y, color);
-		
 	}
 	else if (f->mv.b_color == 1)
 	{

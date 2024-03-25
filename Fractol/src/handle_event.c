@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/20 13:05:25 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:31:24 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	esc_handle(t_fract *f)
 
 void	key_event_next(int keycode, t_fract *f)
 {
-	//printf("key = %d\n", keycode);
 	if (keycode == ZERO)
 		set_null(f, f->mv.julia_mandel);
 	if (keycode == L_SH && f->mv.color > 10 && !f->mv.b_color)

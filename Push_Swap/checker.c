@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:52:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 18:46:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:21:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,8 @@ int	parse_arg(int argc, char **argv, char ***nums, int *nb_elem)
 	return (1);
 }
 
-void make_move(t_nlst_head *a, t_nlst_head *b, char *move)
+void	make_move(t_nlst_head *a, t_nlst_head *b, char *move)
 {
-
 	if (move[0] == 'p' && move[1] == 'a')
 		push(b, a, 0);
 	else if (move[0] == 'p' && move[1] == 'a')
@@ -100,10 +99,11 @@ void make_move(t_nlst_head *a, t_nlst_head *b, char *move)
 		swap(a, b, 2);
 }
 
+//ft_printf("%d", ft_strlen(move));
 static int	emule_ps_answer(char **arg, int nb_arg)
 {
-	t_nlst_head *a;
-	t_nlst_head *b;
+	t_nlst_head	*a;
+	t_nlst_head	*b;
 	char		*move;
 
 	move = get_next_line(0);
@@ -125,7 +125,6 @@ static int	emule_ps_answer(char **arg, int nb_arg)
 		else
 			make_move(a, b, move);
 		move = get_next_line(0);
-		ft_printf("%d", ft_strlen(move));
 	}
 	return (check_heap(a->first, 0) && ft_nlstsize(b) == 0);
 }

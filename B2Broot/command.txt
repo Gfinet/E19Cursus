@@ -67,7 +67,7 @@ sudo vim /etc/ssh/ssh_config		(change les config de ssh (port))
 (sudo) groupdel [group]			(supprime le groupe [groupe]) 
 (sudo) adduser [user]			(ajoute l'utilisateur [user])
 (sudo) deluser [user]			(supprime l'utilisateur [user])
-(sudo) usermod -a -G [group] [user]	(ajoute user au groupe)
+(sudo) usermod -aG [group] [user]	(ajoute user au groupe)
 
 sudo vim etc/sudoers.d
 
