@@ -17,7 +17,7 @@ for (( i=0; i + 1<$#; i++ ))
 do
 	for (( j=0; j + 1<$#; j++ ))
 	do
-		echo "-----< infile ${args[i]}| ${args[j]} > b$((${@: -1}*i+j)) -----"
+		echo "-----< infile ${args[i]} | ${args[j]} > b$((${@: -1}*i+j)) -----"
 		< infile ${args[i]} | ${args[j]} > b$((${@: -1}*i+j))
 	done
 done

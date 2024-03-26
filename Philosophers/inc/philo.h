@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/03/25 18:36:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/26 17:20:08 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct philo_data_s
 	long	sleep_time;
 	long	eat_time;
 	int		nb_diner;
-	int		time_zero;
+	long	time_zero;
 }	philo_data_t;
 
 
@@ -42,7 +42,7 @@ typedef struct philo_s
 	int					has_eat;
 	int					nb_diner;
 	int					is_dead;
-	struct timeval		tv;
+	long				time;
 	pthread_t			thread;
 	philo_data_t		*arg;
 	pthread_mutex_t		mutex;
