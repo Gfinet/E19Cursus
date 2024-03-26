@@ -1,0 +1,1 @@
+fcc test_ps.c push_swap.c make_less_move.c ps_sort.c p_s_r.c nlst.c nlst2.c nlst3.c compute_best_node.c all_verif.c libftprintf.a -D SEP=32 -o test

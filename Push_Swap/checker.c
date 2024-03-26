@@ -6,11 +6,11 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:52:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/25 19:21:43 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/26 14:11:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 #include "get_next_line.h"
 
 static int	is_number(char *s)

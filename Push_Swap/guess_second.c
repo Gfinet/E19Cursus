@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 22:09:33 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/17 22:54:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:39:51 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static int	compute_second(int val, int *b2, int size_b, int a_b)
 				|| (a_b && b2[i] > val && val > b2[i - 1]))
 				break ;
 		}
-
 		i++;
 	}
 	return (i);
@@ -110,8 +109,8 @@ int	guess_sec(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
 	i = 0;
 	while (i < ft_nlstsize(a) - 1)
 	{
-		move_a = i * (i < ((ft_nlstsize(a) - 1)  / 2))
-			+ (ft_nlstsize(a) - 1 - i) * (i >= ((ft_nlstsize(a) - 1)  / 2));
+		move_a = i * (i < ((ft_nlstsize(a) - 1) / 2))
+			+ (ft_nlstsize(a) - 1 - i) * (i >= ((ft_nlstsize(a) - 1) / 2));
 		if (compute_second(a2[i], b2, ft_nlstsize(b) + 1, a_b) + move_a < best)
 			best = compute_second(a2[i], b2, ft_nlstsize(b) + 1, a_b) + move_a;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 17:22:02 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:40:01 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	parse_arg(int argc, char **argv, char ***nums, int *nb_elem)
 	return (1);
 }
 
+//ft_printf("moves : %d\n", res->one);
+//ft_printf("sorted : %d", res->two);
 int	main(int argc, char **argv)
 {
 	t_2_int	*res;
@@ -92,8 +94,6 @@ int	main(int argc, char **argv)
 	else
 	{
 		res = push_swap(nums, nb_elem);
-		//ft_printf("moves : %d\n", res->one);
-		//ft_printf("sorted : %d", res->two);
 		if (!res)
 			write(2, "Error\n", 6);
 		else
