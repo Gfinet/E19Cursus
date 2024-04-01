@@ -3,6 +3,8 @@ CC = GCC
 CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = src/philo_main.c \
+		src/action.c	\
+		src/philo_init.c \
 		src/utils.c
 
 OBJ = $(SRCS:.c=.o)

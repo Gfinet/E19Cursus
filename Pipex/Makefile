@@ -2,10 +2,10 @@ CC = GCC
 
 CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
-SRCS = main_pipex.c \
-		cmd_pipe.c \
-		init_find_path.c \
-		handle_error.c 
+SRCS =  src/main_pipex.c \
+		src/cmd_pipe.c \
+		src/init_find_path.c \
+		src/handle_error.c 
 
 LIB = $(LIBFT)libftprintf.a
 
@@ -32,10 +32,11 @@ libftprintf.a:
 	mv $(LIB) $(NAME)
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ)
 	make -C $(LIBFT) clean
 fclean: clean
-	rm -f *.a
+	rm -f $(LIB)
+	rm $(NAME)
 	make -C $(LIBFT) fclean
 	
 

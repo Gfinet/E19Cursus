@@ -89,6 +89,7 @@ void	draw_fract(t_fract *f)
 	int		y;
 
 	y = 0;
+	mlx_clear_window(f->mlx, f->win);
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;

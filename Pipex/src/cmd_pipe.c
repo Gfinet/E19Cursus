@@ -6,11 +6,11 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 20:50:13 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 00:23:44 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../inc/pipex.h"
 
 void	launch_cmd(t_cmds *c, int pipe_fd[], char **envp, int pr)
 {
@@ -35,44 +35,50 @@ void	print_cmd_i(t_cmds *c, int i)
 	}
 }
 
-int	pipex(t_cmds *c, pid_t *proc, int r_w_fd[], char **envp)
+void	pipex(t_cmds *c, pid_t *proc, int r_w_fd[], char **envp)
 {
 	int	i;
 	int	pipe_fd[2];
 
-	i = 0;
-	if (pipe(pipe_fd) < 0)
-		send_error(-6);
-	while (i < c->nb_pr)
+	i = -1;
+	while (++i < c->nb_pr)
 	{
-		proc[i] = fork();
-		if (proc[i] < 0)
-			send_error(-4);
-		dup2(r_w_fd[0], STDIN_FILENO);
-		if (proc[i] == 0)
-			launch_cmd(c, pipe_fd, envp, i);
-		if (i > 0)
-			close(r_w_fd[0]);
-		close(pipe_fd[1]);
-		r_w_fd[0] = pipe_fd[0];
 		if (i < c->nb_pr - 1)
 			if (pipe(pipe_fd) < 0)
 				send_error(-6);
-		i++;
+		proc[i] = fork();
+		if (proc[i] < 0)
+			send_error(-4);
+		if (proc[i] == 0)
+		{
+			dup2(r_w_fd[0], STDIN_FILENO);
+			if (i == c->nb_pr - 1)
+				launch_cmd(c, r_w_fd, envp, i);
+			else
+				launch_cmd(c, pipe_fd, envp, i);
+		}
+		if (r_w_fd[0] != 0)
+			close(r_w_fd[0]);
+		close(pipe_fd[1]);
+		r_w_fd[0] = pipe_fd[0];
 	}
-	return (r_w_fd[0]);
 }
 
 int	commands(t_cmds *c, int r_w_fd[], char **envp)
 {
 	pid_t	*proc;
-	int		flag;
+	int i;
 
 	proc = malloc(sizeof(pid_t) * c->nb_pr);
-	r_w_fd[0] = pipex(c, proc, r_w_fd, envp);
-	flag = write_file(r_w_fd);
-	if (flag < 0)
-		send_error(flag);
+	if (!proc)
+		return (0);
+	pipex(c, proc, r_w_fd, envp);
+	i = 0;
+	while (i < c->nb_pr)
+	{
+		waitpid(proc[i], 0, 0);
+		i++;
+	}
 	free_all_pipex(c, proc);
 	return (1);
 }

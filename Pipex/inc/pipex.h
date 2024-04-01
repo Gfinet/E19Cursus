@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/14 19:06:01 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 00:21:00 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 64
 # endif
-# include "Printf/ft_printf.h"
+# include "../Printf/ft_printf.h"
 // # define OPEN_ERROR -1
 // # define READ_ERROR -2
 // # define WRITE_ERROR -3
@@ -41,7 +41,7 @@ typedef struct s_mall
 	int		f;
 }	t_mall;
 
-int		pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
+void	pipex(t_cmds *c, pid_t *proc, int pipe_fd[], char **envp);
 int		check_file_perm(char *open_file, char *write_file);
 int		init_t_cmds(t_cmds *c, int argc, char **envp);
 

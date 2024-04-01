@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/03/26 18:33:06 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/01 22:42:15 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ long	trad_time(struct timeval tv)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-long	get_time(void)
+long	get_time(long start)
 {
 	struct timeval tv;
 
 	gettimeofday(&tv, 0);
-	return (trad_time(tv));
+	return (trad_time(tv) - start);
 }
 
 static int	check_arg(char **arg)
@@ -47,41 +47,7 @@ static int	check_arg(char **arg)
 	return (1);
 }
 
-static philo_t	*philo_init(philo_t *philos, philo_data_t *data, char **arg)
-{
-	int	i;
-	data->nb_philo = ft_atol(arg[0]);
-	data->die_time = ft_atol(arg[1]);
-	data->eat_time = ft_atol(arg[2]);
-	data->sleep_time = ft_atol(arg[3]);
-	philos = malloc(sizeof(philo_t) * data->nb_philo);
-	if (!philos)
-		return (0);
-	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!data->fork)
-		return (free(philos), NULL);
-	data->nb_diner = -1;
-	if (arg[4])
-		data->nb_diner = ft_atoi(arg[4]);
-	data->forks = malloc(sizeof(int) * data->nb_philo);
-	if (!data->forks)
-		return (free(philos), free(data->fork), NULL);
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		data->forks[i] = 0;
-		philos[i].arg = data;
-		philos[i].num = i + 1;
-		philos[i].l_hand = 0;
-		philos[i].r_hand = 0;
-		philos[i].has_eat = 0;
-		philos[i].is_dead = 0;
-		philos[i].nb_diner = 0;
-		pthread_mutex_init(&data->fork[i], 0);
-		i++;
-	}
-	return (philos);
-}
+
 
 int is_dead(philo_t *phi)
 {
@@ -117,11 +83,10 @@ void *philosophers(void *data)
 {
 	philo_data_t *d;
 	philo_t *phi;
-	int err;
 
 	phi = (philo_t *)data;
 	d = phi->arg;
-	d->time_zero = get_time();
+	d->time_zero = get_time(0);
 	phi->time = d->time_zero;
 	if (phi->num == 1)
 		phi->l_fork = d->nb_philo - 1;
@@ -133,54 +98,22 @@ void *philosophers(void *data)
 	else
 		phi->r_fork = phi->num - 1;
 	//printf("phi %d has l:%d and r:%d\n", phi->num, phi->l_fork, phi->r_fork);
-	while (get_time() - phi->time < d->die_time && (d->nb_diner < 0 || phi->nb_diner < d->nb_diner)) // && tv.tv_usec < 300000)
+	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0 || phi->nb_diner < d->nb_diner)) // && tv.tv_usec < 300000)
 	{
-		err = pthread_mutex_lock(&phi->arg->fork[phi->l_fork]);
-		if (!err)
-		{
-			d->forks[phi->l_fork] = 1;
-			phi->l_hand = 1;
-			printf("%ld  %d took L fork (%d)\n", get_time() - d->time_zero, phi->num, phi->l_fork);
-		}
-		err = pthread_mutex_lock(&phi->arg->fork[phi->r_fork]);
-		if (!err)
-		{
-			d->forks[phi->r_fork] = 1;
-			phi->r_hand = 1;
-			printf("%ld  %d took R fork (%d)\n", get_time() - d->time_zero, phi->num, phi->r_fork);
-		}
+		take_fork_lr(phi, d, 0);
+		take_fork_lr(phi, d, 1);
 		if (phi->l_hand && phi->r_hand)
-		{
-			printf("%ld  %d eat %d\n", get_time() - d->time_zero, phi->num, phi->nb_diner);
-			usleep(d->eat_time);
-			phi->has_eat = 1;
-		}
+			eat_time(phi, d);
 		if (phi->l_hand)
-		{
-			d->forks[phi->l_fork] = 0;
-			pthread_mutex_unlock(&phi->arg->fork[phi->l_fork]);
-			phi->l_hand = 0;
-			printf("%ld  %d let  L fork (%d)\n", get_time() - d->time_zero, phi->num, phi->l_fork);
-		}
+			let_fork_lr(phi, d, 0);
 		if (phi->r_hand)
-		{
-			d->forks[phi->r_fork] = 0;
-			pthread_mutex_unlock(&phi->arg->fork[phi->r_fork]);
-			phi->r_hand = 0;
-			printf("%ld  %d let  R fork (%d)\n", get_time() - d->time_zero, phi->num, phi->r_fork);
-		}
+			let_fork_lr(phi, d, 1);
 		if (phi->has_eat)
-		{
-			printf("%ld  %d sleep\n", get_time() - d->time_zero, phi->num);
-			usleep(d->sleep_time);
-			phi->has_eat = 0;
-			phi->nb_diner++;
-			phi->time = get_time();
-		}
+			sleep_time(phi, d);
 	}
-	if (phi->nb_diner < phi->arg->nb_diner && phi->time >= d->die_time)
-		printf("%ld  %d is ded----------------------------------------\n", get_time(), phi->num);
-	printf("%ld philo %d has eaten %d times\n", get_time()- d->time_zero, phi->num, phi->nb_diner);
+	if (phi->nb_diner < d->nb_diner && phi->time >= d->die_time)
+		printf("%ld  %d is ded----------------------------------------\n", get_time(0), phi->num);
+	printf("%ld philo %d has eaten %d times\n", get_time(d->time_zero), phi->num, phi->nb_diner);
 	phi->is_dead = 1;
 	//usleep(6000000);
 	return (0);
@@ -205,6 +138,8 @@ int main(int argc, char **argv)
 		philos = 0;
 		if (!check_arg(argv + 1))
 			return (printf("Bad arg\n"), 0);
+		if (!data_init(&data, argc, argv + 1))
+			return (0);
 		philos = philo_init(philos, &data, argv +1);
 		gettimeofday(&tv, 0);
 		data.time_zero = tv.tv_usec;

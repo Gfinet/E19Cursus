@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 20:16:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/02/20 13:03:19 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/01 23:24:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../inc/pipex.h"
 
 int	check_file_perm(char *open_file, char *write_file)
 {
