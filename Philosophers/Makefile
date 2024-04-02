@@ -1,6 +1,6 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
 
 SRCS = src/philo_main.c \
 		src/action.c	\

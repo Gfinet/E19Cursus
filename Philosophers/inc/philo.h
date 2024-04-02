@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/01 22:42:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:48:04 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ long	get_time(long start);
 long	trad_time(struct timeval tv);
 
 //philo_init.c
-int *data_init(philo_data_t *d, int argc, char **arg);
-philo_t	*philo_init(philo_t *philos, philo_data_t *data, char **arg);
+int 	data_init(philo_data_t *d, int argc, char **arg);
+philo_t	*philo_init(philo_t *philos, philo_data_t *data);
+void	init_philo_fork(philo_t *phi, philo_data_t *d);
 
 //utils.c
 long	ft_atol(const char *str);

@@ -71,7 +71,7 @@ bonus: $(BONUSOBJ) $(OBJ)
 	ar rcs $(NAME) $(BONUSOBJ) $(OBJ)
 
 clean:
-	rm -f */*.o
+	rm -f $(OBJ)
 
 
 fclean: clean

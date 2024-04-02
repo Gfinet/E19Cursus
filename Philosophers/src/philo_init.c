@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/01 22:43:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:52:49 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ int data_init(philo_data_t *d, int argc, char **arg)
 	return (1);
 }
 
-philo_t	*philo_init(philo_t *philos, philo_data_t *data, char **arg)
+philo_t	*philo_init(philo_t *philos, philo_data_t *data)
 {
 	int	i;
 
 	philos = malloc(sizeof(philo_t) * data->nb_philo);
 	if (!philos)
-		return (free(data->fork), free(data->forks), 0);
-	
+		return (free(data->fork), free(data->forks), NULL);
 	i = 0;
 	while (i < data->nb_philo)
 	{
@@ -50,7 +49,21 @@ philo_t	*philo_init(philo_t *philos, philo_data_t *data, char **arg)
 		philos[i].is_dead = 0;
 		philos[i].nb_diner = 0;
 		pthread_mutex_init(&data->fork[i], 0);
+		init_philo_fork(&philos[i], data);
 		i++;
 	}
 	return (philos);
+}
+
+void	init_philo_fork(philo_t *phi, philo_data_t *d)
+{
+	if (phi->num == 1)
+		phi->l_fork = d->nb_philo - 1;
+	else
+		phi->l_fork = phi->num - 2;
+
+	if (phi->num == d->nb_philo)
+		phi->r_fork = d->nb_philo - 1;
+	else
+		phi->r_fork = phi->num - 1;
 }
