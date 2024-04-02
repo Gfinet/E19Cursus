@@ -7,9 +7,11 @@ SRCS =  src/main_pipex.c \
 		src/init_find_path.c \
 		src/handle_error.c 
 
-LIB = $(LIBFT)libftprintf.a
-
 LIBFT = ./Printf/
+
+LIBA = libftprintf.a
+
+LIB = $(LIBFT)$(LIBA)
 
 OBJ = $(SRCS:.c=.o)
 
@@ -19,8 +21,8 @@ NAME = pipex
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) libftprintf.a
-	$(CC) $(CFLAGS) $(OBJ) libftprintf.a -o $(NAME) 
+$(NAME): $(OBJ) $(LIBA)
+	$(CC) $(CFLAGS) $^ -o $(NAME) 
 
 %.o : %.c
 	$(CC) $(CFLAGS) $< -c -o $@ 
@@ -35,7 +37,7 @@ clean:
 	rm -f $(OBJ)
 	make -C $(LIBFT) clean
 fclean: clean
-	rm -f $(LIB)
+	mv $(LIBA) $(LIBFT)
 	rm $(NAME)
 	make -C $(LIBFT) fclean
 	

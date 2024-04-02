@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 00:21:29 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 20:43:18 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,6 @@ int	free_all_pipex(t_cmds *c, pid_t *proc )
 	return (0);
 }
 
-int	write_file(int r_w_fd[])
-{
-	int		read_byte;
-	char	buff[BUFFER_SIZE];
-
-	read_byte = BUFFER_SIZE;
-	while (read_byte > 0 && read_byte == BUFFER_SIZE)
-	{
-		read_byte = read(r_w_fd[0], buff, BUFFER_SIZE);
-		if (read_byte == -1)
-			return (-2);
-		if (read_byte > 0)
-		{
-			if (write(r_w_fd[1], buff, read_byte) == -1)
-				return (-3);
-		}
-	}
-	close(r_w_fd[1]);
-	return (1);
-}
-
 void	free_t_cmd(t_cmds *c)
 {
 	int	i;
@@ -51,7 +30,8 @@ void	free_t_cmd(t_cmds *c)
 	while (i < c->nb_pr)
 		if (c->cmd_arg[i])
 			free(c->cmd_arg[i++]);
-	free(c->cmd_arg);
+	if (c->cmd_arg)
+		free(c->cmd_arg);
 	i = 0;
 	while (i < c->nb_pr)
 	{
@@ -89,15 +69,17 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5 || !argv || !envp)
 		return (send_error(-7));
-	check_file_perm(argv[1], argv[argc - 1]);
+	flag = check_file_perm(argv[1], argv[argc - 1]);
+	if (flag <= 0)
+		return (send_error(flag));
 	flag = init_t_cmds(&c, argc, envp);
 	if (flag < 0)
-		return (send_error(flag));
+		return (free_t_cmd(&c), send_error(flag));
 	flag = find_all_path(&c, argv, argc - 3);
 	if (flag == -8)
 		search_cmd(&c);
 	else if (flag < 0)
-		send_error(flag);
+		return (free_t_cmd(&c), send_error(flag));
 	open_files(argc, argv, r_w_fd);
 	if (flag && !commands(&c, r_w_fd, envp))
 		return (errno);

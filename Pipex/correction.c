@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:26:01 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/03/18 19:39:41 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:11:04 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ gcc -Wall -Wextra -Werror correction.c libftprintf.a -o correction
 */
 
 
-#include "pipex.h"
+#include "inc/pipex.h"
+#include <sys/stat.h>
 
 static pid_t launch_pipex(char **arg, char **envp)
 {
@@ -54,6 +55,7 @@ int main(int argc, char **argv, char **envp)
 	cmds[nb_cmd + 1] = ft_strdup(ft_itoa(nb_cmd));
 	cmds[nb_cmd + 2] = NULL;
 	i = 1;
+	mkdir("./test", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	while (i - 1< nb_cmd)
 	{
 		cmds[i] = ft_strdup(argv[i]);
@@ -74,7 +76,7 @@ int main(int argc, char **argv, char **envp)
 		while (j - 1 < nb_cmd && cmds[j])
 		{
 			arg[3] = ft_strdup(cmds[j]);
-			arg[4] = ft_strdup("c");
+			arg[4] = ft_strdup("test/c");
 			arg[4] = ft_stradd(arg[4], ft_itoa(nb_cmd * (i - 1) + (j - 1)));
 			proc[nb_cmd*(i-1)+(j-1)] = launch_pipex(arg, envp);
 			j++;

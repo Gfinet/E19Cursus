@@ -18,7 +18,7 @@ do
 	for (( j=0; j + 1<$#; j++ ))
 	do
 		echo "-----< infile ${args[i]} | ${args[j]} > b$((${@: -1}*i+j)) -----"
-		< infile ${args[i]} | ${args[j]} > b$((${@: -1}*i+j))
+		< infile ${args[i]} | ${args[j]} > test/b$((${@: -1}*i+j))
 	done
 done
 
@@ -29,12 +29,12 @@ do
 	do
 		#echo "-----diff c$((${@: -1}*i + j)) b$((${@: -1}*i + j))-----"
 		
-		res=$(diff c$((${@: -1}*i + j)) b$((${@: -1}*i + j)))
+		res=$(diff test/c$((${@: -1}*i + j)) test/b$((${@: -1}*i + j)))
 		if [ $? -ne 0 ]
 		then
     		# echo "files are the same"
 		# else
-			echo "Error \"< infile ${args[i]} | ${args[j]} > c$((${@: -1}*i + j)) b$((${@: -1}*i + j))\""
+			echo "Error \"< infile ${args[i]} | ${args[j]} > test/c$((${@: -1}*i + j)) test/b$((${@: -1}*i + j))\""
 			flag=1
 			# diff c$((4*i + j)) b$((4*i + j))
 		fi	
@@ -54,8 +54,9 @@ do
 	for (( j=0; j + 1<$#; j++ ))
 	do
 		#echo "-----rm c$((${@: -1}*i+j)) b$((${@: -1}*i+j))-----"
-		rm c$((${@: -1}*i+j))
-		rm b$((${@: -1}*i+j))
+		rm test/c$((${@: -1}*i+j))
+		rm test/b$((${@: -1}*i+j))
 	done
 done
+rmdir test
 echo "cleaning done"

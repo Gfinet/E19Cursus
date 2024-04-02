@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 00:23:44 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 15:45:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	pipex(t_cmds *c, pid_t *proc, int r_w_fd[], char **envp)
 int	commands(t_cmds *c, int r_w_fd[], char **envp)
 {
 	pid_t	*proc;
-	int i;
+	int		i;
 
 	proc = malloc(sizeof(pid_t) * c->nb_pr);
 	if (!proc)

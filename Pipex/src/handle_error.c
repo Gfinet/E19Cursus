@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 20:16:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/01 23:24:43 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 20:35:40 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	check_file_perm(char *open_file, char *write_file)
 		ft_printf("%s: ", open_file);
 		if (access(write_file, F_OK))
 			open(write_file, O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		return (send_error(-1));
+		return (-1);
 	}
 	else if (access(open_file, R_OK))
-		return (ft_printf("\"%s\" ", open_file), send_error(-9));
+		return (ft_printf("\"%s\" ", open_file), -9);
 	if (access(write_file, F_OK) == 0)
 		if (access(write_file, R_OK))
-			return (ft_printf("\"%s\" ", write_file), send_error(-9));
+			return (ft_printf("\"%s\" ", write_file), -9);
 	return (1);
 }
 
