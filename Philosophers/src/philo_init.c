@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 17:52:49 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 21:20:00 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int data_init(philo_data_t *d, int argc, char **arg)
 	d->eat_time = ft_atol(arg[2]);
 	d->sleep_time = ft_atol(arg[3]);
 	d->nb_diner = -1;
+	d->is_dead = 0;
 	d->fork = malloc(sizeof(pthread_mutex_t) * d->nb_philo);
 	if (!d->fork)
 		return (0);

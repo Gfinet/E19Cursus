@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 17:48:04 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 21:19:30 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ typedef struct philo_data_s
 {
 	pthread_mutex_t		*fork;
 	int		*forks;
+	int		nb_diner;
+	int		is_dead;
 	long	nb_philo;
 	long	die_time;
 	long	sleep_time;
 	long	eat_time;
-	int		nb_diner;
 	long	time_zero;
 }	philo_data_t;
 

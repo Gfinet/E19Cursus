@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 19:44:09 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/02 21:42:42 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int is_dead(philo_t *phi, philo_data_t *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (get_time(phi[i].time) >= data->die_time)
+		if (phi->is_dead)
 			return (0);
 		i++;
 	}
@@ -87,7 +87,7 @@ void *philosophers(void *data)
 	phi = (philo_t *)data;
 	d = phi->arg;
 	phi->time = d->time_zero;
-	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0 || phi->nb_diner < d->nb_diner)) // && tv.tv_usec < 300000)
+	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0 || phi->nb_diner < d->nb_diner) && !d->is_dead) // && tv.tv_usec < 300000)
 	{
 		if (!d->forks[phi->l_fork])
 			take_fork_lr(phi, d, 0);
@@ -102,9 +102,14 @@ void *philosophers(void *data)
 		if (phi->has_eat)
 			sleep_time(phi, d);
 	}
-	if (get_time(phi->time) >= d->die_time)
-		printf("%ld  %d is ded----------------------------------------\n", get_time(d->time_zero), phi->num);
-	printf("%ld philo %d has eaten %d times\n", get_time(d->time_zero), phi->num, phi->nb_diner);
+	if (get_time(phi->time) >= d->die_time && !d->is_dead)
+	{
+		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
+		phi->is_dead = 1;
+		if (!d->is_dead)
+			d->is_dead = 1;
+	}
+	//printf("%ld philo %d has eaten %d times\n", get_time(d->time_zero), phi->num, phi->nb_diner);
 	phi->is_dead = 1;
 	//usleep(6000000);
 	return (0);
@@ -137,7 +142,7 @@ int main(int argc, char **argv)
 			i++;
 		}
 		write(1, "bite", 4);
-		while (!is_dead(philos, &data) && !has_eaten_enough(philos))
+		while (!data.is_dead && !has_eaten_enough(philos))
 			i = 0;
 		while (i < data.nb_philo)
 		{
