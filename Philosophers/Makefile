@@ -11,7 +11,7 @@ OBJ = $(SRCS:.c=.o)
 
 NAME = philo
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re exe
 
 all: $(NAME)
 	@echo "$(NAME) made"
@@ -22,6 +22,7 @@ $(NAME): $(OBJ)
 %.o : %.c
 	@$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
 
+exe: all clean
 
 clean:
 	@rm -f */*.o

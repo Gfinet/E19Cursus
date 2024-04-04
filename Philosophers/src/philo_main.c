@@ -3,32 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   philo_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 21:42:42 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/04 02:05:41 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-long	trad_time(struct timeval tv)
-{
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-long	get_time(long start)
-{
-	struct timeval tv;
-
-	gettimeofday(&tv, 0);
-	return (trad_time(tv) - start);
-}
-
 static int	check_arg(char **arg)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (arg[i])
@@ -41,17 +28,15 @@ static int	check_arg(char **arg)
 			j++;
 		}
 		if (ft_atol(arg[i]) <= 0)
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-
-
-int is_dead(philo_t *phi, philo_data_t *data)
+int	is_dead(t_philo *phi, t_philo_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nb_philo)
@@ -63,9 +48,9 @@ int is_dead(philo_t *phi, philo_data_t *data)
 	return (1);
 }
 
-int	has_eaten_enough(philo_t *phi)
+int	has_eaten_enough(t_philo *phi)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (phi->arg->nb_diner < 0)
@@ -79,20 +64,22 @@ int	has_eaten_enough(philo_t *phi)
 	return (1);
 }
 
-void *philosophers(void *data)
+void	*philosophers(void *data)
 {
-	philo_data_t *d;
-	philo_t *phi;
+	t_philo_data	*d;
+	t_philo			*phi;
 
-	phi = (philo_t *)data;
+	phi = (t_philo *)data;
 	d = phi->arg;
 	phi->time = d->time_zero;
-	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0 || phi->nb_diner < d->nb_diner) && !d->is_dead) // && tv.tv_usec < 300000)
+	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0
+			|| phi->nb_diner < d->nb_diner) && !d->is_dead)
 	{
-		if (!d->forks[phi->l_fork])
+		if (!d->forks[phi->l_fork] && !d->forks[phi->r_fork])
+		{
 			take_fork_lr(phi, d, 0);
-		if (!d->forks[phi->r_fork])
 			take_fork_lr(phi, d, 1);
+		}
 		if (phi->l_hand && phi->r_hand)
 			eat_time(phi, d);
 		if (phi->l_hand)
@@ -102,58 +89,36 @@ void *philosophers(void *data)
 		if (phi->has_eat)
 			sleep_time(phi, d);
 	}
-	if (get_time(phi->time) >= d->die_time && !d->is_dead)
-	{
-		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
-		phi->is_dead = 1;
-		if (!d->is_dead)
-			d->is_dead = 1;
-	}
-	//printf("%ld philo %d has eaten %d times\n", get_time(d->time_zero), phi->num, phi->nb_diner);
-	phi->is_dead = 1;
-	//usleep(6000000);
+	die_time(phi, d);
 	return (0);
 }
 
-// ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int				i;
-	philo_data_t	data;
-	philo_t			*philos;
+	t_philo_data	data;
+	t_philo			*philos;
 
 	if (argc < 5)
 		return (printf("Not enough arg\n"), 0);
 	else
 	{
-		i = 0;
-		philos = 0;
 		if (!check_arg(argv + 1))
 			return (printf("Bad arg\n"), 0);
-		if (!data_init(&data, argc, argv + 1))
+		if (!init_all(&philos, &data, argc, argv))
 			return (0);
-		philos = philo_init(philos, &data);
-		if (!philos)
-			return (free(data.fork), free(data.fork), 0);
-		data.time_zero = get_time(0);
-		while (i < data.nb_philo)
-		{
+		i = -1;
+		while (++i < data.nb_philo)
 			pthread_create(&philos[i].thread, 0, philosophers, &philos[i]);
-			i++;
-		}
-		write(1, "bite", 4);
 		while (!data.is_dead && !has_eaten_enough(philos))
 			i = 0;
 		while (i < data.nb_philo)
-		{
 			if (!pthread_join(philos[i].thread, 0))
 				i++;
-		}
-		//free(philos);
-		// free(data.forks);
-		// free(data.fork);
+		free(philos);
+		free(data.forks);
+		free(data.fork);
 	}
-	
 	//system("leaks philo");
 	return (0);
 }

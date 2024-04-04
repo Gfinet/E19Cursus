@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 21:19:30 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/04 02:03:50 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,20 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-typedef struct philo_data_s
+typedef struct s_philo_data
 {
 	pthread_mutex_t		*fork;
-	int		*forks;
-	int		nb_diner;
-	int		is_dead;
-	long	nb_philo;
-	long	die_time;
-	long	sleep_time;
-	long	eat_time;
-	long	time_zero;
-}	philo_data_t;
+	int					*forks;
+	int					nb_diner;
+	int					is_dead;
+	long				nb_philo;
+	long				die_time;
+	long				sleep_time;
+	long				eat_time;
+	long				time_zero;
+}	t_philo_data;
 
-
-typedef struct philo_s
+typedef struct s_philo
 {
 	int					num;
 	int					l_fork;
@@ -45,27 +44,32 @@ typedef struct philo_s
 	int					is_dead;
 	long				time;
 	pthread_t			thread;
-	philo_data_t		*arg;
+	t_philo_data		*arg;
 	pthread_mutex_t		mutex;
-}	philo_t;
+}	t_philo;
 
 //main_philo.c
-long	get_time(long start);
-long	trad_time(struct timeval tv);
+int		is_dead(t_philo *phi, t_philo_data *data);
+int		has_eaten_enough(t_philo *phi);
+void	*philosophers(void *data);
 
 //philo_init.c
-int 	data_init(philo_data_t *d, int argc, char **arg);
-philo_t	*philo_init(philo_t *philos, philo_data_t *data);
-void	init_philo_fork(philo_t *phi, philo_data_t *d);
+int		data_init(t_philo_data *d, int argc, char **arg);
+t_philo	*philo_init(t_philo *philos, t_philo_data *data);
+void	init_philo_fork(t_philo *phi, t_philo_data *d);
+int		init_all(t_philo **philos, t_philo_data *data, int argc, char **argv);
 
 //utils.c
 long	ft_atol(const char *str);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
+long	get_time(long start);
+long	trad_time(struct timeval tv);
 
 //action.c
-void take_fork_lr(philo_t *phi, philo_data_t *data, int l_r);
-void eat_time(philo_t *phi, philo_data_t *d);
-void let_fork_lr(philo_t *phi, philo_data_t *data, int l_r);
-void sleep_time(philo_t *phi, philo_data_t *data);
+void	take_fork_lr(t_philo *phi, t_philo_data *data, int l_r);
+void	eat_time(t_philo *phi, t_philo_data *d);
+void	let_fork_lr(t_philo *phi, t_philo_data *data, int l_r);
+void	sleep_time(t_philo *phi, t_philo_data *data);
+void	die_time(t_philo *phi, t_philo_data *d);
 #endif

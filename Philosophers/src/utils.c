@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:15:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/03/20 17:56:38 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/04 01:49:25 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	check_isspace(char c)
 
 long	ft_atol(const char *str)
 {
-	int	i;
+	int		i;
 	long	res;
-	int	minus;
+	int		minus;
 
 	i = 0;
 	res = 0;
@@ -70,4 +70,12 @@ int	ft_atoi(const char *str)
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
+}
+
+long	get_time(long start)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, 0);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000 - start);
 }

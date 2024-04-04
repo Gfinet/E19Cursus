@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 21:42:56 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/04 02:14:45 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void take_fork_lr(philo_t *phi, philo_data_t *d, int l_r)
+void	take_fork_lr(t_philo *phi, t_philo_data *d, int l_r)
 {
-	int err;
-	int fork;
-	int *hand;
-	pthread_mutex_t *mut_fork;
+	int				err;
+	int				fork;
+	int				*hand;
+	pthread_mutex_t	*mut_fork;
 
 	hand = &phi->r_hand;
 	fork = phi->r_fork;
@@ -33,21 +33,15 @@ void take_fork_lr(philo_t *phi, philo_data_t *d, int l_r)
 	{
 		d->forks[fork] = 1;
 		*hand = 1;
-		//printf("%ld  %d has taken a fork", get_time(d->time_zero), phi->num);
-		if (!l_r)
-			printf("%ld  %d took L fork (%d)\n",get_time(d->time_zero), 
-				phi->num, fork);
-		else
-			printf("%ld  %d took R fork (%d)\n",get_time(d->time_zero), 
-				phi->num, fork);
+		printf("%ld  %d has taken a fork\n", get_time(d->time_zero), phi->num);
 	}
 }
 
-void let_fork_lr(philo_t *phi, philo_data_t *data, int l_r)
+void	let_fork_lr(t_philo *phi, t_philo_data *data, int l_r)
 {
-	int fork;
-	int *hand;
-	pthread_mutex_t *mut_fork;
+	int				fork;
+	int				*hand;
+	pthread_mutex_t	*mut_fork;
 
 	hand = &phi->r_hand;
 	fork = phi->r_fork;
@@ -61,45 +55,41 @@ void let_fork_lr(philo_t *phi, philo_data_t *data, int l_r)
 	data->forks[fork] = 0;
 	pthread_mutex_unlock(mut_fork);
 	*hand = 0;
-	if (!l_r && !data->is_dead)
-		printf("%ld  %d let L fork (%d)\n",get_time(data->time_zero), 
-			phi->num, fork);
-	else if (l_r && !data->is_dead)
-		printf("%ld  %d let R fork (%d)\n",get_time(data->time_zero), 
-			phi->num, fork);
 }
 
-void eat_time(philo_t *phi, philo_data_t *d)
+void	eat_time(t_philo *phi, t_philo_data *d)
 {
-	long time;
+	long	time;
 
 	phi->nb_diner++;
 	if (!d->is_dead)
-		printf("%ld  %d eat %d\n", get_time(d->time_zero), phi->num, phi->nb_diner);
-	phi->time = get_time(d->time_zero);
+		printf("%ld  %d is eating\n", get_time(d->time_zero), phi->num);
+	phi->time = get_time(0);
 	time = get_time(0);
 	while (get_time(0) < time + d->eat_time)
 		usleep(500);
 	phi->has_eat = 1;
 }
 
-void sleep_time(philo_t *phi, philo_data_t *data)
+void	sleep_time(t_philo *phi, t_philo_data *data)
 {
-	long time;
+	long	time;
+	
 	if (!data->is_dead)
-		printf("%ld  %d sleep\n", get_time(data->time_zero), phi->num);
+		printf("%ld  %d is sleeping\n", get_time(data->time_zero), phi->num);
 	time = get_time(0);
 	while (get_time(0) < time + data->sleep_time)
 		usleep(500);
 	if (!data->is_dead)
-		printf("%ld  %d think\n", get_time(data->time_zero), phi->num);
+		printf("%ld  %d is thinking\n", get_time(data->time_zero), phi->num);
 	phi->has_eat = 0;
 }
-
-/*
-void
+void	die_time(t_philo *phi, t_philo_data *d)
 {
-	while (time < start + ms)
-		usleep(100);
+	if (get_time(phi->time) >= d->die_time && !d->is_dead)
+	{
+		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
+		phi->is_dead = 1;
+		d->is_dead = 1;
+	}
 }
-*/
