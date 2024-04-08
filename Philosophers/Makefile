@@ -1,10 +1,11 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread #-g3 -fsanitize=thread
 
 SRCS = src/philo_main.c \
 		src/action.c	\
 		src/philo_init.c \
+		src/routine.c 	\
 		src/utils.c
 
 OBJ = $(SRCS:.c=.o)

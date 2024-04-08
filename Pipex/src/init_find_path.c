@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 15:42:03 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/08 19:16:36 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int	init_t_cmds(t_cmds *c, int argc, char **envp)
 	int	flag;
 
 	flag = 1;
+	c->path = 0;
+	c->arg = 0;
+	c->cmd_arg = 0;
 	while (*(envp) && flag)
 		flag = ft_strncmp(*(envp++), "PATH", 4);
 	if (flag)
@@ -56,6 +59,8 @@ t_mall	*set_t_mall(char *p, int f)
 	t_mall	*tmp;
 
 	tmp = malloc(sizeof(t_mall));
+	if (!tmp)
+		return (0);
 	tmp->f = f;
 	tmp->p = p;
 	return (tmp);
@@ -66,18 +71,18 @@ t_mall	*find_path(t_cmds *c, char *arg, int ind)
 	t_mall	*cmd_arg;
 	int		i;
 
-	i = 0;
+	i = -1;
 	cmd_arg = set_t_mall(0, 0);
 	if (!split_cmd(c, arg, ind) || !cmd_arg)
 		return (0);
-	cmd_arg->p = ft_strdup(arg);
 	cmd_arg->f = (access(cmd_arg->p, F_OK) == 0);
-	while (c->path[i++] && (access(cmd_arg->p, F_OK) != 0
+	while (c->path[++i] && (access(cmd_arg->p, F_OK) != 0
 			|| access(cmd_arg->p, X_OK)))
 	{
+		//ft_printf("%s\n", c->path[i]);
 		free(cmd_arg->p);
 		cmd_arg->p = ft_strjoin(c->path[i], "/");
-		if (!cmd_arg)
+		if (!cmd_arg->p)
 			return (cmd_arg);
 		cmd_arg->p = ft_stradd(cmd_arg->p, c->arg[ind][0]);
 		if (!cmd_arg->p)
@@ -105,7 +110,7 @@ int	find_all_path(t_cmds *c, char **argv, int nb_pr)
 			return (-5);
 		if (!tmp->p && !tmp->f)
 			return (-5);
-		if (tmp->p && !tmp->f)
+		if ((tmp->p && !tmp->f) || (!tmp->p && tmp->f))
 			flag = 0;
 		c->cmd_arg[i] = tmp->p;
 		free(tmp);

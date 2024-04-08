@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:52:05 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 15:45:31 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:53:24 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	commands(t_cmds *c, int r_w_fd[], char **envp)
 
 	proc = malloc(sizeof(pid_t) * c->nb_pr);
 	if (!proc)
-		return (0);
+		return (-5);
 	pipex(c, proc, r_w_fd, envp);
 	i = 0;
 	while (i < c->nb_pr)

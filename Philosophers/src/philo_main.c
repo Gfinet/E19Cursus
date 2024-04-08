@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/05 22:54:21 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:56:34 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,31 @@ void	free_all_philo(t_philo *philos, t_philo_data *d)
 		free(philos);
 }
 
+void	*philosophers(void *data)
+{
+	t_philo_data	*d;
+	t_philo			*phi;
+
+	phi = (t_philo *)data;
+	d = phi->arg;
+	phi->time = d->time_zero;
+	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0
+			|| phi->nb_diner < d->nb_diner) && !d->is_dead)
+	{
+		choose_forks(phi);
+		if (phi->l_hand && phi->r_hand)
+			eat_time(phi, d);
+		if (phi->l_hand)
+			let_fork_lr(phi, d, 0);
+		if (phi->r_hand)
+			let_fork_lr(phi, d, 1);
+		if (phi->has_eat)
+			sleep_time(phi, d);
+	}
+	die_time(phi, d);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int				i;
@@ -73,10 +98,9 @@ int	main(int argc, char **argv)
 		while (i < data.nb_philo)
 			if (!pthread_join(philos[i].thread, 0))
 				i++;
-		free_all_philo(&data, philos);
+		free_all_philo(philos, &data);
 	}
 	else
 		return (printf("Not enough arg\n"), 0);
-	//system("leaks philo");
 	return (0);
 }

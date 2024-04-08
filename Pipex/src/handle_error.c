@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 20:16:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/02 20:35:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/08 17:52:45 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	send_error(int flag)
 	else if (flag == -7)
 	{
 		errno = 5;
-		perror("Not enough argument");
+		perror("bad argument");
 	}
 	else if (flag == -8)
 		perror("access error");
