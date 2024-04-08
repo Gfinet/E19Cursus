@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:26:01 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/05 18:46:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:19:08 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static pid_t launch_pipex(char **arg, char **envp)
 	proc = fork();
 	if (proc == 0)
 	{
-		ft_printf("-----./pipex %s %s ",arg[1], arg[2]); 
+		ft_printf("----- ./pipex %s %s ",arg[1], arg[2]); 
 		ft_printf("%s > ", arg[3]);
 		ft_printf("%s-----\n", arg[4]);
 		execve(arg[0], arg, envp);
@@ -50,10 +50,11 @@ int main(int argc, char **argv, char **envp)
 	nb_cmd = argc - 2;
 	nb_proc = nb_cmd * nb_cmd + 1;
 
-	cmds = malloc(sizeof(char *) * (nb_cmd + 3));
+	cmds = malloc(sizeof(char *) * (nb_cmd + 4));
 	cmds[0] = ft_strdup("correction.sh");
-	cmds[nb_cmd + 1] = ft_strdup(ft_itoa(nb_cmd));
-	cmds[nb_cmd + 2] = NULL;
+	cmds[nb_cmd + 1] = ft_strdup(argv[1]);
+	cmds[nb_cmd + 2] = ft_strdup(ft_itoa(nb_cmd));
+	cmds[nb_cmd + 3] = NULL;
 	i = 1;
 	mkdir("./test", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	open("./test/no_perm_in_c", O_CREAT, 0000);
@@ -126,7 +127,7 @@ int main(int argc, char **argv, char **envp)
 	free(arg);
 	free(proc);
 	i = 0;
-	while (i < nb_cmd + 3)
+	while (i < nb_cmd + 4)
 	{
 		free(cmds[i]);
 		i++;
