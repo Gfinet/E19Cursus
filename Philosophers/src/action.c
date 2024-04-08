@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/04 02:14:45 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/05 22:43:37 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,35 +61,44 @@ void	eat_time(t_philo *phi, t_philo_data *d)
 {
 	long	time;
 
+	pthread_mutex_lock(&d->dead);
 	phi->nb_diner++;
 	if (!d->is_dead)
 		printf("%ld  %d is eating\n", get_time(d->time_zero), phi->num);
+	pthread_mutex_unlock(&d->dead);
+	phi->has_eat = 1;
 	phi->time = get_time(0);
 	time = get_time(0);
 	while (get_time(0) < time + d->eat_time)
 		usleep(500);
-	phi->has_eat = 1;
 }
 
 void	sleep_time(t_philo *phi, t_philo_data *data)
 {
 	long	time;
-	
+
+	pthread_mutex_lock(&data->dead);
+	phi->has_eat = 0;
 	if (!data->is_dead)
 		printf("%ld  %d is sleeping\n", get_time(data->time_zero), phi->num);
+	pthread_mutex_unlock(&data->dead);
 	time = get_time(0);
 	while (get_time(0) < time + data->sleep_time)
 		usleep(500);
+	pthread_mutex_lock(&data->dead);
 	if (!data->is_dead)
 		printf("%ld  %d is thinking\n", get_time(data->time_zero), phi->num);
-	phi->has_eat = 0;
+	pthread_mutex_unlock(&data->dead);
 }
+
 void	die_time(t_philo *phi, t_philo_data *d)
 {
 	if (get_time(phi->time) >= d->die_time && !d->is_dead)
 	{
 		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
+		pthread_mutex_lock(&(d->dead));
 		phi->is_dead = 1;
 		d->is_dead = 1;
+		pthread_mutex_unlock(&(d->dead));
 	}
 }

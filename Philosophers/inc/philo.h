@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/04 02:03:50 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/05 22:52:35 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@
 # include <unistd.h>
 # include <sys/time.h>
 
+typedef struct s_philo		t_philo;
+typedef struct s_philo_data	t_philo_data;
+
 typedef struct s_philo_data
 {
 	pthread_mutex_t		*fork;
+	pthread_mutex_t		dead;
+	t_philo				*philos;
 	int					*forks;
 	int					nb_diner;
 	int					is_dead;
@@ -35,6 +40,7 @@ typedef struct s_philo_data
 typedef struct s_philo
 {
 	int					num;
+	int					ind;
 	int					l_fork;
 	int					r_fork;
 	int					l_hand;
@@ -45,7 +51,6 @@ typedef struct s_philo
 	long				time;
 	pthread_t			thread;
 	t_philo_data		*arg;
-	pthread_mutex_t		mutex;
 }	t_philo;
 
 //main_philo.c
@@ -56,7 +61,7 @@ void	*philosophers(void *data);
 //philo_init.c
 int		data_init(t_philo_data *d, int argc, char **arg);
 t_philo	*philo_init(t_philo *philos, t_philo_data *data);
-void	init_philo_fork(t_philo *phi, t_philo_data *d);
+void	init_philo_fork(t_philo *phi, t_philo_data *d, int i);
 int		init_all(t_philo **philos, t_philo_data *data, int argc, char **argv);
 
 //utils.c

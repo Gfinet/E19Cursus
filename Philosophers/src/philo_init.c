@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/04 02:04:04 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/05 22:36:03 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 	if (!philos)
 		return (free(data->fork), free(data->forks), NULL);
 	i = 0;
+	pthread_mutex_init(&data->dead, 0);
 	while (i < data->nb_philo)
 	{
 		data->forks[i] = 0;
+		philos[i].ind = i;
 		philos[i].arg = data;
 		philos[i].num = i + 1;
 		philos[i].l_hand = 0;
@@ -49,15 +51,15 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 		philos[i].has_eat = 0;
 		philos[i].is_dead = 0;
 		philos[i].nb_diner = 0;
-		pthread_mutex_init(&data->fork[i], 0);
-		init_philo_fork(&philos[i], data);
+		init_philo_fork(&philos[i], data, i);
 		i++;
 	}
 	return (philos);
 }
 
-void	init_philo_fork(t_philo *phi, t_philo_data *d)
+void	init_philo_fork(t_philo *phi, t_philo_data *d, int i)
 {
+	pthread_mutex_init(&d->fork[i], 0);
 	if (phi->num == 1)
 		phi->l_fork = d->nb_philo - 1;
 	else
@@ -76,5 +78,6 @@ int	init_all(t_philo **philos, t_philo_data *data, int argc, char **argv)
 	if (!philos)
 		return (free(data->fork), free(data->fork), 0);
 	data->time_zero = get_time(0);
+	data->philos = *philos;
 	return (1);
 }
