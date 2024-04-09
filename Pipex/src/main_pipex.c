@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:23:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/08 18:08:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 15:25:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	free_t_cmd(t_cmds *c)
 			free(c->cmd_arg[i++]);
 	if (c->cmd_arg)
 		free(c->cmd_arg);
-	i = 0;
-	while (i < c->nb_pr && c->arg && c->arg[i])
+	while (--i >= 0 && c->arg && c->arg[i])
 	{
 		if (c->arg[i])
 		{
@@ -41,13 +40,12 @@ void	free_t_cmd(t_cmds *c)
 			while (c->arg[i][j])
 				free(c->arg[i][j++]);
 		}
-		free(c->arg[i++]);
+		free(c->arg[i]);
 	}
 	if (c->arg)
 		free(c->arg);
-	i = 0;
-	while (c->path && c->path[i])
-		free(c->path[i++]);
+	while (c->path && c->path[++i])
+		free(c->path[i]);
 	if (c->path)
 		free(c->path);
 }
@@ -96,9 +94,4 @@ Pipex
 4) Recuperer output de la commande
 5) Envoyer output de commande1 sur commande 2
 6) emvoyer output de commande 2 sur file 2
-
-int j = 0;
-		while (c->arg[i][j])
-			{ft_printf("com %d ", i);ft_printf("%s\n", c->arg[i][j++]);}
-
 */

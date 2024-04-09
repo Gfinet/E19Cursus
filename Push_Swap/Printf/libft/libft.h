@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <unistd.h>
 # include <stdlib.h>
+# include "GNL/get_next_line_bonus.h"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

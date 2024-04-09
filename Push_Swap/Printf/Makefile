@@ -9,9 +9,11 @@ SRCS = ft_printf.c \
 	ft_plst.c \
 	ft_modif.c
 
-LIB = $(LIBFT)libft.a
+LIBA = libft.a
 
 LIBFT = ./libft/
+
+LIB = $(LIBFT)$(LIBA)
 
 OBJ = $(SRCS:.c=.o)
 
@@ -34,10 +36,12 @@ libft.a:
 	mv $(LIB) $(NAME)
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ)
 	make -C $(LIBFT) clean
+
 fclean: clean
-	rm -f *.a
+	mv $(LIBA) $(LIBFT)
+	rm -f $(NAME)
 	make -C $(LIBFT) fclean
 	
 

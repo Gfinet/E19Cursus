@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:44:34 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/08 19:16:36 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 15:11:14 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ t_mall	*find_path(t_cmds *c, char *arg, int ind)
 	while (c->path[++i] && (access(cmd_arg->p, F_OK) != 0
 			|| access(cmd_arg->p, X_OK)))
 	{
-		//ft_printf("%s\n", c->path[i]);
 		free(cmd_arg->p);
 		cmd_arg->p = ft_strjoin(c->path[i], "/");
 		if (!cmd_arg->p)
