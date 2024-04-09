@@ -6,14 +6,13 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:52:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 03:19:16 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 09:15:20 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
 #include "get_next_line_bonus.h"
 
-static int	is_number(char *s)
+int	is_number(char *s)
 {
 	int	len;
 	int	i;
@@ -25,30 +24,6 @@ static int	is_number(char *s)
 	while (i < len)
 	{
 		if (!ft_isdigit(s[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_input(char **s, int n_arg)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (s[i])
-	{
-		if (ft_strlen(s[i]) != ft_strlen(ft_itoa(ft_atoi(s[i]))))
-			return (0);
-		j = i + 1;
-		while (j < n_arg && s[j])
-		{
-			if (ft_atoi(s[i]) == ft_atoi(s[j]))
-				return (0);
-			j++;
-		}
-		if (!is_number(s[i]))
 			return (0);
 		i++;
 	}
@@ -100,7 +75,7 @@ void	make_move(t_nlst_head *a, t_nlst_head *b, char *move)
 }
 
 //ft_printf("%d", ft_strlen(move));
-static int	emule_ps_answer(char **arg, int nb_arg)
+int	emule_ps_answer(char **arg, int nb_arg)
 {
 	t_nlst_head	*a;
 	t_nlst_head	*b;

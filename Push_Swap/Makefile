@@ -19,6 +19,7 @@ SRCS = 	src/push_swap.c \
 OBJ = $(SRCS:.c=.o)
 
 BONUS_SRC = bonus/checker_bonus.c \
+			bonus/checker2_bonus.c \
 			bonus/get_next_line_bonus.c \
 			bonus/get_next_line_utils_bonus.c
 
