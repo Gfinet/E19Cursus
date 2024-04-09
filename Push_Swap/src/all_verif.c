@@ -6,11 +6,11 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:58:42 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:44:43 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:13:26 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 //Check if the pile is sorted from lower to bigger or bigger to lower with a_b
 //0 : lower to bigger / 1 : bigger to lower

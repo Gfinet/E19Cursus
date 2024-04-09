@@ -6,11 +6,11 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:27:29 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:55:22 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:13:46 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 //Push the first node from a to b and print pa or pb with a_b
 //0 : pa / 1 : pb 

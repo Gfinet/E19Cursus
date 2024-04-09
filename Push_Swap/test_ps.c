@@ -6,11 +6,11 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 10:23:16 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:14:23 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "inc/push_swap.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

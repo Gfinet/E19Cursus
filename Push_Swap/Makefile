@@ -2,33 +2,32 @@ CC = GCC
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
-MAIN = main.c
+MAIN = src/main.c
 
 MAIN_OBJ =$(MAIN:.c=.o)
 
-SRCS = 	push_swap.c \
-		p_s_r.c \
-		nlst.c \
-		nlst2.c \
-		nlst3.c \
-		ps_sort.c \
-		all_verif.c \
-		make_less_move.c \
-		compute_best_node.c \
-		guess_second.c
+SRCS = 	src/push_swap.c \
+		src/p_s_r.c \
+		src/nlst.c \
+		src/nlst2.c \
+		src/nlst3.c \
+		src/ps_sort.c \
+		src/all_verif.c \
+		src/make_less_move.c \
+		src/compute_best_node.c 
 
 OBJ = $(SRCS:.c=.o)
 
-BONUS_SRC = checker.c \
-			get_next_line.c \
-			get_next_line_utils.c
+BONUS_SRC = bonus/checker_bonus.c \
+			bonus/get_next_line_bonus.c \
+			bonus/get_next_line_utils_bonus.c
 
 
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
 
 HEAD = push_swap.h
 
-LIB = $(LIBFT)libftprintf.a
+LIB = libftprintf.a
 
 LIBFT = ./Printf/
 
@@ -38,7 +37,7 @@ NAME = push_swap
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) $(MAIN) libftprintf.a
+$(NAME): $(OBJ) $(MAIN) $(LIB)
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c
@@ -46,19 +45,20 @@ $(NAME): $(OBJ) $(MAIN) libftprintf.a
 
 libftprintf.a: 
 	make -C $(LIBFT)
-	cp $(LIB) .
-	mv $(LIB) $(NAME)
+	cp $(LIBFT)$(LIB) .
+	mv $(LIBFT)$(LIB) $(NAME)
 
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ)
+	rm -f $(BONUS_OBJ)
 	make -C $(LIBFT) clean
 fclean: clean
-	rm -f *.a
+	rm -f $(LIB)
 	make -C $(LIBFT) fclean
 	
 
 re: fclean all
 
-bonus: $(BONUS_OBJ) $(OBJ) libftprintf.a
+bonus: $(BONUS_OBJ) $(OBJ) $(LIB)
 	$(CC) $(CFLAGS) $^ -o checker

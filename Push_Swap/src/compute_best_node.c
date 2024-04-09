@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   compute_best_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 20:51:42 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/24 20:23:45 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:14:09 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 //This function checks if the content of the node cur is lower or bigger than
 //every node in b. If it is, it return the place of the lower or bigger in b.

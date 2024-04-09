@@ -6,11 +6,11 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:46:56 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 10:11:12 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:13:38 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	ft_nlstadd_back(t_nlst_head *lst, t_nlst *new)
 {

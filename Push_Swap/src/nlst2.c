@@ -6,11 +6,11 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 22:17:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/16 23:48:22 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:13:40 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 //Function wich return the place of the node wich content is cont.
 

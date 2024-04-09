@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:07:21 by gfinet            #+#    #+#             */
-/*   Updated: 2024/01/31 14:40:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:13:50 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 //optionnal printing function of a or b because of a_b
 //0 : a / 1 : b

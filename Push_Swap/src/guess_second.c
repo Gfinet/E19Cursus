@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   guess_second.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 22:09:33 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/25 19:39:51 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:13:28 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static t_nlst	*init_p(t_nlst_head *l, t_nlst *cur, int a_b)
 {
