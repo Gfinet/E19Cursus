@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/01 23:16:48 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 10:15:42 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_option(void)
 	ft_printf("No valid arg provided\n");
 	ft_printf("Please try the followings :\n");
 	ft_printf("(if no MAX_IT given, set automatically to 50)\n");
-	ft_printf("julia => ./fractol MAX_IT\n");
+	ft_printf("julia => ./fractol 0 MAX_IT\n");
 	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
 }
 
