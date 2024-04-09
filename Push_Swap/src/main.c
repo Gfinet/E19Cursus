@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 03:13:31 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:57:33 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ static int	is_number(char *s)
 
 int	check_input(char **s, int n_arg)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*tmp;
 
 	i = 0;
 	while (s[i])
 	{
-		if (ft_strlen(s[i]) != ft_strlen(ft_itoa(ft_atoi(s[i]))))
+		tmp = ft_itoa(ft_atoi(s[i]));
+		if (ft_strlen(s[i]) != ft_strlen(tmp))
 			return (0);
+		free(tmp);
 		j = i + 1;
 		while (j < n_arg && s[j])
 		{
