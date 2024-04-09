@@ -24,11 +24,11 @@ endif
 .PHONY: all clean fclean re
 
 all: $(NAME)
-	@echo "fractol made"
+	
 
 $(NAME): $(OBJ) libftprintf.a mlx/libmlx.a
 	@$(CC) $(CFLAGS) $^ -framework OpenGL -framework AppKit -o $(NAME)
-
+	@echo "fractol made"
 %.o : %.c
 	@$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
 
