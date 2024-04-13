@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 03:14:45 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 16:41:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ void	rot_to_first(t_nlst_head *a, int num, int n, int a_b);
 
 void	opti_push(t_nlst_head *a, t_nlst_head *b, int a_b);
 void	sort_3(t_nlst_head *a, int a_b);
-void	print_list(t_nlst_head *a, int a_b); ///
+void	pre_sort(t_nlst_head *a, t_nlst_head *b);
+void	print_list(t_nlst_head *a, int a_b);
 
+int 	modif_best(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b);
+int		get_next_place(t_nlst_head *b, t_nlst *cur, int a_b);
 int		nlst_get_place(t_nlst_head *a, int cont);
 int		nlst_get_low_big(t_nlst_head *a, int a_b);
 int		nlst_compute_moves(t_nlst_head *a);

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 18:31:57 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 15:12:14 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int	check_input(char **s, int n_arg)
 	int		i;
 	int		j;
 	char	*tmp;
+	int		flag;
 
 	i = 0;
 	while (s[i])
 	{
-		tmp = ft_itoa(ft_atoi(s[i]));
-		if (ft_strlen(s[i]) != ft_strlen(tmp))
+		flag = ft_atoi(s[i]);
+		tmp = ft_itoa(flag);
+		if (!flag && ft_strlen(s[i]) != ft_strlen(tmp) && !is_number(s[i]))
 			return (0);
 		free(tmp);
 		j = i + 1;
@@ -92,6 +94,7 @@ int	main(int argc, char **argv)
 	nums = 0;
 	if (argc < 2 || !argv[1][0])
 		return (0);
+	printf("%d\n", ft_atoi("000"));
 	if (!parse_arg(argc, argv, &nums, &nb_elem) || !check_input(nums, nb_elem))
 		write(2, "Error\n", 6);
 	else

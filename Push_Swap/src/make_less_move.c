@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_less_move.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 00:07:19 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 03:13:33 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 16:39:36 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,16 @@ int	find_less_move(t_nlst_head *a, t_nlst_head *b, int a_b)
 		best = ft_nlstsize(b) * ft_nlstsize(b);
 	best_node = a->first->content;
 	cur = a->first;
-	while (cur)
+	while (cur && best != 0 && best != 1)
 	{
 		comp_moves = compute_moves(a, b, cur, a_b);
-		if (comp_moves < best)
+		if (comp_moves < best
+			|| (comp_moves == best && modif_best(a, b, cur, a_b)))
 		{
 			best = comp_moves;
 			best_node = cur->content;
 		}
 		cur = cur->next;
-		if (best == 0 || best == 1)
-			break ;
 	}
 	return (best_node);
 }

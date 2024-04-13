@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_ps.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 03:14:23 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 17:38:32 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int free_all(char **arg, int len)
 {
 	int i = 0;
 	
-	while (i < len)
+	while (i <= len)
 		free(arg[i++]);
 	free(arg);
 	return (0);
@@ -45,7 +45,7 @@ static int in_list(int num, char **arg, int range)
 	int i;
 
 	i = 0;
-	while (arg[i] && i < range)
+	while (arg[i] && i <= range)
 	{
 		if (ft_atoi(arg[i]) == num)
 			return (1);
@@ -81,18 +81,23 @@ static int make_rand_arg(int range, char **arg, int set)
 {
 	int num;
 	int i;
+	char *tmp;
 
 	i = 0;
 	srand(set * time(0));
 	while (i < range)
 	{
-		num = rand() % range +1;
+		num = rand() % range + 1;
 		while (in_list(num, arg, i))
-			num = rand() % range +1;
-		arg[i] = malloc(ft_strlen(ft_itoa(num)));
-		if (!arg[i])
+			num = rand() % range + 1;
+		tmp = ft_itoa(num);
+		if (!tmp)
 			return (free_all(arg, i));
+		arg[i] = malloc(ft_strlen(tmp));
+		if (!arg[i])
+			return (free(tmp), free_all(arg, i));
 		arg[i] = ft_itoa(num);
+		free(tmp);
 		i++;
 	}
 	return (1);
@@ -112,7 +117,7 @@ int main(int argc, char **argv)
 	int range;
 	int nb_test;
 	int *moves;
-	int i = 0;
+	int i = -1;
 	int total = 0;
 	int biggest = 0;
 	int biggest_moves = 0;
@@ -138,11 +143,13 @@ int main(int argc, char **argv)
 		nb_test = ft_atoi(argv[1]);
 		moves = malloc(sizeof(int) * nb_test);
 		arg = malloc(sizeof(char *) * range);
+		while (++i < range)
+			arg[i] = 0;
 		big_arg = malloc(sizeof(char *) * range);
 		set_arg_null(arg, range);
 		set_arg_null(big_arg,range);
 		set_big_arg(big_arg, range);
-		write(1, "bite\n", 5);
+		i = 0;
 		while (i < nb_test)
 		{
 			if (!make_rand_arg(range, arg, i))\
@@ -171,10 +178,11 @@ int main(int argc, char **argv)
 			moves[i] = res->one;
 			total += moves[i];
 			free_all(arg, range);
+			free(res);
 			arg = malloc(sizeof(char *) * range);
 			i++;
 		}
-		free(arg);
+		free_all(arg, range);
 		printf("--- for %i numbers, %i tests ---\n\n", range, nb_test);
 		diff = time(NULL) - diff;
 		print_time(diff);
@@ -185,7 +193,9 @@ int main(int argc, char **argv)
 			printf("\n%d/%d test outlimit = %d%%", out_lim, nb_test, (100*out_lim/nb_test));
 		print_num(big_arg, range);
 		res = push_swap(big_arg, range);
-		free_all(big_arg,range);
+		free_all(big_arg, range);
+		free(moves);
+		system("leaks test");
 	}
 	return (0);
 }

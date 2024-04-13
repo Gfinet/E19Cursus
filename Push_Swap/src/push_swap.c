@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:21:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 03:13:54 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 16:38:04 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_2_int	*push_swap(char **arg, int nb_arg)
 		return (res);
 	a->lower = nlst_get_low_big(a, 0);
 	if (ft_nlstsize(a) > 5)
-		opti_push(a, b, 0);
+		opti_push(a, b, 0); //, ft_nlstsize(a) );
 	else if (ft_nlstsize(a) == 3)
 	{
 		sort_3(a, 0);
