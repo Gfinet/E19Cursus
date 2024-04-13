@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:21:35 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/13 17:38:32 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 20:22:16 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ static int free_all(char **arg, int len)
 {
 	int i = 0;
 	
-	while (i <= len)
+	while (i < len && arg[i])
 		free(arg[i++]);
-	free(arg);
+	if (arg)
+		free(arg);
 	return (0);
 }
 
@@ -45,7 +46,7 @@ static int in_list(int num, char **arg, int range)
 	int i;
 
 	i = 0;
-	while (arg[i] && i <= range)
+	while (arg[i] && i < range)
 	{
 		if (ft_atoi(arg[i]) == num)
 			return (1);
@@ -117,7 +118,7 @@ int main(int argc, char **argv)
 	int range;
 	int nb_test;
 	int *moves;
-	int i = -1;
+	int i = 0;
 	int total = 0;
 	int biggest = 0;
 	int biggest_moves = 0;
@@ -143,8 +144,6 @@ int main(int argc, char **argv)
 		nb_test = ft_atoi(argv[1]);
 		moves = malloc(sizeof(int) * nb_test);
 		arg = malloc(sizeof(char *) * range);
-		while (++i < range)
-			arg[i] = 0;
 		big_arg = malloc(sizeof(char *) * range);
 		set_arg_null(arg, range);
 		set_arg_null(big_arg,range);
@@ -182,20 +181,20 @@ int main(int argc, char **argv)
 			arg = malloc(sizeof(char *) * range);
 			i++;
 		}
-		free_all(arg, range);
+		write(1, "yo\n", 3);
 		printf("--- for %i numbers, %i tests ---\n\n", range, nb_test);
 		diff = time(NULL) - diff;
 		print_time(diff);
 		printf("moyenne moves : %i\n", total / nb_test);
 		printf("biggest iteration: %i\n", biggest);
 		printf("moves : %d\n\n", biggest_moves);
-		if (argc == 4)
-			printf("\n%d/%d test outlimit = %d%%", out_lim, nb_test, (100*out_lim/nb_test));
 		print_num(big_arg, range);
 		res = push_swap(big_arg, range);
+		if (argc == 4)
+			printf("\n%d/%d test outlimit = %d%%", out_lim, nb_test, (100*out_lim/nb_test));
 		free_all(big_arg, range);
 		free(moves);
-		system("leaks test");
+		//system("leaks test");
 	}
 	return (0);
 }

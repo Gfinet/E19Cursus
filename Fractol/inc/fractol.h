@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/03/15 23:48:12 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 18:26:23 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_zoom
 	double			decal;
 	int				julia_mandel;
 	int				move;
-	int				zoom;
 	unsigned int	color;
 	unsigned int	b_color;
 }	t_zoom;

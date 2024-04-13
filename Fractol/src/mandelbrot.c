@@ -95,8 +95,8 @@ void	draw_fract(t_fract *f)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			f->z.x = (double)(2 * (x - f->start_x)) / (f->coef);
-			f->z.y = (double)(2 * (y - f->start_y)) / (f->coef);
+			f->z.x = (double) (x - f->start_x) * (f->coef);
+			f->z.y = (double) (y - f->start_y) * (f->coef);
 			if (f->mv.julia_mandel)
 				it = compute_mand(f);
 			else

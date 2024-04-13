@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_event.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/09 10:15:42 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/13 19:43:45 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	mouse_event(int mcode, int x, int y, t_fract *f)
 	int	dif_x;
 	int	dif_y;
 
-	dif_x = f->start_x - x / 2;
-	dif_y = f->start_y - y / 2;
+	dif_x = (f->start_x - x) / 2;
+	dif_y = (f->start_y - y) / 2;
 	dif_x = (dif_x * (dif_x > 0) - (dif_x * (dif_x < 0)));
 	dif_y = (dif_y * (dif_y > 0) - (dif_y * (dif_y < 0)));
 	set_dec_move(f);
@@ -108,9 +108,9 @@ int	mouse_event(int mcode, int x, int y, t_fract *f)
 	if (mcode == M_UP || mcode == M_DW)
 	{
 		if (mcode == M_UP)
-			f->coef += f->mv.zoom;
+			f->coef /= 1.1;
 		if (mcode == M_DW)
-			f->coef -= f->mv.zoom;
+			f->coef *= 1.1;
 		draw_fract(f);
 	}
 	return (1);
