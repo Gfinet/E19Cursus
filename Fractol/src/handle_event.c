@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 20:54:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 21:11:16 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	print_option(void)
 	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
 }
 
-//system("leaks fractol");
 int	esc_handle(t_fract *f)
 {
 	if (f->img.img)
