@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 20:50:21 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:54:33 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	mouse_event(int mcode, int x, int y, t_fract *f)
 			zoom_in(x, y, f);
 		if (mcode == M_DW)
 			zoom_out(x, y, f);
-	draw_fract(f);
+		draw_fract(f);
 	}
 	return (1);
 }

@@ -94,19 +94,13 @@ void	draw_fract(t_fract *f)
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
-			f->z.x = (double) (x - f->start_x) * (f->coef);
-			f->z.y = (double) (y - f->start_y) * (f->coef);
+			f->z.x = (double)(x - f->start_x) * (f->coef);
+			f->z.y = (double)(y - f->start_y) * (f->coef);
 			if (f->mv.julia_mandel)
 				it = compute_mand(f);
 			else
 				it = compute_julia(f);
 			set_color(f, x, y, it);
-			// if (f->z.y == 0 && (f->z.x == 0 || (f->z.x < 1.001 && f->z.x > 0.995)))
-			// 	printf("x = %d\ny = %d\n%f\nz.x = %f\nz.y = %f\nccoef = %f\n\n",
-			// 		 x, y, f->z.x, f->z.x, f->z.y, f->coef);
-			if ((y == WIN_HEIGHT / 2 && (x + 5 > (WIN_WIDTH / 2 )) && (x - 5 < (WIN_WIDTH / 2 )))
-				|| (x == WIN_WIDTH / 2 && ((y + 5 > (WIN_HEIGHT / 2 )) && (y - 5 < (WIN_HEIGHT / 2 )))))
-				my_mlx_pixel_put(&f->img, x, y, 0x00000000);
 		}
 	}
 	mlx_put_image_to_window(f->mlx, f->win, f->img.img, 0, 0);
