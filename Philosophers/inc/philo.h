@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/08 14:56:29 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 21:36:53 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		data_init(t_philo_data *d, int argc, char **arg);
 t_philo	*philo_init(t_philo *philos, t_philo_data *data);
 void	init_philo_fork(t_philo *phi, t_philo_data *d, int i);
 int		init_all(t_philo **philos, t_philo_data *data, int argc, char **argv);
+int 	is_philo_dead(t_philo_data *d);
 
 //routine.c
 void	choose_forks(t_philo *phi);

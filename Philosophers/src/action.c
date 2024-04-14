@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/05 22:43:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 21:40:33 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	take_fork_lr(t_philo *phi, t_philo_data *d, int l_r)
 	int				*hand;
 	pthread_mutex_t	*mut_fork;
 
+	if (get_time(phi->time) >= d->die_time)
+		return ;
 	hand = &phi->r_hand;
 	fork = phi->r_fork;
 	mut_fork = &d->fork[phi->r_fork];
@@ -93,7 +95,7 @@ void	sleep_time(t_philo *phi, t_philo_data *data)
 
 void	die_time(t_philo *phi, t_philo_data *d)
 {
-	if (get_time(phi->time) >= d->die_time && !d->is_dead)
+	if (get_time(phi->time) >= d->die_time)
 	{
 		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
 		pthread_mutex_lock(&(d->dead));

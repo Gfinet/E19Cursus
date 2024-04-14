@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/08 14:56:34 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 21:36:41 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	*philosophers(void *data)
 	d = phi->arg;
 	phi->time = d->time_zero;
 	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0
-			|| phi->nb_diner < d->nb_diner) && !d->is_dead)
+			|| phi->nb_diner < d->nb_diner) && !is_philo_dead(d))
 	{
 		choose_forks(phi);
 		if (phi->l_hand && phi->r_hand)

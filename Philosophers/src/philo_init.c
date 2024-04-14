@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/05 22:36:03 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 21:36:35 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,14 @@ int	init_all(t_philo **philos, t_philo_data *data, int argc, char **argv)
 	data->time_zero = get_time(0);
 	data->philos = *philos;
 	return (1);
+}
+
+int is_philo_dead(t_philo_data *d)
+{
+	int	dead;
+
+	pthread_mutex_lock(&d->dead);
+	dead = d->is_dead;
+	pthread_mutex_unlock(&d->dead);
+	return (dead);
 }

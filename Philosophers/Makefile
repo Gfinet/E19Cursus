@@ -1,6 +1,6 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror -pthread #-g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
 
 SRCS = src/philo_main.c \
 		src/action.c	\
@@ -15,10 +15,10 @@ NAME = philo
 .PHONY: all clean fclean re exe
 
 all: $(NAME)
-	@echo "$(NAME) made"
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -framework OpenGL -framework AppKit -o $(NAME)
+	@echo "$(NAME) made"
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
@@ -26,7 +26,7 @@ $(NAME): $(OBJ)
 exe: all clean
 
 clean:
-	@rm -f */*.o
+	@rm -f $(OBJ)
 	@echo "clean done"
 
 fclean: clean
