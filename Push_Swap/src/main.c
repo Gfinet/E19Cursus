@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 19:57:58 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:57:44 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static int	is_number(char *s)
 	return (1);
 }
 
-int equal_int(char *s1, char *s2)
+int	equal_int(char *s1, char *s2)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;

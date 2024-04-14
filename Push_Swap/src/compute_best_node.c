@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 20:51:42 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/13 16:50:58 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:57:24 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,8 @@ int	check_all_bigger_lower(t_nlst_head *b, int cur, int a_b)
 	return (-1);
 }
 
-//This function modifies the value of count depending of the position
-//of the node and the futur next node it should take place before.
-
-// static int	count_modif(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int count)
-// {
-// 	count = (ft_nlstsize(b) != count) * count;
-// 	count += !count;
-// 	if (count > ft_nlstsize(b) / 2)
-// 		count = ft_nlstsize(b) - count;
-// 	if (nlst_get_place(a, cur->content) < ft_nlstsize(a) / 2)
-// 		count += nlst_get_place(a, cur->content) - 1;
-// 	else
-// 		count += ft_nlstsize(a) - nlst_get_place(a, cur->content) + 1;
-// 	return (count);
-// }
-
 //This function will return a stop value for the compute move function.
 //It stops if the correct interval is found for the current node.
-
 static int	check_stop(t_nlst *prev, t_nlst *cur, t_nlst *tmp, int a_b)
 {
 	if (!a_b)
@@ -120,12 +103,12 @@ int	get_next_place(t_nlst_head *b, t_nlst *cur, int a_b)
 // return true if the future place of the node and the node are upper
 // or lower than the middle.
 // It push the programm to do more often rrr and rr.
-int modif_best(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
+int	modif_best(t_nlst_head *a, t_nlst_head *b, t_nlst *cur, int a_b)
 {
 	if ((get_next_place(b, cur, a_b) > ft_nlstsize(b) / 2
-		&& nlst_get_place(a, cur->content) > ft_nlstsize(a) / 2)
+			&& nlst_get_place(a, cur->content) > ft_nlstsize(a) / 2)
 		|| (get_next_place(b, cur, a_b) < ft_nlstsize(b) / 2
-		&& nlst_get_place(a, cur->content) < ft_nlstsize(a) / 2))
+			&& nlst_get_place(a, cur->content) < ft_nlstsize(a) / 2))
 		return (1);
 	else
 		return (0);
