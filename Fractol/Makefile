@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = src/main_fractol.c \
 	src/mandelbrot.c\
-	src/handle_event.c
+	src/handle_event.c \
+	src/zoom.c
 
 LIB = $(LIBFT)libftprintf.a
 

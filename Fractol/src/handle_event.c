@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/13 19:43:45 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:50:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,22 @@ int	key_event(int keycode, t_fract *f)
 	else
 	{
 		set_dec_move(f);
-		if (keycode == D && !f->mv.julia_mandel)
-			f->c.x += f->mv.decal;
-		if (keycode == A && !f->mv.julia_mandel)
-			f->c.x -= f->mv.decal;
 		if (keycode == W && !f->mv.julia_mandel)
-			f->c.y += f->mv.decal;
+			f->c.x += f->mv.decal;
 		if (keycode == S && !f->mv.julia_mandel)
+			f->c.x -= f->mv.decal;
+		if (keycode == D && !f->mv.julia_mandel)
+			f->c.y += f->mv.decal;
+		if (keycode == A && !f->mv.julia_mandel)
 			f->c.y -= f->mv.decal;
 		if (keycode == RIGHT)
-			f->start_x -= f->mv.move;
+			f->start_x /= 1.1;
 		if (keycode == LEFT)
-			f->start_x += f->mv.move;
+			f->start_x *= 1.1;
 		if (keycode == UP)
-			f->start_y += f->mv.move;
+			f->start_y *= 1.25;
 		if (keycode == DW)
-			f->start_y -= f->mv.move;
+			f->start_y /= 1.25;
 		key_event_next(keycode, f);
 		draw_fract(f);
 	}
@@ -95,23 +95,18 @@ int	key_event(int keycode, t_fract *f)
 
 int	mouse_event(int mcode, int x, int y, t_fract *f)
 {
-	int	dif_x;
-	int	dif_y;
-
-	dif_x = (f->start_x - x) / 2;
-	dif_y = (f->start_y - y) / 2;
-	dif_x = (dif_x * (dif_x > 0) - (dif_x * (dif_x < 0)));
-	dif_y = (dif_y * (dif_y > 0) - (dif_y * (dif_y < 0)));
 	set_dec_move(f);
 	if (mcode == 17)
 		esc_handle(f);
+	if (mcode == M_CLICK)
+		f->mv.follow_m = !f->mv.follow_m;
 	if (mcode == M_UP || mcode == M_DW)
 	{
 		if (mcode == M_UP)
-			f->coef /= 1.1;
+			zoom_in(x, y, f);
 		if (mcode == M_DW)
-			f->coef *= 1.1;
-		draw_fract(f);
+			zoom_out(x, y, f);
+	draw_fract(f);
 	}
 	return (1);
 }

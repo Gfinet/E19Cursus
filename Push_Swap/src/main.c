@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/13 15:12:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 19:57:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,30 @@ static int	is_number(char *s)
 	return (1);
 }
 
+int equal_int(char *s1, char *s2)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (!is_number(s1))
+		return (0);
+	if (s1[0] == '-' && s1[0] == s2[0])
+		i++;
+	j = i;
+	while (s1[i] == '0')
+		i++;
+	while (s1[i] && s2[j] && s1[i] == s2[j])
+	{
+		i++;
+		j++;
+	}
+	if (s1[i] != s2[j])
+		return (0);
+	return (1);
+}
+
 int	check_input(char **s, int n_arg)
 {
 	int		i;
@@ -42,8 +66,8 @@ int	check_input(char **s, int n_arg)
 	{
 		flag = ft_atoi(s[i]);
 		tmp = ft_itoa(flag);
-		if (!flag && ft_strlen(s[i]) != ft_strlen(tmp) && !is_number(s[i]))
-			return (0);
+		if (flag && !equal_int(s[i], tmp))
+			return (free(tmp), 0);
 		free(tmp);
 		j = i + 1;
 		while (j < n_arg && s[j])
@@ -94,7 +118,6 @@ int	main(int argc, char **argv)
 	nums = 0;
 	if (argc < 2 || !argv[1][0])
 		return (0);
-	printf("%d\n", ft_atoi("000"));
 	if (!parse_arg(argc, argv, &nums, &nb_elem) || !check_input(nums, nb_elem))
 		write(2, "Error\n", 6);
 	else

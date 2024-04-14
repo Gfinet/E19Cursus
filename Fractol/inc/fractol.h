@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/13 18:26:23 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:42:35 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,27 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
-typedef struct s_zoom
+typedef struct s_option
 {
 	double			decal;
 	int				julia_mandel;
-	int				move;
+	int				follow_m;
 	unsigned int	color;
 	unsigned int	b_color;
-}	t_zoom;
+}	t_option;
 
 typedef struct s_fract
 {
-	t_data	img;
-	void	*mlx;
-	void	*win;
-	t_zoom	mv;
-	t_vec	z;
-	t_vec	c;
-	double	coef;
-	int		max_it;
-	int		start_x;
-	int		start_y;
+	t_data		img;
+	void		*mlx;
+	void		*win;
+	t_option	mv;
+	t_vec		z;
+	t_vec		c;
+	int			max_it;
+	double		coef;
+	double		start_x;
+	double		start_y;
 
 }	t_fract;
 
@@ -87,4 +87,7 @@ int		key_event(int keycode, t_fract *f);
 void	key_event_next(int keycode, t_fract *f);
 int		mouse_event(int keycode, int x, int y, t_fract *f);
 
+//zoom.c
+void	zoom_in(int x, int y, t_fract *f);
+void	zoom_out(int x, int y, t_fract *f);
 #endif

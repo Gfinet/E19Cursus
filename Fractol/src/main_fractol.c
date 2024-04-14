@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:15:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/13 19:42:51 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:46:13 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	set_dec_move(t_fract *f)
 			f->mv.decal = 0.05;
 		else if (f->max_it < 1000)
 			f->mv.decal = 0.1;
-		f->mv.move = 20;
 	}
 	else if (f->coef > 1000)
 	{
@@ -40,7 +39,6 @@ void	set_dec_move(t_fract *f)
 			f->mv.decal = 0.005;
 		else if (f->max_it < 1000)
 			f->mv.decal = 0.01;
-		f->mv.move = 10;
 	}
 }
 
@@ -48,12 +46,12 @@ void	set_null(t_fract *f, int j_m)
 {
 	f->start_x = WIN_WIDTH / 2;
 	f->start_y = WIN_HEIGHT / 2;
-	f->coef = WIN_HEIGHT / 1.3;
-	f->coef = 2 / f->coef;
+	f->coef = 0.003415;
 	f->z.x = 0.0;
 	f->z.y = 0.0;
 	f->c.x = 0.0;
 	f->c.y = 0.0;
+	f->mv.follow_m = 0;
 	f->mv.color = 10;
 	f->mv.b_color = 0;
 	f->mv.julia_mandel = j_m;
