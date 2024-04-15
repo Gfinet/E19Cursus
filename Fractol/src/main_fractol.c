@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:15:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 15:52:48 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:57:50 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int argc, char **argv)
 			while (argv[2][i])
 				if (!ft_isdigit(argv[2][i++]))
 					return (print_option(), 0);
-		if (ft_isdigit(argv[1][0]) && !(argv[1][0] > '1'))
+		if (ft_isdigit(argv[1][0]) && !(argv[1][0] > '2'))
 			f = fract_init(argc, argv);
 		if (!f)
 			return (print_option(), 0);

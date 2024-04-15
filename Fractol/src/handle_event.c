@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 15:53:24 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:57:29 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	print_option(void)
 	ft_printf("(if no MAX_IT given, set automatically to 50)\n");
 	ft_printf("julia => ./fractol 0 MAX_IT\n");
 	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
+	ft_printf("burning ship => ./fractol 2 MAX_IT\n");
 }
 
 int	esc_handle(t_fract *f)

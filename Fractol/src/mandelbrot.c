@@ -114,6 +114,5 @@ void	draw_fract(t_fract *f)
 			set_color(f, x, WIN_HEIGHT - y, it);
 		}
 	}
-	printf("%f\n", f->coef);
 	mlx_put_image_to_window(f->mlx, f->win, f->img.img, 0, 0);
 }
