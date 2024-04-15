@@ -8,12 +8,18 @@ SRCS = src/main_fractol.c \
 	src/handle_event.c \
 	src/zoom.c
 
+OBJ = $(SRCS:.c=.o)
+
+BON_SRCS = bonus/main_fractol_bonus.c \
+	bonus/mandelbrot_bonus.c\
+	bonus/handle_event_bonus.c \
+	bonus/zoom_bonus.c
+
+BON_OBJ = $(BON_SRCS:.c=.o)
+
 LIB = $(LIBFT)libftprintf.a
 
 LIBFT = ./Printf/
-
-
-OBJ = $(SRCS:.c=.o)
 
 NAME = fractol
 
@@ -30,6 +36,7 @@ all: $(NAME)
 $(NAME): $(OBJ) libftprintf.a mlx/libmlx.a
 	@$(CC) $(CFLAGS) $^ -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "fractol made"
+
 %.o : %.c
 	@$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
 
@@ -44,15 +51,20 @@ libftprintf.a:
 
 
 clean:
-	@rm -f */*.o
+	@rm -f $(OBJ)
+	@rm -f $(BON_OBJ)
 	@make -C $(LIBFT) clean
 	@echo "clean done"
 fclean: clean
-	@rm -f *.a
+	@rm -f libftprintf.a
 	@make -C $(LIBFT) fclean
 	@rm $(NAME)
 	@echo "fclean done"
 	
+
+bonus : $(BON_OBJ) libftprintf.a mlx/libmlx.a
+	@$(CC) $(CFLAGS) $^ -framework OpenGL -framework AppKit -o $(NAME)
+	@echo "fractol bonus made"
 
 re: fclean all
 	@echo "make re done"

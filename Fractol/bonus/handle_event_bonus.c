@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_event.c                                     :+:      :+:    :+:   */
+/*   handle_event_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 16:58:47 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:59:42 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fractol.h"
+#include "fractol_bonus.h"
 
 void	print_option(void)
 {
@@ -19,6 +19,7 @@ void	print_option(void)
 	ft_printf("(if no MAX_IT given, set automatically to 50)\n");
 	ft_printf("julia => ./fractol 0 MAX_IT\n");
 	ft_printf("mandelbrot => ./fractol 1 MAX_IT\n");
+	ft_printf("burning ship => ./fractol 2 MAX_IT\n");
 }
 
 int	esc_handle(t_fract *f)
@@ -56,6 +57,8 @@ void	key_event_next(int keycode, t_fract *f)
 		f->mv.julia_mandel = 1;
 	if (keycode == Z)
 		f->mv.julia_mandel = 0;
+	if (keycode == C)
+		f->mv.julia_mandel = 2;
 }
 
 int	key_event(int keycode, t_fract *f)
@@ -92,6 +95,8 @@ int	mouse_event(int mcode, int x, int y, t_fract *f)
 	set_dec_move(f);
 	if (mcode == 17)
 		esc_handle(f);
+	if (mcode == M_CLICK)
+		f->mv.follow_m = !f->mv.follow_m;
 	if (mcode == M_UP || mcode == M_DW)
 	{
 		if (mcode == M_UP)
