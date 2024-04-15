@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:22:48 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 17:09:01 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:08:51 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 64
 # endif
 # include "../Printf/ft_printf.h"
-# include <errno.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <errno.h>
 
 typedef struct s_cmds
 {

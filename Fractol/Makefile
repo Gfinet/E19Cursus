@@ -28,7 +28,7 @@ ifeq ($(hostname),"MacBook-Air-de-Guylian.local")
 echo $(hostname)
 endif
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 
 all: $(NAME)
 	
