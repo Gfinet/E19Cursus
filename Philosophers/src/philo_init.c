@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 21:36:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 22:29:02 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 		return (free(data->fork), free(data->forks), NULL);
 	i = 0;
 	pthread_mutex_init(&data->dead, 0);
+	pthread_mutex_init(&data->eat, 0);
+	pthread_mutex_init(&data->time, 0);
 	while (i < data->nb_philo)
 	{
 		data->forks[i] = 0;
@@ -51,6 +53,7 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 		philos[i].has_eat = 0;
 		philos[i].is_dead = 0;
 		philos[i].nb_diner = 0;
+		philos[i].time = get_time(0);
 		init_philo_fork(&philos[i], data, i);
 		i++;
 	}
@@ -82,7 +85,7 @@ int	init_all(t_philo **philos, t_philo_data *data, int argc, char **argv)
 	return (1);
 }
 
-int is_philo_dead(t_philo_data *d)
+int	is_philo_dead(t_philo_data *d)
 {
 	int	dead;
 

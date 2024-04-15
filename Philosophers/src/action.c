@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 21:40:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 22:28:46 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	take_fork_lr(t_philo *phi, t_philo_data *d, int l_r)
 	int				*hand;
 	pthread_mutex_t	*mut_fork;
 
-	if (get_time(phi->time) >= d->die_time)
-		return ;
 	hand = &phi->r_hand;
 	fork = phi->r_fork;
 	mut_fork = &d->fork[phi->r_fork];
@@ -35,7 +33,8 @@ void	take_fork_lr(t_philo *phi, t_philo_data *d, int l_r)
 	{
 		d->forks[fork] = 1;
 		*hand = 1;
-		printf("%ld  %d has taken a fork\n", get_time(d->time_zero), phi->num);
+		printf("\033[0;33m%ld  %d has taken a fork\n\033[0m",
+			get_time(d->time_zero), phi->num);
 	}
 }
 
@@ -63,13 +62,16 @@ void	eat_time(t_philo *phi, t_philo_data *d)
 {
 	long	time;
 
-	pthread_mutex_lock(&d->dead);
+	pthread_mutex_lock(&d->eat);
 	phi->nb_diner++;
 	if (!d->is_dead)
-		printf("%ld  %d is eating\n", get_time(d->time_zero), phi->num);
-	pthread_mutex_unlock(&d->dead);
+		printf("\033[0;32m%ld  %d is eating\n\033[0m",
+			get_time(d->time_zero), phi->num);
 	phi->has_eat = 1;
+	pthread_mutex_unlock(&d->eat);
+	pthread_mutex_lock(&d->time);
 	phi->time = get_time(0);
+	pthread_mutex_unlock(&d->time);
 	time = get_time(0);
 	while (get_time(0) < time + d->eat_time)
 		usleep(500);
@@ -82,14 +84,16 @@ void	sleep_time(t_philo *phi, t_philo_data *data)
 	pthread_mutex_lock(&data->dead);
 	phi->has_eat = 0;
 	if (!data->is_dead)
-		printf("%ld  %d is sleeping\n", get_time(data->time_zero), phi->num);
+		printf("\033[0;35m%ld  %d is sleeping\n\033[0m",
+			get_time(data->time_zero), phi->num);
 	pthread_mutex_unlock(&data->dead);
 	time = get_time(0);
 	while (get_time(0) < time + data->sleep_time)
 		usleep(500);
 	pthread_mutex_lock(&data->dead);
 	if (!data->is_dead)
-		printf("%ld  %d is thinking\n", get_time(data->time_zero), phi->num);
+		printf("\033[0;34m%ld  %d is thinking\n\033[0m",
+			get_time(data->time_zero), phi->num);
 	pthread_mutex_unlock(&data->dead);
 }
 

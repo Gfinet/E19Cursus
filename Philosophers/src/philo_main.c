@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 21:36:41 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 22:29:15 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	free_all_philo(t_philo *philos, t_philo_data *d)
 		free(d->fork);
 	}
 	pthread_mutex_destroy(&d->dead);
+	pthread_mutex_destroy(&d->eat);
+	pthread_mutex_destroy(&d->time);
 	if (d->forks)
 		free(d->forks);
 	if (philos)
@@ -60,20 +62,23 @@ void	*philosophers(void *data)
 	phi = (t_philo *)data;
 	d = phi->arg;
 	phi->time = d->time_zero;
-	while (get_time(phi->time) < d->die_time && (d->nb_diner < 0
-			|| phi->nb_diner < d->nb_diner) && !is_philo_dead(d))
+	while (!is_philo_dead(d))
 	{
-		choose_forks(phi);
 		if (phi->l_hand && phi->r_hand)
 			eat_time(phi, d);
-		if (phi->l_hand)
+		if (phi->l_hand && !is_philo_dead(d))
 			let_fork_lr(phi, d, 0);
-		if (phi->r_hand)
+		if (phi->r_hand && !is_philo_dead(d))
 			let_fork_lr(phi, d, 1);
-		if (phi->has_eat)
+		if (phi->has_eat && !is_philo_dead(d))
 			sleep_time(phi, d);
+		if (get_time(phi->time) < d->die_time && !is_philo_dead(d))
+			choose_forks(phi);
 	}
-	die_time(phi, d);
+	if (phi->l_hand)
+		pthread_mutex_unlock(&d->fork[phi->l_hand]);
+	if (phi->r_hand)
+		pthread_mutex_unlock(&d->fork[phi->r_hand]);
 	return (0);
 }
 
@@ -92,9 +97,8 @@ int	main(int argc, char **argv)
 		i = -1;
 		while (++i < data.nb_philo)
 			pthread_create(&philos[i].thread, 0, philosophers, &philos[i]);
-		while (!check_end(&data))
-			;
-		i = 0;
+		if (check_end(&data))
+			i = 0;
 		while (i < data.nb_philo)
 			if (!pthread_join(philos[i].thread, 0))
 				i++;
