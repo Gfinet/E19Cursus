@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 22:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 21:11:16 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:53:24 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ void	key_event_next(int keycode, t_fract *f)
 	if (keycode == Z)
 		f->mv.julia_mandel = 0;
 	if (keycode == C)
-	{
-		f->start_x = WIN_WIDTH / 2;
-		f->start_y = WIN_HEIGHT / 2;
-	}
+		f->mv.julia_mandel = 2;
 }
 
 int	key_event(int keycode, t_fract *f)
@@ -79,13 +76,13 @@ int	key_event(int keycode, t_fract *f)
 		if (keycode == A && !f->mv.julia_mandel)
 			f->c.y -= f->mv.decal;
 		if (keycode == RIGHT)
-			f->start_x /= 1.1;
+			f->start_x -= 50;
 		if (keycode == LEFT)
-			f->start_x *= 1.1;
+			f->start_x += 50;
 		if (keycode == UP)
-			f->start_y *= 1.25;
+			f->start_y -= 50;
 		if (keycode == DW)
-			f->start_y /= 1.25;
+			f->start_y += 50;
 		key_event_next(keycode, f);
 		draw_fract(f);
 	}

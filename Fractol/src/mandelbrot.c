@@ -12,14 +12,24 @@
 
 #include "../inc/fractol.h"
 
-t_vec	compute_next(t_vec cur, t_vec cons)
+t_vec	compute_next(t_vec cur, t_vec cons, int burn)
 {
 	t_vec	res;
 
-	res.x = cur.x * cur.x - cur.y * cur.y;
-	res.y = 2.0 * cur.x * cur.y;
-	res.x += cons.x;
-	res.y += cons.y;
+	if (!burn)
+	{
+		res.x = cur.x * cur.x - cur.y * cur.y;
+		res.y = 2.0 * cur.x * cur.y;
+		res.x += cons.x;
+		res.y += cons.y;
+	}
+	else
+	{
+		res.x = cur.x * cur.x - cur.y * cur.y;
+		res.y = 2.0 * cur.x * cur.y;
+		res.x -= cons.x;
+		res.y -= cons.y;
+	}
 	return (res);
 }
 
@@ -31,9 +41,9 @@ double	compute_mand(t_fract *f)
 	i = 0;
 	p.x = f->z.x;
 	p.y = f->z.y;
-	while (p.x * p.x + p.y * p.y < 2.0 && i < f->max_it)
+	while (p.x * p.x + p.y * p.y < 4.0 && i < f->max_it)
 	{
-		p = compute_next(p, f->z);
+		p = compute_next(p, f->z, 0);
 		i++;
 	}
 	return (i);
@@ -47,33 +57,32 @@ double	compute_julia(t_fract *f)
 	i = 0;
 	p.x = f->z.x;
 	p.y = f->z.y;
-	while (p.x * p.x + p.y * p.y < 2.0 && i < f->max_it)
+	while (p.x * p.x + p.y * p.y < 4.0 && i < f->max_it)
 	{
-		p = compute_next(p, f->c);
+		p = compute_next(p, f->c, 0);
 		i++;
 	}
 	return (i);
 }
 
-void	set_color(t_fract *f, int x, int y, int it)
+double	compute_burning(t_fract *f)
 {
-	unsigned int	color;
+	double	i;
+	t_vec	p;
 
-	if (!f->mv.b_color)
+	i = 0;
+	p.x = f->z.x;
+	p.y = f->z.y;
+	while (p.x * p.x + p.y * p.y < 4.0 && i < f->max_it)
 	{
-		color = 0xFFFFFFFF / ((it + 1) * f->mv.color);
-		my_mlx_pixel_put(&f->img, x, y, color);
+		if (p.x < 0)
+			p.x *= -1;
+		if (p.y < 0)
+			p.y *= -1;
+		p = compute_next(p, f->z, 1);
+		i++;
 	}
-	else if (f->mv.b_color == 1)
-	{
-		color = 0x00000000 + ((it + f->mv.color) * 0x00010101);
-		my_mlx_pixel_put(&f->img, x, y, color);
-	}
-	else
-	{
-		color = 0x00FF00FF + ((it + f->mv.color) * 0x000F000F);
-		my_mlx_pixel_put(&f->img, x, y, color);
-	}
+	return (i);
 }
 
 /*
@@ -87,7 +96,7 @@ void	draw_fract(t_fract *f)
 	int		x;
 	int		y;
 
-	y = -1;
+	y = 0;
 	mlx_clear_window(f->mlx, f->win);
 	while (++y < WIN_HEIGHT)
 	{
@@ -96,12 +105,15 @@ void	draw_fract(t_fract *f)
 		{
 			f->z.x = (double)(x - f->start_x) * (f->coef);
 			f->z.y = (double)(y - f->start_y) * (f->coef);
-			if (f->mv.julia_mandel)
+			if (f->mv.julia_mandel == 1)
 				it = compute_mand(f);
-			else
+			if (f->mv.julia_mandel == 0)
 				it = compute_julia(f);
-			set_color(f, x, y, it);
+			else if (f->mv.julia_mandel == 2)
+				it = compute_burning(f);
+			set_color(f, x, WIN_HEIGHT - y, it);
 		}
 	}
+	printf("%f\n", f->coef);
 	mlx_put_image_to_window(f->mlx, f->win, f->img.img, 0, 0);
 }

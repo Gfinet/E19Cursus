@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:15:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 20:46:13 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:52:48 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	set_null(t_fract *f, int j_m)
 	f->z.y = 0.0;
 	f->c.x = 0.0;
 	f->c.y = 0.0;
-	f->mv.follow_m = 0;
+	f->mv.follow_m = 1;
 	f->mv.color = 10;
-	f->mv.b_color = 0;
+	f->mv.b_color = 1;
 	f->mv.julia_mandel = j_m;
 	set_dec_move(f);
 }

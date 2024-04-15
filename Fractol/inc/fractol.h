@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:12:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 20:42:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:24:38 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ t_fract	*fract_init(int argc, char **arg);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //mandelbrot.c
-t_vec	compute_next(t_vec cur, t_vec cons);
+t_vec	compute_next(t_vec cur, t_vec cons, int burn);
 double	compute_mand(t_fract *f);
 double	compute_julia(t_fract *f);
+double	compute_burning(t_fract *f);
 void	draw_fract(t_fract *f);
-void	set_color(t_fract *f, int x, int y, int it);
 
 //handle_event.c
 void	print_option(void);
@@ -90,4 +90,5 @@ int		mouse_event(int keycode, int x, int y, t_fract *f);
 //zoom.c
 void	zoom_in(int x, int y, t_fract *f);
 void	zoom_out(int x, int y, t_fract *f);
+void	set_color(t_fract *f, int x, int y, int it);
 #endif
