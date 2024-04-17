@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 20:57:44 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/17 22:02:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,12 @@ int	main(int argc, char **argv)
 	else
 	{
 		res = push_swap(nums, nb_elem);
+		if (argc == 2)
+		{
+			while (nb_elem--)
+				free(nums[nb_elem]);
+			free(nums);
+		}	
 		if (!res)
 			write(2, "Error\n", 6);
 		else
