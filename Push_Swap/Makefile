@@ -11,6 +11,7 @@ SRCS = 	src/push_swap.c \
 		src/all_verif.c \
 		src/make_less_move.c \
 		src/compute_best_node.c \
+		src/free.c \
 		src/main.c
 
 OBJ = $(SRCS:.c=.o)
@@ -47,15 +48,14 @@ $(NAME): $(OBJ) $(LIBA)
 libftprintf.a:
 	make -C $(LIBFT)
 	cp $(LIB) .
-	mv $(LIB) .
+	mv $(LIB) $(NAME)
 
 clean:
 	rm -f $(OBJ)
 	make -C $(LIBFT) clean
 fclean: clean
-	mv $(LIBA) $(LIBFT)
-	rm $(NAME)
+	rm -rf $(NAME)
+	rm -rf $(LIBA)
 	make -C $(LIBFT) fclean
 	
-
 re: fclean all

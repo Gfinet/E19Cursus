@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:48:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 19:56:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/29 22:04:45 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef struct s_2_int
 	int	two;
 }	t_2_int;
 
-int		parse_arg(int argc, char **argv, char ***nums, int *nb_elem);
-int		check_input(char **s, int n_arg);
 t_2_int	*push_swap(char **argv, int argc);
 int		res_init(t_2_int **res);
 
@@ -43,9 +41,12 @@ typedef struct s_nlst_head
 }	t_nlst_head;
 
 //mainc.c
-int		check_input(char **s, int n_arg);
 int		parse_arg(int argc, char **argv, char ***nums, int *nb_elem);
+int		check_input(char **s, int n_arg, int arg);
 int		equal_int(char *s1, char *s2);
+
+//free.c
+void	strarray_free(char **p, int flag);
 
 //all_verif.c
 int		check_heap(t_nlst *a, int a_b);

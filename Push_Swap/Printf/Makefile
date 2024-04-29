@@ -40,10 +40,9 @@ clean:
 	make -C $(LIBFT) clean
 
 fclean: clean
-	mv $(LIBA) $(LIBFT)
 	rm -f $(NAME)
+	rm -f libft.a
 	make -C $(LIBFT) fclean
-	
 
 re: fclean all
 

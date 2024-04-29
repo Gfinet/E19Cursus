@@ -23,7 +23,7 @@ LIBFT = ./Printf/
 
 NAME = fractol
 
-ifeq ($(hostname),"MacBook-Air-de-Guylian.local")
+ifeq "$(hostname)" "MacBook-Air-de-Guylian.local"
 	CFLAGS="-Wall -Wextra -Werror -D WIN_WIDTH=2560 -D WIN_HEIGHT=1664"
 echo $(hostname)
 endif

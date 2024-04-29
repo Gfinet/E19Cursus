@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 00:59:08 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/17 22:02:31 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/04/29 22:08:40 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	equal_int(char *s1, char *s2)
 	return (1);
 }
 
-int	check_input(char **s, int n_arg)
+int	check_input(char **s, int n_arg, int arg)
 {
 	int		i;
 	int		j;
@@ -67,17 +67,16 @@ int	check_input(char **s, int n_arg)
 		flag = ft_atoi(s[i]);
 		tmp = ft_itoa(flag);
 		if (flag && !equal_int(s[i], tmp))
-			return (free(tmp), 0);
+			return (strarray_free(s, arg), free(tmp), 0);
 		free(tmp);
 		j = i + 1;
 		while (j < n_arg && s[j])
 		{
-			if (ft_atoi(s[i]) == ft_atoi(s[j]))
-				return (0);
-			j++;
+			if (ft_atoi(s[i]) == ft_atoi(s[j++]))
+				return (strarray_free(s, arg), 0);
 		}
 		if (!is_number(s[i]))
-			return (0);
+			return (strarray_free(s, arg), 0);
 		i++;
 	}
 	return (1);
@@ -118,7 +117,8 @@ int	main(int argc, char **argv)
 	nums = 0;
 	if (argc < 2 || !argv[1][0])
 		return (0);
-	if (!parse_arg(argc, argv, &nums, &nb_elem) || !check_input(nums, nb_elem))
+	if (!parse_arg(argc, argv, &nums, &nb_elem)
+		|| !check_input(nums, nb_elem, (argc == 2)))
 		write(2, "Error\n", 6);
 	else
 	{
@@ -128,7 +128,7 @@ int	main(int argc, char **argv)
 			while (nb_elem--)
 				free(nums[nb_elem]);
 			free(nums);
-		}	
+		}
 		if (!res)
 			write(2, "Error\n", 6);
 		else
