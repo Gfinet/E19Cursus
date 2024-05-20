@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 22:45:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 22:30:05 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:29:25 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	choose_forks(t_philo *phi)
 	if (phi->num % 2)
 	{
 		take_fork_lr(phi, phi->arg, 0);
-		take_fork_lr(phi, phi->arg, 1);
+		if (!check_fork(phi->arg, phi->r_fork))
+			take_fork_lr(phi, phi->arg, 1);
 	}
 	else
 	{
 		take_fork_lr(phi, phi->arg, 1);
-		take_fork_lr(phi, phi->arg, 0);
+		if (!check_fork(phi->arg, phi->l_fork))
+			take_fork_lr(phi, phi->arg, 0);
 	}
 }
 
@@ -90,8 +92,7 @@ int	check_end(t_philo_data *d)
 			pthread_mutex_unlock(&(d->dead));
 		}
 		i++;
-		if (i == d->nb_philo)
-			i = 0;
+		i = i % d->nb_philo;
 	}
 	return (0);
 }

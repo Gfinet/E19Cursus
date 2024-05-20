@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 22:28:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:27:49 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	eat_time(t_philo *phi, t_philo_data *d)
 	pthread_mutex_unlock(&d->time);
 	time = get_time(0);
 	while (get_time(0) < time + d->eat_time)
-		usleep(500);
+		usleep(100);
 }
 
 void	sleep_time(t_philo *phi, t_philo_data *data)
@@ -97,14 +97,3 @@ void	sleep_time(t_philo *phi, t_philo_data *data)
 	pthread_mutex_unlock(&data->dead);
 }
 
-void	die_time(t_philo *phi, t_philo_data *d)
-{
-	if (get_time(phi->time) >= d->die_time)
-	{
-		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
-		pthread_mutex_lock(&(d->dead));
-		phi->is_dead = 1;
-		d->is_dead = 1;
-		pthread_mutex_unlock(&(d->dead));
-	}
-}

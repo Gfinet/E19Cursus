@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 22:29:15 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:48:20 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	*philosophers(void *data)
 	{
 		if (phi->l_hand && phi->r_hand)
 			eat_time(phi, d);
-		if (phi->l_hand && !is_philo_dead(d))
+		if (phi->l_hand)
 			let_fork_lr(phi, d, 0);
-		if (phi->r_hand && !is_philo_dead(d))
+		if (phi->r_hand)
 			let_fork_lr(phi, d, 1);
 		if (phi->has_eat && !is_philo_dead(d))
 			sleep_time(phi, d);
@@ -102,6 +102,7 @@ int	main(int argc, char **argv)
 		while (i < data.nb_philo)
 			if (!pthread_join(philos[i].thread, 0))
 				i++;
+		printf("coucou\n");
 		free_all_philo(philos, &data);
 	}
 	else

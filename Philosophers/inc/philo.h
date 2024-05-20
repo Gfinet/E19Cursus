@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 22:28:20 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:27:59 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,4 @@ void	take_fork_lr(t_philo *phi, t_philo_data *data, int l_r);
 void	eat_time(t_philo *phi, t_philo_data *d);
 void	let_fork_lr(t_philo *phi, t_philo_data *data, int l_r);
 void	sleep_time(t_philo *phi, t_philo_data *data);
-void	die_time(t_philo *phi, t_philo_data *d);
 #endif

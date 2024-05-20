@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 22:04:52 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/29 22:05:03 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/19 20:45:07 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void	strarray_free(char **p, int flag)
 	i = -1;
 	while (flag && p && p[++i])
 		free(p[i]);
-	free(p);
+	if (flag)
+		free(p);
 }

@@ -1,6 +1,6 @@
 CC = GCC
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = 	src/push_swap.c \
 		src/p_s_r.c \

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action.c                                           :+:      :+:    :+:   */
+/*   action_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 22:28:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/20 22:28:13 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,4 @@ void	sleep_time(t_philo *phi, t_philo_data *data)
 		printf("\033[0;34m%ld  %d is thinking\n\033[0m",
 			get_time(data->time_zero), phi->num);
 	pthread_mutex_unlock(&data->dead);
-}
-
-void	die_time(t_philo *phi, t_philo_data *d)
-{
-	if (get_time(phi->time) >= d->die_time)
-	{
-		printf("%ld  %d is ded---\n", get_time(d->time_zero), phi->num);
-		pthread_mutex_lock(&(d->dead));
-		phi->is_dead = 1;
-		d->is_dead = 1;
-		pthread_mutex_unlock(&(d->dead));
-	}
 }
