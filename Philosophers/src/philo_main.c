@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/05/20 22:48:20 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/25 16:05:25 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ void	free_all_philo(t_philo *philos, t_philo_data *d)
 	if (d->fork)
 	{
 		while (i < d->nb_philo)
-			pthread_mutex_destroy(&d->fork[i++]);
+			pthread_mutex_destroy(&d->time[i++]);
 		free(d->fork);
+	}
+	if (d->time)
+	{
+		while (i)
+			pthread_mutex_destroy(&d->fork[--i]);
+		free(d->time);
 	}
 	pthread_mutex_destroy(&d->dead);
 	pthread_mutex_destroy(&d->eat);
-	pthread_mutex_destroy(&d->time);
 	if (d->forks)
 		free(d->forks);
 	if (philos)
@@ -61,7 +66,9 @@ void	*philosophers(void *data)
 
 	phi = (t_philo *)data;
 	d = phi->arg;
-	phi->time = d->time_zero;
+	pthread_mutex_lock(&d->time[phi->num - 1]);
+	phi->time = get_time(0);
+	pthread_mutex_unlock(&d->time[phi->num - 1]);
 	while (!is_philo_dead(d))
 	{
 		if (phi->l_hand && phi->r_hand)
@@ -102,7 +109,6 @@ int	main(int argc, char **argv)
 		while (i < data.nb_philo)
 			if (!pthread_join(philos[i].thread, 0))
 				i++;
-		printf("coucou\n");
 		free_all_philo(philos, &data);
 	}
 	else

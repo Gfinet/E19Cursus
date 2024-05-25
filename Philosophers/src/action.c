@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/05/20 22:27:49 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/25 16:14:27 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	take_fork_lr(t_philo *phi, t_philo_data *d, int l_r)
 		mut_fork = &d->fork[phi->l_fork];
 		hand = &phi->l_hand;
 	}
+	*hand = 1;
 	err = pthread_mutex_lock(mut_fork);
 	if (!err)
 	{
 		d->forks[fork] = 1;
-		*hand = 1;
 		printf("\033[0;33m%ld  %d has taken a fork\n\033[0m",
 			get_time(d->time_zero), phi->num);
 	}
@@ -69,9 +69,9 @@ void	eat_time(t_philo *phi, t_philo_data *d)
 			get_time(d->time_zero), phi->num);
 	phi->has_eat = 1;
 	pthread_mutex_unlock(&d->eat);
-	pthread_mutex_lock(&d->time);
+	pthread_mutex_lock(&d->time[phi->num - 1]);
 	phi->time = get_time(0);
-	pthread_mutex_unlock(&d->time);
+	pthread_mutex_unlock(&d->time[phi->num - 1]);
 	time = get_time(0);
 	while (get_time(0) < time + d->eat_time)
 		usleep(100);
@@ -97,3 +97,18 @@ void	sleep_time(t_philo *phi, t_philo_data *data)
 	pthread_mutex_unlock(&data->dead);
 }
 
+void	choose_forks(t_philo *phi)
+{
+	if (!(phi->num % 2))
+	{
+		take_fork_lr(phi, phi->arg, 0);
+		if (!check_fork(phi->arg, phi->r_fork))
+			take_fork_lr(phi, phi->arg, 1);
+	}
+	else
+	{
+		take_fork_lr(phi, phi->arg, 1);
+		if (!check_fork(phi->arg, phi->l_fork))
+			take_fork_lr(phi, phi->arg, 0);
+	}
+}

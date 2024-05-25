@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   check_philo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 22:45:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/05/20 22:29:25 by gfinet           ###   ########.fr       */
+/*   Created: 2024/05/25 15:23:11 by gfinet            #+#    #+#             */
+/*   Updated: 2024/05/25 15:40:37 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,14 @@ int	check_fork(t_philo_data *d, int ind)
 	return (res);
 }
 
-void	choose_forks(t_philo *phi)
+int	is_philo_dead(t_philo_data *d)
 {
-	if (phi->num % 2)
-	{
-		take_fork_lr(phi, phi->arg, 0);
-		if (!check_fork(phi->arg, phi->r_fork))
-			take_fork_lr(phi, phi->arg, 1);
-	}
-	else
-	{
-		take_fork_lr(phi, phi->arg, 1);
-		if (!check_fork(phi->arg, phi->l_fork))
-			take_fork_lr(phi, phi->arg, 0);
-	}
+	int	dead;
+
+	pthread_mutex_lock(&d->dead);
+	dead = d->is_dead;
+	pthread_mutex_unlock(&d->dead);
+	return (dead);
 }
 
 int	is_dead(t_philo *phi, t_philo_data *data)
@@ -80,9 +74,9 @@ int	check_end(t_philo_data *d)
 	t = 0;
 	while (i < d->nb_philo && !is_philo_dead(d) && !has_eaten_enough(d->philos))
 	{
-		pthread_mutex_lock(&d->time);
+		pthread_mutex_lock(&d->time[i]);
 		t = (get_time(d->philos[i].time) >= d->die_time);
-		pthread_mutex_unlock(&d->time);
+		pthread_mutex_unlock(&d->time[i]);
 		if (t)
 		{
 			printf("\033[0;33m%ld  %d died\n\033[0m", get_time(d->time_zero),

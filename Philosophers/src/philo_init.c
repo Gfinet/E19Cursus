@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/15 22:29:02 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/25 15:45:35 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ int	data_init(t_philo_data *d, int argc, char **arg)
 	d->fork = malloc(sizeof(pthread_mutex_t) * d->nb_philo);
 	if (!d->fork)
 		return (0);
+	d->time = malloc(sizeof(pthread_mutex_t) * d->nb_philo);
+	if (!d->time)
+		return (free(d->fork), 0);
 	if (argc == 6)
 		d->nb_diner = ft_atoi(arg[4]);
 	d->forks = malloc(sizeof(int) * d->nb_philo);
 	if (!d->forks)
-		return (free(d->fork), 0);
+		return (free(d->fork), free(d->time), 0);
 	return (1);
 }
 
@@ -41,7 +44,6 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 	i = 0;
 	pthread_mutex_init(&data->dead, 0);
 	pthread_mutex_init(&data->eat, 0);
-	pthread_mutex_init(&data->time, 0);
 	while (i < data->nb_philo)
 	{
 		data->forks[i] = 0;
@@ -62,6 +64,7 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 
 void	init_philo_fork(t_philo *phi, t_philo_data *d, int i)
 {
+	pthread_mutex_init(&d->time[i], 0);
 	pthread_mutex_init(&d->fork[i], 0);
 	if (phi->num == 1)
 		phi->l_fork = d->nb_philo - 1;
@@ -79,18 +82,8 @@ int	init_all(t_philo **philos, t_philo_data *data, int argc, char **argv)
 		return (0);
 	*philos = philo_init(*philos, data);
 	if (!philos)
-		return (free(data->fork), free(data->fork), 0);
+		return (free(data->fork), free(data->forks), 0);
 	data->time_zero = get_time(0);
 	data->philos = *philos;
 	return (1);
-}
-
-int	is_philo_dead(t_philo_data *d)
-{
-	int	dead;
-
-	pthread_mutex_lock(&d->dead);
-	dead = d->is_dead;
-	pthread_mutex_unlock(&d->dead);
-	return (dead);
 }
