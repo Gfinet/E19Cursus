@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/05/25 16:05:25 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/29 18:08:35 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	free_all_philo(t_philo *philos, t_philo_data *d)
 	if (d->fork)
 	{
 		while (i < d->nb_philo)
-			pthread_mutex_destroy(&d->time[i++]);
+			pthread_mutex_destroy(&d->fork[i++]);
 		free(d->fork);
 	}
 	if (d->time)
 	{
 		while (i)
-			pthread_mutex_destroy(&d->fork[--i]);
+			pthread_mutex_destroy(&d->time[--i]);
 		free(d->time);
 	}
 	pthread_mutex_destroy(&d->dead);
@@ -95,23 +95,23 @@ int	main(int argc, char **argv)
 	t_philo_data	data;
 	t_philo			*philos;
 
-	if (argc >= 5)
+	if (argc < 5)
+		return (system("leaks philo"), printf("Not enough arg\n"), 0);
+	if (!check_arg(argv + 1))
+		return (system("leaks philo"), printf("Bad arg\n"), 0);
+	if (!init_all(&philos, &data, argc, argv))
+		return (system("leaks philo"), 0);
+	i = 0;
+	while (i < data.nb_philo)
 	{
-		if (!check_arg(argv + 1))
-			return (printf("Bad arg\n"), 0);
-		if (!init_all(&philos, &data, argc, argv))
-			return (0);
-		i = -1;
-		while (++i < data.nb_philo)
-			pthread_create(&philos[i].thread, 0, philosophers, &philos[i]);
-		if (check_end(&data))
-			i = 0;
-		while (i < data.nb_philo)
-			if (!pthread_join(philos[i].thread, 0))
-				i++;
-		free_all_philo(philos, &data);
+		pthread_create(&philos[i].thread, 0, philosophers, &philos[i]);
+		i++;
 	}
-	else
-		return (printf("Not enough arg\n"), 0);
-	return (0);
+	if (check_end(&data))
+		i = 0;
+	while (i < data.nb_philo)
+		if (!pthread_join(philos[i].thread, 0))
+			i++;
+	free_all_philo(philos, &data);
+	return (system("leaks philo"), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/05/25 15:45:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/29 18:17:15 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,8 @@ void	init_philo_fork(t_philo *phi, t_philo_data *d, int i)
 {
 	pthread_mutex_init(&d->time[i], 0);
 	pthread_mutex_init(&d->fork[i], 0);
-	if (phi->num == 1)
-		phi->l_fork = d->nb_philo - 1;
-	else
-		phi->l_fork = phi->num - 2;
-	if (phi->num == d->nb_philo)
-		phi->r_fork = d->nb_philo - 1;
-	else
-		phi->r_fork = phi->num - 1;
+	phi->l_fork = phi->num - 1;
+	phi->r_fork = phi->num % d->nb_philo;
 }
 
 int	init_all(t_philo **philos, t_philo_data *data, int argc, char **argv)
