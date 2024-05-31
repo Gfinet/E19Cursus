@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/05/29 18:08:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/31 21:10:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ void	free_all_philo(t_philo *philos, t_philo_data *d)
 			pthread_mutex_destroy(&d->time[--i]);
 		free(d->time);
 	}
+	if (d->eat)
+	{
+		while (i < d->nb_philo)
+			pthread_mutex_destroy(&d->eat[i++]);
+		free(d->eat);
+	}
 	pthread_mutex_destroy(&d->dead);
-	pthread_mutex_destroy(&d->eat);
-	if (d->forks)
-		free(d->forks);
-	if (philos)
-		free(philos);
+	free(d->forks);
+	free(philos);
 }
 
 void	*philosophers(void *data)
@@ -77,7 +80,7 @@ void	*philosophers(void *data)
 			let_fork_lr(phi, d, 0);
 		if (phi->r_hand)
 			let_fork_lr(phi, d, 1);
-		if (phi->has_eat && !is_philo_dead(d))
+		if (phi->has_eat)
 			sleep_time(phi, d);
 		if (get_time(phi->time) < d->die_time && !is_philo_dead(d))
 			choose_forks(phi);
@@ -92,6 +95,7 @@ void	*philosophers(void *data)
 int	main(int argc, char **argv)
 {
 	int				i;
+	int				res;
 	t_philo_data	data;
 	t_philo			*philos;
 
@@ -107,11 +111,10 @@ int	main(int argc, char **argv)
 		pthread_create(&philos[i].thread, 0, philosophers, &philos[i]);
 		i++;
 	}
-	if (check_end(&data))
-		i = 0;
-	while (i < data.nb_philo)
-		if (!pthread_join(philos[i].thread, 0))
-			i++;
+	check_end(&data);
+	i = -1;
+	while (++i < data.nb_philo)
+		res = pthread_join(philos[i].thread, 0);
 	free_all_philo(philos, &data);
-	return (system("leaks philo"), 0);
+	return (0);
 }

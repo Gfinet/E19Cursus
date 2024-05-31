@@ -6,20 +6,22 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 15:23:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/05/25 15:40:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/31 21:32:17 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	check_fork(t_philo_data *d, int ind)
+int	check_fork(t_philo *phi, t_philo_data *d, int ind)
 {
 	int	res;
 
 	res = 0;
-	pthread_mutex_lock(&d->fork[ind]);
-	res = d->forks[ind];
-	pthread_mutex_unlock(&d->fork[ind]);
+	pthread_mutex_lock(&d->eat[ind]);
+	pthread_mutex_lock(&d->eat[phi->num - 1]);
+	res = (phi->nb_diner >= d->philos[ind].nb_diner);
+	pthread_mutex_unlock(&d->eat[phi->num - 1]);
+	pthread_mutex_unlock(&d->eat[ind]);
 	return (res);
 }
 
@@ -56,10 +58,10 @@ int	has_eaten_enough(t_philo *phi)
 		return (0);
 	while (i < phi->arg->nb_philo)
 	{
-		pthread_mutex_lock(&phi->arg->eat);
+		pthread_mutex_lock(&phi->arg->eat[i]);
 		if (phi[i].nb_diner < phi->arg->nb_diner)
-			return (pthread_mutex_unlock(&phi->arg->eat), 0);
-		pthread_mutex_unlock(&phi->arg->eat);
+			return (pthread_mutex_unlock(&phi->arg->eat[i]), 0);
+		pthread_mutex_unlock(&phi->arg->eat[i]);
 		i++;
 	}
 	return (1);
@@ -71,15 +73,14 @@ int	check_end(t_philo_data *d)
 	int	i;
 
 	i = 0;
-	t = 0;
 	while (i < d->nb_philo && !is_philo_dead(d) && !has_eaten_enough(d->philos))
 	{
 		pthread_mutex_lock(&d->time[i]);
-		t = (get_time(d->philos[i].time) >= d->die_time);
+		t = (get_time(d->philos[i].time) > d->die_time);
 		pthread_mutex_unlock(&d->time[i]);
 		if (t)
 		{
-			printf("\033[0;33m%ld  %d died\n\033[0m", get_time(d->time_zero),
+			printf("\033[0;31m%ld  %d died\n\033[0m", get_time(d->time_zero),
 				d->philos[i].num);
 			pthread_mutex_lock(&(d->dead));
 			d->is_dead = 1;
@@ -88,5 +89,8 @@ int	check_end(t_philo_data *d)
 		i++;
 		i = i % d->nb_philo;
 	}
+	i = 0;
+	while (i < d->nb_philo)
+		pthread_mutex_unlock(&(d->fork[i++]));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 22:30:40 by gfinet            #+#    #+#             */
-/*   Updated: 2024/05/29 18:17:15 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/31 19:32:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ int	data_init(t_philo_data *d, int argc, char **arg)
 	d->time = malloc(sizeof(pthread_mutex_t) * d->nb_philo);
 	if (!d->time)
 		return (free(d->fork), 0);
+	d->eat = malloc(sizeof(pthread_mutex_t) * d->nb_philo);
+	if (!d->eat)
+		return (free(d->fork), free(d->time), 0);
 	if (argc == 6)
 		d->nb_diner = ft_atoi(arg[4]);
 	d->forks = malloc(sizeof(int) * d->nb_philo);
 	if (!d->forks)
-		return (free(d->fork), free(d->time), 0);
+		return (free(d->fork), free(d->time), free(d->eat), 0);
 	return (1);
 }
 
@@ -43,7 +46,6 @@ t_philo	*philo_init(t_philo *philos, t_philo_data *data)
 		return (free(data->fork), free(data->forks), NULL);
 	i = 0;
 	pthread_mutex_init(&data->dead, 0);
-	pthread_mutex_init(&data->eat, 0);
 	while (i < data->nb_philo)
 	{
 		data->forks[i] = 0;
@@ -66,6 +68,7 @@ void	init_philo_fork(t_philo *phi, t_philo_data *d, int i)
 {
 	pthread_mutex_init(&d->time[i], 0);
 	pthread_mutex_init(&d->fork[i], 0);
+	pthread_mutex_init(&d->eat[i], 0);
 	phi->l_fork = phi->num - 1;
 	phi->r_fork = phi->num % d->nb_philo;
 }

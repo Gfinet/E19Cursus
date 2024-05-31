@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/05/25 15:39:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/05/31 21:28:22 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_philo_data
 {
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		dead;
-	pthread_mutex_t		eat;
+	pthread_mutex_t		*eat;
 	pthread_mutex_t		*time;
 	t_philo				*philos;
 	int					*forks;
@@ -69,7 +69,7 @@ int		is_philo_dead(t_philo_data *d);
 
 //routine.c
 void	choose_forks(t_philo *phi);
-int		check_fork(t_philo_data *d, int ind);
+int		check_fork(t_philo *phi, t_philo_data *d, int ind);
 int		is_dead(t_philo *phi, t_philo_data *data);
 int		has_eaten_enough(t_philo *phi);
 int		check_end(t_philo_data *d);
