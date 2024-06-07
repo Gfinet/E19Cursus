@@ -6,11 +6,11 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:15:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/05 14:49:34 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:43:37 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "philo.h"
 
 static int	check_isspace(char c)
 {
@@ -75,9 +75,7 @@ int	ft_isdigit(int c)
 long	get_time(long start)
 {
 	struct timeval	tv;
-	long			time;
 
 	gettimeofday(&tv, 0);
-	time = (tv.tv_sec * 1000 + tv.tv_usec / 1000) - start;
-	return (time);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000 - start);
 }

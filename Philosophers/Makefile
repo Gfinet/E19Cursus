@@ -21,7 +21,7 @@ $(NAME): $(OBJ)
 	@echo "$(NAME) made"
 
 %.o : %.c
-	@$(CC) $(CFLAGS) -Imlx -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 exe: all clean
 

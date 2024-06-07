@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/05 14:15:20 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/03 19:43:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
-#include <stdatomic.h>
 
 typedef struct s_philo		t_philo;
 typedef struct s_philo_data	t_philo_data;
@@ -26,10 +25,13 @@ typedef struct s_philo_data	t_philo_data;
 typedef struct s_philo_data
 {
 	pthread_mutex_t		*fork;
-	atomic_int			is_dead;
+	pthread_mutex_t		dead;
+	pthread_mutex_t		*eat;
+	pthread_mutex_t		*time;
 	t_philo				*philos;
 	int					*forks;
 	int					nb_diner;
+	int					is_dead;
 	long				nb_philo;
 	long				die_time;
 	long				sleep_time;
@@ -46,8 +48,9 @@ typedef struct s_philo
 	int					l_hand;
 	int					r_hand;
 	int					has_eat;
-	atomic_int			nb_diner;
-	atomic_long				time;
+	int					nb_diner;
+	int					is_dead;
+	long				time;
 	pthread_t			thread;
 	t_philo_data		*arg;
 }	t_philo;
@@ -64,8 +67,10 @@ void	init_philo_fork(t_philo *phi, t_philo_data *d, int i);
 int		init_all(t_philo **philos, t_philo_data *data, int argc, char **argv);
 int		is_philo_dead(t_philo_data *d);
 
-//check_philo.c
-void	my_sleep(long duration);
+//routine.c
+void	choose_forks(t_philo *phi);
+int		check_fork(t_philo *phi, t_philo_data *d, int ind);
+int		is_dead(t_philo *phi, t_philo_data *data);
 int		has_eaten_enough(t_philo *phi);
 int		check_end(t_philo_data *d);
 
@@ -77,7 +82,6 @@ long	get_time(long start);
 long	trad_time(struct timeval tv);
 
 //action.c
-void	choose_forks(t_philo *phi);
 void	take_fork_lr(t_philo *phi, t_philo_data *data, int l_r);
 void	eat_time(t_philo *phi, t_philo_data *d);
 void	let_fork_lr(t_philo *phi, t_philo_data *data, int l_r);
