@@ -3,34 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:11:36 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/07 13:30:59 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/09 17:21:23 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iostream>
+
+void get_choice(std::string *in)
+{
+	std::cout << "Do you want to add a contact? Type ADD" << std::endl;
+	std::cout << "Do you search a contact? Type SEARCH" << std::endl;
+	std::cout << "to exit, type EXIT" << std::endl;
+	std::cin >> *in;
+}
 
 int main(void)
 {
-	char *in;
+	std::string in = "a";
 	PhoneBook phone;
 
-	std::cin >> in;
-	while (in)
+	while (in.size() > 0)
 	{
-		if (!strcmp(in, "ADD"))
+		get_choice(&in);
+		if (!std::strcmp(in.c_str(), "ADD"))
 		{
-
+			phone.add();
 		}
-		else if (!strcmp(in, "SEARCH"))
+		else if (!std::strcmp(in.c_str(), "SEARCH"))
 		{
-			
+			phone.search();
 		}
-		else if (!strcmp(in, "EXIT"))
+		else if (!std::strcmp(in.c_str(), "EXIT"))
 		{
+			phone.exit();
 			break;
 		}
 		else
@@ -38,5 +46,6 @@ int main(void)
 			std::cout << "BAD ENTRY ! TRY AGAIN" << std::endl;
 		}
 	}
-	return 0;
+	system("leaks My_Phone");
+	return (0);
 }
