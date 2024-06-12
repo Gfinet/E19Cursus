@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:02:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/11 21:26:39 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/11 22:40:01 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ PhoneBook::PhoneBook(const PhoneBook &other)
 		this->lst[i] = *tmp;
 		i++;
 	}
+	delete tmp;
 }
 
 PhoneBook& PhoneBook::operator=(const PhoneBook &other)
@@ -144,19 +145,18 @@ void PhoneBook::add(void)
 	new_cont->set_dark_secret(str);
 	while ( i < this->nb_cont)
 		i++;
-	std::cout << "i : " << i << std::endl;
-	std::cout << "old_cont : " << this->old_cont << std::endl;
-	if (i == 7)
+	if (i == 8)
 	{
 		//delete &lst[old_cont];
 		lst[old_cont] = *new_cont;
 		old_cont++;
-		old_cont *= (old_cont != 7);
+		old_cont *= (old_cont != 8);
 	}
 	else
 		lst[this->nb_cont] = *new_cont;
-	if (this->nb_cont < 7)
+	if (this->nb_cont < 8)
 		this->nb_cont++;
+	delete new_cont;
 }
 
 void PhoneBook::search(void)
