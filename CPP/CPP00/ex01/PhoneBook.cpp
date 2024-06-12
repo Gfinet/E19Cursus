@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:02:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/11 22:40:01 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/12 17:22:45 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void PhoneBook::add(void)
 		i++;
 	if (i == 8)
 	{
-		//delete &lst[old_cont];
 		lst[old_cont] = *new_cont;
 		old_cont++;
 		old_cont *= (old_cont != 8);
