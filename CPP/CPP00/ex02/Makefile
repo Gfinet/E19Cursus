@@ -1,12 +1,13 @@
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror #-std=c++98 #-fsanitize=address -g3
 
-SRC = megaphone.cpp
+SRC =	tests.cpp \
+		Account.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = megaphone
+NAME = test
 
 
 .PHONY: all clean fclean re
@@ -15,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
-	@echo "megaphone made"
+	@echo "test ready"
 
 %.o : %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@ 
