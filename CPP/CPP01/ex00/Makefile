@@ -1,14 +1,15 @@
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror #-std=c++98 -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-std=c++98 #-fsanitize=address -g3
 
-SRC =	main.cpp \
-		Contact.cpp \
-		PhoneBook.cpp
+SRC =	main.cpp		\
+		Zombie.cpp		\
+		newZombie.cpp	\
+		randomChump.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = My_Phone
+NAME = Zombie
 
 
 .PHONY: all clean fclean re
@@ -17,7 +18,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
-	@echo "Phone ready"
+	@echo "test ready"
 
 %.o : %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@ 
