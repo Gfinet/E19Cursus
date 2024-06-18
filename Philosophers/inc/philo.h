@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:54:49 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/05 14:15:20 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/18 17:32:27 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
-#include <stdatomic.h>
+# include <stdatomic.h>
 
 typedef struct s_philo		t_philo;
 typedef struct s_philo_data	t_philo_data;
@@ -47,7 +47,7 @@ typedef struct s_philo
 	int					r_hand;
 	int					has_eat;
 	atomic_int			nb_diner;
-	atomic_long				time;
+	atomic_long			time;
 	pthread_t			thread;
 	t_philo_data		*arg;
 }	t_philo;

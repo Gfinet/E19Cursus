@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
+/*   Updated: 2024/06/18 19:21:36 by gfinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 
 int Fixed::_nbBit = 8;
@@ -18,11 +30,28 @@ Fixed::Fixed(int n)
 }
 Fixed::Fixed(float n)
 {
-	int e = 0,f = 0;
+	int neg = 0, valI = 0;
+	float reste = 0;
+
+	std::cout << "n    " << n << '\n';
+	neg = (n < 0);
 	
-	f = n >> 24;
+	if (neg)
+	{
+		valI = -(int)n;
+		reste = n + valI;
+	}
+	else
+	{
+		valI = (int)n;
+		reste = n - valI;
+	}
+	
+	std::cout << "neg  " << neg << '\n';
+	std::cout << "valI " << valI << '\n';
+	std::cout << "rest " << reste << '\n';
 	std::cout << "Default constructor called\n";
-	_intVal = n;
+	//_intVal = n;
 }
 Fixed::Fixed(const Fixed &other)
 {
@@ -56,19 +85,19 @@ Fixed&	Fixed::operator=( Fixed const &other )
 void Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits member function called\n";
-	_val = raw;
+	_intVal = raw;
 }
 
 int Fixed::toInt( void ) const
 {
-	int val(_val);
+	int val(_intVal);
 
 	return val;
 }
 
 float Fixed::toFloat( void ) const
 {
-	float val(_val);
+	float val(_intVal);
 	//std::cout << val << "\n";
 	return val;
 }
@@ -87,6 +116,6 @@ int Fixed::getRawBits(void) const
 
 std::ostream &operator<<( std::ostream &o, Fixed const &i )
 {
-	o << i.getRawBits();
+	o << i.getRawBits() ; //<< " " <<  i._floatVal;
 	return o;
 }

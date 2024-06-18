@@ -6,16 +6,16 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 15:23:11 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/05 15:15:12 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/18 17:33:40 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void my_sleep(long duration)
+void	my_sleep(long duration)
 {
-	long time;
-	
+	long	time;
+
 	time = get_time(0) + duration;
 	while (get_time(0) < time)
 		usleep(100);
@@ -55,8 +55,6 @@ int	check_end(t_philo_data *d)
 		i++;
 		i = i % d->nb_philo;
 	}
-
-		
 	i = 0;
 	while (i < d->nb_philo)
 		pthread_mutex_unlock(&d->fork[i++]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:42:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/18 01:29:22 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/18 17:59:17 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	int main( void ) {
 	Fixed a;
 	Fixed const b( 10 );
-	Fixed const c( 42.42f );
+	Fixed const c( - 42.42f );
 	Fixed const d( b );
 	a = Fixed( 1234.4321f );
 	std::cout << "a is " << a << std::endl;

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 21:58:46 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/05 15:14:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/18 17:32:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	take_fork_lr(t_philo *phi, t_philo_data *d, int l_r)
 		return ;
 	pthread_mutex_lock(mut_fork);
 	*hand = 1;
-	//printf("%d loc %d\n", phi->num, fork);
 	d->forks[fork] = 1;
 	if (!d->is_dead)
 		printf("\033[0;33m%ld  %d has taken a fork\n\033[0m",
@@ -54,7 +53,6 @@ void	let_fork_lr(t_philo *phi, t_philo_data *data, int l_r)
 		hand = &phi->l_hand;
 	}
 	data->forks[fork] = 0;
-	//printf("%d unl %d\n", phi->num, fork);
 	*hand = 0;
 	pthread_mutex_unlock(mut_fork);
 }
