@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/18 01:44:07 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:25:57 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 class Fixed
 {
 	private:
-		int _intVal;
-		int _floatVal;
+		int _val;
 		static int _nbBit;
 
 	public:

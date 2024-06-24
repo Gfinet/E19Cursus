@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/18 19:21:36 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/24 16:26:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ int Fixed::_nbBit = 8;
 Fixed::Fixed()
 {
 	std::cout << "Default constructor called\n";
-	_intVal = 0;
-	_floatVal = 0;
+	_val = 0;
 }
 Fixed::Fixed(int n)
 {
 	std::cout << "Default constructor called\n";
-	_intVal = n;
-	_floatVal = 0;
+	_val = n;
 }
 Fixed::Fixed(float n)
 {
@@ -36,6 +34,7 @@ Fixed::Fixed(float n)
 	std::cout << "n    " << n << '\n';
 	neg = (n < 0);
 	
+
 	if (neg)
 	{
 		valI = -(int)n;
@@ -56,7 +55,7 @@ Fixed::Fixed(float n)
 Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called\n";
-	_intVal = other._intVal;
+	_val = other._val;
 }
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -73,7 +72,7 @@ Fixed&	Fixed::operator=( Fixed const &other )
 {
 	std::cout << "Copy Assignement operator called\n";
 	if (this != &other)
-		this->_intVal = other.getRawBits();
+		this->_val = other.getRawBits();
 	return *this;
 }
 
@@ -85,19 +84,19 @@ Fixed&	Fixed::operator=( Fixed const &other )
 void Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits member function called\n";
-	_intVal = raw;
+	_val = raw;
 }
 
 int Fixed::toInt( void ) const
 {
-	int val(_intVal);
+	int val(_val);
 
 	return val;
 }
 
 float Fixed::toFloat( void ) const
 {
-	float val(_intVal);
+	float val(_val);
 	//std::cout << val << "\n";
 	return val;
 }
@@ -109,7 +108,7 @@ float Fixed::toFloat( void ) const
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called\n";
-	return (this->_intVal);
+	return (this->_val);
 }
 
 /* ************************************************************************** */
