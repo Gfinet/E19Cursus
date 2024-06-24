@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 15:51:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/24 18:27:41 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/24 21:57:09 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,45 @@ void print_circle(t_draw *draw)
 
 	while (++i < draw->w)
 	{
-		j = 0;
+		j=0;
 		while (j < draw->h)
-			printf("%c",draw->zone[i][j++]);
+			printf("%c ",draw->zone[draw->w - 1 - i][j++]);
 		printf("\n");
 	}
 }
 
 void draw_circle(t_draw *draw, t_circle *circ)
 {
-	int i = -1, j;
+	int x = -1, y;
 
-	while (++i < draw->w)
+	while (++x < draw->w)
 	{
-		j = 0;
-		while (j < draw->h)
-			draw->zone[i][j++] = draw->c;
+		y = 0;
+		while (y < draw->h)
+			draw->zone[x][y++] = draw->c;
 	}
-	i = -1;
+	// draw->zone[0][0] = '0';
+	// draw->zone[draw->w - 1][draw->h - 3] = '1';
+	//center = (circ->x, circ->x)
+	// srqt((Xa - Xb) * (Xa - Xb) + (Ya - Yb) * (Ya - Yb))
+	// distance de point du cercle et centre + 1 < rayon => dans le cercle
+	x = -1;
+	while (++x < draw->w)
+	{
+		y = 0;
+		while (y < draw->h)
+		{
+			if (sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y)) < circ->rad + 1)
+			{
+				if (!(sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y)) < circ->rad))// pour 'c'
+					draw->zone[x][y] = circ->c;
+			}
+			//printf("(%d, %d)%f\n",x, y, sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y)));
+			y++;
+		}
+	}
 	print_circle(draw);
-	i += circ->c;
+	x += circ->c;
 }
 
 int main(int argc, char **argv)
@@ -77,17 +96,6 @@ int main(int argc, char **argv)
 		printf("c : %c, X : %f, Y : %f, rad : %f, cic : %c\n", circ.mt_fu, circ.x, circ.y, circ.rad, circ.c);
 		draw_circle(&draw, &circ);
 	}
-	// while (st_line + line_len < 100)
-	// {
-	// 	st_line = line_len + 1;
-	// 	line_len = 0;
-	// 	while (buff[st_line + line_len] && buff[st_line + line_len] != '\n' && st_line + line_len < 100)
-	// 	{
-	// 		line_len++;
-	// 	}
-	// 	//make_round(&buff[st_line], line_len, buff[st_line] == 'c');
-	// }
-	//printf("%s\n", buff);
 	free_zone(draw.zone, draw.w);
 	fclose(fd);
 	printf("\n\n");
