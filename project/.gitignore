@@ -1,6 +1,0 @@
-libftprintf.a
-*.o
-*/*.o
-*/*/*.o
-*/*/*/*.o
-cub3d
