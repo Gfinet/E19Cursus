@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 15:51:02 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/24 21:57:09 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/25 17:30:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ void print_circle(t_draw *draw)
 			printf("%c ",draw->zone[draw->w - 1 - i][j++]);
 		printf("\n");
 	}
+	//printf("1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30\n");
 }
 
 void draw_circle(t_draw *draw, t_circle *circ)
 {
-	int x = -1, y;
+	int x = -1, y, res;
 
 	while (++x < draw->w)
 	{
@@ -43,23 +44,18 @@ void draw_circle(t_draw *draw, t_circle *circ)
 		while (y < draw->h)
 			draw->zone[x][y++] = draw->c;
 	}
-	// draw->zone[0][0] = '0';
-	// draw->zone[draw->w - 1][draw->h - 3] = '1';
-	//center = (circ->x, circ->x)
-	// srqt((Xa - Xb) * (Xa - Xb) + (Ya - Yb) * (Ya - Yb))
-	// distance de point du cercle et centre + 1 < rayon => dans le cercle
 	x = -1;
 	while (++x < draw->w)
 	{
 		y = 0;
 		while (y < draw->h)
 		{
-			if (sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y)) < circ->rad + 1)
+			res = sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y));
+			if ( res < circ->rad + 1)
 			{
-				if (!(sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y)) < circ->rad))// pour 'c'
+				if ((!(res < circ->rad) && circ->mt_fu == 'c') || (circ->mt_fu == 'C' && res < circ->rad + 1))// pour 'c'
 					draw->zone[x][y] = circ->c;
 			}
-			//printf("(%d, %d)%f\n",x, y, sqrtf((y + 1 - circ->x) * (y + 1 - circ->x) + (x - circ->y) * (x - circ->y)));
 			y++;
 		}
 	}
@@ -74,7 +70,7 @@ int main(int argc, char **argv)
 	t_circle circ;
 	t_draw draw;
 	if (argc != 2)
-		return (write(2, "Error: argument\n", 17), 1);
+		return (write(1, "Error: argument\n", 17), 1);
 	fd = fopen(argv[1], "r");
 	if (!fd)
 		return (printf("oh"), 1);
@@ -94,6 +90,8 @@ int main(int argc, char **argv)
 	while (fscanf(fd, "%c %f %f %f %c\n", &circ.mt_fu, &circ.x, &circ.y, &circ.rad, &circ.c) != -1)
 	{
 		printf("c : %c, X : %f, Y : %f, rad : %f, cic : %c\n", circ.mt_fu, circ.x, circ.y, circ.rad, circ.c);
+		if (circ.rad < 0 || (circ.mt_fu != 'c' && circ.mt_fu != 'C'))
+			return (0);
 		draw_circle(&draw, &circ);
 	}
 	free_zone(draw.zone, draw.w);
