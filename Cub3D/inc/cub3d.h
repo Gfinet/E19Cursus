@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:41:55 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/12 21:34:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/06/29 13:03:37 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct s_cube
 
 //handle_event.c
 void	esc_handle(void *f);
-void	key_event(void *f);
-void	mouse_event(void *cube);
+void	key_event(mlx_key_data_t keydata, void *f);
+void	mouse_event(mouse_key_t button, action_t action, modifier_key_t mods, void *cube);
+void	scroll_event(double xdelta, double ydelta, void* param);
+void	add_event(void *param);
 
 #endif
