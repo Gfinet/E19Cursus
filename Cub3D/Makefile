@@ -25,7 +25,7 @@ all: libmlx42.a $(NAME)
 	
 
 $(NAME): $(OBJ) libftprintf.a 
-	$(CC) $(CFLAGS) $(HEADERS) $(LIBS) $^ -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
+	@$(CC) $(CFLAGS) $(HEADERS) $(LIBS) $^ -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 	@echo "Cube3d made"
 
 %.o : %.c

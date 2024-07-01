@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:41:55 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/29 13:03:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/07/01 15:56:20 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ typedef struct s_cube
 
 }	t_cube;
 
+
+typedef struct s_img
+{
+	void *img;
+	xpm_t *texture;
+	char *path;
+	int witdh;
+	int height;
+	
+}	t_img;
 
 //handle_event.c
 void	esc_handle(void *f);
