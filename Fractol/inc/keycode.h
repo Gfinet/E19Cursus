@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:47:34 by gfinet            #+#    #+#             */
-/*   Updated: 2024/04/14 20:32:19 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/07/01 18:13:59 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@
 # define A 0
 # define S 1
 # define D 2
-# define M_CLICK 3
-# define M_DW 4
-# define M_UP 5
+
 # define C 8
 # define LEFT 123
 # define RIGHT 124
 # define DW 125
 # define UP 126
+
+# define M_CLICK 3
+# define M_DW 4
+# define M_UP 5
 # define ZERO 29
 # define L_SH 257
 # define R_SH 258

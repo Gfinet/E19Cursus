@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/06/24 16:26:21 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/08/16 18:23:24 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,11 @@ Fixed::Fixed()
 Fixed::Fixed(int n)
 {
 	std::cout << "Default constructor called\n";
-	_val = n;
+	_val = roundf(n * (1 << _nbBit));
 }
 Fixed::Fixed(float n)
 {
-	int neg = 0, valI = 0;
-	float reste = 0;
-
-	std::cout << "n    " << n << '\n';
-	neg = (n < 0);
-	
-
-	if (neg)
-	{
-		valI = -(int)n;
-		reste = n + valI;
-	}
-	else
-	{
-		valI = (int)n;
-		reste = n - valI;
-	}
-	
-	std::cout << "neg  " << neg << '\n';
-	std::cout << "valI " << valI << '\n';
-	std::cout << "rest " << reste << '\n';
+	_val = roundf(n * (1 << _nbBit));
 	std::cout << "Default constructor called\n";
 	//_intVal = n;
 }
@@ -89,16 +69,13 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt( void ) const
 {
-	int val(_val);
 
-	return val;
+	return roundf(toFloat());
 }
 
 float Fixed::toFloat( void ) const
 {
-	float val(_val);
-	//std::cout << val << "\n";
-	return val;
+	return (float)this->_val / (float)(1 << this->_nbBit);
 }
 
 /*
@@ -107,7 +84,7 @@ float Fixed::toFloat( void ) const
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called\n";
+	//std::cout << "getRawBits member function called\n";
 	return (this->_val);
 }
 
@@ -115,6 +92,6 @@ int Fixed::getRawBits(void) const
 
 std::ostream &operator<<( std::ostream &o, Fixed const &i )
 {
-	o << i.getRawBits() ; //<< " " <<  i._floatVal;
+	o << i.toFloat();
 	return o;
 }
