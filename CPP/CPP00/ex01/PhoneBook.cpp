@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:02:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/12 17:22:45 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/08/20 19:10:57 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,40 +122,45 @@ void PhoneBook::set_contact(Contact c, int i)
 	this->nb_cont++;
 }
 
+static std::string add_info(std::string question, int f)
+{
+	std::string str("");
+
+	if (f)
+		std::cout << question << std::endl;
+	while (1)
+	{
+		getline(std::cin, str);
+		if (str.length())
+			break;
+		std::cout << question << std::endl;
+	}
+	return (str);
+}
+
 void PhoneBook::add(void)
 {
 	int i = 0;
 	std::string str;
-	Contact *new_cont = new Contact;
+	Contact new_cont;
 	
-	std::cout << "What's the first name?" << std::endl; 
-	std::cin >> str;
-	new_cont->set_first_name(str);
-	std::cout << "What's the last name?" << std::endl; 
-	std::cin >> str;
-	new_cont->set_last_name(str);
-	std::cout << "What's the nickname?" << std::endl; 
-	std::cin >> str;
-	new_cont->set_nick_name(str);
-	std::cout << "What's the number?" << std::endl; 
-	std::cin >> str;
-	new_cont->set_phone_number(str);
-	std::cout << "What's the dark secret?" << std::endl; 
-	std::cin >> str;
-	new_cont->set_dark_secret(str);
+	new_cont.set_first_name(add_info("What's the first name?", 0));
+	new_cont.set_last_name(add_info("What's the last name?", 1));
+	new_cont.set_nick_name(add_info("What's the nickname?", 1));
+	new_cont.set_phone_number(add_info("What's the number?", 1));
+	new_cont.set_dark_secret(add_info("What's the dark secret?", 1));
 	while ( i < this->nb_cont)
 		i++;
 	if (i == 8)
 	{
-		lst[old_cont] = *new_cont;
+		lst[old_cont] = new_cont;
 		old_cont++;
 		old_cont *= (old_cont != 8);
 	}
 	else
-		lst[this->nb_cont] = *new_cont;
+		lst[this->nb_cont] = new_cont;
 	if (this->nb_cont < 8)
 		this->nb_cont++;
-	delete new_cont;
 }
 
 void PhoneBook::search(void)
