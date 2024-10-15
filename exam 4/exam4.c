@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:49:45 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/14 21:37:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/15 19:52:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,87 +62,119 @@ int count_proc(char **av, char **sep)
 	return (nb);
 }
 
-int back_dup(t_cmd *cmd)
+void launch_cmd(t_cmd *cmd, char **envp, int pip[2], int pipe_fd[2])
 {
-	printf("backdup\n");
-	if (dup2(cmd->pipe[0], STDIN_FILENO) == -1)
-		return (0);
-	return (1);
+	printf("launch cmd %s\n", cmd->buff[0]);
+    // Si c'est une commande avec un pipe en sortie
+    if (pip[0] && cmd->sep[cmd->cur] == '|')
+        if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+            exit(EXIT_FAILURE);
+
+    // Si c'est une commande avec un pipe en entrée
+    if (pip[1] && cmd->cur > 0 && cmd->sep[cmd->cur - 1] == '|')
+        if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+            exit(EXIT_FAILURE);
+
+    if (pipe_fd[0] > 2)
+		close(pipe_fd[0]);
+    if (pipe_fd[1] > 2)
+		close(pipe_fd[1]);
+
+    execve(cmd->buff[0], cmd->buff, envp);
+    exit(EXIT_FAILURE);
 }
 
-int next_dup(t_cmd *cmd)
-{
-	printf("nextdup\n");
-	if (dup2(cmd->pipe[1], STDOUT_FILENO) == -1)
-		return (0);
-	return (1);
-}
 
-void launch_cmd(t_cmd *cmd, char **envp, int pip)
+void print_cmd(char **buff)
 {
-	printf("pip %d\n", pip);
-	if (cmd->cur > 1)
-		printf("cur %d\n", cmd->cur);
-	if (pip && cmd->nb_cmd > 1 && cmd->cur > 0 && cmd->sep[cmd->cur - 1] == '|'
-		&& back_dup(cmd))
-		exit(EXIT_FAILURE);
-	if (pip && cmd->cur < cmd->nb_cmd - 1 && cmd->sep[cmd->cur] == '|'
-		&& next_dup(cmd))
-		exit(EXIT_FAILURE);
-	if (cmd->pipe[0] > 2)
-		close(cmd->pipe[0]);
-	if (cmd->pipe[1] > 2)
-		close(cmd->pipe[1]);
-	execve(cmd->buff[0], cmd->buff, envp);
-	exit(EXIT_FAILURE);
+	int k = 0;
+
+	while (buff[k])
+			printf("%s ", buff[k++]);
+		printf("\n");
 }
 
 int main(int ac, char **av, char **env)
 {
-	t_cmd cmd;
-	int i, k, inf, pip[2];
+    t_cmd cmd;
+    int i, inf = -1, pip[2], pipe_fd[2];
 
-	i = 0;
-	cmd = (t_cmd){0};
-	if (ac < 2)
-		return (1);
-	cmd.nb_cmd = count_proc(av, &cmd.sep);
-	printf("nb : %d\nsep : [%s]\n", cmd.nb_cmd, cmd.sep);
-	cmd.proc = malloc(sizeof(pid_t) * (cmd.nb_cmd + 1));
-	while (i++ < ac)
-	{
-		cmd.buff = cut_cmd(&i, av);
-		if (!cmd.buff)
-			return (write(2, "error: fatal\n", 13), 1);
-		
-		// k = 0;
-		// while (cmd.buff[k])
-		// 	printf("%s ", cmd.buff[k++]);
-		// printf("\n");
-		pip[0] = (cmd.nb_cmd > 1 && cmd.sep[cmd.cur] == '|');
-		pip[1] = (cmd.cur && cmd.cur < cmd.nb_cmd && cmd.sep[cmd.cur - 1] == '|');
-		printf("\nsssep %c\n", cmd.sep[cmd.cur]);
-		if ((cmd.nb_cmd > 1 && cmd.sep[cmd.cur] == '|') && printf("PIPE\n") && pipe(cmd.pipe) < 0)
-				return (write(2, "error: fatal\n", 13), 1);
+    i = 0;
+    cmd = (t_cmd){0};
+    if (ac < 2)
+        return (1);
 
-		cmd.proc[cmd.cur] = fork();
-		if (cmd.proc[cmd.cur] == 0)
-			launch_cmd(&cmd, env, pip[0] || pip[1]);
-		inf = cmd.pipe[0];
-		if (cmd.pipe[0] > 2)
-			close(cmd.pipe[0]);
-		cmd.pipe[0] = inf;
-		if (cmd.pipe[1] > 2)
-			close(cmd.pipe[1]);
-			printf("pipe %d %d\n", cmd.pipe[0], cmd.pipe[1]);
-		free(cmd.buff);
-		cmd.cur++;
-	}
-	cmd.cur = -1;
-	while (++cmd.cur < cmd.nb_cmd)
-		waitpid(cmd.proc[cmd.cur], 0, 0);
-	k = 0;
-	free(cmd.proc);
-	free(cmd.sep);
-	return (0);
+    cmd.nb_cmd = count_proc(av, &cmd.sep);
+    printf("nb : %d\nsep : [%s]\n", cmd.nb_cmd, cmd.sep);
+    cmd.proc = malloc(sizeof(pid_t) * (cmd.nb_cmd + 1));
+
+    while (i++ < ac)
+    {
+        cmd.buff = cut_cmd(&i, av);
+        if (!cmd.buff)
+            return (write(2, "error: fatal\n", 13), 1);
+
+        //print_cmd(cmd.buff);
+
+        pip[0] = (cmd.nb_cmd > 1 && cmd.sep[cmd.cur] == '|');
+        pip[1] = (cmd.cur && cmd.cur < cmd.nb_cmd && cmd.sep[cmd.cur - 1] == '|');
+
+        if (pip[0] && printf("PIPE\n") && pipe(pipe_fd) < 0)
+            return (write(2, "error: fatal\n", 13), 1);
+
+        cmd.proc[cmd.cur] = fork();
+        if (cmd.proc[cmd.cur] == 0)
+			launch_cmd(&cmd, env, pip, (int[2]){inf, pipe_fd[1]});
+
+        if (inf != -1)
+            close(inf);
+        if (pip[0])
+		{
+            close(pipe_fd[1]);
+            inf = pipe_fd[0];
+        }
+		else
+			inf = -1;
+
+        free(cmd.buff);
+        cmd.cur++;
+    }
+    cmd.cur = -1;
+    while (++cmd.cur < cmd.nb_cmd)
+        waitpid(cmd.proc[cmd.cur], 0, 0);
+    free(cmd.proc);
+    free(cmd.sep);
+    return (0);
 }
+
+/*
+Meta_code :
+
+main()
+{
+	check_nb_arg();
+	while (iterateur de la ligne)
+	{
+		get_one_cmd();
+		setting_flag_for_pipe(pipe_entree_sortie);
+		if (pipe_entree_sortie[0])
+			pipe(pipe_fd);
+		fork()
+		{
+			launch_cmd(save_fd, pipe_fd[1], env);
+		}
+		if (save_fd != -1)
+			close(save_fd);
+		if (pipe_entree_sortie[0])
+		{
+			close(pipe_fd[0])
+			save_fd = pipe_fd[1];
+		}
+		else
+			save_fd = -1;
+	}
+	wait_proc();
+	free_all();
+}
+
+*/
