@@ -4,6 +4,7 @@ CFLAGS = -Wall -Wextra -Werror #-std=c++98 -fsanitize=address -g3
 
 SRC =	main.cpp		\
 		Dog.cpp 		\
+		Brain.cpp 		\
 		Cat.cpp 		\
 		Animal.cpp 		\
 		WrongCat.cpp 	\

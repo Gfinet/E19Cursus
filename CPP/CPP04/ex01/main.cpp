@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:53:55 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:18:16 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/28 16:40:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int main(void)
 
 		delete badmeta;
 		delete badj;
-		return 0;
+		std::cout << std::endl;
+		std::cout << std::endl;
 	}
 	{
 		Animal *list[16];
@@ -69,7 +70,11 @@ int main(void)
 			else
 				list[i] = new Cat();
 		}
-		list[0]->addIdea("eating's good !");
-		list[0]->addIdea("eating's good !");
+		std::cout << std::endl;
+		std::cout << std::endl;
+		i = -1;
+		while (++i < 16)
+			delete list[i];
 	}
+	return 0;
 }
