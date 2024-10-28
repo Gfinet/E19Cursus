@@ -6,13 +6,14 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:42:07 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/22 13:07:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/22 14:59:34 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main(void)
 {
@@ -49,5 +50,15 @@ int main(void)
 	Boom.highFivesGuys();
 	std::cout << std::endl;
 
+	DiamondTrap Jojo("Jojo");
+	Jojo.attack("Dio");
+	Jojo.takeDamage(50);
+	Jojo.beRepaired(25);
+	Jojo.attack("Dio");
+	Jojo.highFivesGuys();
+	Jojo.guardGate();
+	Jojo.whoAmI();
+	std::cout << std::endl;
+	
 	return 0;
 }

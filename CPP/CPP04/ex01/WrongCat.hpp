@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 19:14:26 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/22 13:17:01 by gfinet           ###   ########.fr       */
+/*   Created: 2024/10/28 11:42:32 by gfinet            #+#    #+#             */
+/*   Updated: 2024/10/28 15:09:17 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include <iostream>
-# include <string>
-# include "ClapTrap.hpp"
+# include "WrongAnimal.hpp"
 
-class ScavTrap : public ClapTrap
+// Class declaration
+class WrongCat : public WrongAnimal
 {
+	private:
+
+
 	public:
-
-		ScavTrap();
-		ScavTrap(std::string Name);
-		ScavTrap( ScavTrap const & src );
-		~ScavTrap();
-		ScavTrap &operator=( ScavTrap const & rhs );
-
-		void guardGate();
+		WrongCat();
+		WrongCat(const WrongCat &other);
+		WrongCat &operator=(const WrongCat &rhs);
+		~WrongCat();
+		
+		void makeSound();
 };
-#endif
+
+#endif // WRONGCAT_HPP

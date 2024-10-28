@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/18 01:27:10 by Gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/16 19:37:08 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Fixed
 		Fixed( Fixed const & src );
 		~Fixed();
 
-		Fixed &operator=( Fixed const & rhs );
+		Fixed& operator=( Fixed const & rhs );
 		int getRawBits( void ) const;
 		void setRawBits( int const raw);
 

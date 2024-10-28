@@ -2,14 +2,16 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror #-std=c++98 -fsanitize=address -g3
 
-SRC =	main.cpp	\
-		ClapTrap.cpp \
-		ScavTrap.cpp \
-		FragTrap.cpp \
+SRC =	main.cpp		\
+		Dog.cpp 		\
+		Cat.cpp 		\
+		Animal.cpp 		\
+		WrongCat.cpp 	\
+		WrongAnimal.cpp 	
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = FragTrap
+NAME = Animals
 
 
 .PHONY: all clean fclean re

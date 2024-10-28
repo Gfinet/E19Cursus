@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 14:49:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/28 14:52:46 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 
-FragTrap::FragTrap() : ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
-	this->Type = "FragTrap";
+	this->Type = "ScavTrap";
 	this->MaxHealth = 100;
 	this->Health = 100;
-	this->Energy = 100;
-	this->Attack = 30;
-	std::cout << "Empty constuctor called for FragTrap" << std::endl;
+	this->Energy = 50;
+	this->Attack = 20;
+	std::cout << "Empty constuctor called for ScavTrap " << this->Name << std::endl;
 }
 
-FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
+ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 {
-	this->Type = "FragTrap";
+	this->Type = "ScavTrap";
 	this->MaxHealth = 100;
 	this->Health = 100;
-	this->Energy = 100;
-	this->Attack = 30;
-	std::cout << "Constuctor called for FragTrap " << this->Name << std::endl;
+	this->Energy = 50;
+	this->Attack = 20;
+	std::cout << "Constuctor called for ScavTrap " << this->Name << std::endl;
 }
 
-FragTrap::FragTrap( FragTrap const & src )
+ScavTrap::ScavTrap( ScavTrap const & src )
 {
-	std::cout << "copy constructor called for FragTrap" << std::endl;
+	std::cout << "copy constructor called for ScavTrap " << this->Name << std::endl;
 	this->Name = src.Name;
 	this->Type = src.Type;
 	this->Attack = src.Attack;
@@ -44,14 +44,14 @@ FragTrap::FragTrap( FragTrap const & src )
 	this->Energy = src.Energy;
 }
 
-FragTrap::~FragTrap()
+ScavTrap::~ScavTrap()
 {
-	std::cout << "Destructor called for FragTrap " << this->Name << std::endl;
+	std::cout << "Destructor called for ScavTrap " << this->Name << std::endl;
 }
 
-FragTrap& FragTrap::operator=( FragTrap const & rhs )
+ScavTrap& ScavTrap::operator=( ScavTrap const & rhs )
 {
-	std::cout << "Assignator called for FragTrap" << std::endl;
+	std::cout << "Assignator called for ScavTrap " << this->Name << std::endl;
 	this->Name = rhs.Name;
 	this->Type = rhs.Type;
 	this->Attack = rhs.Attack;
@@ -61,7 +61,9 @@ FragTrap& FragTrap::operator=( FragTrap const & rhs )
 	return *this;
 }
 
-void FragTrap::highFivesGuys(void)
+void ScavTrap::guardGate()
 {
-	std::cout << "FragTrap " << this->Name << " made a High Five !" << std::endl;
+	//this->Energy--;
+	std::cout << this->Type << " " << this->Name << " is now in Gate keeper mode." << std::endl;
+	//std::cout << "Energy left : " << this->Energy << std::endl;
 }

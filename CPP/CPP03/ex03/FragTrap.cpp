@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 14:49:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/28 15:03:28 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ FragTrap::FragTrap() : ClapTrap()
 	this->Health = 100;
 	this->Energy = 100;
 	this->Attack = 30;
-	std::cout << "Empty constuctor called for FragTrap" << std::endl;
+	std::cout << "Empty constuctor called for FragTrap " << this->Name << std::endl;
 }
 
 FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
@@ -35,9 +35,9 @@ FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
 
 FragTrap::FragTrap( FragTrap const & src )
 {
-	std::cout << "copy constructor called for FragTrap" << std::endl;
-	this->Name = src.Name;
+	std::cout << "copy constructor called for FragTrap " << this->Name << std::endl;
 	this->Type = src.Type;
+	this->Name = src.Name;
 	this->Attack = src.Attack;
 	this->Health = src.Health;
 	this->MaxHealth = src.MaxHealth;
@@ -63,5 +63,5 @@ FragTrap& FragTrap::operator=( FragTrap const & rhs )
 
 void FragTrap::highFivesGuys(void)
 {
-	std::cout << "FragTrap " << this->Name << " made a High Five !" << std::endl;
+	std::cout << this->Type << " " << this->Name << " made a High Five !" << std::endl;
 }

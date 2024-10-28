@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 19:14:26 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/22 13:17:01 by gfinet           ###   ########.fr       */
+/*   Created: 2024/10/22 15:14:17 by gfinet            #+#    #+#             */
+/*   Updated: 2024/10/28 16:16:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef DOG_HPP
+#define DOG_HPP
 
-# include <iostream>
-# include <string>
-# include "ClapTrap.hpp"
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-class ScavTrap : public ClapTrap
+// Class declaration
+class Dog : public Animal
 {
+	private:
+		Brain* brain;
+		
 	public:
+		Dog();
+		Dog(const Dog &other);
+		Dog &operator=(const Dog &rhs);
+		~Dog();
 
-		ScavTrap();
-		ScavTrap(std::string Name);
-		ScavTrap( ScavTrap const & src );
-		~ScavTrap();
-		ScavTrap &operator=( ScavTrap const & rhs );
-
-		void guardGate();
+		Brain* getBrain();
+		void addIdea(std::string idea);
+		void makeSound();
 };
-#endif
+
+#endif // DOG_HPP_

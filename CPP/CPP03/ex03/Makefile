@@ -1,15 +1,16 @@
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror #-std=c++98 -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -Wpedantic #-std=c++98 -fsanitize=address -g3
 
 SRC =	main.cpp	\
 		ClapTrap.cpp \
 		ScavTrap.cpp \
 		FragTrap.cpp \
+		DiamondTrap.cpp 
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = FragTrap
+NAME = DiamongTrap
 
 
 .PHONY: all clean fclean re

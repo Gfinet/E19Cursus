@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 19:14:26 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/22 13:17:01 by gfinet           ###   ########.fr       */
+/*   Created: 2024/10/28 15:42:31 by gfinet            #+#    #+#             */
+/*   Updated: 2024/10/28 16:03:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
 
-# include <iostream>
-# include <string>
-# include "ClapTrap.hpp"
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
-class ScavTrap : public ClapTrap
-{
+#include <iostream>
+#include <string>
+
+// Class declaration
+class Brain {
+
+	private:
+		std::string ideas[100];
+		int nbIdeas;
 	public:
+		Brain();
+		Brain(const Brain &other);
+		Brain &operator=(const Brain &rhs);
+		~Brain();
 
-		ScavTrap();
-		ScavTrap(std::string Name);
-		ScavTrap( ScavTrap const & src );
-		~ScavTrap();
-		ScavTrap &operator=( ScavTrap const & rhs );
-
-		void guardGate();
+		int getNbIdeas();
+		std::string getIdeas(int i);
+		void addIdea(std::string idea);
 };
-#endif
+
+#endif // BRAIN_HPP

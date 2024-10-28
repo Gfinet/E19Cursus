@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 14:45:31 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/10/28 14:50:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 ClapTrap::ClapTrap() : Type("ClapTrap"), Name("Bobby"), MaxHealth(10), Health(10), Energy(10), Attack(10)
 {
-	std::cout << "Empty constuctor called for " << this->Type << " " << this->Name << std::endl;
+	std::cout << "Empty constuctor called for ClapTrap " << this->Name << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string Name) : Type("ClapTrap"), Name(Name), MaxHealth(10), Health(10), Energy(10), Attack(10)
 {
-	std::cout << "Constuctor called for " << this->Type << " " << this->Name << std::endl;
+	std::cout << "Constuctor called for ClapTrap " << this->Name << std::endl;
 }
 
 ClapTrap::ClapTrap( ClapTrap const & src )
@@ -28,20 +28,20 @@ ClapTrap::ClapTrap( ClapTrap const & src )
 	std::cout << "copy constructor called for ClapTrap " << std::endl;
 	this->Type = src.Type;
 	this->Name = src.Name;
-	this->Attack = src.Attack;
 	this->MaxHealth = src.MaxHealth;
 	this->Health = src.Health;
+	this->Attack = src.Attack;
 	this->Energy = src.Energy;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called for " << this->Type << " " << this->Name << std::endl;
+	std::cout << "Destructor called for ClapTrap " << this->Name << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=( ClapTrap const & rhs )
 {
-	std::cout << "Assignator called for " << this->Type << " " << this->Name << std::endl;
+	std::cout << "Assignator called for ClapTrap " << this->Name << std::endl;
 	this->Type = rhs.Type;
 	this->Name = rhs.Name;
 	this->MaxHealth = rhs.MaxHealth;
