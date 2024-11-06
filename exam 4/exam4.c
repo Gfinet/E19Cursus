@@ -187,8 +187,9 @@ main()
 			close(save_fd);
 		if (pipe_entree_sortie[0])
 		{
-			close(pipe_fd[0])
-			save_fd = pipe_fd[1];
+			close(pipe_fd[1])
+			save_fd = pipe_fd[0];
+   			close(pipe_fd[0]); //?
 		}
 		else
 			save_fd = -1;
