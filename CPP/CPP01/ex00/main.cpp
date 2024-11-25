@@ -17,14 +17,14 @@ int main(void)
 	Zombie a("Jacques"), b("JM");
 	Zombie *c, *d;
 
-	std::cout << "on pile\n";
+	std::cout << "[on pile]\n";
 	a.announce();
 	b.announce();
 	randomChump("Jean");
 	randomChump("Bob");
 	randomChump("Michael Jackson");
 	
-	std::cout << "\non stack\n";
+	std::cout << "\n[on stack]\n";
 	c = newZombie("JustUngraved");
 	d = newZombie("Bobby");
 

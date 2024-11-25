@@ -18,10 +18,11 @@ int main()
 	std::string *stringPTR = &base;
 	std::string &stringREF = base;
 
-	std::cout << "base : " << base << '\n';
-	std::cout << "PTR  : " << stringPTR << '\n';
-	std::cout << "REF  : " << stringREF << '\n';
-
+	std::cout << "[base = ´HI THIS IS BRAIN´] base : " << base << '\n';
+	std::cout << "[stringPTR = &base]        PTR  : " << stringPTR << '\n';
+	std::cout << "[&stringREF = base]         REF  : " << stringREF << '\n';
+	stringREF = *stringPTR;
+	std::cout << "[stringREF = *stringPTR;]   REF  : " << stringREF << '\n';
 
 	return (0);
 }

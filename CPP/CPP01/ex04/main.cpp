@@ -23,7 +23,7 @@ int openFiles(std::ifstream &rFile, std::ofstream &wFile, char **argv)
 		return (0);
 	wName.append(argv[1]);
 	wName.append(".replace");
-	wFile.open(wName);
+	wFile.open(wName.c_str());
 	if (!wFile.good())
 		return (0);
 	return (1);
@@ -77,9 +77,15 @@ int main(int argc, char **argv)
 	std::ifstream rFile;
 	std::ofstream wFile;
 	if (argc != 4)
+	{
+		std::cout << "Not enough arg" << std::endl;
 		return (0);
+	}
 	if (!openFiles(rFile, wFile, argv))
+	{
+		std::cout << "Not able to locate " << argv[1] << std::endl;
 		return (0);
+	}
 	strReplace(rFile, wFile, argv[2], argv[3]);
 	return 0;
 }

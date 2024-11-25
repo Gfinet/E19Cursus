@@ -63,12 +63,15 @@ void Harl::complain(std::string level)
 	{
 		case 0:
 			debug();
+			goto case1;
 		case 1:
-			info();
+		case1: info();
+			goto case2;
 		case 2:
-			warning();
+			case2: warning();
+			goto case3;
 		case 3:
-			error();
+			case3: error();
 			break;
 		default:
 			std::cout << "[Probably complaining about insignificant problems]\n";
