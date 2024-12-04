@@ -27,8 +27,7 @@ Point::Point(float const x, float const y) : _x(x), _y(y)
 
 Point::Point(Point const &src)
 {
-	this->_x = src._x;
-	this->_y = src._y;
+	*this = src;
 }
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -52,11 +51,11 @@ Point &Point::operator=(Point const &rhs)
 
 void	Point::set_x(float x)
 {
-	_x = x;
+	_x = Fixed(x);
 }
 void	Point::set_y(float y)
 {
-	_y = y;
+	_y = Fixed(y);
 }
 void	Point::set_x(Fixed x)
 {
