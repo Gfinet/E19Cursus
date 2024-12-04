@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   AAnimal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/24 16:25:57 by gfinet           ###   ########.fr       */
+/*   Created: 2024/10/22 15:09:36 by gfinet            #+#    #+#             */
+/*   Updated: 2024/10/28 15:25:28 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+
+#ifndef AANIMAL_HPP
+# define AANIMAL_HPP
 
 # include <iostream>
 # include <string>
 
-class Fixed
+// Class declaration
+class AAnimal
 {
 	private:
-		int _val;
-		static int _nbBit;
-
+	
+	protected:
+		std::string type;
+		AAnimal();
 	public:
+		AAnimal(const AAnimal &other);
+		AAnimal &operator=(const AAnimal &rhs);
+		virtual ~AAnimal();
 
-		Fixed();
-		Fixed(const int n);
-		Fixed(const float n);
-		Fixed( Fixed const & src );
-		~Fixed();
-
-		Fixed &operator=( Fixed const & rhs );
-		int getRawBits( void ) const;
-		void setRawBits( int const raw);
-		float toFloat( void ) const;
-		int toInt( void ) const;
-
+		const std::string getType();
+		virtual void makeSound();
+  
 };
 
-std::ostream &operator<<( std::ostream &o, Fixed const &i );
-
-#endif
+#endif // AANIMAL_HPP_

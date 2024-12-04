@@ -12,7 +12,7 @@
 
 #include "Dog.hpp"
 #include "Cat.hpp"
-//#include "Animal.hpp"
+//#include "AAnimal.hpp"
 #include "WrongCat.hpp"
 //#include "WrongAnimal.hpp"
 
@@ -22,9 +22,9 @@
 int main(void)
 {
 	{
-		Animal* meta = new Animal();
-		Animal* j = new Dog();
-		Animal* i = new Cat();
+		//AAnimal* meta = new Animal();
+		AAnimal* j = new Dog();
+		AAnimal* i = new Cat();
 		std::cout << std::endl;
 		std::cout << "Cat type : " << i->getType() << " " << std::endl;
 		std::cout << "Dog type : " << j->getType() << " " << std::endl;
@@ -34,11 +34,11 @@ int main(void)
 		i->makeSound(); //will output the cat sound!
 		std::cout << "Dog sound : " << std::endl;
 		j->makeSound();
-		std::cout << "Animal sound ? : " << std::endl;
-		meta->makeSound();
-		std::cout << std::endl;
+		// std::cout << "AAnimal sound ? : " << std::endl;
+		// meta->makeSound();
+		// std::cout << std::endl;
 		
-		delete meta;
+		//delete meta;
 		delete j;
 		delete i;
 	}
@@ -51,7 +51,7 @@ int main(void)
 
 		std::cout << "WrongCat sound ? : " << std::endl;
 		badj->makeSound();
-		std::cout << "WrongAnimal sound ? : " << std::endl;
+		std::cout << "WrongAAnimal sound ? : " << std::endl;
 		badmeta->makeSound();
 		std::cout << std::endl;
 		std::cout << std::endl;
@@ -62,7 +62,7 @@ int main(void)
 		std::cout << std::endl;
 	}
 	{
-		Animal *list[16];
+		AAnimal *list[16];
 		int i = -1;
 		
 		while (++i < 16)

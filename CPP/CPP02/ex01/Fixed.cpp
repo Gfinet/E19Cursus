@@ -21,21 +21,21 @@ Fixed::Fixed()
 	std::cout << "Default constructor called\n";
 	_val = 0;
 }
-Fixed::Fixed(int n)
+Fixed::Fixed(const int n)
 {
-	std::cout << "Default constructor called\n";
-	_val = roundf(n * (1 << _nbBit));
+	std::cout << "int constructor called\n";
+	
+	_val = n * (1 << _nbBit);
 }
-Fixed::Fixed(float n)
+Fixed::Fixed(const float n)
 {
-	_val = roundf(n * (1 << _nbBit));
-	std::cout << "Default constructor called\n";
-	//_intVal = n;
+	_val = n * (1 << _nbBit);
+	std::cout << "float constructor called\n";
 }
 Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called\n";
-	_val = other._val;
+	*this = other;
 }
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -70,8 +70,10 @@ void Fixed::setRawBits(int const raw)
 int Fixed::toInt( void ) const
 {
 
-	return roundf(toFloat());
+	return (int)toFloat();
 }
+
+//number = (sign ? -1:1) * 2^(exponent) * 1.(mantissa bits)
 
 float Fixed::toFloat( void ) const
 {

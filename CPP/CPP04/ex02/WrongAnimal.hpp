@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/06/24 16:25:57 by gfinet           ###   ########.fr       */
+/*   Created: 2024/10/22 15:09:36 by gfinet            #+#    #+#             */
+/*   Updated: 2024/10/28 15:09:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 # include <iostream>
 # include <string>
 
-class Fixed
+// Class declaration
+class WrongAnimal
 {
-	private:
-		int _val;
-		static int _nbBit;
-
+	protected:
+		std::string type;
 	public:
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal &other);
+		WrongAnimal &operator=(const WrongAnimal &rhs);
+		~WrongAnimal();
 
-		Fixed();
-		Fixed(const int n);
-		Fixed(const float n);
-		Fixed( Fixed const & src );
-		~Fixed();
-
-		Fixed &operator=( Fixed const & rhs );
-		int getRawBits( void ) const;
-		void setRawBits( int const raw);
-		float toFloat( void ) const;
-		int toInt( void ) const;
-
+		const std::string getType();
+		void makeSound();
+  
 };
 
-std::ostream &operator<<( std::ostream &o, Fixed const &i );
-
-#endif
+#endif // WRONGANIMAL_HPP_

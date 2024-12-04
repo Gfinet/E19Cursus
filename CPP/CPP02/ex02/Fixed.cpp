@@ -24,11 +24,11 @@ Fixed::Fixed()
 Fixed::Fixed(int n)
 {
 	//std::cout << "Default constructor called\n";
-	_val = roundf(n * (1 << _nbBit));
+	_val = n * (1 << _nbBit);
 }
 Fixed::Fixed(float n)
 {
-	_val = roundf(n * (1 << _nbBit));
+	_val = n * (1 << _nbBit);
 	//std::cout << "Default constructor called\n";
 	//_intVal = n;
 }
@@ -155,7 +155,7 @@ void Fixed::setRawBits(int const raw)
 int Fixed::toInt( void ) const
 {
 
-	return roundf(toFloat());
+	return toFloat();
 }
 
 float Fixed::toFloat( void ) const

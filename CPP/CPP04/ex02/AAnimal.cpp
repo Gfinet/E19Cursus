@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   AAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,44 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 // Default constructor
-Animal::Animal() 
+AAnimal::AAnimal() 
 {
 	this->type = "BEEUUUWAAA C'EST QUOI CE TRUC?!";
-	std::cout << "Animal empty constructor is called" << std::endl;
+	std::cout << "AAnimal empty constructor is called" << std::endl;
 }
 
 // Copy constructor
-Animal::Animal(const Animal &other) 
+AAnimal::AAnimal(const AAnimal &other)
 {
-	std::cout << "Animal copy constructor is called" << std::endl;
+	std::cout << "AAnimal copy constructor is called" << std::endl;
 	this->type = other.type;
 	return;
 }
 
 // Copy assignment overload
-Animal &Animal::operator=(const Animal &rhs)
+AAnimal &AAnimal::operator=(const AAnimal &rhs)
 {
-	std::cout << "Animal operator = is called" << std::endl;
+	std::cout << "AAnimal operator = is called" << std::endl;
 	this->type = rhs.type;
 	return *this;
 }
 
 // Default destructor
-Animal::~Animal()
+AAnimal::~AAnimal()
 {
-	std::cout << "Animal destrucor is called" << std::endl;
+	std::cout << "AAnimal destrucor is called" << std::endl;
 	return;
 }
 
-const std::string Animal::getType()
+const std::string AAnimal::getType()
 {
 	return this->type;
 }
 
-void Animal::makeSound()
+void AAnimal::makeSound()
 {
 	std::cout << "Ed..ward.. want... to play ?" << std::endl;
 }

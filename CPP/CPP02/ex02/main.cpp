@@ -37,30 +37,31 @@
 	std::cout << "c is " << c.toFloat() << " as floating" << std::endl;
 	std::cout << "d is " << d.toFloat() << " as floating" << std::endl;
 
-	std::cout << a << " a++ " << a++ << " " << a << std::endl;
-	std::cout << a << " ++a " << ++a << " " << a << std::endl;
-	std::cout << a << " --a " << --a << " " << a << std::endl;
-	std::cout << a << " a-- " << a-- << " " << a << std::endl;
+	std::cout << a << " : a++ " << a++ << " " << a << std::endl;
+	std::cout << a << " : ++a " << ++a << " " << a << std::endl;
+	std::cout << a << " : --a " << --a << " " << a << std::endl;
+	std::cout << a << " : a-- " << a-- << " " << a << std::endl;
+	std::cout << "a-- is " << a << std::endl << std::endl;
 
-	std::cout << "a-- is " << a << std::endl;
+	std::cout << "Comparison between what Should Be (sb) and the result (is)" << std::endl;
 	std::cout << "a * a is " << (a * a) << std::endl;
-	std::cout << "a * a sb " << (x * x) << std::endl;
+	std::cout << "a * a sb " << (x * x) << std::endl << std::endl;
 	std::cout << "a + a is " << (a + a) << std::endl;
-	std::cout << "a + a sb " << (x + x) << std::endl;
+	std::cout << "a + a sb " << (x + x) << std::endl << std::endl;
 	std::cout << "a - a is " << (a - a) << std::endl;
-	std::cout << "a - a sb " << (x - x) << std::endl;
+	std::cout << "a - a sb " << (x - x) << std::endl << std::endl;
 	std::cout << "a / b is " << (a / b) << std::endl;
-	std::cout << "a / b sb " << (x / y) << std::endl;
+	std::cout << "a / b sb " << (x / y) << std::endl << std::endl;
 	std::cout << "a > b is " << (a > b) << std::endl;
-	std::cout << "a > b sb " << (x > y) << std::endl;
+	std::cout << "a > b sb " << (x > y) << std::endl << std::endl;
 	std::cout << "a < b is " << (a < b) << std::endl;
-	std::cout << "a < b sb " << (x < y) << std::endl;
+	std::cout << "a < b sb " << (x < y) << std::endl << std::endl;
 	std::cout << "a <= b is " << (a <= b) << std::endl;
-	std::cout << "a <= b sb " << (x <= y) << std::endl;
+	std::cout << "a <= b sb " << (x <= y) << std::endl << std::endl;
 	std::cout << "a >= b is " << (a >= b) << std::endl;
-	std::cout << "a >= b sb " << (x >= y) << std::endl;
+	std::cout << "a >= b sb " << (x >= y) << std::endl << std::endl;
 	std::cout << "a != b is " << (a != b) << std::endl;
-	std::cout << "a != b sb " << (x != y) << std::endl;
+	std::cout << "a != b sb " << (x != y) << std::endl << std::endl;
 	std::cout << "a == b is " << (a == b) << std::endl;
 	std::cout << "a == b sb " << (x == y) << std::endl;
 

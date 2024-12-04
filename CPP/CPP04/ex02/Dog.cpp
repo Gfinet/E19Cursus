@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 15:12:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:17:33 by gfinet           ###   ########.fr       */
+/*   Created: 2024/10/22 15:14:00 by gfinet            #+#    #+#             */
+/*   Updated: 2024/10/28 16:17:27 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Dog.hpp"
 
 // Default constructor
-Cat::Cat() : Animal()
+Dog::Dog() : AAnimal()
 {
-	this->type = "Cat";
+	this->type = "Dog";
 	this->brain = new Brain();
-	std::cout << "Cat empty constructor is called" << std::endl;
+	std::cout << "Dog empty constructor is called" << std::endl;
 }
 
 // Copy constructor
-Cat::Cat(const Cat &other) : Animal(other)
+Dog::Dog(const Dog &other) : AAnimal(other)
 {
-	std::cout << "Cat copy constructor is called" << std::endl;
+	std::cout << "Dog copy constructor is called" << std::endl;
 	*this = other;
 	return;
 }
 
 // Copy assignment overload
-Cat &Cat::operator=(const Cat &rhs)
+Dog &Dog::operator=(const Dog &rhs)
 {
 	int i = -1;
-	std::cout << "Cat operator = is called" << std::endl;
+	std::cout << "Dog operator = is called" << std::endl;
 	this->type = rhs.type;
 	while (++i < rhs.brain->getNbIdeas())
 		this->brain->addIdea(rhs.brain->getIdeas(i));
@@ -40,24 +40,24 @@ Cat &Cat::operator=(const Cat &rhs)
 }
 
 // Default destructor
-Cat::~Cat() 
+Dog::~Dog() 
 {
 	delete this->brain;
-	std::cout << "Cat destrucor is called" << std::endl;
+	std::cout << "Dog destrucor is called" << std::endl;
 	return;
 }
 
-void Cat::makeSound()
+void Dog::makeSound()
 {
-	std::cout << "Miaou Bitch !" << std::endl;
+	std::cout << "FOOD FOOD PLAY PLAY FRIEND FRIEND STILL... WAFF !" << std::endl;
 }
 
-Brain* Cat::getBrain()
+Brain* Dog::getBrain()
 {
 	return this->brain;
 }
 
-void Cat::addIdea(std::string idea)
+void Dog::addIdea(std::string idea)
 {
 	this->brain->addIdea(idea);
 }

@@ -6,20 +6,20 @@ int Fixed::_nbBit = 8;
 */
 Fixed::Fixed()
 {
-	std::cout << "Default constructor called\n";
+	std::cout << "Default constructor called" << std::endl;
 	_val = 0;
 }
 Fixed::Fixed(const Fixed &other)
 {
-	std::cout << "Copy constructor called\n";
-	_val = other._val;
+	std::cout << "Copy constructor called" << std::endl;
+	*this = other;
 }
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called\n";
+	std::cout << "Destructor called" << std::endl;
 }
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
@@ -27,9 +27,9 @@ Fixed::~Fixed()
 
 Fixed&	Fixed::operator=( Fixed const &other )
 {
-	std::cout << "Copy Assignement operator called\n";
+	std::cout << "Copy Assignement operator called" << std::endl;
 	if (this != &other)
-		this->_val = other.getRawBits();
+		this->_val = other._val;
 	return *this;
 }
 
@@ -40,7 +40,7 @@ Fixed&	Fixed::operator=( Fixed const &other )
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called\n";
+	std::cout << "setRawBits member function called" << std::endl;
 	_val = raw;
 }
 
@@ -50,7 +50,7 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called\n";
+	std::cout << "getRawBits member function called" << std::endl;
 	return (this->_val);
 }
 

@@ -3,16 +3,11 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 
 SRC =	main.cpp		\
-		Dog.cpp 		\
-		Brain.cpp 		\
-		Cat.cpp 		\
-		Animal.cpp 		\
-		WrongCat.cpp 	\
-		WrongAnimal.cpp 	
+		AMateria.cpp		
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = Animals
+NAME = Materia
 
 
 .PHONY: all clean fclean re
