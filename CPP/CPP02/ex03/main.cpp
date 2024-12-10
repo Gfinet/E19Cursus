@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:42:11 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/08/20 17:23:00 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 17:17:25 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include "Point.hpp"
+#include "Triangle.hpp"
 
 
 #include <iostream>
@@ -20,9 +21,11 @@ bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 int main( void ) {
 
-	Point a,b(0.5f, 5.2f),c(-5,0.2f);
-	Point x(-1, 0), y(1, 2);
-	
-	bsp(a, b, c, x);
+	Point x(1.0f,1.0f), y(5.0f,1.0f), z(2.0f,1.0f);
+
+	// std::cout << x << " " << y << " " << z << std::endl;
+	Line a(x,y);
+
+	a.on_line(z);
 	return 0;
 }

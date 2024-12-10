@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 14:52:54 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 17:34:57 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,68 +15,68 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-	this->Type = "ScavTrap";
-	this->MaxHealth = 100;
-	this->Health = 100;
-	this->Energy = 50;
-	this->Attack = 20;
+	this->_Type = "ScavTrap";
+	this->_MaxHealth = 100;
+	this->_Health = 100;
+	this->_Energy = 50;
+	this->_Attack = 20;
 	std::cout << "Empty constuctor called for ScavTrap" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 {
-	this->Type = "ScavTrap";
-	this->MaxHealth = 100;
-	this->Health = 100;
-	this->Energy = 50;
-	this->Attack = 20;
-	std::cout << "Constuctor called for ScavTrap " << this->Name << std::endl;
+	this->_Type = "ScavTrap";
+	this->_MaxHealth = 100;
+	this->_Health = 100;
+	this->_Energy = 50;
+	this->_Attack = 20;
+	std::cout << "Constuctor called for ScavTrap " << this->_Name << std::endl;
 }
 
 ScavTrap::ScavTrap( ScavTrap const & src )
 {
 	std::cout << "copy constructor called for ScavTrap" << std::endl;
-	this->Type = src.Type;
-	this->Name = src.Name;
-	this->Attack = src.Attack;
-	this->Health = src.Health;
-	this->MaxHealth = src.MaxHealth;
-	this->Energy = src.Energy;
+	this->_Type = src._Type;
+	this->_Name = src._Name;
+	this->_Attack = src._Attack;
+	this->_Health = src._Health;
+	this->_MaxHealth = src ._MaxHealth;
+	this->_Energy = src._Energy;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "Destructor called for ScavTrap " << this->Name << std::endl;
+	std::cout << "Destructor called for ScavTrap " << this->_Name << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=( ScavTrap const & rhs )
 {
 	std::cout << "Assignator called for ScavTrap" << std::endl;
-	this->Type = rhs.Type;
-	this->Name = rhs.Name;
-	this->Attack = rhs.Attack;
-	this->Health = rhs.Health;
-	this->MaxHealth = rhs.MaxHealth;
-	this->Energy = rhs.Energy;
+	this->_Type = rhs._Type;
+	this->_Name = rhs._Name;
+	this->_Attack = rhs._Attack;
+	this->_Health = rhs._Health;
+	this->_MaxHealth = rhs ._MaxHealth;
+	this->_Energy = rhs._Energy;
 	return *this;
 }
 
 void ScavTrap::attack(const std::string& target)
 {
-	if (this->Energy == 0)
+	if (this->_Energy == 0)
 	{
-		std::cout << "ScavTrap " << this->Name << " trying to attack but has no Energy left" << std::endl;
+		std::cout << "ScavTrap " << this->_Name << " trying to attack but has no Energy left" << std::endl;
 		return;
 	}
-	this->Energy--;
-	std::cout << "ScavTrap " << this->Name << " attacks " << target ;
-	std::cout << " causing " << this->Attack << " points of damage !" << std::endl;
-	std::cout << "Energy left : " << this->Energy << std::endl;
+	this->_Energy--;
+	std::cout << "ScavTrap " << this->_Name << " attacks " << target ;
+	std::cout << " causing " << this->_Attack << " points of damage !" << std::endl;
+	std::cout << "Energy left : " << this->_Energy << std::endl;
 }
 
 void ScavTrap::guardGate()
 {
-	//this->Energy--;
-	std::cout << "ScavTrap " << this->Name << " is now in Gate keeper mode." << std::endl;
-	//std::cout << "Energy left : " << this->Energy << std::endl;
+	//this->_Energy--;
+	std::cout << "ScavTrap " << this->_Name << " is now in Gate keeper mode." << std::endl;
+	//std::cout << "Energy left : " << this->_Energy << std::endl;
 }

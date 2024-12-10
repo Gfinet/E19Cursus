@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:20:28 by gfinet            #+#    #+#             */
-/*   Updated: 2024/08/20 17:14:47 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 16:57:06 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Point
 
 		Point();
 		Point(float const x, float const y);
+		Point(Fixed const x, Fixed const y);
 		Point( Point const & src );
 		~Point();
 		

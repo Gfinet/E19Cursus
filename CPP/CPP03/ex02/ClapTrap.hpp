@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:14:26 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/22 12:58:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 17:35:27 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 class ClapTrap
 {
 	protected:
-		std::string Type;
-		std::string Name;
-		int MaxHealth;
-		int Health;
-		int Energy;
-		int Attack;
+		std::string _Type;
+		std::string _Name;
+		int _MaxHealth;
+		int _Health;
+		int _Energy;
+		int _Attack;
 
 	public:
 

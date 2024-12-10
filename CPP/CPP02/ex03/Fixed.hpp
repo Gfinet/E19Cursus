@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/08/20 16:21:05 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 16:58:47 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ bool 	operator<=(Fixed const &first, Fixed const &other);
 bool 	operator>=(Fixed const &first, Fixed const &other);
 bool 	operator==(Fixed const &first, Fixed const &other);
 bool 	operator!=(Fixed const &first, Fixed const &other);
+
 #endif

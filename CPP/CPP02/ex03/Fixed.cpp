@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/08/20 17:23:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 17:05:19 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ Fixed::Fixed()
 Fixed::Fixed(int n)
 {
 	//std::cout << "Default constructor called\n";
-	_val = roundf(n * (1 << _nbBit));
+	_val = n * (1 << _nbBit);
 }
 Fixed::Fixed(float n)
 {
-	_val = roundf(n * (1 << _nbBit));
+	_val = n * (1 << _nbBit);
 	//std::cout << "Default constructor called\n";
 	//_intVal = n;
 }
@@ -148,14 +148,14 @@ Fixed	Fixed::operator--(int)
 
 void Fixed::setRawBits(int const raw)
 {
-	//std::cout << "setRawBits member function called\n";
+	std::cout << "setRawBits member function called\n";
 	_val = raw;
 }
 
 int Fixed::toInt( void ) const
 {
 
-	return roundf(toFloat());
+	return toFloat();
 }
 
 float Fixed::toFloat( void ) const

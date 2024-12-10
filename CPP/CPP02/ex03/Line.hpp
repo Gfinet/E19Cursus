@@ -11,7 +11,7 @@ class Line
 	private:
         Point _x;
         Point _y;
-        float   _m, _b;
+        Fixed _m, _b;
         std::string _func;
 	public:
 
@@ -25,13 +25,14 @@ class Line
         std::string get_func() const;
         Point get_x()const;
         Point get_y()const;
-        float get_m()const;
-        float get_b()const;
+        Fixed get_m()const;
+        Fixed get_b()const;
+        int on_line(Point f);
 
 };
 
 std::ostream &			operator<<( std::ostream & o, Line const & i );
 
-void intersection(Line &a, Line &b, Point *p);
+Point *intersection(Line &a, Line &b);
 
 #endif /* ************************************************************ LINE_H */

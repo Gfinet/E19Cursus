@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:18:00 by gfinet            #+#    #+#             */
-/*   Updated: 2024/08/20 17:21:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/10 16:56:45 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ Point::Point(float const x, float const y) : _x(x), _y(y)
 {
 }
 
+Point::Point(Fixed const x, Fixed const y) : _x(x), _y(y)
+{
+}
 
 Point::Point(Point const &src)
 {
