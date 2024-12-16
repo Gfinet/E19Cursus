@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:20:28 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 16:57:06 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/16 14:21:37 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ class Point
 		void	set_x(Fixed x);
 		void	set_y(Fixed y);
 };
+
+std::ostream &operator<<( std::ostream &o, Point const &i );
 
 #endif

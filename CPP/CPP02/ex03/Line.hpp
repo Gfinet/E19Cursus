@@ -13,6 +13,7 @@ class Line
         Point _y;
         Fixed _m, _b;
         std::string _func;
+        int _vert;
 	public:
 
 		Line();
@@ -27,12 +28,13 @@ class Line
         Point get_y()const;
         Fixed get_m()const;
         Fixed get_b()const;
-        int on_line(Point f);
+        int is_vert() const;
+        int on_line(Point f, int print);
 
 };
 
 std::ostream &			operator<<( std::ostream & o, Line const & i );
 
-Point *intersection(Line &a, Line &b);
+int intersection(Line const &a, Line const &b, Point &p, int print);
 
 #endif /* ************************************************************ LINE_H */
