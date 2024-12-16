@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:05:19 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:01:53 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ Fixed::Fixed()
 Fixed::Fixed(int n)
 {
 	//std::cout << "Default constructor called\n";
-	_val = n * (1 << _nbBit);
+	_val = roundf(n * (1 << _nbBit));
 }
 Fixed::Fixed(float n)
 {
-	_val = n * (1 << _nbBit);
+	_val = roundf(n * (1 << _nbBit));
 	//std::cout << "Default constructor called\n";
 	//_intVal = n;
 }

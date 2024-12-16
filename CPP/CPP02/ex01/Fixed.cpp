@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/08/16 18:23:24 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/16 18:02:11 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ Fixed::Fixed(const int n)
 {
 	std::cout << "int constructor called\n";
 	
-	_val = n * (1 << _nbBit);
+	_val = roundf(n * (1 << _nbBit));
 }
 Fixed::Fixed(const float n)
 {
-	_val = n * (1 << _nbBit);
+	_val = roundf(n * (1 << _nbBit));
 	std::cout << "float constructor called\n";
 }
 Fixed::Fixed(const Fixed &other)
@@ -77,7 +77,7 @@ int Fixed::toInt( void ) const
 
 float Fixed::toFloat( void ) const
 {
-	return (float)this->_val / (float)(1 << this->_nbBit);
+	return roundf((float)this->_val / (float)(1 << this->_nbBit));
 }
 
 /*
