@@ -36,7 +36,10 @@ Line::Line(const Point x, const Point y): _x(x), _y(y)
     s1 = ss1.str();
     ss2 << _b.toFloat();
     s2 = ss2.str();
-    _func = "y = " + s1 + "x + " + s2;
+    _func = "y = " ;
+    if (_m != 0)
+        _func += s1 + "x + ";
+    _func += s2;
 }
 
 Line::Line( const Line & src )
@@ -156,7 +159,7 @@ int Line::on_line(Point f, int print)
     }
     // Point f not on the Line
     if (print)
-        std::cout << "not on this line" << std::endl;
+        std::cout << " not on this line" << std::endl;
     return -1;
 }
 

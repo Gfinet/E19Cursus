@@ -186,8 +186,8 @@ int point_in_triangle(Triangle t, Point f)
 	y = f.get_y();
 	p = Point(x, y);
 	inter = Line(p, f);
-	nb_inter = intersection(t.get_first_line(), inter, tmp, 1) && inter.on_line(tmp, 0);
-	nb_inter += intersection(t.get_second_line(), inter, tmp, 1) && inter.on_line(tmp, 0);
-	nb_inter += intersection(t.get_third_line(), inter, tmp, 1) && inter.on_line(tmp, 0);
+	nb_inter = intersection(t.get_first_line(), inter, tmp, 0) && inter.on_line(tmp, 0);
+	nb_inter += intersection(t.get_second_line(), inter, tmp, 0) && inter.on_line(tmp, 0);
+	nb_inter += intersection(t.get_third_line(), inter, tmp, 0) && inter.on_line(tmp, 0);
 	return (nb_inter % 2 == 0);
 }

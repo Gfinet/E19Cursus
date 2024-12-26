@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:18:00 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/16 14:19:35 by gfinet           ###   ########.fr       */
+/*   Updated: 2024/12/26 02:39:37 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ Fixed Point::get_y(void) const
 
 std::ostream &			operator<<( std::ostream & o, Point const & i )
 {
-	o << "(" << i.get_x() << "," << i.get_y() << ")";
+	o << "(" << i.get_x() << " , " << i.get_y() << ")";
 	return o;
 }
