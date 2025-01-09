@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/16 18:02:11 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/09 19:11:22 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int Fixed::toInt( void ) const
 
 float Fixed::toFloat( void ) const
 {
-	return roundf((float)this->_val / (float)(1 << this->_nbBit));
+	return (float)this->_val / (float)(1 << this->_nbBit);
 }
 
 /*

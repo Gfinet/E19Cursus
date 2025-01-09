@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2024/12/16 17:54:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/09 19:17:29 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,10 @@ bool 	operator<=(Fixed const &first, Fixed const &other);
 bool 	operator>=(Fixed const &first, Fixed const &other);
 bool 	operator==(Fixed const &first, Fixed const &other);
 bool 	operator!=(Fixed const &first, Fixed const &other);
+
+Fixed min(Fixed const &first, Fixed const &other);
+Fixed min(Fixed &first, Fixed &other);
+Fixed max(Fixed const &first, Fixed const &other);
+Fixed max(Fixed  &first, Fixed  &other);
 
 #endif

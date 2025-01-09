@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/16 18:01:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/09 19:20:52 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,31 @@ Fixed	Fixed::operator--(int)
 
 	_val -= (1 << _nbBit);
 	return (tmp);
+}
+
+Fixed min(Fixed const &first, Fixed const &other)
+{
+	if (first < other)
+		return first;
+	return other;
+}
+Fixed min(Fixed &first, Fixed &other)
+{
+	if (first < other)
+		return first;
+	return other;
+}
+Fixed max(Fixed const &first, Fixed const &other)
+{
+	if (first > other)
+		return first;
+	return other;
+}
+Fixed max(Fixed  &first, Fixed  &other)
+{
+	if (first > other)
+		return first;
+	return other;
 }
 
 
