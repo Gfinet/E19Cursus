@@ -6,7 +6,7 @@
 /*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:47:54 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/13 18:41:20 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/13 19:10:13 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ Fixed::~Fixed()
 
 Fixed&	Fixed::operator=( Fixed const &other )
 {
-	//std::cout << "Copy Assignement operator called\n";
+	std::cout << "Copy Assignement operator called\n";
 	if (this != &other)
 		this->_val = other.getRawBits();
 	return *this;
@@ -110,7 +110,7 @@ float	Fixed::operator*( Fixed const &other )
 // prefix increment
 Fixed&	Fixed::operator++(void)
 {
-	_val += (1 << _nbBit);
+	_val++; // += (1 << _nBits)
 	return *this;
 }
 
@@ -119,14 +119,14 @@ Fixed	Fixed::operator++(int)
 {
 	Fixed tmp(*this);
 	
-	_val += (1 << _nbBit);
+	_val++; // += (1 << _nBits)
 	return (tmp);
 }
 
 // prefix decrement
 Fixed&	Fixed::operator--(void)
 {
-	_val -= (1 << _nbBit);
+	_val--; // -= (1 << _nBits)
 	return *this;
 }
 
@@ -135,34 +135,36 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed tmp(*this);
 
-	_val -= (1 << _nbBit);
+	_val--; // -= (1 << _nBits)
 	return (tmp);
 }
 
-Fixed min(Fixed const &first, Fixed const &other)
+const Fixed& Fixed::min(Fixed const &first, Fixed const &other)
 {
 	if (first < other)
 		return first;
 	return other;
 }
-Fixed min(Fixed &first, Fixed &other)
+Fixed& Fixed::min(Fixed &first, Fixed &other)
 {
 	if (first < other)
 		return first;
 	return other;
 }
-Fixed max(Fixed const &first, Fixed const &other)
+const Fixed& Fixed::max(Fixed const &first, Fixed const &other)
 {
 	if (first > other)
 		return first;
 	return other;
 }
-Fixed max(Fixed  &first, Fixed  &other)
+Fixed& Fixed::max(Fixed  &first, Fixed  &other)
 {
 	if (first > other)
 		return first;
 	return other;
 }
+
+
 
 /*
 ** --------------------------------- METHODS ----------------------------------
