@@ -1,6 +1,6 @@
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -std=c++98 #-g3 -fsanitize=address 
 
 SRC =	main.cpp	\
 		bsp.cpp		\

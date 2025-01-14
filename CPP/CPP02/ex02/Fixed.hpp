@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 00:46:24 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/01/09 19:17:29 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:57:31 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ class Fixed
 		Fixed	&operator--(void);
 		Fixed	operator--(int);
 
+		static const Fixed& min(Fixed const &first, Fixed const &other);
+		static Fixed& min(Fixed &first, Fixed &other);
+		static const Fixed& max(Fixed const &first, Fixed const &other);
+		static Fixed& max(Fixed  &first, Fixed  &other);
 };
 
 std::ostream &operator<<( std::ostream &o, Fixed const &i );
@@ -57,9 +61,5 @@ bool 	operator>=(Fixed const &first, Fixed const &other);
 bool 	operator==(Fixed const &first, Fixed const &other);
 bool 	operator!=(Fixed const &first, Fixed const &other);
 
-Fixed min(Fixed const &first, Fixed const &other);
-Fixed min(Fixed &first, Fixed &other);
-Fixed max(Fixed const &first, Fixed const &other);
-Fixed max(Fixed  &first, Fixed  &other);
 
 #endif
