@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:12:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:17:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:26:17 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 Cat::Cat() : Animal()
 {
 	this->type = "Cat";
-	this->brain = new Brain();
 	std::cout << "Cat empty constructor is called" << std::endl;
+	this->brain = new Brain();
 }
 
 // Copy constructor
@@ -42,8 +42,8 @@ Cat &Cat::operator=(const Cat &rhs)
 // Default destructor
 Cat::~Cat() 
 {
-	delete this->brain;
 	std::cout << "Cat destrucor is called" << std::endl;
+	delete this->brain;
 	return;
 }
 

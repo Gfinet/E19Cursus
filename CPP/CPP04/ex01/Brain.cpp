@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:42:18 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:04:16 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:23:37 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 // Default constructor
 Brain::Brain()
-{ 
-
+{
+	std::cout << "Brain constructor called" << std::endl;
 }
 
 // Copy constructor
@@ -36,7 +36,10 @@ Brain &Brain::operator=(const Brain &rhs)
 }
 
 // Default destructor
-Brain::~Brain() {}
+Brain::~Brain()
+{
+	std::cout << "Brain destructor called" << std::endl;
+}
 
 int Brain::getNbIdeas()
 {

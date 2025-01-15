@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:53:55 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:24:38 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:19:03 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int main(void)
 		std::cout << "Dog type : " << j->getType() << " " << std::endl;
 		std::cout << std::endl;
 		
-		std::cout << "Cat sound : " << std::endl;
+		std::cout << "Cat sound : " ;
 		i->makeSound(); //will output the cat sound!
-		std::cout << "Dog sound : " << std::endl;
+		std::cout << "Dog sound : " ;
 		j->makeSound();
-		std::cout << "Animal sound ? : " << std::endl;
+		std::cout << "Animal sound ? : ";
 		meta->makeSound();
 		std::cout << std::endl;
 		

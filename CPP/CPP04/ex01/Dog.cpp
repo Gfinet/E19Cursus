@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:14:00 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:17:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:26:23 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 // Default constructor
 Dog::Dog() : Animal()
 {
+	std::cout << "Dog empty constructor is called" << std::endl;
 	this->type = "Dog";
 	this->brain = new Brain();
-	std::cout << "Dog empty constructor is called" << std::endl;
 }
 
 // Copy constructor
@@ -42,8 +42,8 @@ Dog &Dog::operator=(const Dog &rhs)
 // Default destructor
 Dog::~Dog() 
 {
-	delete this->brain;
 	std::cout << "Dog destrucor is called" << std::endl;
+	delete this->brain;
 	return;
 }
 

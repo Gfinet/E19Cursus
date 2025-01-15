@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:53:55 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:40:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:30:14 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 int main(void)
 {
+	/*
 	{
 		Animal* meta = new Animal();
 		Animal* j = new Dog();
@@ -60,13 +61,15 @@ int main(void)
 		delete badj;
 		std::cout << std::endl;
 		std::cout << std::endl;
-	}
+	}*/
 	{
 		Animal *list[16];
 		int i = -1;
 		
 		while (++i < 16)
 		{
+			if (i == 8)
+				std::cout << std::endl;
 			if (i < 8)
 				list[i] = new Dog();
 			else
@@ -76,7 +79,11 @@ int main(void)
 		std::cout << std::endl;
 		i = -1;
 		while (++i < 16)
+		{
+			if (i == 8)
+				std::cout << std::endl;
 			delete list[i];
+		}
 	}
 	return 0;
 }
