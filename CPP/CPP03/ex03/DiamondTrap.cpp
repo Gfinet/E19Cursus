@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:14:13 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:34:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 18:51:42 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap()
 {
 	this->_Type = "DiamondTrap";
-	this->_MaxHealth = FragTrap::MaxHealth;
-	this->_Health = FragTrap::Health;
-	this->_Energy = ScavTrap::Energy;
-	this->_Attack = FragTrap::Attack;
+	this->_MaxHealth = FragTrap::_MaxHealth;
+	this->_Health = FragTrap::_Health;
+	this->_Energy = ScavTrap::_Energy;
+	this->_Attack = FragTrap::_Attack;
 	std::cout << "Empty constuctor called for DiamondTrap" << std::endl;
 }
 
@@ -26,14 +26,14 @@ DiamondTrap::DiamondTrap(std::string Name) : ClapTrap(Name), ScavTrap(Name), Fra
 {
 	this->_Type = "DiamondTrap";
 	this->_Name = Name;
-	this->_MaxHealth = FragTrap::MaxHealth;
-	this->_Health = FragTrap::Health;
-	this->_Energy = ScavTrap::Energy;
-	this->_Attack = FragTrap::Attack;
+	this->_MaxHealth = FragTrap::_MaxHealth;
+	this->_Health = FragTrap::_Health;
+	this->_Energy = ScavTrap::_Energy;
+	this->_Attack = FragTrap::_Attack;
 	std::cout << "Constuctor called for DiamondTrap " << this->_Name << std::endl;
 }
 
-DiamondTrap::DiamondTrap( DiamondTrap const & src )
+DiamondTrap::DiamondTrap( DiamondTrap const & src ) : ClapTrap(src), ScavTrap(src), FragTrap(src)
 {
 	std::cout << "copy constructor called for DiamondTrap" << std::endl;
 	this->_Type = src._Type;
@@ -41,7 +41,7 @@ DiamondTrap::DiamondTrap( DiamondTrap const & src )
 	this->_Attack = src._Attack;
 	this->_Health = src._Health;
 	this->_MaxHealth = src ._MaxHealth;
-	this->_Energy = src.Energy;
+	this->_Energy = src._Energy;
 }
 
 DiamondTrap::~DiamondTrap()
@@ -63,6 +63,29 @@ DiamondTrap& DiamondTrap::operator=( DiamondTrap const & rhs )
 
 void DiamondTrap::whoAmI()
 {
-	std::cout << "Ore wa " << this->_Type << " " << this->_Name << " des !" << std::endl;
+	if (!this->_Health)
+	{
+		std::cout << "DiamondTrap " << this->_Name << " trying to talk but is dead..." << std::endl;
+		return;
+	}
+	if (this->_Name == "Dio")
+		std::cout << "KONO DIIIIIIO DA !!!" << std::endl;
+	else
+		std::cout << "Ore wa " << this->_Type << " " << this->_Name << " des !" << std::endl;
 }
 
+void DiamondTrap::Jattack()
+{
+	if (this->_Health == 0)
+	{
+		std::cout << this->_Type << " " << this->_Name << " trying to attack but is dead..." << std::endl;
+		return ;
+	}
+	if (this->_Energy == 0)
+	{
+		std::cout << this->_Type << " " << this->_Name << " trying to attack but has no Energy left" << std::endl;
+		return;
+	}
+	this->_Energy--;
+	std::cout << "ORA ";
+}

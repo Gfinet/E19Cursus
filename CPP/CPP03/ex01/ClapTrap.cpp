@@ -6,21 +6,21 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:37:51 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 18:14:58 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 
-ClapTrap::ClapTrap() : _Type("ClapTrap"), _Name("Bobby"), _MaxHealth(10), _Health(10), _Energy(10), _Attack(10)
+ClapTrap::ClapTrap() : _Type("ClapTrap"), _Name("Bobby"), _MaxHealth(10), _Health(10), _Energy(10), _Attack(0)
 {
-	std::cout << "Empty constuctor called for " << this->_Type << " " << this->_Name << std::endl;
+	std::cout << "Empty constuctor called for ClapTrap " << this->_Name << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string Name) : _Type("ClapTrap"), _Name(Name), _MaxHealth(10), _Health(10), _Energy(10), _Attack(10)
+ClapTrap::ClapTrap(std::string Name) : _Type("ClapTrap"), _Name(Name), _MaxHealth(10), _Health(10), _Energy(10), _Attack(0)
 {
-	std::cout << "Constuctor called for " << this->_Type << " " << this->_Name << std::endl;
+	std::cout << "Constuctor called for ClapTrap " << this->_Name << std::endl;
 }
 
 ClapTrap::ClapTrap( ClapTrap const & src )
@@ -36,7 +36,7 @@ ClapTrap::ClapTrap( ClapTrap const & src )
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called for " << this->_Type << " " << this->_Name << std::endl;
+	std::cout << "Destructor called for ClapTrap " << this->_Name << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=( ClapTrap const & rhs )

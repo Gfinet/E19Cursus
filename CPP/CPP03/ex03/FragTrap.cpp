@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:34:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:58:34 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
 	std::cout << "Constuctor called for FragTrap " << this->_Name << std::endl;
 }
 
-FragTrap::FragTrap( FragTrap const & src )
+FragTrap::FragTrap( FragTrap const & src ): ClapTrap(src)
 {
 	std::cout << "copy constructor called for FragTrap " << this->_Name << std::endl;
 	this->_Type = src._Type;
@@ -41,7 +41,7 @@ FragTrap::FragTrap( FragTrap const & src )
 	this->_Attack = src._Attack;
 	this->_Health = src._Health;
 	this->_MaxHealth = src ._MaxHealth;
-	this->_Energy = src.Energy;
+	this->_Energy = src._Energy;
 }
 
 FragTrap::~FragTrap()

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:42:07 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/16 20:00:01 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 17:36:41 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ int main(void)
 	std::cout << std::endl;
 	for (int i = 0; i < 11 ; i++)
 		bobby.attack("Rob");
+	bobby.beRepaired(5);
+	
 	std::cout << std::endl;
 	Max.takeDamage(9);
-	Max.takeDamage(1);
 	Max.beRepaired(5);
+	Max.beRepaired(5);
+	Max.takeDamage(1);
+	Max.takeDamage(9);
+	Max.attack("Rob");
 	Max.beRepaired(5);
 	std::cout << std::endl;
 	return 0;

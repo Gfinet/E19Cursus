@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:23:28 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 17:41:16 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ClapTrap::ClapTrap() : _Name("Bobby")
 {
 	this->_Health = 10;
 	this->_Energy = 10;
-	this->_Attack = 10;
+	this->_Attack = 0;
 	std::cout << "Empty constuctor called" << std::endl;
 }
 
@@ -25,7 +25,7 @@ ClapTrap::ClapTrap(std::string Name) : _Name(Name)
 {
 	this->_Health = 10;
 	this->_Energy = 10;
-	this->_Attack = 10;
+	this->_Attack = 0;
 	std::cout << "Constuctor called for " << this->_Name << std::endl;
 }
 
@@ -60,7 +60,11 @@ void ClapTrap::attack(const std::string& target)
 		std::cout << "ClapTrap " << this->_Name << " trying to attack but has no Energy left" << std::endl;
 		return;
 	}
-	if (this->_Health)
+	if (!this->_Health)
+	{
+		std::cout << "ClapTrap " << this->_Name << " trying to attack but is dead..." << std::endl;
+		return;
+	}
 	this->_Energy--;
 	std::cout << "ClapTrap " << this->_Name << " attacks " << target ;
 	std::cout << " causing " << this->_Attack << " points of damage !" << std::endl;
@@ -85,6 +89,11 @@ void ClapTrap::beRepaired(unsigned int amount)
 	if (this->_Energy == 0)
 	{
 		std::cout << "ClapTrap " << this->_Name << " trying to heal but has no Energy left" << std::endl;
+		return;
+	}
+	if (!this->_Health)
+	{
+		std::cout << "ClapTrap " << this->_Name << " trying to heal but is dead..." << std::endl;
 		return;
 	}
 	this->_Energy--;

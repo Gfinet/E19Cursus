@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:34:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 18:54:54 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 	std::cout << "Constuctor called for ScavTrap " << this->_Name << std::endl;
 }
 
-ScavTrap::ScavTrap( ScavTrap const & src )
+ScavTrap::ScavTrap( ScavTrap const & src ) : ClapTrap(src)
 {
 	std::cout << "copy constructor called for ScavTrap " << this->_Name << std::endl;
 	this->_Name = src._Name;
@@ -41,7 +41,7 @@ ScavTrap::ScavTrap( ScavTrap const & src )
 	this->_Attack = src._Attack;
 	this->_Health = src._Health;
 	this->_MaxHealth = src ._MaxHealth;
-	this->_Energy = src.Energy;
+	this->_Energy = src._Energy;
 }
 
 ScavTrap::~ScavTrap()
@@ -63,7 +63,17 @@ ScavTrap& ScavTrap::operator=( ScavTrap const & rhs )
 
 void ScavTrap::guardGate()
 {
-	//this->_Energy--;
+	if (this->_Energy == 0)
+	{
+		std::cout << this->_Type << " " << this->_Name << " trying to guard but has no Energy left" << std::endl;
+		return;
+	}
+	if (this->_Health == 0)
+	{
+		std::cout << this->_Type << " " << this->_Name << " trying to guard but is dead..." << std::endl;
+		return;
+	}
+	this->_Energy--;
 	std::cout << this->_Type << " " << this->_Name << " is now in Gate keeper mode." << std::endl;
-	//std::cout << "Energy left : " << this->_Energy << std::endl;
+	std::cout << "Energy left : " << this->_Energy << std::endl;
 }

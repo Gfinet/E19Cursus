@@ -6,19 +6,19 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:25:04 by gfinet            #+#    #+#             */
-/*   Updated: 2024/12/10 17:36:59 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 17:43:25 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 
-ClapTrap::ClapTrap() : _Type("ClapTrap"), _Name("Bobby"), _MaxHealth(10), _Health(10), _Energy(10), _Attack(10)
+ClapTrap::ClapTrap() : _Type("ClapTrap"), _Name("Bobby"), _MaxHealth(10), _Health(10), _Energy(10), _Attack(0)
 {
 	std::cout << "Empty constuctor called for ClapTrap " << this->_Name << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string Name) : _Type("ClapTrap"), _Name(Name), _MaxHealth(10), _Health(10), _Energy(10), _Attack(10)
+ClapTrap::ClapTrap(std::string Name) : _Type("ClapTrap"), _Name(Name), _MaxHealth(10), _Health(10), _Energy(10), _Attack(0)
 {
 	std::cout << "Constuctor called for ClapTrap " << this->_Name << std::endl;
 }
@@ -71,7 +71,7 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->_Health - amount < 0)
+	if (this->_Health - (int)amount < 0)
 		this->_Health = 0;
 	else
 		this->_Health -= amount;

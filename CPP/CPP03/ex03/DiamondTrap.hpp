@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:14:18 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/22 14:59:30 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/14 18:50:41 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		DiamondTrap &operator=( DiamondTrap const & rhs );
 
 		void whoAmI();
+		void Jattack();
 };
 #endif
