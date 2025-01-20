@@ -3,7 +3,11 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 
 SRC =	main.cpp		\
-		AMateria.cpp		
+		AMateria.cpp	\
+		ICharacter.cpp	\
+		Character.cpp	\
+		Ice.cpp			\
+		Cure.cpp		\
 
 OBJ = $(SRC:.cpp=.o)
 
