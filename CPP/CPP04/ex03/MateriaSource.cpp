@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:32:18 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 17:42:55 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/21 18:13:50 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,19 @@ AMateria *MateriaSource::createMateria(std::string const &type)
     return tmp;
 }
 
-void MateriaSource::learnMateria(AMateria *)
+void MateriaSource::learnMateria(AMateria *mat)
 {
+	if (_nbMat == 4)
+		return ;
+	for (int i = 0; i < 4; i++)
+	{
+		if(_stock[i] == 0)
+		{
+			_stock[i] = mat;
+			break;
+		}
+	}
+	_nbMat++;
 }
 
 /*
