@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 14:25:47 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 17:45:58 by gfinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cure.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Cure::Cure()
+Cure::Cure() : AMateria()
 {
+	this->_type = "cure";
 }
 
-Cure::Cure( const Cure & src )
+Cure::Cure( const Cure & src ) : AMateria(src)
 {
 }
 
@@ -26,29 +39,13 @@ Cure::~Cure()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Cure &				Cure::operator=( Cure const & rhs )
-{
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
-	return *this;
-}
-
-std::ostream &			operator<<( std::ostream & o, Cure const & i )
-{
-	//o << "Value = " << i.getValue();
-	return o;
-}
-
-
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void Cure::use(Character& target) const
+void Cure::use(ICharacter& target)
 {
-	std::cout << " heals " << target.getName() << " wounds ";
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
 Cure* Cure::clone() const

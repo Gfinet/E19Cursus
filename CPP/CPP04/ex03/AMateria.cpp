@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 14:25:51 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 16:41:44 by gfinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "AMateria.hpp"
 
 /*
@@ -43,22 +55,14 @@ AMateria &				AMateria::operator=( AMateria const & rhs )
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, AMateria const & i )
-{
-	//o << "Value = " << i.getValue();
-	return o;
-}
-
-
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
 void AMateria::use(ICharacter& target)
 {
-	std::cout << " used fart on " << target.getName() << " and has no effect ";
+	std::cout << " used fart on " << target.getName() << " and has no effect" << std::endl;
 }
-
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

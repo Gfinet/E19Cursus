@@ -1,72 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.cpp                                     :+:      :+:    :+:   */
+/*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 14:25:43 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 15:27:21 by gfinet           ###   ########.fr       */
+/*   Created: 2025/01/21 17:32:18 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 17:42:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ICharacter.hpp"
+#include "MateriaSource.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-ICharacter::ICharacter()
+MateriaSource::MateriaSource() : IMateriaSource()
 {
-	_Name = "Bobby";
-	_nbMat = 0;
-	for (int i=0; i<4; i++)
-		_stuff[i] = 0;
 }
 
-ICharacter::ICharacter( const ICharacter & src )
+MateriaSource::MateriaSource( const MateriaSource & src ) : IMateriaSource(src)
 {
-	*this = src;
 }
 
-ICharacter::ICharacter(std::string const Name)
-{
-	_Name = Name;
-	_nbMat = 0;
-	for (int i=0; i<4; i++)
-		_stuff[i] = 0;
-}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
+
+MateriaSource::~MateriaSource()
+{
+	for (int i = 0; i<4; i++)
+		if (_stock[i])
+			delete _stock[i];
+}
 
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-ICharacter &				ICharacter::operator=( ICharacter const & rhs )
-{
-	if ( this != &rhs )
-	{
-		this->_Name = rhs.getName();
-		this->_nbMat = rhs.getNbMateria();
-		for (int i=0; i<4; i++)
-		{
-			if (_stuff[i])
-				delete _stuff[i];
-			_stuff[i] = rhs._stuff[i]->clone();
-		}
-	}
-	return *this;
-}
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
+AMateria *MateriaSource::createMateria(std::string const &type)
+{
+	AMateria* tmp;
+
+	tmp = 0;
+	if (type == "ice")
+		tmp = new Ice();
+	else if (type == "cure")
+		tmp = new Cure();
+	else
+		std::cout << "Unknown Materia." << std::endl;
+    return tmp;
+}
+
+void MateriaSource::learnMateria(AMateria *)
+{
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

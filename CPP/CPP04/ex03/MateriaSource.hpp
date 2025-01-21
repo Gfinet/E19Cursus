@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 14:25:37 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 16:57:29 by gfinet           ###   ########.fr       */
+/*   Created: 2025/01/21 17:32:34 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 17:42:49 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-# define ICE_HPP
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
 
 # include <iostream>
 # include <string>
-# include "AMateria.hpp"
-# include "Character.hpp"
+# include "IMateriaSource.hpp"
+# include "Ice.hpp"
+# include "Cure.hpp"
 
-class Ice : public AMateria
+class MateriaSource : public IMateriaSource
 {
 
 	public:
 
-		Ice();
-		Ice( Ice const & src );
-		~Ice();
-		Ice &operator=( Ice const & rhs );
+		MateriaSource();
+		MateriaSource( MateriaSource const & src );
+		~MateriaSource();
 
-		void use(ICharacter& target);
-		Ice* clone() const;
+		AMateria* createMateria(std::string const & type);
+		void learnMateria(AMateria*);
 	private:
 
 };
 
-#endif /* ************************************************************* ICE_H */
+
+#endif /* *************************************************** MATERIASOURCE_H */

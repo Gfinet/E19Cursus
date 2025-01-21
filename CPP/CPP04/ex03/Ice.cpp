@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 14:25:49 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 17:45:11 by gfinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Ice.hpp"
 
 /*
@@ -11,7 +23,6 @@ Ice::Ice() : AMateria()
 
 Ice::Ice( const Ice & src ) : AMateria(src)
 {
-	*this = src;
 }
 
 
@@ -28,29 +39,14 @@ Ice::~Ice()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Ice &				Ice::operator=( Ice const & rhs )
-{
-	if ( this != &rhs )
-	{
-		this->_type = rhs.getType();
-	}
-	return *this;
-}
-
-std::ostream &			operator<<( std::ostream & o, Ice const & i )
-{
-	//o << "Value = " << i.getValue();
-	return o;
-}
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void Ice::use(Character& target) const
+void Ice::use(ICharacter& target)
 {
-	std::cout << " shoot an ice bolt at " << target.getName() << " ";
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 
 Ice* Ice::clone() const

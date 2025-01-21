@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 14:25:35 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 16:57:17 by gfinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CURE_HPP
 # define CURE_HPP
 
@@ -6,7 +18,7 @@
 # include "AMateria.hpp"
 # include "Character.hpp"
 
-class Cure : virtual public AMateria
+class Cure : public AMateria
 {
 
 	public:
@@ -16,12 +28,10 @@ class Cure : virtual public AMateria
 		~Cure();
 		Cure &operator=( Cure const & rhs );
 
-		void use(Character& target) const;
+		void use(ICharacter& target);
 		Cure* clone() const;
 	private:
 
 };
-
-std::ostream &			operator<<( std::ostream & o, Cure const & i );
 
 #endif /* ************************************************************ CURE_H */

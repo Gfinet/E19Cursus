@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:17:56 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/20 18:51:07 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:43:56 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <iostream>
 # include <string>
-#include "ICharacter.hpp"
+# include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria
 {
@@ -33,6 +35,5 @@ class AMateria
 		virtual void use(ICharacter& target);
 };
 
-std::ostream &			operator<<( std::ostream & o, AMateria const & i );
 
 #endif /* ******************************************************** AMATERIA_H */

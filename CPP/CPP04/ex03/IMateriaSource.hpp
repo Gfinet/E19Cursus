@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 14:25:37 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 16:57:29 by gfinet           ###   ########.fr       */
+/*   Created: 2025/01/21 17:32:37 by gfinet            #+#    #+#             */
+/*   Updated: 2025/01/21 17:37:40 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-# define ICE_HPP
+#ifndef IMATERIASOURCE_HPP
+# define IMATERIASOURCE_HPP
 
 # include <iostream>
 # include <string>
 # include "AMateria.hpp"
-# include "Character.hpp"
 
-class Ice : public AMateria
+class IMateriaSource
 {
 
+	protected:
+		AMateria* _stock[4];
+		unsigned int _nbMat;
+	
 	public:
+		IMateriaSource();
+		IMateriaSource( IMateriaSource const & src );
+		virtual ~IMateriaSource() {}
 
-		Ice();
-		Ice( Ice const & src );
-		~Ice();
-		Ice &operator=( Ice const & rhs );
+		virtual IMateriaSource &operator=( IMateriaSource const & rhs );
+		virtual AMateria* createMateria(std::string const & type) = 0;
+		virtual void learnMateria(AMateria*) = 0;
 
-		void use(ICharacter& target);
-		Ice* clone() const;
-	private:
 
 };
 
-#endif /* ************************************************************* ICE_H */
+#endif /* ************************************************** IMATERIASOURCE_H */
