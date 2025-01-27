@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:25:35 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 16:57:17 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 15:07:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ class Cure : public AMateria
 		Cure();
 		Cure( Cure const & src );
 		~Cure();
-		Cure &operator=( Cure const & rhs );
 
 		void use(ICharacter& target);
 		Cure* clone() const;

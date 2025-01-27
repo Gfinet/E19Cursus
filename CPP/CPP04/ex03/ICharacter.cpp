@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:25:43 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 15:27:21 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 15:15:36 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,34 @@ ICharacter &				ICharacter::operator=( ICharacter const & rhs )
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
+
+void ICharacter::setName(const std::string &Name)
+{
+	this->_Name = Name;
+}
+
+AMateria* ICharacter::getMateria(int i) const
+{
+	if (_stuff[i])
+		return _stuff[i];
+	return NULL;
+}
+
+AMateria* ICharacter::getMateria(unsigned int i) const
+{
+	return getMateria((int)i);
+}
+
+unsigned int ICharacter::getNbMateria() const
+{
+	return this->_nbMat;
+}
+
+
+std::string const &ICharacter::getName() const
+{
+	return this->_Name;
+}
 
 
 /* ************************************************************************** */

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:25:37 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 16:57:29 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 15:07:47 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ class Ice : public AMateria
 		Ice();
 		Ice( Ice const & src );
 		~Ice();
-		Ice &operator=( Ice const & rhs );
 
 		void use(ICharacter& target);
 		Ice* clone() const;

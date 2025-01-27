@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:18:11 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 15:50:58 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 15:16:27 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ class ICharacter
 		ICharacter( ICharacter const & src );
 		ICharacter(std::string const Name);
 		ICharacter &operator=( ICharacter const & rhs );
-		virtual ~ICharacter() {}
 
-		virtual std::string const & getName() const = 0;
+		virtual ~ICharacter() {}
 		virtual void equip(AMateria* m) = 0;
 		virtual void unequip(int idx) = 0;
 		virtual void use(int idx, ICharacter& target) = 0;
-		virtual AMateria* getMateria(int i) const = 0;
-		virtual AMateria* getMateria(unsigned int i) const = 0;
-		virtual unsigned int getNbMateria() const = 0;
+		
+		void setName(const std::string &Name);
+		std::string const & getName() const;
+		AMateria* getMateria(int i) const;
+		AMateria* getMateria(unsigned int i) const;
+		unsigned int getNbMateria() const;
 };
 
 
