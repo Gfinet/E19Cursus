@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:15 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 17:19:18 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:18:01 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@ class Bureaucrat
 	private:
 		const std::string  _Name;
 		int _Grade;
-		static std::exception GradeTooLowException;
-		static std::exception GradeTooHighException;
 
 	public:
 
-		//Bureaucrat();
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+		Bureaucrat();
 		Bureaucrat(std::string const Name, int grade);
 		Bureaucrat( Bureaucrat const & src );
 		// virtual ~Bureaucrat();
