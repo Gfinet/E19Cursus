@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:17 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 18:23:27 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 19:44:50 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,56 @@ Bureaucrat::Bureaucrat( const Bureaucrat & src )
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Bureaucrat &				Bureaucrat::operator=( Bureaucrat const & rhs )
+int &Bureaucrat::operator++()
+{
+	if (_Grade > 1)
+		_Grade--;
+	else
+		std::cout << "Grade too high to higher" << std::endl;
+    return _Grade;
+}
+
+int &Bureaucrat::operator--()
+{
+	if (_Grade < 150)
+		_Grade++;
+	else
+		std::cout << "Grade too low to lower" << std::endl;
+    return _Grade;
+}
+
+int Bureaucrat::operator++(int)
+{
+	int grade = _Grade;
+	
+	if (_Grade > 1)
+		_Grade--;
+	else
+		std::cout << "Grade too high to higher" << std::endl;
+    return grade;
+}
+
+int Bureaucrat::operator--(int)
+{
+	int grade = _Grade;
+	
+	if (_Grade < 150)
+		_Grade++;
+	else
+		std::cout << "Grade too low to lower" << std::endl;
+    return grade;
+}
+
+void Bureaucrat::incrGrade()
+{
+	operator++();
+}
+void Bureaucrat::decrGrade()
+{
+	operator--();
+}
+
+Bureaucrat &Bureaucrat::operator=(Bureaucrat const &rhs)
 {
 	if ( this != &rhs )
 	{

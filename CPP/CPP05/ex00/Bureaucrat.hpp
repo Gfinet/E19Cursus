@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:15 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 18:18:01 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 19:37:54 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ class Bureaucrat
 		Bureaucrat( Bureaucrat const & src );
 		// virtual ~Bureaucrat();
 
+		int &operator++();
+		int operator++(int);
+		int &operator--();
+		int operator--(int);
+		void incrGrade();
+		void decrGrade();
 		Bureaucrat &operator=( Bureaucrat const & rhs );
 		std::string const getName() const;
 		int getGrade() const;
