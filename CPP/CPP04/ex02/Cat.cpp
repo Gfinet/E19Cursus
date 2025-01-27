@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:12:44 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:17:33 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:05:22 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,9 @@ Brain* Cat::getBrain()
 void Cat::addIdea(std::string idea)
 {
 	this->brain->addIdea(idea);
+}
+
+std::string Cat::getIdea(int i) const
+{
+    return brain->getIdeas(i);
 }

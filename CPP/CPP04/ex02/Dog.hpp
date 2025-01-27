@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:14:17 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:16:58 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:05:42 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class Dog : public AAnimal
 		Brain* getBrain();
 		void addIdea(std::string idea);
 		void makeSound();
+		std::string getIdea(int i) const;
 };
 
 #endif // DOG_HPP_

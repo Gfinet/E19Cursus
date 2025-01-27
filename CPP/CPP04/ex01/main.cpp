@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:53:55 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/15 19:30:14 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:04:27 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ int main(void)
 				std::cout << std::endl;
 			delete list[i];
 		}
+	}
+	{
+		Dog cpy, *main;
+
+		main = new Dog();
+		main->addIdea("Woof");
+
+		cpy = *main;
+		std::cout << main->getIdea(0) << std::endl;
+
+		delete main;
+		std::cout << cpy.getIdea(0) << std::endl;
 	}
 	return 0;
 }

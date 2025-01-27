@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:42:18 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 16:04:16 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:05:52 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // Default constructor
 Brain::Brain()
 { 
-
+	nbIdeas = 0;
 }
 
 // Copy constructor

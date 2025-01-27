@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:42:18 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/15 19:23:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:02:28 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // Default constructor
 Brain::Brain()
 {
+	nbIdeas = 0;
 	std::cout << "Brain constructor called" << std::endl;
 }
 

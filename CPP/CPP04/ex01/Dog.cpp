@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:14:00 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/15 19:26:23 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:03:54 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,9 @@ Brain* Dog::getBrain()
 void Dog::addIdea(std::string idea)
 {
 	this->brain->addIdea(idea);
+}
+
+std::string Dog::getIdea(int i) const
+{
+    return brain->getIdeas(i);
 }
