@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 20:25:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/28 16:13:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ int main()
 
     c.incrGrade();
     c.decrGrade();
+
+    Bureaucrat e, f("Jean", 45);
+
+    e = f;
+    
+    std::cout << e.getName() << " " << e.getGrade() << std::endl;
     
     return 0;
 }

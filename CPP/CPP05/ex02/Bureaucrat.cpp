@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:17 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/28 16:30:19 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/01/28 16:30:07 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
-
 Bureaucrat::Bureaucrat() : _Name("default")
 {
 	_Grade = 150;
@@ -125,7 +124,6 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 	return o;
 }
 
-
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("Not enough High Bro!");
@@ -136,10 +134,15 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 	return ("Too High Bro!");
 }
 
+
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
+void Bureaucrat::signForm(Form &form)
+{
+	form.beSigned(*this);
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
