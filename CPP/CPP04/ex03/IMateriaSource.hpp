@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:32:37 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 17:37:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:44:30 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ class IMateriaSource
 	public:
 		IMateriaSource();
 		IMateriaSource( IMateriaSource const & src );
-		virtual ~IMateriaSource() {}
-
 		virtual IMateriaSource &operator=( IMateriaSource const & rhs );
-		virtual AMateria* createMateria(std::string const & type) = 0;
+		
+		virtual ~IMateriaSource() {}
 		virtual void learnMateria(AMateria*) = 0;
+		virtual AMateria* createMateria(std::string const & type) = 0;
+
 
 
 };

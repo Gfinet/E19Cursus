@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:06:52 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/21 18:10:43 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 17:07:28 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,36 @@ int main()
         }
     }
     {
+        std::cout << std::endl << std::endl;
         IMateriaSource* src = new MateriaSource();
         ICharacter* me = new Character("me");
-        AMateria* tmp;
+        AMateria* tmp1, *tmp2;
         ICharacter* bob = new Character("bob");
         
+        tmp1 = src->createMateria("ice");
+        tmp1 = src->createMateria("cure");
         src->learnMateria(new Ice());
         src->learnMateria(new Cure());
         
-        tmp = src->createMateria("ice");
-        me->equip(tmp);
-        tmp = src->createMateria("cure");
-        me->equip(tmp);
+        tmp1 = src->createMateria("ice");
+        me->equip(tmp1);
+        tmp2 = src->createMateria("cure");
+        me->equip(tmp2);
         
         me->use(0, *bob);
         me->use(1, *bob);
+        for (int i = 0; i<4; i++)
+        {
+            if (me->getMateria(i))
+                std::cout << me->getMateria(i)->getType() << std::endl;
+            else
+                std::cout << "No Materia" << std::endl;
+        }
+        std::cout << std::endl;
+        me->unequip(0);
+        me->unequip(1);
+        delete tmp1;
+        delete tmp2;
         for (int i = 0; i<4; i++)
         {
             if (me->getMateria(i))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:42:12 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:11:10 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:40:42 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ WrongCat::~WrongCat()
 	return;
 }
 
-void WrongCat::makeSound()
+void WrongCat::makeSound() const
 {
 	std::cout << "Wiaou Citch !" << std::endl;
 }

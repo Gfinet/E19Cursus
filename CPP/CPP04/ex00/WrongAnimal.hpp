@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:09:36 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:09:21 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:41:21 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class WrongAnimal
 		~WrongAnimal();
 
 		const std::string getType();
-		void makeSound();
+		void makeSound() const;
   
 };
 

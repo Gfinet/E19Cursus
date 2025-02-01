@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:13:06 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:18:54 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:41:41 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Cat : public Animal
 		Cat &operator=(const Cat &rhs);
 		~Cat();
 		
-		void makeSound();
+		void makeSound() const;
 };
 
 #endif // CAT_HPP

@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:14:00 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 18:05:11 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:39:13 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ Dog::~Dog()
 	return;
 }
 
-void Dog::makeSound()
+void Dog::makeSound() const
 {
 	std::cout << "FOOD FOOD PLAY PLAY FRIEND FRIEND STILL... WAFF !" << std::endl;
 }

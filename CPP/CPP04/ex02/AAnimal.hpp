@@ -24,14 +24,14 @@ class AAnimal
 	
 	protected:
 		std::string type;
-		AAnimal();
 	public:
+		AAnimal();
 		AAnimal(const AAnimal &other);
 		AAnimal &operator=(const AAnimal &rhs);
 		virtual ~AAnimal();
 
 		const std::string getType();
-		virtual void makeSound();
+		virtual void makeSound() const = 0;
   
 };
 

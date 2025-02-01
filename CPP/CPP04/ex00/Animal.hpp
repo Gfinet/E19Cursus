@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:09:36 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:25:28 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:41:49 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Animal
 		virtual ~Animal();
 
 		const std::string getType();
-		virtual void makeSound();
+		virtual void makeSound() const;
   
 };
 

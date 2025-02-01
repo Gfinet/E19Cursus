@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:13:06 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 18:05:37 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:39:04 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class Cat : public AAnimal
 		
 		Brain* getBrain();
 		void addIdea(std::string idea);
-		void makeSound();
+		void makeSound() const;
 		std::string getIdea(int i) const;
 };
 

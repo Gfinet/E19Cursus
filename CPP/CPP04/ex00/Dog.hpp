@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:14:17 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:18:57 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:41:30 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Dog : public Animal
 		Dog &operator=(const Dog &rhs);
 		~Dog();
 
-		void makeSound();
+		void makeSound() const;
 };
 
 #endif // DOG_HPP_

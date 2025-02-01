@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:25:41 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 15:13:46 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:44:02 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ Character::~Character()
 */
 
 
+
 void Character::equip(AMateria *m)
 {	
 	if (_nbMat < 4)
@@ -91,6 +92,10 @@ void Character::use(int idx, ICharacter &target)
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
+std::string const &Character::getName() const
+{
+    return this->_Name;
+}
 
 
 

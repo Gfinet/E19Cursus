@@ -47,7 +47,7 @@ const std::string AAnimal::getType()
 	return this->type;
 }
 
-void AAnimal::makeSound()
-{
-	std::cout << "Ed..ward.. want... to play ?" << std::endl;
-}
+// void AAnimal::makeSound()
+// {
+// 	std::cout << "Ed..ward.. want... to play ?" << std::endl;
+// }

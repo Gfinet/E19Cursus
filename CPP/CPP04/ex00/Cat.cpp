@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:12:44 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 18:03:22 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:41:44 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Cat::~Cat()
 	return;
 }
 
-void Cat::makeSound()
+void Cat::makeSound() const
 {
 	std::cout << "Miaou Bitch !" << std::endl;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:42:32 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:09:17 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:40:39 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class WrongCat : public WrongAnimal
 		WrongCat &operator=(const WrongCat &rhs);
 		~WrongCat();
 		
-		void makeSound();
+		void makeSound() const;
 };
 
 #endif // WRONGCAT_HPP

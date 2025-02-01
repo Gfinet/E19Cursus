@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:39:58 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:11:40 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:40:50 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ const std::string WrongAnimal::getType()
 	return this->type;
 }
 
-void WrongAnimal::makeSound()
+void WrongAnimal::makeSound() const
 {
 	std::cout << "Ed..ward.. want... to play ?" << std::endl;
 }

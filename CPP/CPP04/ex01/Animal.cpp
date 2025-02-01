@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:10:22 by gfinet            #+#    #+#             */
-/*   Updated: 2024/10/28 15:31:51 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:40:33 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ const std::string Animal::getType()
 	return this->type;
 }
 
-void Animal::makeSound()
+void Animal::makeSound() const
 {
 	std::cout << "Ed..ward.. want... to play ?" << std::endl;
 }

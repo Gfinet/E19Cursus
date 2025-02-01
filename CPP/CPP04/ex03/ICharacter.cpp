@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:25:43 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/27 15:15:36 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 16:43:26 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,5 @@ unsigned int ICharacter::getNbMateria() const
 {
 	return this->_nbMat;
 }
-
-
-std::string const &ICharacter::getName() const
-{
-	return this->_Name;
-}
-
 
 /* ************************************************************************** */
