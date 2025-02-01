@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:17 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/28 16:30:07 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 18:29:47 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,15 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
 	form.beSigned(*this);
+}
+
+void Bureaucrat::executeForm(AForm const &form)
+{
+	form.execute(*this);
+	std::cout << this->getName() << " executed " << form.getName() << std::endl;
 }
 
 /*

@@ -4,6 +4,7 @@
 # include <iostream>
 # include <string>
 # include "AForm.hpp"
+# include "fstream"
 
 class ShrubberyCreationForm : public AForm
 {
@@ -16,8 +17,8 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm( ShrubberyCreationForm const & src );
 		~ShrubberyCreationForm();
 
-		ShrubberyCreationForm &		operator=( ShrubberyCreationForm const & rhs );
-
+		ShrubberyCreationForm &operator=( ShrubberyCreationForm const & rhs );
+		void act() const;
 
 };
 

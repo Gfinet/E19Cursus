@@ -107,6 +107,21 @@ void AForm::beSigned(Bureaucrat &guy)
 
 }
 
+void AForm::execute(Bureaucrat const & exec) const
+{
+	if (!this->isSigned())
+	{
+		std::cout << "This Form is not signed." << std::endl;
+		return ;
+	}
+	if (exec.getGrade() > this->getGradeToExec())
+	{
+		std::cout << exec.getName() << " can't execute this task" << std::endl;
+		return ;
+	}
+	this->act();
+}
+
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */

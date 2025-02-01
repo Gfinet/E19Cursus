@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:15 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/28 16:09:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/01 18:27:28 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <iostream>
 # include <string>
-# include "Form.hpp"
+# include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat 
 {
@@ -45,7 +45,8 @@ class Bureaucrat
 		Bureaucrat( Bureaucrat const & src );
 		~Bureaucrat();
 
-		void signForm(Form &form); 
+		void signForm(AForm &form);
+		void executeForm(AForm const &form);
 
 		int &operator++();
 		int operator++(int);

@@ -16,8 +16,8 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm( RobotomyRequestForm const & src );
 		~RobotomyRequestForm();
 
-		RobotomyRequestForm &		operator=( RobotomyRequestForm const & rhs );
-
+		RobotomyRequestForm &operator=( RobotomyRequestForm const & rhs );
+		void act() const;
 
 };
 

@@ -17,8 +17,8 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm( PresidentialPardonForm const & src );
 		~PresidentialPardonForm();
 
-		PresidentialPardonForm &		operator=( PresidentialPardonForm const & rhs );
-
+		PresidentialPardonForm &operator=( PresidentialPardonForm const & rhs );
+		void act() const;
 
 };
 

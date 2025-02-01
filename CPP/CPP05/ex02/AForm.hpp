@@ -40,9 +40,11 @@ class AForm
 		AForm(std::string Name, int grSign);
 		AForm(std::string Name, int grSign, int grExec);
 		AForm( AForm const & src );
-		virtual ~AForm() = 0;
 		AForm &operator=( AForm const & rhs );
+		virtual ~AForm() = 0;
 
+		virtual void execute(Bureaucrat const & executor) const;
+		virtual void act() const = 0;
 		void beSigned(Bureaucrat &guy);
 
 		int getGradeToSign() const;
