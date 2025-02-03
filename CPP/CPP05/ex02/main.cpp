@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/01 18:26:11 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/03 15:39:22 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,44 @@
 int main()
 {
     {
-        Bureaucrat a("Bob", 1);
+        Bureaucrat A("President", 1);
+        Bureaucrat B("Sergeant", 25);
+        Bureaucrat C("Police Officer", 137);
+        Bureaucrat D("Karen", 146);
         ShrubberyCreationForm b("test");
-        PresidentialPardonForm c("test2");
-        RobotomyRequestForm d("test3");
+        PresidentialPardonForm c("Been Laten");
+        RobotomyRequestForm d("Been Laten (The bad one)");
 
-        a.signForm(b);
-        b.execute(a);
-        a.signForm(c);
-        c.execute(a);
-        a.signForm(d);
-        d.execute(a);
-        d.execute(a);
+        std::cout << D << " try to sign " << b << std::endl;
+        D.signForm(b);
+        std::cout << D << " try to sign " << c << std::endl;
+        D.signForm(c);
+        std::cout << D << " try to sign " << d << std::endl;
+        D.signForm(d);
+        A.signForm(b);
+
+        std::cout << std::endl << std::endl;
+        std::cout << C << " try to sign " << c << std::endl;
+        C.signForm(c);
+        std::cout << C << " try to sign " << d << std::endl;
+        C.signForm(d);
+        B.signForm(c);
+
+        std::cout << std::endl << std::endl;
+        std::cout << B << " try to sign " << d << std::endl;
+        B.signForm(d);
+        C.signForm(d);
+        
+        std::cout << std::endl << std::endl;
+        b.execute(B);
+        c.execute(A);
+        d.execute(A);
+        d.execute(A);
+    }
+    {
+        std::cout << std::endl << std::endl;
+        Bureaucrat A("President", 0);
+        Bureaucrat B("Sergeant", 151);
     }
     return 0;
 }
