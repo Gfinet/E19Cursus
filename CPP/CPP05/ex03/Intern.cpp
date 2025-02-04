@@ -6,10 +6,12 @@
 
 Intern::Intern()
 {
+	_nbFormMade = 0;
 }
 
 Intern::Intern( const Intern & src )
 {
+	*this = src;
 }
 
 
@@ -28,21 +30,23 @@ Intern::~Intern()
 
 Intern &				Intern::operator=( Intern const & rhs )
 {
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
+	if ( this != &rhs )
+	{
+		this->_nbFormMade = rhs._nbFormMade;
+	}
 	return *this;
 }
 
 
 std::ostream &			operator<<( std::ostream & o, Intern const & i )
 {
-	o << "Just an Intern";
+	o << "Just an Intern who made " << i.getNbFormMade() << " forms. ";
+	if (i.getNbFormMade() > 10)
+		o << "What a great Intern !";
 	return o;
 }
 
-const char* Bureaucrat::NorFormException::what() const throw()
+const char* Intern::NoFormException::what() const throw()
 {
 	return ("[NorFormException : Name of the Form not knowned!]");
 }
@@ -70,7 +74,7 @@ static AForm* ShrubberyForm(std::string target)
 
 AForm *Intern::makeForm(std::string Name, std::string target)
 {
-	std::string form[3] = {"PresidentialPardon", "RobotomyRequest", "ShrubberyCreation"};
+	std::string form[3] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
     AForm* (*func[3])(std::string) = {PresidentialForm, RobotomyForm, ShrubberyForm};
 	bool found = false;
 	try
@@ -79,7 +83,10 @@ AForm *Intern::makeForm(std::string Name, std::string target)
 		{
 			found = (form[i] == Name);
 			if (found)
-				return (func[i](target));
+			{
+				std::cout << "Intern creates " << Name << std::endl;
+				return (_nbFormMade++, func[i](target));
+			}
 		}
 		if (!found)
 			throw NoFormException();
@@ -97,6 +104,9 @@ AForm *Intern::makeForm(std::string Name, std::string target)
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-
+unsigned int Intern::getNbFormMade() const
+{
+	return _nbFormMade;
+}
 
 /* ************************************************************************** */

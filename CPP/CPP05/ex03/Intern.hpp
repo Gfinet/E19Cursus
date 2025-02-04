@@ -12,7 +12,7 @@ class Intern
 {
 
 	private:
-		
+		unsigned int _nbFormMade;
 	public:
 
 		class NoFormException : public std::exception
@@ -28,7 +28,7 @@ class Intern
 		Intern &operator=( Intern const & rhs );
 
 		AForm* makeForm(std::string Name, std::string target);
-
+		unsigned int getNbFormMade() const;
 
 
 };

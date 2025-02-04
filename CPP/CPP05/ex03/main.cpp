@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/03 17:11:01 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/04 15:01:24 by Gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ int main()
     AForm *pres, *shrub, *robot;
 
     pres = bob.makeForm("PresidentialPardonForm", "Been Laten");
+    std::cout << *pres << std::endl;
+    
     shrub = bob.makeForm("ShrubberyCreationForm", "Shubb");
-    robot = bob.makeForm("RobotomyRequestForm", "Been Laten (the bad one)");
+    std::cout << *shrub << std::endl;
 
-    std::cout << pres << std::endl;
-    std::cout << shrub << std::endl;
-    std::cout << robot << std::endl;
+    robot = bob.makeForm("RobotomyRequestForm", "Been Laten (the bad one)");
+    std::cout << *robot << std::endl;
+
+
+    std::cout << bob << std::endl;
+    for (int i = 0; i < 10; i++)
+        bob.makeForm("ShrubberyCreationForm", "Shubb");
+    std::cout << bob << std::endl;
     return 0;
 }
