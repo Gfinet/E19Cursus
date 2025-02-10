@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:07:46 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:07:48 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/10 20:39:41 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ std::ostream &operator<<( std::ostream & o, RobotomyRequestForm const & i )
 void RobotomyRequestForm::act() const
 {
 	static bool robot = false;
+	time_t tp;
 
 	std::cout << "DRRRRIIIIILLL\nDRRRRIIIIILLL\n";
-	if (robot )
+	if (time(&tp) % 2)
 		std::cout << _target << " has been robotomized" << std::endl;
 	else
 		std::cout << "robotomization failed" << std::endl;

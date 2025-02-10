@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/03 15:39:22 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/10 20:27:36 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main()
         Bureaucrat B("Sergeant", 25);
         Bureaucrat C("Police Officer", 137);
         Bureaucrat D("Karen", 146);
-        ShrubberyCreationForm b("test");
+        ShrubberyCreationForm b("FUCK");
         PresidentialPardonForm c("Been Laten");
         RobotomyRequestForm d("Been Laten (The bad one)");
 

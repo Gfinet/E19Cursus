@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:07:31 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:07:32 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/10 20:35:09 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ AForm::AForm(std::string Name) : _name(Name), _gradeToSign(150), _gradeToExec(15
 
 AForm::AForm(std::string Name, int grSign) : _name(Name), _checkSign(setGradeToSign(grSign)), _gradeToSign(_checkSign), _gradeToExec(150)
 {
+	
 	_signed = false;
 }
 

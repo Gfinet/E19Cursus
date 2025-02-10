@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:06:57 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/10 20:25:05 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int main()
 {
     Intern bob;
-    AForm *pres, *shrub, *robot;
+    AForm *pres, *shrub, *robot, *tmp;
 
     pres = bob.makeForm("PresidentialPardonForm", "Been Laten");
     std::cout << *pres << std::endl;
@@ -34,7 +34,13 @@ int main()
 
     std::cout << bob << std::endl;
     for (int i = 0; i < 10; i++)
-        bob.makeForm("ShrubberyCreationForm", "Shubb");
+    {
+        tmp = bob.makeForm("ShrubberyCreationForm", "Shubb");
+        delete tmp;
+    }
     std::cout << bob << std::endl;
+    delete pres;
+    delete shrub;
+    delete robot;
     return 0;
 }
