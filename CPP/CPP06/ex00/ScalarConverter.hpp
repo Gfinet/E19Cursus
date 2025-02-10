@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:09:41 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 17:52:20 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/10 17:42:43 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include <iostream>
 # include <string>
+
+# ifndef INT32_MIN 
+#  define INT32_MIN -2147483648
+# endif
+# ifndef INT32_MAX
+#  define INT32_MAX 2147483647
+# endif
 
 enum e_type
 {
@@ -36,13 +43,18 @@ class ScalarConverter
 		ScalarConverter( ScalarConverter const & src );
 		virtual ~ScalarConverter() = 0;
 
-		ScalarConverter &		operator=( ScalarConverter const & rhs );
+		ScalarConverter &operator=( ScalarConverter const & rhs );
 		static void convert(std::string a);
 		
 	private:
 
 };
 
-std::ostream &			operator<<( std::ostream & o, ScalarConverter const & i );
+std::ostream &operator<<( std::ostream & o, ScalarConverter const & i );
+e_type getType(std::string in);
+
+void printSpecial(std::string a);
+void printInvalid();
+void printConvert(long double in);
 
 #endif /* ************************************************* SCALARCONVERTER_H */

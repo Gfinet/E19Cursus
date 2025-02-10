@@ -3,14 +3,11 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 
 SRC =	main.cpp			\
-		convertType.cpp		\
-		detectType.cpp		\
-		detectType.cpp		\
-		ScalarConverter.cpp
+		Serializer.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = ScalarConverter
+NAME = Serializer
 
 
 .PHONY: all clean fclean re
