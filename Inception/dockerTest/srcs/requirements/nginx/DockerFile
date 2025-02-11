@@ -1,0 +1,7 @@
+# FROM, RUN, COPY, CMD
+ARG version=1.16.1
+
+FROM nginx:${version}
+
+
+

@@ -1,0 +1,16 @@
+version: "2"
+
+volumes:
+  
+
+
+services:
+
+  web: 
+    build:
+      context: ./requirements/nginx/.
+    ports:
+      - xx:xx
+    volumes:
+      - ./requirements/nginx
+  db:

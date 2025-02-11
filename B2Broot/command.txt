@@ -1,3 +1,10 @@
+MDP : Born2Beroute!
+
+
+
+
+
+
 ----------------------------  Correction -----------------------------
 debian vs Rocky
 - Debian est stable, applications fonctionnent entre elles
@@ -61,7 +68,7 @@ sudo systemctl start ssh		(lance le server ssh)
 sudo systemctl stop ssh			(stop le server ssh)
 = sudo service ssh stop
 sudo systemctl status ssh		(affiche le status du server ssh)
-sudo vim /etc/ssh/ssh_config		(change les config de ssh (port))
+sudo vim /etc/ssh/sshd_config		(change les config de ssh (port))
 
 (sudo) groupadd [group]			(ajoute le groupe [group])
 (sudo) groupdel [group]			(supprime le groupe [groupe]) 
@@ -69,7 +76,7 @@ sudo vim /etc/ssh/ssh_config		(change les config de ssh (port))
 (sudo) deluser [user]			(supprime l'utilisateur [user])
 (sudo) usermod -aG [group] [user]	(ajoute user au groupe)
 
-sudo vim etc/sudoers.d
+sudo vim etc/sudoers (cf lower)
 
 
 sudo ufw enable				(active le firewall ufw)

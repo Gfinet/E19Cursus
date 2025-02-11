@@ -1,12 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 20:13:47 by gfinet            #+#    #+#             */
+/*   Updated: 2025/02/11 20:57:25 by gfinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SERIALIZER_HPP
 # define SERIALIZER_HPP
 
 # include <iostream>
 # include <string>
+# include <stdint.h>
 
 typedef struct t_data
 {
-
+	int		x;
+	char	c;
 } Data;
 
 class Serializer
@@ -16,7 +30,7 @@ class Serializer
 
 		Serializer();
 		Serializer( Serializer const & src );
-		~Serializer();
+		virtual ~Serializer() = 0;
 
 		Serializer &		operator=( Serializer const & rhs );
 		static uintptr_t serialize(Data* ptr);
@@ -26,7 +40,5 @@ class Serializer
 	private:
 
 };
-
-std::ostream &			operator<<( std::ostream & o, Serializer const & i );
 
 #endif /* ****************************************************** SERIALIZER_H */
