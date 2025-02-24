@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:07:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/24 16:38:53 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:36:09 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,15 @@ void AForm::beSigned(Bureaucrat &guy)
 		std::cerr << e.what() << '\n';
 	}
 	if (guy.getGrade() <= _gradeToSign) // && !_signed)
+	{
 		_signed = true;
+		std::cout << guy.getName() << " signed " << _name << std::endl;
+	}
 	// else if (_signed)
 	// {
 	// 	std::cout << _name << " already signed" << std::endl;
 	// 	return;
 	// }
-	if(_signed)
-		std::cout << guy.getName() << " signed " << _name << std::endl;
 	else
 	{
 		std::cout << guy.getName() << " couldn't sign " << _name ;
