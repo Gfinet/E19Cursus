@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:30:17 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/03 14:51:39 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:50:38 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Bureaucrat::Bureaucrat(std::string const Name) : _Name(Name)
 	_Grade = 150;
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat & src )
+Bureaucrat::Bureaucrat( const Bureaucrat & src ) : _Name("default")
 {
 	if (this != &src)
 	{
@@ -62,7 +62,7 @@ int &Bureaucrat::operator++()
 	if (_Grade > 1)
 		_Grade--;
 	else
-		std::cout << "Grade too high to higher" << std::endl;
+		std::cout << "Grade too high to higher it" << std::endl;
     return _Grade;
 }
 
@@ -71,7 +71,7 @@ int &Bureaucrat::operator--()
 	if (_Grade < 150)
 		_Grade++;
 	else
-		std::cout << "Grade too low to lower" << std::endl;
+		std::cout << "Grade too low to lower it" << std::endl;
     return _Grade;
 }
 

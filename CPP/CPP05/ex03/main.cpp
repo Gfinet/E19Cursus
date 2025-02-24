@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/10 20:25:05 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:37:32 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ int main()
     Intern bob;
     AForm *pres, *shrub, *robot, *tmp;
 
-    pres = bob.makeForm("PresidentialPardonForm", "Been Laten");
+    pres = bob.makeForm("Presidential Pardon", "Been Laten");
     std::cout << *pres << std::endl;
     
-    shrub = bob.makeForm("ShrubberyCreationForm", "Shubb");
+    shrub = bob.makeForm("Shrubbery Creation", "Shubb");
     std::cout << *shrub << std::endl;
 
-    robot = bob.makeForm("RobotomyRequestForm", "Been Laten (the bad one)");
+    robot = bob.makeForm("Robotomy Request", "Been Laten (the bad one)");
     std::cout << *robot << std::endl;
 
 
     std::cout << bob << std::endl;
     for (int i = 0; i < 10; i++)
     {
-        tmp = bob.makeForm("ShrubberyCreationForm", "Shubb");
+        tmp = bob.makeForm("Shrubbery Creation", "Shubb");
         delete tmp;
     }
     std::cout << bob << std::endl;

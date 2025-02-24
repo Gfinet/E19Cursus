@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:08:01 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:08:02 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:18:31 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ Form &	Form::operator=( Form const & rhs )
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-	return ("You too low  Bro!");
+	return ("You too low Bro!");
 }
 
 const char* Form::GradeTooHighException::what() const throw()
@@ -86,6 +86,12 @@ const char* Form::GradeTooHighException::what() const throw()
 	return ("You too High Bro!");
 }
 
+std::ostream &operator<<( std::ostream & o, Form const & i )
+{
+	o << "Form \"" << i.getName() << "\" grade to sign : " << i.getGradeToSign();
+	o << ", grade to exec : " << i.getGradeToExec() ;
+	return o;
+}
 
 /*
 ** --------------------------------- METHODS ----------------------------------

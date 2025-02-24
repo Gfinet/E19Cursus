@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:07:05 by gfinet            #+#    #+#             */
-/*   Updated: 2025/01/28 18:31:13 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:18:19 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 
 int main()
 {
-    Bureaucrat a("Jean", 0);
-    std::cout << a.getName() << " " << a.getGrade() << std::endl;
     Bureaucrat b("Jacques", 1);
-    std::cout << b.getName() << " " << b.getGrade() << std::endl;
+    std::cout << b << std::endl;
+    Bureaucrat a("Jean", 145);
+    std::cout << a << std::endl;
     Bureaucrat c("Bob", 150);
-    std::cout << c.getName() << " " << c.getGrade() << std::endl;
-    Bureaucrat d("Marie", 151);
+    std::cout << c << std::endl;
 
     // std::cout << d.getGrade() << std::endl;
     // std::cout << b << std::endl;
@@ -46,13 +45,35 @@ int main()
     // c.incrGrade();
     // c.decrGrade();
     
-    Form f1("Hard Contract", 5, 15), f2("Low Contract", 145), f3("Bug Contract", 0), f4("bug contract", 151);
-
+    std::cout << std::endl << "---  Testing Hard Contract with grade sign 5, exec 145   ---" << std::endl;
+    Form f1("Hard Contract", 5, 15);
+    std::cout << f1 << std::endl;
+    std::cout << "-- " << c << " try to sign Hard contract --" << std::endl;
+    c.signForm(f1);
+    std::cout << "-- " << a << " try to sign Hard contract --" << std::endl;
     a.signForm(f1);
-    a.signForm(f2);
+    std::cout << "-- " << b << " try to sign Hard contract --" << std::endl;
     b.signForm(f1);
+    
+    std::cout << std::endl<< "---  Testing Low Contract with grade sign 145            ---" << std::endl;
+    Form f2("Low Contract", 145);
+    std::cout << f2 << std::endl;
+    std::cout << "-- " << c << " try to sign low contract --" << std::endl;
+    c.signForm(f2);
+    std::cout << "-- " << a << " try to sign low contract --" << std::endl;
+    a.signForm(f2);
+    std::cout << "-- " << b << " try to sign low contract --" << std::endl;
     b.signForm(f2);
+    
+    std::cout << std::endl << "---  Testing Bug Contract with grade sign 0              ---" << std::endl;
+    Form f3("Bug Contract", 0);
+    std::cout << f3 << std::endl;
     b.signForm(f3);
-    std::cout << "grade " << f3.getGradeToExec() << " " << f4.getGradeToSign() << std::endl;
+    
+    std::cout << std::endl << "---  Testing bug Contract with grade sign 151            ---" << std::endl;
+    Form f4("bug contract", 151);
+    std::cout << f4 << std::endl;
+    b.signForm(f4);
+
     return 0;
 }

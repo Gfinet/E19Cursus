@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:06:46 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:06:48 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:37:53 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static AForm* ShrubberyForm(std::string target)
 
 AForm *Intern::makeForm(std::string Name, std::string target)
 {
-	std::string form[3] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
+	std::string form[3] = {"Presidential Pardon", "Robotomy Request", "Shrubbery Creation"};
     AForm* (*func[3])(std::string) = {PresidentialForm, RobotomyForm, ShrubberyForm};
 	bool found = false;
 	try

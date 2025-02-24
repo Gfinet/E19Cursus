@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:07:00 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:07:01 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:38:53 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ const char* AForm::NotGradedEnoughException::what() const throw()
 
 std::ostream &operator<<(std::ostream &o, AForm const & i)
 {
-	o << "Form named '" << i.getName() << "' sign_grade : " << i.getGradeToSign();
-	o << " exec_grade : " << i.getGradeToExec();
+	o << "Form \"" << i.getName() << "\" grade to sign : " << i.getGradeToSign();
+	o << ", grade to exec : " << i.getGradeToExec() ;
 	return o;
 }
 

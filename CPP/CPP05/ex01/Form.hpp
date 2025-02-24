@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:08:03 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/04 15:08:04 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:58:54 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ class Form
 		std::string getName() const;
 
 };
+
+std::ostream &operator<<( std::ostream & o, Form const & i );
 
 #endif /* ************************************************************ FORM_H */

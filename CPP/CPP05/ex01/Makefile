@@ -8,7 +8,7 @@ SRC =	main.cpp		\
 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = Bureaucrat
+NAME = Form
 
 
 .PHONY: all clean fclean re
