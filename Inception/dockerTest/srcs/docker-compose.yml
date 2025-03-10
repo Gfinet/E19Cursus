@@ -1,4 +1,4 @@
-version: "2"
+version: "3.8"
 
 volumes:
   
@@ -6,11 +6,14 @@ volumes:
 
 services:
 
-  web: 
-    build:
-      context: ./requirements/nginx/.
+  nginx: 
+    build: requirements/nginx/.
+    container_name: nginx
     ports:
-      - xx:xx
-    volumes:
-      - ./requirements/nginx
-  db:
+      - 443:80
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wp-php
+
+
+

@@ -1,0 +1,5 @@
+version: "2.32.4"
+services:
+  web:
+    tty: true
+    build: ./requirements/NGINX
