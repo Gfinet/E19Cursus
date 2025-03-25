@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:27:17 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/14 20:40:59 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/03/25 17:47:40 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int main()
 	float arf[5] = {1.1,2.2,3.3,4.4,5.5};
 	char arc[5] = {'a','b','c','d','e'};
 
+	std::cout << "Original :" << std::endl;
 	for (int i=0; i<5; i++)
 		std::cout << ari[i] << " ";
 	std::cout << std::endl;
@@ -28,8 +29,10 @@ int main()
 	iter(ari, 5, plusOne);
 	for (int i=0; i<5; i++)
 		std::cout << ari[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 	
+	
+	std::cout << "Original :" << std::endl;
 	for (int i=0; i<5; i++)
 		std::cout << arf[i] << " ";
 	std::cout << std::endl;
@@ -40,8 +43,10 @@ int main()
 	iter(arf, 5, plusOne);
 	for (int i=0; i<5; i++)
 		std::cout << arf[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
+	
 
+	std::cout << "Original :" << std::endl;
 	for (int i=0; i<5; i++)
 		std::cout << arc[i] << " ";
 	std::cout << std::endl;
