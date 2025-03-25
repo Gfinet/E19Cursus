@@ -6,26 +6,16 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:21:14 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/10 17:22:09 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/03/25 16:24:55 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-
-// static bool isAll(int func(int), std::string in)
-// {
-// 	for (size_t i=0; i < in.length(); i++)
-// 	{
-// 		if (!func(in.c_str()[0]))
-// 			return false;
-// 	}
-// 	return true;
-// }
-
 static bool isChar(std::string in)
 {
-	return (in.length() == 1) && isalpha(in[0]);
+	return ((in.length() == 3 && in[0] == in[2] && (in[0] == 39 || in[0] == 34)) \
+		|| (in.length() == 1 && !isdigit(in[0]) && isascii(in[0])));
 }
 
 static bool isInt(std::string in)
@@ -33,7 +23,7 @@ static bool isInt(std::string in)
 	bool sign;
 
 	sign = (in[0] == '+' || in[0] == '-');
-	for (size_t i = sign; i<in.length(); i++)
+	for (size_t i = sign; i < in.length(); i++)
 	{
 		if(!isdigit(in[i]))
 			return false;
@@ -80,9 +70,8 @@ static bool isSpecial(std::string in)
 e_type getType(std::string in)
 {
 	size_t dot = in.find(".");
-	// size_t f = in.find("f");
 
-	std::cout << "in : " << in << ", len : " << in.length() << ", type : ";
+	//std::cout << "in : " << in << ", len : " << in.length() << ", type : ";
 	if (isChar(in))
 		return CHAR;
 	else if (isSpecial(in))

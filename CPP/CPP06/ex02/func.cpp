@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gfinet <gfinet@student.s19.be>             +#+  +:+       +#+        */
+/*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:47:06 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/13 17:09:10 by Gfinet           ###   ########.fr       */
+/*   Updated: 2025/03/25 16:42:03 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Base * generate(void)
 		break;
 	
 	default:
-		ret = nullptr;
+		ret = 0;
 		break;
 	}
 	return ret;

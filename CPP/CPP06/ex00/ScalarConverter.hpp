@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:09:41 by Gfinet            #+#    #+#             */
-/*   Updated: 2025/02/10 17:42:43 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/03/25 16:03:01 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include <limits>
 
 # ifndef INT32_MIN 
 #  define INT32_MIN -2147483648

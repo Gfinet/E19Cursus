@@ -6,7 +6,7 @@
 /*   By: gfinet <gfinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:23:27 by gfinet            #+#    #+#             */
-/*   Updated: 2025/02/10 17:37:15 by gfinet           ###   ########.fr       */
+/*   Updated: 2025/03/25 16:18:04 by gfinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ static void printInt(long double in)
 static void printDouble(long double in)
 {
     std::cout << "double : ";
-    if (0)
-        std::cout << "impossible";
+    if (in > std::numeric_limits<double>::max())
+        std::cout << "+inff";
+    else if (in < - std::numeric_limits<double>::max())
+        std::cout << "-inff";
     else
     {
         std::cout << static_cast<double>(in);
@@ -55,8 +57,10 @@ static void printDouble(long double in)
 static void printFloat(long double in)
 {
     std::cout << "float  : ";
-    if (0)
-        std::cout << "impossible";
+    if (in > std::numeric_limits<float>::max())
+        std::cout << "+inf";
+    else if (in < - std::numeric_limits<float>::max())
+        std::cout << "-inf";
     else
     {
         std::cout << static_cast<float>(in) ;
@@ -94,11 +98,6 @@ void printInvalid()
 
 void printConvert(long double in)
 {
-    // char c;
-    // int i;
-    // double d;
-    // float f;
-
     printChar(in);
     printInt(in);
     printDouble(in);
